@@ -453,8 +453,8 @@
         <!-- API Key Section -->
         <div id="api-key-section" class="section active">
             <div class="form-group">
-                <label for="api-key">Enter your Gemini API Key:</label>
-                <input type="password" id="api-key" placeholder="Your Gemini API Key">
+                <label for="api-key">Enter your OpenRouter API Key:</label>
+                <input type="password" id="api-key" placeholder="Your OpenRouter API Key">
             </div>
             <button id="save-api-key">Save API Key</button>
             <div id="api-status"></div>
@@ -570,8 +570,8 @@
             continueToApp: document.getElementById('continue-to-app')
         };
 
-        // Gemini API Configuration
-        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+        // OpenRouter API Configuration
+        const OPENROUTER_API_ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
 
         // Initialize Three.js Background
         function initThreeBackground() {
@@ -648,7 +648,7 @@
                     initThreeBackground();
                     
                     // Check for existing API key
-                    const savedApiKey = localStorage.getItem('geminiApiKey');
+                    const savedApiKey = localStorage.getItem('openRouterApiKey');
                     if (savedApiKey) {
                         appState.apiKey = savedApiKey;
                         elements.apiKeyInput.value = savedApiKey;
@@ -702,14 +702,14 @@
                 return;
             }
 
-            // Simple validation - check if it looks like a Gemini API key
-            if (!apiKey.startsWith('AIza') || apiKey.length < 20) {
+            // Simple validation - check if it looks like an OpenRouter API key
+            if (apiKey.length < 20) {
                 showNotification('Invalid API key format', 'error');
                 return;
             }
 
             appState.apiKey = apiKey;
-            localStorage.setItem('geminiApiKey', apiKey);
+            localStorage.setItem('openRouterApiKey', apiKey);
             elements.apiStatus.textContent = 'API Key saved successfully!';
             elements.apiStatus.style.color = '#3498db';
             
@@ -721,23 +721,23 @@
             }, 3000);
         }
 
-        // Gemini API Call Function
-        async function callGeminiAPI(prompt) {
+        // OpenRouter API Call Function
+        async function callOpenRouterAPI(prompt) {
             try {
-                const response = await fetch(GEMINI_API_ENDPOINT, {
+                const response = await fetch(OPENROUTER_API_ENDPOINT, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-goog-api-key': appState.apiKey
+                        'Authorization': `Bearer ${appState.apiKey}`,
+                        'HTTP-Referer': window.location.href,
+                        'X-Title': 'HOPE-PPT'
                     },
                     body: JSON.stringify({
-                        contents: [
+                        model: 'qwen/qwen-2.5-coder-32b-instruct:free',
+                        messages: [
                             {
-                                parts: [
-                                    {
-                                        text: prompt
-                                    }
-                                ]
+                                role: 'user',
+                                content: prompt
                             }
                         ]
                     })
@@ -749,9 +749,9 @@
                 }
 
                 const data = await response.json();
-                return data.candidates[0].content.parts[0].text;
+                return data.choices[0].message.content;
             } catch (error) {
-                console.error('Gemini API Error:', error);
+                console.error('OpenRouter API Error:', error);
                 throw error;
             }
         }
@@ -770,10 +770,22 @@
 
             try {
                 // Create prompt for generating questions with options
-                const prompt = `Generate 10 clarifying questions for a presentation about "${topic}". For each question, provide 4 multiple choice options. Format your response as a JSON array where each object has a "question" field and an "options" array with 4 strings. The questions should help gather more information to create a comprehensive presentation.`;
-                
-                // Call Gemini API
-                const responseText = await callGeminiAPI(prompt);
+            const prompt = `Generate 10 clarifying questions for a presentation about "${topic}". For each question, provide 4 multiple choice options. Format your response as a JSON array where each object has a "question" field and an "options" array with 4 strings. The questions should help gather more information to create a comprehensive presentation, specifically addressing common doubts that occur while creating presentation code, including:
+
+1. Presentation structure and slide count
+2. Visual theme and design preferences
+3. Content depth and length requirements
+4. Technical specifications and constraints
+5. Animation and interaction preferences
+6. Audience considerations
+7. Branding and style guidelines
+8. Special features or requirements
+9. Delivery platform considerations
+10. Content organization approach
+
+The questions should be designed to resolve uncertainties about presentation development before coding begins.`;                
+                // Call OpenRouter API
+                const responseText = await callOpenRouterAPI(prompt);
                 
                 // Parse the response to extract questions and options
                 let questionsData;
@@ -919,7 +931,7 @@
                 
                 // Create prompt for generating the presentation
                 const prompt = `Generate a complete HTML presentation about "${appState.topic}" based on the following information:\n\n${answersText}\n\nThe presentation must follow this exact structure:\n\n1. A single HTML file with embedded CSS and JavaScript\n2. Include Three.js for 3D elements on each slide\n3. Implement arrow key navigation (left/right arrows)\n4. Add fullscreen toggle with 'F' key\n5. Include side-moving slide transitions with CSS transforms\n6. Add visual slide indicators (dots)\n7. Include Previous/Next control buttons\n8. Make it responsive with media queries\n9. Include fact cards and solution grid layouts where appropriate\n10. Add animated text effects (glow, slideUp)\n11. Include backdrop blur effects for UI elements\n12. Add the watermark "Developed under HOPE Research Team" and "Developed by Justin" to the bottom-right corner of each slide\n\nADDITIONAL REQUIREMENTS:\n13. Use Bootstrap 5 for professional UI components and responsive grid system\n14. Implement clean, modern design with consistent color scheme and typography\n15. Add subtle hover animations and micro-interactions\n16. Ensure smooth transitions between all UI elements\n17. Organize code with clear comments and proper indentation\n18. Use semantic HTML5 tags throughout\n19. Implement component-based structure for maintainability\n20. Add loading animations and progress indicators\n\nPROFESSIONAL 3D INTEGRATION:\n21. Create sophisticated Three.js scenes with professional lighting (ambient, directional, point lights)\n22. Implement particle systems for atmospheric effects where appropriate\n23. Add realistic materials with PBR (Physically Based Rendering) textures\n24. Include smooth camera animations and orbital controls\n25. Create interactive 3D elements that respond to mouse movement\n26. Add depth of field and post-processing effects\n27. Implement shadow mapping for realistic lighting\n28. Use professional color grading and tone mapping\n\nENGAGING CONTENT REQUIREMENTS:\n29. Design visually striking layouts with dynamic compositions\n30. Use data visualization techniques for statistics (animated charts, infographics)\n31. Include compelling imagery and icons that enhance understanding\n32. Implement storytelling techniques with visual narrative flow\n33. Add surprise elements and reveal animations\n34. Use professional typography hierarchy with emphasis techniques\n35. Include relevant quotes or statistics in stylized callouts\n36. Implement parallax scrolling effects between slide layers\n37. Add subtle background animations (floating particles, gradient shifts)\n\nThe presentation should have exactly 6 slides with this specific structure:\n1. Introduction slide with title, subtitle, and brief overview\n2. Background/Context slide with historical context and foundational information\n3. Key Concepts slide with main principles, theories, or frameworks\n4. Current State/Analysis slide with present situation, data, or trends\n5. Future Outlook/Implications slide with predictions, opportunities, or challenges\n6. Conclusion slide with summary, key takeaways, and call to action\n\nCRITICAL: For the 3D elements on each slide, create objects that are specifically relevant to the presentation topic "${appState.topic}". The 3D elements must:\n- Be contextually appropriate for each slide's content\n- Directly relate to "${appState.topic}" in a meaningful way\n- Vary between slides while maintaining thematic consistency\n- Include appropriate lighting, camera angles, and animations\n- Have interactive elements where appropriate (rotation on hover, etc.)\n- Demonstrate professional 3D modeling techniques\n- Include realistic physics simulations where applicable\n\nFor example:\n- If the topic is about space: use rotating planets with atmospheric glow, asteroid fields with particle systems, spacecraft with engine trails\n- If the topic is about technology: use circuit boards with animated data flow, holographic interfaces, rotating gears with metallic materials\n- If the topic is about environment: use growing trees with wind animation, water simulations with refraction, recycling symbols with particle effects\n- If the topic is about medicine: use DNA strands with molecular bonds, beating heart with blood flow, neural networks with synaptic firing\n- If the topic is about education: use floating books with page-turning animations, lightbulbs with filament glow, graduation caps with confetti particles\n- If the topic is about business: use growing charts with 3D bars, rotating globe with data connections, team avatars with dynamic interactions\n\nEach slide should have a unique Three.js 3D scene that enhances the content and creates visual interest. The 3D elements should be professionally rendered with attention to detail.\n\nCODE QUALITY REQUIREMENTS:\n- Use Bootstrap classes for layout and components\n- Implement CSS custom properties for consistent theming\n- Add detailed comments explaining complex sections\n- Use BEM methodology for CSS class naming\n- Implement modular JavaScript with clear functions\n- Add proper error handling\n- Optimize performance with efficient rendering\n- Include accessibility features (ARIA labels, keyboard navigation)\n\nReturn only the complete HTML code without any additional explanations.`;                
-                const presentationHTML = await callGeminiAPI(prompt);
+                const presentationHTML = await callOpenRouterAPI(prompt);
                 
                 // Ensure watermark is present in all slides
                 const finalHTML = ensureWatermark(presentationHTML);
