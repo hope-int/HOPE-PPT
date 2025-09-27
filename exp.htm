@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Warming Presentation</title>
+    <style>
+        /* Reset and base styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #000; color: #fff; overflow: hidden; }
+        
+        /* Slides container */
+        .slides-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease;
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+        .slide.next {
+            transform: translateX(100%);
+        }
+        
+        /* Content styling */
+        h1 { font-size: 3em; margin-bottom: 20px; color: #ff6b35; }
+        h2 { font-size: 2.5em; margin-bottom: 15px; color: #4ecdc4; }
+        p { font-size: 1.2em; line-height: 1.5; max-width: 800px; margin-bottom: 20px; }
+        ul { font-size: 1.2em; list-style: none; }
+        ul li { margin: 10px 0; padding-left: 20px; position: relative; }
+        ul li:before { content: "•"; color: #ff6b35; font-weight: bold; position: absolute; left: 0; }
+        
+        /* 3D Canvas */
+        #three-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        
+        /* Instructions overlay */
+        #instructions {
+            position: fixed; top: 10px; right: 10px; z-index: 100; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; font-size: 0.9em;
+        }
+        .slide.active + #three-canvas { display: block; } /* Show canvas per slide via JS */
+    </style>
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <div id="instructions">
+        Press 'F' for fullscreen. ← / → arrows or Space to navigate.
+    </div>
+    
+    <div class="slides-container">
+        <!-- Slide 1: Introduction -->
+        <div class="slide" data-slide="1">
+            <h1>Global Warming: A Call to Action</h1>
+            <p>The Earth's average temperature has risen by 1.1°C since the pre-industrial era, driven by human activities.</p>
+            <p>It's time to understand, act, and change.</p>
+        </div>
+        
+        <!-- Slide 2: Causes -->
+        <div class="slide" data-slide="2">
+            <h2>Causes of Global Warming</h2>
+            <ul>
+                <li>Fossil fuel combustion (coal, oil, gas) releases CO2.</li>
+                <li>Deforestation reduces carbon absorption.</li>
+                <li>Industrial processes and agriculture emit methane and nitrous oxide.</li>
+            </ul>
+            <p>Human actions trap heat in the atmosphere.</p>
+        </div>
+        
+        <!-- Slide 3: Effects -->
+        <div class="slide" data-slide="3">
+            <h2>Devastating Effects</h2>
+            <ul>
+                <li>Rising sea levels threaten coastal cities.</li>
+                <li>Extreme weather: hurricanes, droughts, wildfires.</li>
+                <li>Biodiversity loss and ecosystem disruption.</li>
+                <li>Health impacts from heatwaves and disease spread.</li>
+            </ul>
+        </div>
+        
+        <!-- Slide 4: Solutions -->
+        <div class="slide" data-slide="4">
+            <h2>Solutions for a Cooler Future</h2>
+            <ul>
+                <li>Switch to renewable energy: solar, wind, hydro.</li>
+                <li>Plant trees and protect forests.</li>
+                <li>Adopt sustainable policies and reduce waste.</li>
+                <li>Individual actions: conserve energy, eat local.</li>
+            </ul>
+        </div>
+        
+        <!-- Slide 5: Conclusion -->
+        <div class="slide" data-slide="5">
+            <h2>Act Now for Tomorrow</h2>
+            <p>Global warming is reversible with collective effort. Join the movement—reduce, reuse, advocate.</p>
+            <p>Our planet depends on it.</p>
+        </div>
+    </div>
+    
+    <canvas id="three-canvas"></canvas> <!-- Shared canvas for all 3D scenes; switched via JS -->
+    
+    <script>
+        // Slides management
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active', 'prev', 'next');
+                if (i < index) {
+                    slide.classList.add('prev');
+                } else if (i === index) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.add('next');
+                }
+            });
+            currentSlide = index;
+            initThreeJS(index); // Initialize 3D for current slide
+        }
+        
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) showSlide(currentSlide + 1);
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 0) showSlide(currentSlide - 1);
+        }
+        
+        // Show first slide
+        showSlide(0);
+        
+        // Keyboard events
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'f' || e.key === 'F') {
+                toggleFullscreen();
+            } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+        
+        // Fullscreen API
+        function toggleFullscreen() {
+            const elem = document.documentElement;
+            if (!document.fullscreenElement) {
+                elem.requestFullscreen().catch(err => console.log('Fullscreen error:', err));
+            } else {
+                document.exitFullscreen();
+            }
+        }
+        
+        // Three.js Setup (shared scene, switched per slide)
+        let scene, camera, renderer, mesh; // Global for reuse
+        const canvas = document.getElementById('three-canvas');
+        
+        function initThreeJS(slideIndex) {
+            if (!scene) {
+                // Init once
+                scene = new THREE.Scene();
+                scene.background = new THREE.Color(0x001122); // Dark blue-ish for theme
+                
+                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                camera.position.z = 5;
+                
+                renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                
+                // Lighting
+                const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+                scene.add(ambientLight);
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(1, 1, 1);
+                scene.add(directionalLight);
+                
+                // Animation loop
+                function animate() {
+                    requestAnimationFrame(animate);
+                    if (mesh && mesh.rotation) {
+                        mesh.rotation.y += 0.005; // Slow auto-rotate
+                    }
+                    renderer.render(scene, camera);
+                }
+                animate();
+                
+                // Mouse interaction
+                let mouseX = 0, mouseY = 0;
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                    mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+                    if (mesh) {
+                        mesh.rotation.y += mouseX * 0.01;
+                        mesh.rotation.x += mouseY * 0.01;
+                    }
+                });
+                document.addEventListener('click', () => {
+                    if (mesh) mesh.rotation.x += Math.PI / 4; // Click to tilt
+                });
+                
+                // Resize handler
+                window.addEventListener('resize', () => {
+                    camera.aspect = window.innerWidth / window.innerHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
+            
+            // Clear previous mesh
+            if (mesh) scene.remove(mesh);
+            
+            // Create slide-specific 3D element
+            switch(slideIndex) {
+                case 0: // Intro: Rotating Earth (sphere with texture simulation)
+                    const geometry0 = new THREE.SphereGeometry(2, 32, 32);
+                    const material0 = new THREE.MeshPhongMaterial({ color: 0x4a90e2, wireframe: false });
+                    mesh = new THREE.Mesh(geometry0, material0);
+                    scene.add(mesh);
+                    break;
+                    
+                case 1: // Causes: Glowing CO2 particles
+                    const particles = new THREE.BufferGeometry();
+                    const particleCount = 500;
+                    const positions = new Float32Array(particleCount * 3);
+                    for (let i = 0; i < particleCount * 3; i += 3) {
+                        positions[i] = (Math.random() - 0.5) * 10;
+                        positions[i + 1] = (Math.random() - 0.5) * 10;
+                        positions[i + 2] = (Math.random() - 0.5) * 10;
+                    }
+                    particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                    const particleMaterial = new THREE.PointsMaterial({ color: 0xff0000, size: 0.1 });
+                    mesh = new THREE.Points(particles, particleMaterial);
+                    scene.add(mesh);
+                    break;
+                    
+                case 2: // Effects: Melting ice (cube scaling down)
+                    const geometry2 = new THREE.BoxGeometry(2, 2, 2);
+                    const material2 = new THREE.MeshPhongMaterial({ color: 0xadd8e6 });
+                    mesh = new THREE.Mesh(geometry2, material2);
+                    scene.add(mesh);
+                    // Animate "melting" (scale y over time)
+                    setInterval(() => { if (mesh.scale.y > 0.5) mesh.scale.y -= 0.01; }, 1000);
+                    break;
+                    
+                case 3: // Solutions: Wind turbine (cylinder + blades)
+                    const group = new THREE.Group();
+                    const baseGeometry = new THREE.CylinderGeometry(0.2, 0.3, 1);
+                    const baseMaterial = new THREE.MeshPhongMaterial({ color: 0x8b4513 });
+                    const base = new THREE.Mesh(baseGeometry, baseMaterial);
+                    group.add(base);
+                    
+                    const bladeGeometry = new THREE.BoxGeometry(0.05, 2, 0.5);
+                    const bladeMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff });
+                    for (let i = 0; i < 3; i++) {
+                        const blade = new THREE.Mesh(bladeGeometry, bladeMaterial);
+                        blade.position.set(0, 1.5, 0);
+                        blade.rotation.z = (i * Math.PI * 2) / 3;
+                        group.add(blade);
+                    }
+                    mesh = group;
+                    scene.add(mesh);
+                    break;
+                    
+                case 4: // Conclusion: Growing tree (cone on cylinder)
+                    const trunkGeometry = new THREE.CylinderGeometry(0.2, 0.3, 2);
+                    const trunkMaterial = new THREE.MeshPhongMaterial({ color: 0x8b4513 });
+                    const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
+                    
+                    const leavesGeometry = new THREE.ConeGeometry(1, 3, 8);
+                    const leavesMaterial = new THREE.MeshPhongMaterial({ color: 0x228b22 });
+                    const leaves = new THREE.Mesh(leavesGeometry, leavesMaterial);
+                    leaves.position.y = 2;
+                    
+                    mesh = new THREE.Group();
+                    mesh.add(trunk);
+                    mesh.add(leaves);
+                    scene.add(mesh);
+                    // "Grow" animation
+                    let grow = 0;
+                    setInterval(() => { grow += 0.01; mesh.scale.set(1 + grow, 1 + grow, 1 + grow); if (grow > 0.5) grow = 0; }, 200);
+                    break;
+            }
+            
+            canvas.style.display = 'block'; // Show canvas
+        }
+    </script>
+</body>
+</html>
