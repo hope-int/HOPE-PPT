@@ -770,8 +770,55 @@
 
             try {
                 // Create prompt for generating questions with options
-                const prompt = `Generate 10 clarifying questions for a presentation about "${topic}". For each question, provide 4 multiple choice options. Format your response as a JSON array where each object has a "question" field and an "options" array with 4 strings. The questions should help gather more information to create a comprehensive presentation.`;
-                
+            const prompt = `Generate 10 clarifying questions for a presentation about "${topic}". Each question should have 4 multiple choice options designed to gather specific information needed to create a comprehensive presentation. 
+
+Requirements:
+1. Questions must cover these presentation aspects:
+   - Target audience knowledge level
+   - Desired presentation tone (formal/casual/inspirational)
+   - Key topics to emphasize
+   - Visual style preferences
+   - Presentation length expectations
+   - Call-to-action requirements
+   - Data visualization needs
+   - Technical depth required
+   - Interactive elements desired
+   - Branding guidelines
+
+2. For each question:
+   - Provide 4 distinct, relevant multiple choice options
+   - Options should cover a range of possibilities
+   - Include one "Other" option where appropriate
+   - Make options mutually exclusive where possible
+
+3. Response format:
+   - Strict JSON array format only
+   - Each object must contain:
+        "question": "Question text here",
+        "options": ["Option 1", "Option 2", "Option 3", "Option 4"]
+   - No additional text or explanations
+   - Valid JSON syntax (no trailing commas)
+
+4. Content guidelines:
+   - Questions should be clear and concise
+   - Options should be specific and actionable
+   - Avoid yes/no questions
+   - Focus on gathering implementation details
+   - Consider presentation structure and flow
+
+Example structure:
+[
+  {
+    "question": "What is the primary knowledge level of your target audience?",
+    "options": ["Beginner", "Intermediate", "Advanced", "Mixed levels"]
+  },
+  {
+    "question": "Which visual style do you prefer for the presentation?",
+    "options": ["Minimalist", "Data-heavy", "Creative/Artistic", "Corporate"]
+  }
+]
+
+Generate exactly 10 questions following all specifications above.`;                
                 // Call Gemini API
                 const responseText = await callGeminiAPI(prompt);
                 
