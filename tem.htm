@@ -1,12 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+        <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOPE-PPT</title>
+    
+    <!-- Essential Meta Tags -->
+    <title>HOPE-PPT | AI-Powered Presentation Generator</title>
+    <meta name="description" content="Create stunning interactive presentations with AI. HOPE-PPT generates custom 3D presentations using Gemini AI with beautiful animations and themes.">
+    <meta name="keywords" content="presentation generator, AI presentations, 3D slides, HOPE-PPT, Gemini AI, interactive presentations, slide creator">
+    <meta name="author" content="Justin">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://hope-ppt.vercel.app">
+    
+    <!-- Open Graph (OG) Tags -->
+    <meta property="og:title" content="HOPE-PPT | AI-Powered Presentation Generator">
+    <meta property="og:description" content="Create stunning interactive presentations with AI. HOPE-PPT generates custom 3D presentations using Gemini AI with beautiful animations and themes.">
+    <meta property="og:image" content="https://hope-ppt.vercel.app/images/og-preview.jpg">
+    <meta property="og:url" content="https://hope-ppt.vercel.app">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="HOPE-PPT">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HOPE-PPT | AI-Powered Presentation Generator">
+    <meta name="twitter:description" content="Create stunning interactive presentations with AI. HOPE-PPT generates custom 3D presentations using Gemini AI with beautiful animations and themes.">
+    <meta name="twitter:image" content="https://hope-ppt.vercel.app/images/twitter-preview.jpg">
+    <meta name="twitter:site" content="@hopeppt">
+    <meta name="twitter:creator" content="@justindev">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="theme-color" content="#3498db">
+    <meta name="msapplication-TileColor" content="#3498db">
+    <meta name="application-name" content="HOPE-PPT">
+    <meta name="apple-mobile-web-app-title" content="HOPE-PPT">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Existing scripts and styles -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <style>
+        <style>
+        /* All existing styles remain unchanged */
         * {
             margin: 0;
             padding: 0;
@@ -84,7 +126,7 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        input, textarea {
+        input, textarea, select {
             width: 100%;
             padding: 12px;
             border: none;
@@ -97,7 +139,7 @@
             transition: all 0.3s ease;
         }
 
-        input:focus, textarea:focus {
+        input:focus, textarea:focus, select:focus {
             outline: none;
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
@@ -404,6 +446,82 @@
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
         }
 
+        /* Custom color picker styles */
+        .custom-colors-container {
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .custom-colors-container.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .color-picker-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .color-picker-group label {
+            min-width: 120px;
+            margin-right: 10px;
+        }
+        
+        .color-picker {
+            width: 50px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .color-code {
+            margin-left: 10px;
+            font-family: monospace;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        /* Language dropdown styles */
+        .language-dropdown-container {
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .language-dropdown-container.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .language-search {
+            margin-bottom: 10px;
+        }
+        
+        .language-list {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        .language-option {
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .language-option:hover {
+            background: rgba(52, 152, 219, 0.2);
+        }
+        
+        .language-option.selected {
+            background: rgba(52, 152, 219, 0.3);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
@@ -426,7 +544,7 @@
                 font-size: 1.2rem;
             }
         }
-    </style>
+        </style>
 </head>
 <body>
     <!-- Splash Screen -->
@@ -487,6 +605,24 @@
                 <div class="progress-fill" id="progress-fill"></div>
             </div>
             <div id="questions-container"></div>
+            <div id="custom-colors-container" class="custom-colors-container">
+                <div class="color-picker-group">
+                    <label for="custom-color-1">First Color:</label>
+                    <input type="color" id="custom-color-1" class="color-picker" value="#3498db">
+                    <span id="color-code-1" class="color-code">#3498db</span>
+                </div>
+                <div class="color-picker-group">
+                    <label for="custom-color-2">Second Color:</label>
+                    <input type="color" id="custom-color-2" class="color-picker" value="#e74c3c">
+                    <span id="color-code-2" class="color-code">#e74c3c</span>
+                </div>
+            </div>
+            <div id="language-dropdown-container" class="language-dropdown-container">
+                <div class="language-search">
+                    <input type="text" id="language-search" placeholder="Search languages...">
+                </div>
+                <div id="language-list" class="language-list"></div>
+            </div>
             <button id="generate-presentation" disabled>Generate Presentation</button>
         </div>
         
@@ -532,12 +668,65 @@
         const appState = {
             apiKey: '',
             topic: '',
-            questions: [],
-            answers: [],
+            theme: '',
+            slideCount: '',
+            structure: '',
+            animationStyle: '',
+            colorTheme: '',
+            customColor1: '#3498db',
+            customColor2: '#e74c3c',
+            descriptionLength: '',
+            bulletPointsCount: '',
+            fontSize: '',
+            includeImages: '',
+            termsdepth: '',
+            bgitem: '',
+            language: 'English',
+            presentationStyle: '',
+            advancedAnimations: '',
+            interactiveElements: '',
+            dataVisualization: '',
+            multimediaElements: '',
+            imageFallback: '',
             generatedPresentation: '',
             currentQuestionIndex: 0,
             presentationHistory: []
         };
+
+        // List of languages that LLMs are typically trained on
+        const languages = [
+            "English", "Spanish", "French", "German", "Italian", "Portuguese", "Dutch", "Russian", 
+            "Japanese", "Korean", "Chinese (Simplified)", "Chinese (Traditional)", "Arabic", 
+            "Hindi", "Bengali", "Punjabi", "Marathi", "Tamil", "Telugu", "Gujarati", "Kannada", 
+            "Malayalam", "Odia", "Assamese", "Urdu", "Persian", "Turkish", "Polish", "Ukrainian", 
+            "Romanian", "Czech", "Hungarian", "Swedish", "Danish", "Norwegian", "Finnish", 
+            "Greek", "Hebrew", "Thai", "Vietnamese", "Indonesian", "Malay", "Tagalog", 
+            "Swahili", "Zulu", "Afrikaans", "Amharic", "Yoruba", "Igbo", "Somali", 
+            "Nepali", "Sinhala", "Burmese", "Khmer", "Lao", "Mongolian", "Kazakh", 
+            "Uzbek", "Azerbaijani", "Georgian", "Armenian", "Lithuanian", "Latvian", 
+            "Estonian", "Slovak", "Slovenian", "Croatian", "Serbian", "Bosnian", 
+            "Montenegrin", "Macedonian", "Bulgarian", "Albanian", "Belarusian", 
+            "Moldovan", "Icelandic", "Faroese", "Basque", "Catalan", "Galician", 
+            "Welsh", "Irish", "Scottish Gaelic", "Breton", "Cornish", "Manx", 
+            "Esperanto", "Latin", "Ancient Greek", "Sanskrit", "Pali", "Tibetan", 
+            "Mongolian (Traditional)", "Javanese", "Sundanese", "Madurese", "Balinese", 
+            "Minangkabau", "Buginese", "Makassarese", "Acehnese", "Banjarese", 
+            "Tausug", "Maguindanao", "Maranao", "Ilocano", "Hiligaynon", "Waray-Waray", 
+            "Bicolano", "Pangasinan", "Kapampangan", "Ibanag", "Gaddang", "Ifugao", 
+            "Kalinga", "Bontoc", "Tboli", "T'boli", "Manobo", "Bagobo", "Mandaya", 
+            "Mansaka", "Dibabawon", "Manguangan", "Kalagan", "Tagakaulo", "Blan", 
+            "Talaandig", "Higaonon", "Bukidnon", "Tigwahanon", "Matigsalug", "Obo", 
+            "Tinananon", "Tigwa", "Umayamnon", "Western Bukidnon Manobo", "Eastern Bukidnon Manobo", 
+            "Kinamiging", "Cotabato Manobo", "Dibabawon Manobo", "Agusan Manobo", 
+            "Surigao Manobo", "Western Visayan", "Central Visayan", "Southern Visayan", 
+            "Northern Visayan", "Ati", "Sulod", "Magahat", "Negros Occidental Hiligaynon", 
+            "Capiznon", "Aklanon", "Kinaray-a", "Cuyonon", "Ratagnon", "Batak", 
+            "Palawano", "Tagbanwa", "Cuyonon", "Agutaynen", "Tausug", "Sama", 
+            "Yakan", "Jama Mapun", "Sama-Bajau", "Badjao", "Molbog", "Palawano", 
+            "Tagbanwa", "Cuyonon", "Agutaynen", "Tausug", "Sama", "Yakan", 
+            "Jama Mapun", "Sama-Bajau", "Badjao", "Molbog", "Palawano", "Tagbanwa", 
+            "Cuyonon", "Agutaynen"
+        ];
 
         // DOM Elements
         const sections = {
@@ -567,11 +756,15 @@
             notification: document.getElementById('notification'),
             historyToggle: document.getElementById('history-toggle'),
             splashScreen: document.getElementById('splash-screen'),
-            continueToApp: document.getElementById('continue-to-app')
+            continueToApp: document.getElementById('continue-to-app'),
+            customColorsContainer: document.getElementById('custom-colors-container'),
+            languageDropdownContainer: document.getElementById('language-dropdown-container'),
+            languageSearch: document.getElementById('language-search'),
+            languageList: document.getElementById('language-list')
         };
 
         // Gemini API Configuration
-        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent';
 
         // Initialize Three.js Background
         function initThreeBackground() {
@@ -684,6 +877,12 @@
                     showSection('history');
                 }
             });
+
+            // Language search functionality
+            elements.languageSearch.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                renderLanguageList(searchTerm);
+            });
         }
 
         // Section Navigation
@@ -757,7 +956,7 @@
         }
 
         // Topic Input and Question Generation
-        async function generateQuestions() {
+        function generateQuestions() {
             const topic = elements.presentationTopic.value.trim();
             if (!topic) {
                 showNotification('Please enter a presentation topic', 'error');
@@ -766,112 +965,109 @@
 
             appState.topic = topic;
             elements.generateQuestionsBtn.disabled = true;
-            elements.generateQuestionsBtn.textContent = 'Generating questions...';
-
-            try {
-                // Create prompt for generating questions with options
-            const prompt = `Generate 10 clarifying questions for a presentation about "${topic}". Each question should have 4 multiple choice options designed to gather specific information needed to create a comprehensive presentation. 
-
-Requirements:
-1. Questions must cover these presentation aspects:
-   - Target audience knowledge level
-   - Desired presentation tone (formal/casual/inspirational)
-   - Key topics to emphasize
-   - Visual style preferences
-   - Presentation length expectations
-   - Call-to-action requirements
-   - Data visualization needs
-   - Technical depth required
-   - Interactive elements desired
-   - Branding guidelines
-
-2. For each question:
-   - Provide 4 distinct, relevant multiple choice options
-   - Options should cover a range of possibilities
-   - Include one "Other" option where appropriate
-   - Make options mutually exclusive where possible
-
-3. Response format:
-   - Strict JSON array format only
-   - Each object must contain:
-        "question": "Question text here",
-        "options": ["Option 1", "Option 2", "Option 3", "Option 4"]
-   - No additional text or explanations
-   - Valid JSON syntax (no trailing commas)
-
-4. Content guidelines:
-   - Questions should be clear and concise
-   - Options should be specific and actionable
-   - Avoid yes/no questions
-   - Focus on gathering implementation details
-   - Consider presentation structure and flow
-
-Example structure:
-[
-  {
-    "question": "What is the primary knowledge level of your target audience?",
-    "options": ["Beginner", "Intermediate", "Advanced", "Mixed levels"]
-  },
-  {
-    "question": "Which visual style do you prefer for the presentation?",
-    "options": ["Minimalist", "Data-heavy", "Creative/Artistic", "Corporate"]
-  }
-]
-
-Generate exactly 10 questions following all specifications above.`;                
-                // Call Gemini API
-                const responseText = await callGeminiAPI(prompt);
-                
-                // Parse the response to extract questions and options
-                let questionsData;
-                try {
-                    questionsData = JSON.parse(responseText);
-                } catch (e) {
-                    // If the response is not valid JSON, create a fallback
-                    questionsData = [
-                        { question: "What is the main objective of your presentation?", options: ["Inform", "Persuade", "Entertain", "Educate"] },
-                        { question: "Who is your target audience?", options: ["Experts", "General public", "Students", "Business professionals"] },
-                        { question: "What is the desired length of your presentation?", options: ["Short (5-10 min)", "Medium (10-20 min)", "Long (20-30 min)", "Flexible"] },
-                        { question: "What tone would you like for your presentation?", options: ["Formal", "Informal", "Technical", "Inspirational"] },
-                        { question: "What key points do you want to emphasize?", options: ["Benefits", "Challenges", "Innovations", "Future outlook"] },
-                        { question: "Do you have specific data to include?", options: ["Statistics", "Case studies", "Research findings", "No specific data"] },
-                        { question: "What visual style do you prefer?", options: ["Minimalist", "Colorful", "Professional", "Creative"] },
-                        { question: "What is the call to action?", options: ["Learn more", "Adopt a solution", "Change perspective", "No specific action"] },
-                        { question: "What is your experience level with this topic?", options: ["Beginner", "Intermediate", "Advanced", "Expert"] },
-                        { question: "What makes your approach unique?", options: ["New methodology", "Unique perspective", "Innovative solution", "Comprehensive analysis"] }
-                    ];
+            elements.generateQuestionsBtn.textContent = 'Preparing questions...';
+            
+            // Set predefined questions with professional options
+            appState.questions = [
+                {
+                    question: "What language do you want for your presentation?",
+                    options: ["Malayalam", "English", "Other"],
+                    variable: "language"
+                },
+                {
+                    question: "What presentation style do you prefer?",
+                    options: ["Professional Corporate", "Creative Modern", "Minimalist Clean", "Bold Impactful", "Academic Formal"],
+                    variable: "presentationStyle"
+                },
+                {
+                    question: "What theme do you prefer?",
+                    options: ["Minimal", "Creative", "Professional", "HighTech", "Corporate", "Academic", "Modern", "Vintage"],
+                    variable: "theme"
+                },
+                {
+                    question: "How many slides do you want?",
+                    options: ["1-4", "1-6", "1-8", "1-10", "1-12", "1-15"],
+                    variable: "slideCount"
+                },
+                {
+                    question: "What structure do you prefer for each slide?",
+                    options: ["Title and content", "Title and bullet points", "Title, subtitle and content", "Title, subtitle and bullet points", "Two-column layout", "Three-column layout"],
+                    variable: "structure"
+                },
+                {
+                    question: "What animation style do you prefer?",
+                    options: ["Simple transitions (fade, slide)", "Advanced animations (rotate, zoom, bounce)", "3D animations (flip, cube, carousel)", "No animation"],
+                    variable: "animationStyle"
+                },
+                {
+                    question: "What level of 3D elements do you want?",
+                    options: ["None", "Basic 3D shapes", "Advanced 3D models", "Interactive 3D elements"],
+                    variable: "advancedAnimations"
+                },
+                {
+                    question: "What interactive elements do you want?",
+                    options: ["None", "Basic (click to reveal)", "Advanced (drag, zoom, rotate)", "Interactive quizzes", "Interactive simulations"],
+                    variable: "interactiveElements"
+                },
+                {
+                    question: "Do you want data visualization?",
+                    options: ["No", "Yes, basic charts", "Yes, advanced charts", "Yes, interactive charts"],
+                    variable: "dataVisualization"
+                },
+                {
+                    question: "Do you want multimedia elements?",
+                    options: ["No", "Audio only", "Video only", "Both audio and video"],
+                    variable: "multimediaElements"
+                },
+                {
+                    question: "What type of images do you want?",
+                    options: ["No images", "Icons only", "SVG graphics only", "Photographs only", "Mix of icons and SVG graphics", "Mix of SVG graphics and photographs", "Mix of all types"],
+                    variable: "includeImages"
+                },
+                {
+                    question: "What image fallback strategy do you prefer?",
+                    options: ["No fallback", "Text description fallback", "Placeholder image fallback", "Both text and placeholder fallback"],
+                    variable: "imageFallback"
+                },
+                {
+                    question: "What color theme do you prefer?",
+                    options: ["Black and white with blue accent", "Black and white with green accent", "Black and white with red accent", "Black and white with purple accent", "Dark theme with blue", "Dark theme with green", "Dark theme with red", "Dark theme with purple", "Light theme with blue", "Light theme with green", "Light theme with red", "Light theme with purple", "Custom color (select two)"],
+                    variable: "colorTheme"
+                },
+                {
+                    question: "Content Depth Preference?",
+                    options: ["Beginner level", "Intermediate level", "Expert level", "Mixed levels"],
+                    variable: "termsdepth"
+                },
+                {
+                    question: "How long should descriptions be?",
+                    options: ["Very short (1 sentence)", "Short (2-3 sentences)", "Medium (4-5 sentences)", "Long (6-7 sentences)", "Very long (8+ sentences)"],
+                    variable: "descriptionLength"
+                },
+                {
+                    question: "How many bullet points per slide?",
+                    options: ["1-2", "3-4", "5-6", "7-8", "9-10"],
+                    variable: "bulletPointsCount"
+                },
+                {
+                    question: "What font size do you prefer?",
+                    options: ["Very small", "Small", "Medium", "Large", "Very large"],
+                    variable: "fontSize"
+                },
+                {
+                    question: "Which 3D background do you prefer?",
+                    options: ["Stars in Universe", "3D nodes", "3D floating particles", "Abstract shapes", "3D landscape", "3D cityscape", "3D underwater", "3D space nebula", "No background"],
+                    variable: "bgitem"
                 }
-                
-                // Ensure we have exactly 10 questions
-                if (questionsData.length < 10) {
-                    // Fill with generic questions if needed
-                    const genericQuestions = [
-                        { question: "What is the main objective of your presentation?", options: ["Inform", "Persuade", "Entertain", "Educate"] },
-                        { question: "Who is your target audience?", options: ["Experts", "General public", "Students", "Business professionals"] },
-                        { question: "What is the desired length of your presentation?", options: ["Short (5-10 min)", "Medium (10-20 min)", "Long (20-30 min)", "Flexible"] },
-                        { question: "What tone would you like for your presentation?", options: ["Formal", "Informal", "Technical", "Inspirational"] },
-                        { question: "What key points do you want to emphasize?", options: ["Benefits", "Challenges", "Innovations", "Future outlook"] },
-                        { question: "Do you have specific data to include?", options: ["Statistics", "Case studies", "Research findings", "No specific data"] },
-                        { question: "What visual style do you prefer?", options: ["Minimalist", "Colorful", "Professional", "Creative"] },
-                        { question: "What is the call to action?", options: ["Learn more", "Adopt a solution", "Change perspective", "No specific action"] },
-                        { question: "What is your experience level with this topic?", options: ["Beginner", "Intermediate", "Advanced", "Expert"] },
-                        { question: "What makes your approach unique?", options: ["New methodology", "Unique perspective", "Innovative solution", "Comprehensive analysis"] }
-                    ];
-                    
-                    questionsData = [...questionsData, ...genericQuestions.slice(0, 10 - questionsData.length)];
-                }
-
-                appState.questions = questionsData.slice(0, 10); // Ensure we have exactly 10 questions
-                appState.answers = new Array(10).fill('');
-                appState.currentQuestionIndex = 0;
-                
-                showSection('questions');
-                renderCurrentQuestion();
-            } catch (error) {
-                showNotification(`Error generating questions: ${error.message}`, 'error');
-                elements.generateQuestionsBtn.disabled = false;
-                elements.generateQuestionsBtn.textContent = 'Generate Questions';
-            }
+            ];
+            
+            // Initialize answers array for these questions
+            appState.answers = new Array(appState.questions.length).fill('');
+            appState.currentQuestionIndex = 0;
+            
+            // Show the questions section
+            showSection('questions');
+            renderCurrentQuestion();
         }
 
         // Render Current Question with Options
@@ -901,6 +1097,21 @@ Generate exactly 10 questions following all specifications above.`;
                 </div>
             `;
             
+            // Show custom color pickers if color theme question and custom option is selected
+            if (currentQuestion.variable === "colorTheme" && selectedOption === "Custom color (select two)") {
+                elements.customColorsContainer.classList.add('show');
+            } else {
+                elements.customColorsContainer.classList.remove('show');
+            }
+            
+            // Show language dropdown if language question and "Other" option is selected
+            if (currentQuestion.variable === "language" && selectedOption === "Other") {
+                elements.languageDropdownContainer.classList.add('show');
+                renderLanguageList();
+            } else {
+                elements.languageDropdownContainer.classList.remove('show');
+            }
+            
             // Add event listeners for options
             const optionElements = document.querySelectorAll('.option');
             optionElements.forEach(option => {
@@ -912,9 +1123,48 @@ Generate exactly 10 questions following all specifications above.`;
                     // Update the answer
                     const input = option.querySelector('input');
                     input.checked = true;
+                    // Store the answer in appState using the variable name
+                    const variableName = appState.questions[appState.currentQuestionIndex].variable;
+                    appState[variableName] = input.value;
+                    // Also update the answers array for progress tracking
                     appState.answers[appState.currentQuestionIndex] = input.value;
+                    
+                    // Show/hide custom color pickers based on selection
+                    if (variableName === "colorTheme" && input.value === "Custom color (select two)") {
+                        elements.customColorsContainer.classList.add('show');
+                    } else {
+                        elements.customColorsContainer.classList.remove('show');
+                    }
+                    
+                    // Show/hide language dropdown based on selection
+                    if (variableName === "language" && input.value === "Other") {
+                        elements.languageDropdownContainer.classList.add('show');
+                        renderLanguageList();
+                    } else {
+                        elements.languageDropdownContainer.classList.remove('show');
+                    }
                 });
             });
+            
+            // Add event listeners for color pickers
+            const colorPicker1 = document.getElementById('custom-color-1');
+            const colorPicker2 = document.getElementById('custom-color-2');
+            const colorCode1 = document.getElementById('color-code-1');
+            const colorCode2 = document.getElementById('color-code-2');
+            
+            if (colorPicker1) {
+                colorPicker1.addEventListener('input', (e) => {
+                    appState.customColor1 = e.target.value;
+                    colorCode1.textContent = e.target.value;
+                });
+            }
+            
+            if (colorPicker2) {
+                colorPicker2.addEventListener('input', (e) => {
+                    appState.customColor2 = e.target.value;
+                    colorCode2.textContent = e.target.value;
+                });
+            }
             
             if (appState.currentQuestionIndex > 0) {
                 document.getElementById('prev-question-btn').addEventListener('click', previousQuestion);
@@ -925,6 +1175,34 @@ Generate exactly 10 questions following all specifications above.`;
             } else {
                 document.getElementById('finish-questions-btn').addEventListener('click', finishQuestions);
             }
+        }
+
+        // Render Language List
+        function renderLanguageList(searchTerm = '') {
+            const filteredLanguages = languages.filter(lang => 
+                lang.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            
+            elements.languageList.innerHTML = filteredLanguages.map(lang => `
+                <div class="language-option ${appState.language === lang ? 'selected' : ''}" data-lang="${lang}">
+                    ${lang}
+                </div>
+            `).join('');
+            
+            // Add event listeners to language options
+            const languageOptions = document.querySelectorAll('.language-option');
+            languageOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    languageOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Update the selected language
+                    appState.language = option.dataset.lang;
+                    // Update the answer in the answers array
+                    appState.answers[appState.currentQuestionIndex] = appState.language;
+                });
+            });
         }
 
         // Question Navigation
@@ -946,6 +1224,20 @@ Generate exactly 10 questions following all specifications above.`;
                 return;
             }
             
+            // Check if custom color option is selected and validate colors
+            if (appState.colorTheme === "Custom color (select two)") {
+                if (!appState.customColor1 || !appState.customColor2) {
+                    showNotification('Please select both custom colors', 'error');
+                    return;
+                }
+            }
+            
+            // Check if language is "Other" and no specific language is selected
+            if (appState.language === "Other" && !appState.selectedLanguage) {
+                showNotification('Please select a specific language', 'error');
+                return;
+            }
+            
             elements.generatePresentationBtn.disabled = false;
             showNotification('All questions answered. You can now generate your presentation!');
         }
@@ -959,15 +1251,93 @@ Generate exactly 10 questions following all specifications above.`;
             showSection('generating');
             
             try {
-                // Prepare the answers for the API call
-                const answersText = appState.answers.map((answer, index) => 
-                    `Q${index + 1}: ${appState.questions[index].question}\nA${index + 1}: ${answer}`
-                ).join('\n\n');
+                // Extract the parameters from appState
+                const { 
+                    topic, 
+                    theme, 
+                    slideCount, 
+                    structure, 
+                    animationStyle, 
+                    colorTheme, 
+                    customColor1, 
+                    customColor2, 
+                    bgitem, 
+                    termsdepth,
+                    descriptionLength,
+                    bulletPointsCount,
+                    fontSize,
+                    includeImages,
+                    imageFallback,
+                    language,
+                    presentationStyle,
+                    advancedAnimations,
+                    interactiveElements,
+                    dataVisualization,
+                    multimediaElements
+                } = appState;
                 
-                // Create prompt for generating the presentation
-const prompt = `Generate a complete HTML presentation about "${appState.topic}" based on the following information:\n\n${answersText}\n\nThe presentation must follow this exact structure:\n\n1. A single HTML file with embedded CSS and JavaScript\n2. Include Three.js for 3D elements on each slide\n3. Implement arrow key navigation (left/right arrows) with smooth transitions\n4. Add fullscreen toggle with 'F' key that works consistently across browsers\n5. Include side-moving slide transitions using CSS transforms with cubic-bezier easing\n6. Add visual slide indicators (dots) that highlight the active slide and are clickable\n7. Include Previous/Next control buttons with hover effects and keyboard navigation support\n8. Make it responsive with media queries for mobile, tablet, and desktop breakpoints\n9. Include fact cards with flip animations and solution grid layouts with hover effects\n10. Add animated text effects (glow on hover, slideUp on scroll) with proper timing\n11. Include backdrop blur effects for UI elements using backdrop-filter CSS property\n12. Add the watermark "Developed under HOPE Research Team" and "Developed by Justin" to the bottom-right corner of each slide with consistent styling\n\nADDITIONAL REQUIREMENTS:\n13. Use Bootstrap 5 for professional UI components and responsive grid system\n14. Implement clean, modern design with consistent color scheme (primary, secondary, accent) and typography hierarchy\n15. Add subtle hover animations (scale, shadow) and micro-interactions (ripple effects)\n16. Ensure smooth transitions between all UI elements with proper timing functions\n17. Organize code with clear comments and proper indentation (2 spaces)\n18. Use semantic HTML5 tags throughout (header, section, article, etc.)\n19. Implement component-based structure with reusable CSS classes and JavaScript functions\n\nPROFESSIONAL 3D INTEGRATION:\n20. Create sophisticated Three.js scenes with professional lighting (ambient: 0x404040, directional: 0xffffff, point lights with color)\n21. Implement particle systems with varying sizes and opacity for atmospheric effects\n22. Add realistic materials with PBR textures (metalness, roughness, normal maps)\n23. Include smooth camera animations with orbital controls and auto-rotation\n24. Create interactive 3D elements that respond to mouse movement with raycasting\n25. Add depth of field and post-processing effects (bloom, vignette)\n26. Implement shadow mapping with soft shadows and proper shadow bias\n27. Use professional color grading and tone mapping (ACES filmic tonemapping)\n\nVISUAL ENHANCEMENTS:\n28. Create a cohesive visual theme with consistent color palette (primary: #1a237e, secondary: #4fc3f7, accent: #ff4081)\n29. Use gradient overlays and glassmorphism effects (background: rgba(255, 255, 255, 0.1)) for modern UI elements\n30. Implement smooth parallax scrolling effects between background layers with proper depth\n31. Add dynamic background animations (floating particles with random movement, gradient shifts)\n32. Use professional typography (font-family: 'Inter', sans-serif) with clear hierarchy (h1: 2.5rem, h2: 2rem, p: 1rem)\n33. Include high-quality SVG icons and visual elements that complement content\n34. Implement reveal animations (fade-in-up, staggered) for content elements as slides transition\n35. Add subtle glow effects (box-shadow: 0 0 15px rgba(79, 195, 247, 0.7)) and shadows for depth perception\n36. Create visually striking title screens with impactful typography and animated backgrounds\n\nENGAGING CONTENT REQUIREMENTS:\n37. Design visually compelling layouts with dynamic compositions (rule of thirds, golden ratio)\n38. Use data visualization techniques for statistics (animated charts with Chart.js, infographics)\n39. Include compelling imagery and icons that enhance understanding with alt text\n40. Implement storytelling techniques with visual narrative flow (problem-solution-benefit)\n41. Add surprise elements and reveal animations (staggered reveals, step animations)\n42. Use professional typography hierarchy with emphasis techniques (bold, italic, color)\n43. Include relevant quotes or statistics in stylized callouts with attribution\n44. Implement parallax scrolling effects between slide layers with proper z-indexing\n45. Add subtle background animations (floating particles with random movement, gradient shifts)\n\nThe presentation should have exactly 6 slides with this specific structure:\n1. Introduction slide with title, subtitle, and brief overview\n2. Background/Context slide with historical context and foundational information\n3. Key Concepts slide with main principles, theories, or frameworks\n4. Current State/Analysis slide with present situation, data, or trends\n5. Future Outlook/Implications slide with predictions, opportunities, or challenges\n6. Conclusion slide with summary, key takeaways, and call to action\n\nCRITICAL: For the 3D elements on each slide, create objects that are specifically relevant to the presentation topic "${appState.topic}". The 3D elements must:\n- Be contextually appropriate for each slide's content\n- Directly relate to "${appState.topic}" in a meaningful way\n- Vary between slides while maintaining thematic consistency\n- Include appropriate lighting (intensity, color, position), camera angles (perspective, orthographic), and animations (rotation, scale, position)\n- Have interactive elements where appropriate (rotation on hover, click to reveal details)\n- Demonstrate professional 3D modeling techniques with proper geometry\n- Include realistic physics simulations where applicable (gravity, collision)\n- Use high-quality textures and materials with proper UV mapping\n- Implement smooth animations with proper easing functions\n\nFor example:\n- If the topic is about space: use rotating planets with atmospheric glow (shader material), asteroid fields with particle systems (THREE.Points), spacecraft with engine trails (particle emitters), starfields with parallax effect (multiple layers)\n- If the topic is about technology: use circuit boards with animated data flow (line geometry), holographic interfaces (transparent materials), rotating gears with metallic materials (MeshStandardMaterial), digital networks with pulsing connections (tube geometry)\n- If the topic is about environment: use growing trees with wind animation (skinned mesh), water simulations with refraction (refraction mapping), recycling symbols with particle effects (sprite particles), earth with rotating atmosphere (shader material)\n- If the topic is about medicine: use DNA strands with molecular bonds (tube geometry), beating heart with blood flow (morph targets), neural networks with synaptic firing (particle systems), cells with organelle animations (instanced mesh)\n- If the topic is about education: use floating books with page-turning animations (texture animation), lightbulbs with filament glow (emissive material), graduation caps with confetti particles (particle system), chalkboards with dynamic writing (canvas texture)\n- If the topic is about business: use growing charts with 3D bars (extruded geometry), rotating globe with data connections (line geometry), team avatars with dynamic interactions (morph targets), currency symbols with floating animations (sprite particles)\n\nEach slide should have a unique Three.js 3D scene that enhances the content and creates visual interest. The 3D elements should be professionally rendered with attention to detail.\n\nCODE QUALITY REQUIREMENTS:\n- Use Bootstrap classes for layout and components (container, row, col)\n- Implement CSS custom properties for consistent theming (--primary-color, --secondary-color)\n- Add detailed comments explaining complex sections (// Three.js scene setup)\n- Use BEM methodology for CSS class naming (block__element--modifier)\n- Implement modular JavaScript with clear functions (initThreeJS(), handleNavigation())\n- Add proper error handling (try/catch blocks, console error messages)\n- Optimize performance with efficient rendering (requestAnimationFrame, dispose unused objects)\n- Include accessibility features (ARIA labels, keyboard navigation, focus management)\n\nReturn only the complete HTML code without any additional explanations. The code should be production-ready and fully functional.`;                const presentationHTML = await callGeminiAPI(prompt);
+                // Determine the actual language to use
+                let presentationLanguage = language;
+                if (language === "Other") {
+                    presentationLanguage = appState.selectedLanguage || "English";
+                }
                 
-                // Ensure watermark is present in all slides
+                // Build the color theme string for the prompt
+                let colorThemeString;
+                if (colorTheme === "Custom color (select two)") {
+                    colorThemeString = `Custom colors: ${customColor1} and ${customColor2}`;
+                } else {
+                    colorThemeString = colorTheme;
+                }
+                
+                // Build the prompt
+                const prompt = `Create a complete HTML, CSS, and JavaScript file for a presentation about "${topic}". The presentation should have the following features:
+
+1. Fullscreen functionality: When the user presses the 'F' key, the presentation should enter fullscreen mode.
+2. Navigation: Include arrow key navigation (left and right arrows) to move between slides in both directions.
+3. Design: Use clean, professional designs with glassmorphism UI elements. The UI should have a glass-like appearance with backdrop blur effects.
+4. Color scheme: Use colors suitable for the topic "${topic}". Apply the selected color theme: "${colorThemeString}".
+5. 3D theme background: Slide should have a Three.js 3D background as "${bgitem}".
+6. Content depth: Use "${termsdepth}" for the content language style.
+7. Animations: Use CSS for all animations. The animation style should be "${animationStyle}".
+8. Structure: Each slide should follow the "${structure}" format.
+9. Theme: The overall theme should be "${theme}".
+10. Slide count: Create ${slideCount} slides with well-organized content.
+11. Description length: For slides with paragraphs, use ${descriptionLength}.
+12. Bullet points: For slides with bullet points, include ${bulletPointsCount} bullet points per slide.
+13. Font size: Use ${fontSize} font size throughout the presentation.
+14. Images: ${includeImages}. For SVG graphics, use inline SVG code for crisp rendering at any size.
+15. Image fallback: ${imageFallback}. Implement proper fallback mechanisms for images that fail to load.
+16. Language: Generate the entire presentation in ${presentationLanguage}. All text content, including headings, paragraphs, and bullet points, must be in ${presentationLanguage}.
+17. Presentation style: The presentation should follow a "${presentationStyle}" approach.
+18. 3D elements: Include ${advancedAnimations} in the slides.
+19. Interactive elements: Implement ${interactiveElements} for user engagement.
+20. Data visualization: ${dataVisualization} should be included where appropriate.
+21. Multimedia elements: ${multimediaElements} should be incorporated into the presentation.
+
+Additional requirements:
+- Include slide indicators (dots) at the bottom to show current slide position.
+- Add Previous/Next buttons for navigation.
+- Make the presentation responsive for different screen sizes.
+- Include a watermark "Developed under HOPE Research Team" and "By Justin" in the bottom-right corner of each slide.
+- Use semantic HTML5 tags throughout.
+- Add smooth transitions between slides.
+- Include professional typography with clear hierarchy.
+- For SVG images, use inline SVG code with proper viewBox attributes for scalability.
+- Implement image fallback strategies: ${imageFallback}. For text fallbacks, use descriptive alt text. For placeholder fallbacks, use a placeholder image with a message indicating the image could not be loaded.
+
+The presentation should be structured as follows:
+1. Title slide with the topic "${topic}" and a subtitle.
+2. Introduction slide explaining key concepts.
+3. Main content slides with detailed information.
+4. Conclusion slide with key takeaways.
+
+3D theme background: Slide should have a Three.js 3D background as "${bgitem}".
+Return only the complete HTML code without any additional explanations.`;
+                
+                const presentationHTML = await callGeminiAPI(prompt);
+                
+                // Ensure watermark is present
                 const finalHTML = ensureWatermark(presentationHTML);
                 
                 appState.generatedPresentation = finalHTML;
@@ -988,13 +1358,13 @@ const prompt = `Generate a complete HTML presentation about "${appState.topic}" 
         // Ensure watermark is present in the presentation
         function ensureWatermark(html) {
             // Check if watermark is already present
-            if (html.includes('Developed under HOPE Research Team') && html.includes('Developed by Justin')) {
+            if (html.includes('Developed under HOPE Research Team') && html.includes('By Justin')) {
                 return html;
             }
             
             // Find each slide and add watermark if not present
             const slidePattern = /<div class="slide-content">(.*?)<\/div>/gs;
-            const watermark = '<div class="watermark">Developed under HOPE Research Team<br>Developed by Justin</div>';
+            const watermark = '<div class="watermark">Developed under HOPE Research Team<br> by Justin</div>';
             
             return html.replace(slidePattern, (match, content) => {
                 if (!content.includes('watermark')) {
@@ -1087,10 +1457,33 @@ const prompt = `Generate a complete HTML presentation about "${appState.topic}" 
         // Reset for New Presentation
         function resetForNewPresentation() {
             appState.topic = '';
+            appState.theme = '';
+            appState.slideCount = '';
+            appState.structure = '';
+            appState.animationStyle = '';
+            appState.colorTheme = '';
+            appState.customColor1 = '#3498db';
+            appState.customColor2 = '#e74c3c';
+            appState.descriptionLength = '';
+            appState.bulletPointsCount = '';
+            appState.fontSize = '';
+            appState.includeImages = '';
+            appState.imageFallback = '';
+            appState.language = 'English';
+            appState.selectedLanguage = '';
+            appState.presentationStyle = '';
+            appState.advancedAnimations = '';
+            appState.interactiveElements = '';
+            appState.dataVisualization = '';
+            appState.multimediaElements = '';
             appState.questions = [];
             appState.answers = [];
             appState.currentQuestionIndex = 0;
             elements.presentationTopic.value = '';
+            document.getElementById('custom-color-1').value = '#3498db';
+            document.getElementById('custom-color-2').value = '#e74c3c';
+            document.getElementById('color-code-1').textContent = '#3498db';
+            document.getElementById('color-code-2').textContent = '#e74c3c';
             showSection('topic');
         }
 
