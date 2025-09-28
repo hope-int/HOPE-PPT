@@ -47,7 +47,7 @@
     <!-- Existing scripts and styles -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <style>
+        <style>
         /* All existing styles remain unchanged */
         * {
             margin: 0;
@@ -444,6 +444,44 @@
         .history-btn:hover {
             transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
+        }
+
+        /* Custom color picker styles */
+        .custom-colors-container {
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .custom-colors-container.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .color-picker-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .color-picker-group label {
+            min-width: 120px;
+            margin-right: 10px;
+        }
+        
+        .color-picker {
+            width: 50px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .color-code {
+            margin-left: 10px;
+            font-family: monospace;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
         }
 
         @media (max-width: 768px) {
