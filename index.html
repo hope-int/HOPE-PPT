@@ -40,8 +40,6 @@ document.addEventListener('dragstart', (event) => event.preventDefault());
 // Disable copying, cutting, or pasting
 document.addEventListener('copy', (event) => event.preventDefault());
 document.addEventListener('cut', (event) => event.preventDefault());
-document.addEventListener('paste', (event) => event.preventDefault());
-
 // Hide the source code
 document.onkeydown = function (e) {
     if (e.ctrlKey && e.key === 'P') {
