@@ -7,6 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <style>
+        /* All existing styles remain unchanged */
         * {
             margin: 0;
             padding: 0;
@@ -532,8 +533,11 @@
         const appState = {
             apiKey: '',
             topic: '',
-            questions: [],
-            answers: [],
+            theme: '',
+            slideCount: '',
+            structure: '',
+            animationStyle: '',
+            colorTheme: '',
             generatedPresentation: '',
             currentQuestionIndex: 0,
             presentationHistory: []
@@ -571,7 +575,7 @@
         };
 
         // Gemini API Configuration
-        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent';
 
         // Initialize Three.js Background
         function initThreeBackground() {
@@ -757,7 +761,7 @@
         }
 
         // Topic Input and Question Generation
-        async function generateQuestions() {
+        function generateQuestions() {
             const topic = elements.presentationTopic.value.trim();
             if (!topic) {
                 showNotification('Please enter a presentation topic', 'error');
@@ -766,65 +770,55 @@
 
             appState.topic = topic;
             elements.generateQuestionsBtn.disabled = true;
-            elements.generateQuestionsBtn.textContent = 'Generating questions...';
-
-            try {
-                // Create prompt for generating questions with options
-                const prompt = `Generate 10 clarifying questions for a presentation about "${topic}". For each question, provide 4 multiple choice options. Format your response as a JSON array where each object has a "question" field and an "options" array with 4 strings. The questions should help gather more information to create a comprehensive presentation.`;
-                
-                // Call Gemini API
-                const responseText = await callGeminiAPI(prompt);
-                
-                // Parse the response to extract questions and options
-                let questionsData;
-                try {
-                    questionsData = JSON.parse(responseText);
-                } catch (e) {
-                    // If the response is not valid JSON, create a fallback
-                    questionsData = [
-                        { question: "What is the main objective of your presentation?", options: ["Inform", "Persuade", "Entertain", "Educate"] },
-                        { question: "Who is your target audience?", options: ["Experts", "General public", "Students", "Business professionals"] },
-                        { question: "What is the desired length of your presentation?", options: ["Short (5-10 min)", "Medium (10-20 min)", "Long (20-30 min)", "Flexible"] },
-                        { question: "What tone would you like for your presentation?", options: ["Formal", "Informal", "Technical", "Inspirational"] },
-                        { question: "What key points do you want to emphasize?", options: ["Benefits", "Challenges", "Innovations", "Future outlook"] },
-                        { question: "Do you have specific data to include?", options: ["Statistics", "Case studies", "Research findings", "No specific data"] },
-                        { question: "What visual style do you prefer?", options: ["Minimalist", "Colorful", "Professional", "Creative"] },
-                        { question: "What is the call to action?", options: ["Learn more", "Adopt a solution", "Change perspective", "No specific action"] },
-                        { question: "What is your experience level with this topic?", options: ["Beginner", "Intermediate", "Advanced", "Expert"] },
-                        { question: "What makes your approach unique?", options: ["New methodology", "Unique perspective", "Innovative solution", "Comprehensive analysis"] }
-                    ];
+            elements.generateQuestionsBtn.textContent = 'Preparing questions...';
+            
+            // Set predefined questions
+            appState.questions = [
+                {
+                    question: "What theme do you prefer?",
+                    options: ["Minimal", "Creative", "Professional", "HighTech"],
+                    variable: "theme"
+                },
+                {
+                    question: "How many slides do you want?",
+                    options: ["1-4", "1-6", "1-8", "1-10"],
+                    variable: "slideCount"
+                },
+                {
+                    question: "What structure do you prefer for each slide?",
+                    options: ["Heading with paragraph", "Heading with bullet points", "Heading only"],
+                    variable: "structure"
+                },
+                {
+                    question: "What animation style do you prefer?",
+                    options: ["Simple", "No animation", "Futuristic"],
+                    variable: "animationStyle"
+                },
+                {
+                    question: "What color theme do you prefer?",
+                    options: ["Black white with accent", "Black white with blue accent", "Custom color"],
+                    variable: "colorTheme"
+                },
+                {
+                    question: "Content Depth Preference?",
+                    options: ["Simple Words", "Advanced Terms", "Semi-Advanced Terms"],
+                    variable: "termsdepth"
                 }
-                
-                // Ensure we have exactly 10 questions
-                if (questionsData.length < 10) {
-                    // Fill with generic questions if needed
-                    const genericQuestions = [
-                        { question: "What is the main objective of your presentation?", options: ["Inform", "Persuade", "Entertain", "Educate"] },
-                        { question: "Who is your target audience?", options: ["Experts", "General public", "Students", "Business professionals"] },
-                        { question: "What is the desired length of your presentation?", options: ["Short (5-10 min)", "Medium (10-20 min)", "Long (20-30 min)", "Flexible"] },
-                        { question: "What tone would you like for your presentation?", options: ["Formal", "Informal", "Technical", "Inspirational"] },
-                        { question: "What key points do you want to emphasize?", options: ["Benefits", "Challenges", "Innovations", "Future outlook"] },
-                        { question: "Do you have specific data to include?", options: ["Statistics", "Case studies", "Research findings", "No specific data"] },
-                        { question: "What visual style do you prefer?", options: ["Minimalist", "Colorful", "Professional", "Creative"] },
-                        { question: "What is the call to action?", options: ["Learn more", "Adopt a solution", "Change perspective", "No specific action"] },
-                        { question: "What is your experience level with this topic?", options: ["Beginner", "Intermediate", "Advanced", "Expert"] },
-                        { question: "What makes your approach unique?", options: ["New methodology", "Unique perspective", "Innovative solution", "Comprehensive analysis"] }
-                    ];
-                    
-                    questionsData = [...questionsData, ...genericQuestions.slice(0, 10 - questionsData.length)];
+                ,
+                {
+                    question: "which 3D background do you prefer?",
+                    options: ["Stars in Universe", "3D nodes", "3D floating particles"," Abstract shapes", "No background"],
+                    variable: "bgitem"
                 }
-
-                appState.questions = questionsData.slice(0, 10); // Ensure we have exactly 10 questions
-                appState.answers = new Array(10).fill('');
-                appState.currentQuestionIndex = 0;
-                
-                showSection('questions');
-                renderCurrentQuestion();
-            } catch (error) {
-                showNotification(`Error generating questions: ${error.message}`, 'error');
-                elements.generateQuestionsBtn.disabled = false;
-                elements.generateQuestionsBtn.textContent = 'Generate Questions';
-            }
+            ];
+            
+            // Initialize answers array for these questions
+            appState.answers = new Array(appState.questions.length).fill('');
+            appState.currentQuestionIndex = 0;
+            
+            // Show the questions section
+            showSection('questions');
+            renderCurrentQuestion();
         }
 
         // Render Current Question with Options
@@ -865,6 +859,10 @@
                     // Update the answer
                     const input = option.querySelector('input');
                     input.checked = true;
+                    // Store the answer in appState using the variable name
+                    const variableName = appState.questions[appState.currentQuestionIndex].variable;
+                    appState[variableName] = input.value;
+                    // Also update the answers array for progress tracking
                     appState.answers[appState.currentQuestionIndex] = input.value;
                 });
             });
@@ -912,16 +910,45 @@
             showSection('generating');
             
             try {
-                // Prepare the answers for the API call
-                const answersText = appState.answers.map((answer, index) => 
-                    `Q${index + 1}: ${appState.questions[index].question}\nA${index + 1}: ${answer}`
-                ).join('\n\n');
+                // Extract the parameters from appState
+                const { topic, theme, slideCount, structure, animationStyle, colorTheme,bgitem,termsdepth } = appState;
                 
-                // Create prompt for generating the presentation
-                const prompt = `Generate a complete HTML presentation about "${appState.topic}" based on the following information:\n\n${answersText}\n\nThe presentation must follow this exact structure:\n\n1. A single HTML file with embedded CSS and JavaScript\n2. Include Three.js for 3D elements on each slide\n3. Implement arrow key navigation (left/right arrows)\n4. Add fullscreen toggle with 'F' key\n5. Include side-moving slide transitions with CSS transforms\n6. Add visual slide indicators (dots)\n7. Include Previous/Next control buttons\n8. Make it responsive with media queries\n9. Include fact cards and solution grid layouts where appropriate\n10. Add animated text effects (glow, slideUp)\n11. Include backdrop blur effects for UI elements\n12. Add the watermark "Developed under HOPE Research Team" and "Developed by Justin" to the bottom-right corner of each slide\n\nADDITIONAL REQUIREMENTS:\n13. Use Bootstrap 5 for professional UI components and responsive grid system\n14. Implement clean, modern design with consistent color scheme and typography\n15. Add subtle hover animations and micro-interactions\n16. Ensure smooth transitions between all UI elements\n17. Organize code with clear comments and proper indentation\n18. Use semantic HTML5 tags throughout\n19. Implement component-based structure for maintainability\n20. Add loading animations and progress indicators\n\nPROFESSIONAL 3D INTEGRATION:\n21. Create sophisticated Three.js scenes with professional lighting (ambient, directional, point lights)\n22. Implement particle systems for atmospheric effects where appropriate\n23. Add realistic materials with PBR (Physically Based Rendering) textures\n24. Include smooth camera animations and orbital controls\n25. Create interactive 3D elements that respond to mouse movement\n26. Add depth of field and post-processing effects\n27. Implement shadow mapping for realistic lighting\n28. Use professional color grading and tone mapping\n\nVISUAL ENHANCEMENTS:\n29. Create a cohesive visual theme with consistent color palette throughout\n30. Use gradient overlays and glassmorphism effects for modern UI elements\n31. Implement smooth parallax scrolling effects between background layers\n32. Add dynamic background animations (floating particles, gradient shifts)\n33. Use professional typography with clear hierarchy and emphasis\n34. Include high-quality icons and visual elements that complement content\n35. Implement reveal animations for content elements as slides transition\n36. Add subtle glow effects and shadows for depth perception\n37. Create visually striking title screens with impactful typography\n\nENGAGING CONTENT REQUIREMENTS:\n38. Design visually compelling layouts with dynamic compositions\n39. Use data visualization techniques for statistics (animated charts, infographics)\n40. Include compelling imagery and icons that enhance understanding\n41. Implement storytelling techniques with visual narrative flow\n42. Add surprise elements and reveal animations\n43. Use professional typography hierarchy with emphasis techniques\n44. Include relevant quotes or statistics in stylized callouts\n45. Implement parallax scrolling effects between slide layers\n46. Add subtle background animations (floating particles, gradient shifts)\n\nThe presentation should have exactly 6 slides with this specific structure:\n1. Introduction slide with title, subtitle, and brief overview\n2. Background/Context slide with historical context and foundational information\n3. Key Concepts slide with main principles, theories, or frameworks\n4. Current State/Analysis slide with present situation, data, or trends\n5. Future Outlook/Implications slide with predictions, opportunities, or challenges\n6. Conclusion slide with summary, key takeaways, and call to action\n\nCRITICAL: For the 3D elements on each slide, create objects that are specifically relevant to the presentation topic "${appState.topic}". The 3D elements must:\n- Be contextually appropriate for each slide's content\n- Directly relate to "${appState.topic}" in a meaningful way\n- Vary between slides while maintaining thematic consistency\n- Include appropriate lighting, camera angles, and animations\n- Have interactive elements where appropriate (rotation on hover, etc.)\n- Demonstrate professional 3D modeling techniques\n- Include realistic physics simulations where applicable\n- Use high-quality textures and materials\n- Implement smooth animations and transitions\n\nFor example:\n- If the topic is about space: use rotating planets with atmospheric glow, asteroid fields with particle systems, spacecraft with engine trails, starfields with parallax effect\n- If the topic is about technology: use circuit boards with animated data flow, holographic interfaces, rotating gears with metallic materials, digital networks with pulsing connections\n- If the topic is about environment: use growing trees with wind animation, water simulations with refraction, recycling symbols with particle effects, earth with rotating atmosphere\n- If the topic is about medicine: use DNA strands with molecular bonds, beating heart with blood flow, neural networks with synaptic firing, cells with organelle animations\n- If the topic is about education: use floating books with page-turning animations, lightbulbs with filament glow, graduation caps with confetti particles, chalkboards with dynamic writing\n- If the topic is about business: use growing charts with 3D bars, rotating globe with data connections, team avatars with dynamic interactions, currency symbols with floating animations\n\nEach slide should have a unique Three.js 3D scene that enhances the content and creates visual interest. The 3D elements should be professionally rendered with attention to detail.\n\nCODE QUALITY REQUIREMENTS:\n- Use Bootstrap classes for layout and components\n- Implement CSS custom properties for consistent theming\n- Add detailed comments explaining complex sections\n- Use BEM methodology for CSS class naming\n- Implement modular JavaScript with clear functions\n- Add proper error handling\n- Optimize performance with efficient rendering\n- Include accessibility features (ARIA labels, keyboard navigation)\n\nReturn only the complete HTML code without any additional explanations.`;                
+                // Build the prompt
+                const prompt = `Create a complete HTML, CSS, and JavaScript file for a presentation about "${topic}". The presentation should have the following features:
+
+1. Fullscreen functionality: When the user presses the 'F' key, the presentation should enter fullscreen mode.
+2. Navigation: Include arrow key navigation (left and right arrows) to move between slides in both directions.
+3. Design: Use clean, professional designs with glassmorphism UI elements. The UI should have a glass-like appearance with backdrop blur effects.
+4. Color scheme: Use colors suitable for the topic "${topic}". Apply the selected color theme: "${colorTheme}".
+5. 3D theme background: Slide should have a Three.js 3D particle background as "${bgitem}".
+6. Content depth: Use "${termsdepth}" for the content language style.
+7. Animations: Use CSS for all animations. The animation style should be "${animationStyle}".
+8. Structure: Each slide should follow the "${structure}" format.
+9. Theme: The overall theme should be "${theme}".
+10. Slide count: Create ${slideCount} slides with well-organized content.
+
+Additional requirements:
+- Include slide indicators (dots) at the bottom to show current slide position.
+- Add Previous/Next buttons for navigation.
+- Make the presentation responsive for different screen sizes.
+- Include a watermark "Developed under HOPE Research Team" and "Developed by Justin" in the bottom-right corner of each slide.
+- Use semantic HTML5 tags throughout.
+- Add smooth transitions between slides.
+- Include professional typography with clear hierarchy.
+
+The presentation should be structured as follows:
+1. Title slide with the topic "${topic}" and a subtitle.
+2. Introduction slide explaining key concepts.
+3. Main content slides with detailed information.
+4. Conclusion slide with key takeaways.
+
+Each slide should have a unique Three.js 3D particale background as floating particles.
+
+Return only the complete HTML code without any additional explanations.`;
+                
                 const presentationHTML = await callGeminiAPI(prompt);
                 
-                // Ensure watermark is present in all slides
+                // Ensure watermark is present
                 const finalHTML = ensureWatermark(presentationHTML);
                 
                 appState.generatedPresentation = finalHTML;
@@ -942,13 +969,13 @@
         // Ensure watermark is present in the presentation
         function ensureWatermark(html) {
             // Check if watermark is already present
-            if (html.includes('Developed under HOPE Research Team') && html.includes('Developed by Justin')) {
+            if (html.includes('Developed under HOPE Research Team') && html.includes('By Justin')) {
                 return html;
             }
             
             // Find each slide and add watermark if not present
             const slidePattern = /<div class="slide-content">(.*?)<\/div>/gs;
-            const watermark = '<div class="watermark">Developed under HOPE Research Team<br>Developed by Justin</div>';
+            const watermark = '<div class="watermark">Developed under HOPE Research Team<br> by Justin</div>';
             
             return html.replace(slidePattern, (match, content) => {
                 if (!content.includes('watermark')) {
@@ -1041,6 +1068,11 @@
         // Reset for New Presentation
         function resetForNewPresentation() {
             appState.topic = '';
+            appState.theme = '';
+            appState.slideCount = '';
+            appState.structure = '';
+            appState.animationStyle = '';
+            appState.colorTheme = '';
             appState.questions = [];
             appState.answers = [];
             appState.currentQuestionIndex = 0;
