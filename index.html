@@ -15,7 +15,7 @@
     <!-- Open Graph (OG) Tags -->
     <meta property="og:title" content="HOPE-PPT | AI-Powered Presentation Generator">
     <meta property="og:description" content="Create stunning interactive presentations with AI. HOPE-PPT generates custom 3D presentations using Gemini AI with beautiful animations and themes.">
-    <meta property="og:image" content="https://hope-ppt.vercel.app/images/og-preview.jpg">
+    <meta property="og:image" content="https://i.ibb.co/3yMXpZ71/Whats-App-Image-2025-09-29-at-12-03-39-AM.jpg">
     <meta property="og:url" content="https://hope-ppt.vercel.app">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="HOPE-PPT">
@@ -1524,7 +1524,6 @@ Additional requirements:
 - Include slide indicators (dots) at the bottom to show current slide position.
 - Add Previous/Next buttons for navigation.
 - Make the presentation responsive for different screen sizes.
-- Include a watermark "Developed under HOPE Research Team" and "By Justin" in the bottom-right corner of each slide.
 - Use semantic HTML5 tags throughout.
 - Add smooth transitions between slides.
 - Include professional typography with clear hierarchy.
@@ -1561,24 +1560,7 @@ Return only the complete HTML code without any additional explanations.`;
         }
 
         // Ensure watermark is present in the presentation
-        function ensureWatermark(html) {
-            // Check if watermark is already present
-            if (html.includes('Developed under HOPE Research Team') && html.includes('By Justin')) {
-                return html;
-            }
-            
-            // Find each slide and add watermark if not present
-            const slidePattern = /<div class="slide-content">(.*?)<\/div>/gs;
-            const watermark = '<div class="watermark">Developed under HOPE Research Team<br> by Justin</div>';
-            
-            return html.replace(slidePattern, (match, content) => {
-                if (!content.includes('watermark')) {
-                    return `<div class="slide-content">${content}${watermark}</div>`;
-                }
-                return match;
-            });
-        }
-
+        
         // Preview Function
         function previewPresentation() {
             const newWindow = window.open();
