@@ -575,7 +575,7 @@
         };
 
         // Gemini API Configuration
-        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent';
 
         // Initialize Three.js Background
         function initThreeBackground() {
@@ -798,6 +798,17 @@
                     question: "What color theme do you prefer?",
                     options: ["Black white with accent", "Black white with blue accent", "Custom color"],
                     variable: "colorTheme"
+                },
+                {
+                    question: "Content Depth Preference?",
+                    options: ["Simple Words", "Advanced Terms", "Semi-Advanced Terms"],
+                    variable: "termsdepth"
+                }
+                ,
+                {
+                    question: "which 3D background do you prefer?",
+                    options: ["Stars in Universe", "3D nodes", "3D floating particles"," Abstract shapes", "No background"],
+                    variable: "bgitem"
                 }
             ];
             
@@ -900,7 +911,7 @@
             
             try {
                 // Extract the parameters from appState
-                const { topic, theme, slideCount, structure, animationStyle, colorTheme } = appState;
+                const { topic, theme, slideCount, structure, animationStyle, colorTheme,bgitem,termsdepth } = appState;
                 
                 // Build the prompt
                 const prompt = `Create a complete HTML, CSS, and JavaScript file for a presentation about "${topic}". The presentation should have the following features:
@@ -909,10 +920,12 @@
 2. Navigation: Include arrow key navigation (left and right arrows) to move between slides in both directions.
 3. Design: Use clean, professional designs with glassmorphism UI elements. The UI should have a glass-like appearance with backdrop blur effects.
 4. Color scheme: Use colors suitable for the topic "${topic}". Apply the selected color theme: "${colorTheme}".
-5. Animations: Use CSS for all animations. The animation style should be "${animationStyle}".
-6. Structure: Each slide should follow the "${structure}" format.
-7. Theme: The overall theme should be "${theme}".
-8. Slide count: Create ${slideCount} slides with well-organized content.
+5. 3D theme background: Slide should have a Three.js 3D particle background as "${bgitem}".
+6. Content depth: Use "${termsdepth}" for the content language style.
+7. Animations: Use CSS for all animations. The animation style should be "${animationStyle}".
+8. Structure: Each slide should follow the "${structure}" format.
+9. Theme: The overall theme should be "${theme}".
+10. Slide count: Create ${slideCount} slides with well-organized content.
 
 Additional requirements:
 - Include slide indicators (dots) at the bottom to show current slide position.
