@@ -571,8 +571,8 @@
             continueToApp: document.getElementById('continue-to-app')
         };
 
-        // Gemini API Configuration
-        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+        // Gemini API Configuration - Fixed endpoint and model
+        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
         // Initialize Three.js Background
         let scene, camera, renderer, particlesMesh;
@@ -771,7 +771,7 @@
             }
         }
 
-        // Gemini API Call Function
+        // Gemini API Call Function - Fixed header name
         async function callGeminiAPI(prompt) {
             if (!appState.isOnline) {
                 throw new Error('Network connection lost. Please check your connection.');
@@ -782,7 +782,8 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-goog-api-key': appState.apiKey
+                        'x-goog-api-key': appState.apiKey,  // Fixed: lowercase 'x'
+                        'x-goog-api-version': 'v1'  // Added API version header
                     },
                     body: JSON.stringify({
                         contents: [
@@ -793,12 +794,19 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        generationConfig: {
+                            temperature: 0.7,
+                            topK: 40,
+                            topP: 0.95,
+                            maxOutputTokens: 8192,
+                        }
                     })
                 });
 
                 if (!response.ok) {
                     const errorData = await response.json();
+                    console.error('API Error Response:', errorData);
                     throw new Error(errorData.error?.message || 'API request failed');
                 }
 
@@ -886,6 +894,7 @@ Generate exactly 10 questions following all specifications above.`;
                 try {
                     questionsData = JSON.parse(responseText);
                 } catch (e) {
+                    console.error('Failed to parse JSON response:', responseText);
                     // If the response is not valid JSON, create a fallback
                     questionsData = [
                         { question: "What is the main objective of your presentation?", options: ["Inform", "Persuade", "Entertain", "Educate"] },
