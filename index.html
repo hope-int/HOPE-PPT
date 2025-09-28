@@ -522,6 +522,109 @@
             background: rgba(52, 152, 219, 0.3);
         }
 
+        /* Tutorial Section Styles */
+        .tutorial-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .tutorial-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tutorial-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #3498db, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tutorial-header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .tutorial-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .tutorial-step {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .step-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+
+        .step-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .step-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .step-content li {
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .step-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 10px;
+            margin: 15px auto;
+            display: block;
+            border: 2px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .tutorial-actions {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .tutorial-note {
+            background: rgba(52, 152, 219, 0.2);
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .tutorial-note p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
@@ -542,6 +645,14 @@
             
             .splash-subtitle {
                 font-size: 1.2rem;
+            }
+
+            .tutorial-header h2 {
+                font-size: 2rem;
+            }
+
+            .step-content h3 {
+                font-size: 1.3rem;
             }
         }
         </style>
@@ -568,14 +679,86 @@
     <div class="container">
         <h1>HOPE-PPT</h1>
         
+        <!-- Tutorial Section -->
+        <div id="tutorial-section" class="section">
+            <div class="tutorial-section">
+                <div class="tutorial-header">
+                    <h2>Welcome to HOPE-PPT!</h2>
+                    <p>Let's get you set up with your Gemini API key to start creating amazing presentations</p>
+                </div>
+                
+                <div class="tutorial-steps">
+                    <div class="tutorial-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>What is a Gemini API Key?</h3>
+                            <p>The Gemini API key is a unique identifier that allows HOPE-PPT to access Google's powerful Gemini AI model to generate your presentations. It's like a password that gives our app permission to use Google's AI services.</p>
+                            <div class="tutorial-note">
+                                <p><strong>Note:</strong> Your API key is private and should never be shared with others. We store it securely in your browser only.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Getting Your Gemini API Key</h3>
+                            <p>Follow these steps to get your free API key from Google:</p>
+                            <ul>
+                                <li>Go to <a href="https://makersuite.google.com/app/apikey" target="_blank" style="color: #3498db;">Google AI Studio</a></li>
+                                <li>Sign in with your Google account</li>
+                                <li>Click on "Get API Key" button</li>
+                                <li>Choose "Create API key in new project"</li>
+                                <li>Copy the generated API key</li>
+                            </ul>
+                            <img src="https://i.imgur.com/ABC1234.png" alt="Google AI Studio interface" class="step-image">
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>API Key Benefits</h3>
+                            <p>With your Gemini API key, you can:</p>
+                            <ul>
+                                <li>Generate unlimited presentations</li>
+                                <li>Access the latest AI models</li>
+                                <li>Create content in multiple languages</li>
+                                <li>Use advanced 3D and animation features</li>
+                                <li>Save and manage your presentation history</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Security & Privacy</h3>
+                            <p>Your API key is stored locally in your browser and is never sent to our servers. Google's AI processes your presentation topics, but we don't store any of your content or personal information.</p>
+                            <div class="tutorial-note">
+                                <p><strong>Important:</strong> Never share your API key publicly or commit it to code repositories.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-actions">
+                    <button id="got-it-btn" class="splash-continue">I Understand, Take Me to API Key Setup</button>
+                </div>
+            </div>
+        </div>
+        
         <!-- API Key Section -->
-        <div id="api-key-section" class="section active">
+        <div id="api-key-section" class="section">
             <div class="form-group">
                 <label for="api-key">Enter your Gemini API Key:</label>
                 <input type="password" id="api-key" placeholder="Your Gemini API Key">
             </div>
             <button id="save-api-key">Save API Key</button>
             <div id="api-status"></div>
+            <div style="margin-top: 20px;">
+                <button id="show-tutorial-btn" style="background: rgba(52, 152, 219, 0.3);">Need Help? Show Tutorial</button>
+            </div>
         </div>
         
         <!-- Loading Screen -->
@@ -690,7 +873,8 @@
             imageFallback: '',
             generatedPresentation: '',
             currentQuestionIndex: 0,
-            presentationHistory: []
+            presentationHistory: [],
+            hasSeenTutorial: false
         };
 
         // List of languages that LLMs are typically trained on
@@ -730,6 +914,7 @@
 
         // DOM Elements
         const sections = {
+            tutorial: document.getElementById('tutorial-section'),
             apiKey: document.getElementById('api-key-section'),
             loading: document.getElementById('loading-section'),
             topic: document.getElementById('topic-section'),
@@ -760,7 +945,9 @@
             customColorsContainer: document.getElementById('custom-colors-container'),
             languageDropdownContainer: document.getElementById('language-dropdown-container'),
             languageSearch: document.getElementById('language-search'),
-            languageList: document.getElementById('language-list')
+            languageList: document.getElementById('language-list'),
+            gotItBtn: document.getElementById('got-it-btn'),
+            showTutorialBtn: document.getElementById('show-tutorial-btn')
         };
 
         // Gemini API Configuration
@@ -840,15 +1027,22 @@
                     // Initialize Three.js background after splash screen
                     initThreeBackground();
                     
-                    // Check for existing API key
-                    const savedApiKey = localStorage.getItem('geminiApiKey');
-                    if (savedApiKey) {
-                        appState.apiKey = savedApiKey;
-                        elements.apiKeyInput.value = savedApiKey;
-                        showSection('topic');
-                        loadHistory();
+                    // Check if user has seen tutorial
+                    const hasSeenTutorial = localStorage.getItem('hasSeenTutorial');
+                    if (hasSeenTutorial) {
+                        // Check for existing API key
+                        const savedApiKey = localStorage.getItem('geminiApiKey');
+                        if (savedApiKey) {
+                            appState.apiKey = savedApiKey;
+                            elements.apiKeyInput.value = savedApiKey;
+                            showSection('topic');
+                            loadHistory();
+                        } else {
+                            showSection('apiKey');
+                        }
                     } else {
-                        showSection('apiKey');
+                        // First time user, show tutorial
+                        showSection('tutorial');
                     }
                 }, 1000);
             });
@@ -876,6 +1070,16 @@
                     loadHistory();
                     showSection('history');
                 }
+            });
+
+            // Tutorial navigation
+            elements.gotItBtn.addEventListener('click', () => {
+                localStorage.setItem('hasSeenTutorial', 'true');
+                showSection('apiKey');
+            });
+
+            elements.showTutorialBtn.addEventListener('click', () => {
+                showSection('tutorial');
             });
 
             // Language search functionality
