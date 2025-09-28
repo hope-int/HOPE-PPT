@@ -529,6 +529,18 @@
                 <div class="progress-fill" id="progress-fill"></div>
             </div>
             <div id="questions-container"></div>
+            <div id="custom-colors-container" class="custom-colors-container">
+                <div class="color-picker-group">
+                    <label for="custom-color-1">First Color:</label>
+                    <input type="color" id="custom-color-1" class="color-picker" value="#3498db">
+                    <span id="color-code-1" class="color-code">#3498db</span>
+                </div>
+                <div class="color-picker-group">
+                    <label for="custom-color-2">Second Color:</label>
+                    <input type="color" id="custom-color-2" class="color-picker" value="#e74c3c">
+                    <span id="color-code-2" class="color-code">#e74c3c</span>
+                </div>
+            </div>
             <button id="generate-presentation" disabled>Generate Presentation</button>
         </div>
         
@@ -579,6 +591,8 @@
             structure: '',
             animationStyle: '',
             colorTheme: '',
+            customColor1: '#3498db',
+            customColor2: '#e74c3c',
             generatedPresentation: '',
             currentQuestionIndex: 0,
             presentationHistory: []
@@ -837,18 +851,17 @@
                 },
                 {
                     question: "What color theme do you prefer?",
-                    options: ["Black white with accent", "Black white with blue accent", "Custom color"],
+                    options: ["Black white with accent", "Black white with blue accent", "Custom color (select two)"],
                     variable: "colorTheme"
                 },
                 {
                     question: "Content Depth Preference?",
                     options: ["Simple Words", "Advanced Terms", "Semi-Advanced Terms"],
                     variable: "termsdepth"
-                }
-                ,
+                },
                 {
-                    question: "which 3D background do you prefer?",
-                    options: ["Stars in Universe", "3D nodes", "3D floating particles"," Abstract shapes", "No background"],
+                    question: "Which 3D background do you prefer?",
+                    options: ["Stars in Universe", "3D nodes", "3D floating particles", "Abstract shapes", "No background"],
                     variable: "bgitem"
                 }
             ];
@@ -889,6 +902,14 @@
                 </div>
             `;
             
+            // Show custom color pickers if color theme question and custom option is selected
+            const customColorsContainer = document.getElementById('custom-colors-container');
+            if (currentQuestion.variable === "colorTheme" && selectedOption === "Custom color (select two)") {
+                customColorsContainer.classList.add('show');
+            } else {
+                customColorsContainer.classList.remove('show');
+            }
+            
             // Add event listeners for options
             const optionElements = document.querySelectorAll('.option');
             optionElements.forEach(option => {
@@ -905,7 +926,30 @@
                     appState[variableName] = input.value;
                     // Also update the answers array for progress tracking
                     appState.answers[appState.currentQuestionIndex] = input.value;
+                    
+                    // Show/hide custom color pickers based on selection
+                    if (variableName === "colorTheme" && input.value === "Custom color (select two)") {
+                        customColorsContainer.classList.add('show');
+                    } else {
+                        customColorsContainer.classList.remove('show');
+                    }
                 });
+            });
+            
+            // Add event listeners for color pickers
+            const colorPicker1 = document.getElementById('custom-color-1');
+            const colorPicker2 = document.getElementById('custom-color-2');
+            const colorCode1 = document.getElementById('color-code-1');
+            const colorCode2 = document.getElementById('color-code-2');
+            
+            colorPicker1.addEventListener('input', (e) => {
+                appState.customColor1 = e.target.value;
+                colorCode1.textContent = e.target.value;
+            });
+            
+            colorPicker2.addEventListener('input', (e) => {
+                appState.customColor2 = e.target.value;
+                colorCode2.textContent = e.target.value;
             });
             
             if (appState.currentQuestionIndex > 0) {
@@ -938,6 +982,14 @@
                 return;
             }
             
+            // Check if custom color option is selected and validate colors
+            if (appState.colorTheme === "Custom color (select two)") {
+                if (!appState.customColor1 || !appState.customColor2) {
+                    showNotification('Please select both custom colors', 'error');
+                    return;
+                }
+            }
+            
             elements.generatePresentationBtn.disabled = false;
             showNotification('All questions answered. You can now generate your presentation!');
         }
@@ -952,7 +1004,15 @@
             
             try {
                 // Extract the parameters from appState
-                const { topic, theme, slideCount, structure, animationStyle, colorTheme,bgitem,termsdepth } = appState;
+                const { topic, theme, slideCount, structure, animationStyle, colorTheme, customColor1, customColor2, bgitem, termsdepth } = appState;
+                
+                // Build the color theme string for the prompt
+                let colorThemeString;
+                if (colorTheme === "Custom color (select two)") {
+                    colorThemeString = `Custom colors: ${customColor1} and ${customColor2}`;
+                } else {
+                    colorThemeString = colorTheme;
+                }
                 
                 // Build the prompt
                 const prompt = `Create a complete HTML, CSS, and JavaScript file for a presentation about "${topic}". The presentation should have the following features:
@@ -960,8 +1020,8 @@
 1. Fullscreen functionality: When the user presses the 'F' key, the presentation should enter fullscreen mode.
 2. Navigation: Include arrow key navigation (left and right arrows) to move between slides in both directions.
 3. Design: Use clean, professional designs with glassmorphism UI elements. The UI should have a glass-like appearance with backdrop blur effects.
-4. Color scheme: Use colors suitable for the topic "${topic}". Apply the selected color theme: "${colorTheme}".
-5. 3D theme background: Slide should have a Three.js 3D particle background as "${bgitem}".
+4. Color scheme: Use colors suitable for the topic "${topic}". Apply the selected color theme: "${colorThemeString}".
+5. 3D theme background: Slide should have a Three.js 3D background as "${bgitem}".
 6. Content depth: Use "${termsdepth}" for the content language style.
 7. Animations: Use CSS for all animations. The animation style should be "${animationStyle}".
 8. Structure: Each slide should follow the "${structure}" format.
@@ -983,7 +1043,7 @@ The presentation should be structured as follows:
 3. Main content slides with detailed information.
 4. Conclusion slide with key takeaways.
 
-3D theme background: Slide should have a Three.js 3D particle background as "${bgitem}".
+3D theme background: Slide should have a Three.js 3D background as "${bgitem}".
 Return only the complete HTML code without any additional explanations.`;
                 
                 const presentationHTML = await callGeminiAPI(prompt);
@@ -1113,10 +1173,16 @@ Return only the complete HTML code without any additional explanations.`;
             appState.structure = '';
             appState.animationStyle = '';
             appState.colorTheme = '';
+            appState.customColor1 = '#3498db';
+            appState.customColor2 = '#e74c3c';
             appState.questions = [];
             appState.answers = [];
             appState.currentQuestionIndex = 0;
             elements.presentationTopic.value = '';
+            document.getElementById('custom-color-1').value = '#3498db';
+            document.getElementById('custom-color-2').value = '#e74c3c';
+            document.getElementById('color-code-1').textContent = '#3498db';
+            document.getElementById('color-code-2').textContent = '#e74c3c';
             showSection('topic');
         }
 
