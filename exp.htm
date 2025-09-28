@@ -682,6 +682,11 @@
             termsdepth: '',
             bgitem: '',
             language: 'English',
+            presentationStyle: '',
+            advancedAnimations: '',
+            interactiveElements: '',
+            dataVisualization: '',
+            multimediaElements: '',
             generatedPresentation: '',
             currentQuestionIndex: 0,
             presentationHistory: []
@@ -961,7 +966,7 @@
             elements.generateQuestionsBtn.disabled = true;
             elements.generateQuestionsBtn.textContent = 'Preparing questions...';
             
-            // Set predefined questions
+            // Set predefined questions with professional options
             appState.questions = [
                 {
                     question: "What language do you want for your presentation?",
@@ -969,58 +974,83 @@
                     variable: "language"
                 },
                 {
+                    question: "What presentation style do you prefer?",
+                    options: ["Professional Corporate", "Creative Modern", "Minimalist Clean", "Bold Impactful", "Academic Formal"],
+                    variable: "presentationStyle"
+                },
+                {
                     question: "What theme do you prefer?",
-                    options: ["Minimal", "Creative", "Professional", "HighTech"],
+                    options: ["Minimal", "Creative", "Professional", "HighTech", "Corporate", "Academic", "Modern", "Vintage"],
                     variable: "theme"
                 },
                 {
                     question: "How many slides do you want?",
-                    options: ["1-4", "1-6", "1-8", "1-10"],
+                    options: ["1-4", "1-6", "1-8", "1-10", "1-12", "1-15"],
                     variable: "slideCount"
                 },
                 {
                     question: "What structure do you prefer for each slide?",
-                    options: ["Heading with paragraph", "Heading with bullet points", "Heading only"],
+                    options: ["Title and content", "Title and bullet points", "Title, subtitle and content", "Title, subtitle and bullet points", "Two-column layout", "Three-column layout"],
                     variable: "structure"
                 },
                 {
                     question: "What animation style do you prefer?",
-                    options: ["Simple", "No animation", "Futuristic"],
+                    options: ["Simple transitions (fade, slide)", "Advanced animations (rotate, zoom, bounce)", "3D animations (flip, cube, carousel)", "No animation"],
                     variable: "animationStyle"
                 },
                 {
+                    question: "What level of 3D elements do you want?",
+                    options: ["None", "Basic 3D shapes", "Advanced 3D models", "Interactive 3D elements"],
+                    variable: "advancedAnimations"
+                },
+                {
+                    question: "What interactive elements do you want?",
+                    options: ["None", "Basic (click to reveal)", "Advanced (drag, zoom, rotate)", "Interactive quizzes", "Interactive simulations"],
+                    variable: "interactiveElements"
+                },
+                {
+                    question: "Do you want data visualization?",
+                    options: ["No", "Yes, basic charts", "Yes, advanced charts", "Yes, interactive charts"],
+                    variable: "dataVisualization"
+                },
+                {
+                    question: "Do you want multimedia elements?",
+                    options: ["No", "Audio only", "Video only", "Both audio and video"],
+                    variable: "multimediaElements"
+                },
+                {
                     question: "What color theme do you prefer?",
-                    options: ["Black white with accent", "Black white with blue accent", "Custom color (select two)"],
+                    options: ["Black and white with blue accent", "Black and white with green accent", "Black and white with red accent", "Black and white with purple accent", "Dark theme with blue", "Dark theme with green", "Dark theme with red", "Dark theme with purple", "Light theme with blue", "Light theme with green", "Light theme with red", "Light theme with purple", "Custom color (select two)"],
                     variable: "colorTheme"
                 },
                 {
                     question: "Content Depth Preference?",
-                    options: ["Simple Words", "Advanced Terms", "Semi-Advanced Terms"],
+                    options: ["Beginner level", "Intermediate level", "Expert level", "Mixed levels"],
                     variable: "termsdepth"
                 },
                 {
                     question: "How long should descriptions be?",
-                    options: ["Short (1-2 sentences)", "Medium (3-4 sentences)", "Long (5+ sentences)"],
+                    options: ["Very short (1 sentence)", "Short (2-3 sentences)", "Medium (4-5 sentences)", "Long (6-7 sentences)", "Very long (8+ sentences)"],
                     variable: "descriptionLength"
                 },
                 {
                     question: "How many bullet points per slide?",
-                    options: ["2-3", "4-5", "6-7"],
+                    options: ["1-2", "3-4", "5-6", "7-8", "9-10"],
                     variable: "bulletPointsCount"
                 },
                 {
                     question: "What font size do you prefer?",
-                    options: ["Small", "Medium", "Large"],
+                    options: ["Very small", "Small", "Medium", "Large", "Very large"],
                     variable: "fontSize"
                 },
                 {
                     question: "Do you want to include images?",
-                    options: ["Yes, real photos", "Yes, illustrations", "No images"],
+                    options: ["No images", "Icons only", "Illustrations only", "Photographs only", "Mix of icons and illustrations", "Mix of illustrations and photographs", "Mix of all types"],
                     variable: "includeImages"
                 },
                 {
                     question: "Which 3D background do you prefer?",
-                    options: ["Stars in Universe", "3D nodes", "3D floating particles", "Abstract shapes", "No background"],
+                    options: ["Stars in Universe", "3D nodes", "3D floating particles", "Abstract shapes", "3D landscape", "3D cityscape", "3D underwater", "3D space nebula", "No background"],
                     variable: "bgitem"
                 }
             ];
@@ -1231,7 +1261,12 @@
                     bulletPointsCount,
                     fontSize,
                     includeImages,
-                    language
+                    language,
+                    presentationStyle,
+                    advancedAnimations,
+                    interactiveElements,
+                    dataVisualization,
+                    multimediaElements
                 } = appState;
                 
                 // Determine the actual language to use
@@ -1266,6 +1301,11 @@
 13. Font size: Use ${fontSize} font size throughout the presentation.
 14. Images: ${includeImages}.
 15. Language: Generate the entire presentation in ${presentationLanguage}. All text content, including headings, paragraphs, and bullet points, must be in ${presentationLanguage}.
+16. Presentation style: The presentation should follow a "${presentationStyle}" approach.
+17. 3D elements: Include ${advancedAnimations} in the slides.
+18. Interactive elements: Implement ${interactiveElements} for user engagement.
+19. Data visualization: ${dataVisualization} should be included where appropriate.
+20. Multimedia elements: ${multimediaElements} should be incorporated into the presentation.
 
 Additional requirements:
 - Include slide indicators (dots) at the bottom to show current slide position.
@@ -1420,6 +1460,11 @@ Return only the complete HTML code without any additional explanations.`;
             appState.includeImages = '';
             appState.language = 'English';
             appState.selectedLanguage = '';
+            appState.presentationStyle = '';
+            appState.advancedAnimations = '';
+            appState.interactiveElements = '';
+            appState.dataVisualization = '';
+            appState.multimediaElements = '';
             appState.questions = [];
             appState.answers = [];
             appState.currentQuestionIndex = 0;
