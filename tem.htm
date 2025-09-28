@@ -1,1 +1,1066 @@
-tem.htm
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOPE-PPT</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #000000, #1a1a2e);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #three-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 80px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, #3498db, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 16px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
+            border-color: rgba(52, 152, 219, 0.6);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        button {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-top: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(45deg, #2980b9, #3498db);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60vh;
+        }
+
+        .loading-text {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite;
+            text-align: center;
+            color: #3498db;
+        }
+
+        .loading-credit {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 0.5s;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .loading-credit:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        .question-container {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .history-item {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .history-item button {
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
+        .preview-container {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(52, 152, 219, 0.9);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: rgba(231, 76, 60, 0.9);
+        }
+
+        .generating-animation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60vh;
+        }
+
+        .generating-text {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #3498db;
+        }
+
+        .lottie-container {
+            width: 200px;
+            height: 200px;
+            margin: 20px 0;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            padding: 15px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(52, 152, 219, 0.3);
+            z-index: 100;
+        }
+
+        .option-container {
+            margin-top: 15px;
+        }
+
+        .option {
+            display: block;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: rgba(52, 152, 219, 0.2);
+            border-color: rgba(52, 152, 219, 0.6);
+        }
+
+        .option.selected {
+            background: rgba(52, 152, 219, 0.3);
+            border-color: #3498db;
+        }
+
+        .option input[type="radio"] {
+            display: none;
+        }
+
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000000, #1a1a2e);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 1s ease;
+        }
+
+        .splash-content {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+        }
+
+        .splash-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #3498db, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .splash-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .splash-animation {
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+        }
+
+        .splash-footer {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .splash-continue {
+            margin-top: 30px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border: none;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .splash-continue:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
+        }
+
+        .history-btn {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+            z-index: 99;
+            transition: all 0.3s ease;
+        }
+
+        .history-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            button {
+                width: 100%;
+                margin-right: 0;
+            }
+            
+            .splash-title {
+                font-size: 2.5rem;
+            }
+            
+            .splash-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <h1 class="splash-title">HOPE-PPT</h1>
+            <p class="splash-subtitle">Create stunning interactive presentations with AI</p>
+            <div class="splash-animation">
+                <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_DMgKk1.json" background="transparent" speed="1" loop autoplay></lottie-player>
+            </div>
+            <div class="splash-footer">
+                <p>Developed by Justin</p>
+                <p>Under HOPE Research & development Team</p>
+            </div>
+            <button class="splash-continue" id="continue-to-app">Continue to App</button>
+        </div>
+    </div>
+
+    <div id="three-background"></div>
+    
+    <div class="container">
+        <h1>HOPE-PPT</h1>
+        
+        <!-- API Key Section -->
+        <div id="api-key-section" class="section active">
+            <div class="form-group">
+                <label for="api-key">Enter your Gemini API Key:</label>
+                <input type="password" id="api-key" placeholder="Your Gemini API Key">
+            </div>
+            <button id="save-api-key">Save API Key</button>
+            <div id="api-status"></div>
+        </div>
+        
+        <!-- Loading Screen -->
+        <div id="loading-section" class="section">
+            <div class="loading-screen">
+                <div class="loading-text">AI now Getting ready</div>
+                <div class="loading-credit">Developed by Justin</div>
+                <div class="loading-credit">Developed under HOPE Research & development Team</div>
+                <div class="lottie-container">
+                    <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_DMgKk1.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Topic Input Section -->
+        <div id="topic-section" class="section">
+            <div class="form-group">
+                <label for="presentation-topic">Enter your presentation topic:</label>
+                <input type="text" id="presentation-topic" placeholder="e.g., Climate Change, Artificial Intelligence, etc.">
+            </div>
+            <button id="generate-questions">Generate Questions</button>
+        </div>
+        
+        <!-- Questions Section -->
+        <div id="questions-section" class="section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div id="questions-container"></div>
+            <button id="generate-presentation" disabled>Generate Presentation</button>
+        </div>
+        
+        <!-- Generating Section -->
+        <div id="generating-section" class="section">
+            <div class="generating-animation">
+                <div class="generating-text">Creating your presentation...</div>
+                <div class="lottie-container">
+                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
+                <p>This may take a moment as we generate your custom 3D presentation</p>
+            </div>
+        </div>
+        
+        <!-- Preview Section -->
+        <div id="preview-section" class="section">
+            <h2>Your presentation is ready!</h2>
+            <div class="preview-container">
+                <button id="preview-btn">Preview in New Tab</button>
+                <button id="new-presentation-btn">Create New Presentation</button>
+            </div>
+        </div>
+        
+        <!-- History Section -->
+        <div id="history-section" class="section">
+            <h2>Recent Presentations</h2>
+            <div id="history-container"></div>
+            <button id="clear-history-btn">Clear History</button>
+            <button id="new-presentation-from-history-btn">Create New Presentation</button>
+        </div>
+    </div>
+    
+    <footer>
+        Developed under HOPE Research Team | Developed by Justin
+    </footer>
+    
+    <button class="history-btn" id="history-toggle" title="View History">📋</button>
+    
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Application State
+        const appState = {
+            apiKey: '',
+            topic: '',
+            questions: [],
+            answers: [],
+            generatedPresentation: '',
+            currentQuestionIndex: 0,
+            presentationHistory: []
+        };
+
+        // DOM Elements
+        const sections = {
+            apiKey: document.getElementById('api-key-section'),
+            loading: document.getElementById('loading-section'),
+            topic: document.getElementById('topic-section'),
+            questions: document.getElementById('questions-section'),
+            generating: document.getElementById('generating-section'),
+            preview: document.getElementById('preview-section'),
+            history: document.getElementById('history-section')
+        };
+
+        const elements = {
+            apiKeyInput: document.getElementById('api-key'),
+            saveApiKeyBtn: document.getElementById('save-api-key'),
+            apiStatus: document.getElementById('api-status'),
+            presentationTopic: document.getElementById('presentation-topic'),
+            generateQuestionsBtn: document.getElementById('generate-questions'),
+            questionsContainer: document.getElementById('questions-container'),
+            progressFill: document.getElementById('progress-fill'),
+            generatePresentationBtn: document.getElementById('generate-presentation'),
+            previewBtn: document.getElementById('preview-btn'),
+            newPresentationBtn: document.getElementById('new-presentation-btn'),
+            historyContainer: document.getElementById('history-container'),
+            clearHistoryBtn: document.getElementById('clear-history-btn'),
+            newPresentationFromHistoryBtn: document.getElementById('new-presentation-from-history-btn'),
+            notification: document.getElementById('notification'),
+            historyToggle: document.getElementById('history-toggle'),
+            splashScreen: document.getElementById('splash-screen'),
+            continueToApp: document.getElementById('continue-to-app')
+        };
+
+        // Gemini API Configuration
+        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+
+        // Initialize Three.js Background
+        function initThreeBackground() {
+            const container = document.getElementById('three-background');
+            
+            // Scene
+            const scene = new THREE.Scene();
+            
+            // Camera
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+            
+            // Renderer
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
+            
+            // Create floating particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 500;
+            const posArray = new Float32Array(particlesCount * 3);
+            
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 10;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            
+            // Material
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.02,
+                color: 0x3498db,
+                transparent: true,
+                opacity: 0.8
+            });
+            
+            // Mesh
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+            
+            // Add ambient light
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                particlesMesh.rotation.x += 0.001;
+                particlesMesh.rotation.y += 0.002;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Initialize Application
+        function initApp() {
+            // Show splash screen first
+            elements.continueToApp.addEventListener('click', () => {
+                elements.splashScreen.style.opacity = '0';
+                setTimeout(() => {
+                    elements.splashScreen.style.display = 'none';
+                    // Initialize Three.js background after splash screen
+                    initThreeBackground();
+                    
+                    // Check for existing API key
+                    const savedApiKey = localStorage.getItem('geminiApiKey');
+                    if (savedApiKey) {
+                        appState.apiKey = savedApiKey;
+                        elements.apiKeyInput.value = savedApiKey;
+                        showSection('topic');
+                        loadHistory();
+                    } else {
+                        showSection('apiKey');
+                    }
+                }, 1000);
+            });
+
+            // Event Listeners
+            elements.saveApiKeyBtn.addEventListener('click', saveApiKey);
+            elements.generateQuestionsBtn.addEventListener('click', generateQuestions);
+            elements.generatePresentationBtn.addEventListener('click', generatePresentation);
+            elements.previewBtn.addEventListener('click', previewPresentation);
+            elements.newPresentationBtn.addEventListener('click', resetForNewPresentation);
+            elements.clearHistoryBtn.addEventListener('click', clearHistory);
+            elements.newPresentationFromHistoryBtn.addEventListener('click', () => {
+                showSection('topic');
+            });
+            elements.historyToggle.addEventListener('click', () => {
+                if (sections.history.classList.contains('active')) {
+                    // If currently showing history, go back to previous section
+                    if (appState.generatedPresentation) {
+                        showSection('preview');
+                    } else {
+                        showSection('topic');
+                    }
+                } else {
+                    // Show history section
+                    loadHistory();
+                    showSection('history');
+                }
+            });
+        }
+
+        // Section Navigation
+        function showSection(sectionName) {
+            Object.values(sections).forEach(section => {
+                section.classList.remove('active');
+            });
+            sections[sectionName].classList.add('active');
+        }
+
+        // API Key Management
+        function saveApiKey() {
+            const apiKey = elements.apiKeyInput.value.trim();
+            if (!apiKey) {
+                showNotification('Please enter a valid API key', 'error');
+                return;
+            }
+
+            // Simple validation - check if it looks like a Gemini API key
+            if (!apiKey.startsWith('AIza') || apiKey.length < 20) {
+                showNotification('Invalid API key format', 'error');
+                return;
+            }
+
+            appState.apiKey = apiKey;
+            localStorage.setItem('geminiApiKey', apiKey);
+            elements.apiStatus.textContent = 'API Key saved successfully!';
+            elements.apiStatus.style.color = '#3498db';
+            
+            // Show loading screen then proceed to topic input
+            showSection('loading');
+            setTimeout(() => {
+                showSection('topic');
+                loadHistory();
+            }, 3000);
+        }
+
+        // Gemini API Call Function
+        async function callGeminiAPI(prompt) {
+            try {
+                const response = await fetch(GEMINI_API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-goog-api-key': appState.apiKey
+                    },
+                    body: JSON.stringify({
+                        contents: [
+                            {
+                                parts: [
+                                    {
+                                        text: prompt
+                                    }
+                                ]
+                            }
+                        ]
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error?.message || 'API request failed');
+                }
+
+                const data = await response.json();
+                return data.candidates[0].content.parts[0].text;
+            } catch (error) {
+                console.error('Gemini API Error:', error);
+                throw error;
+            }
+        }
+
+        // Topic Input and Question Generation
+        async function generateQuestions() {
+            const topic = elements.presentationTopic.value.trim();
+            if (!topic) {
+                showNotification('Please enter a presentation topic', 'error');
+                return;
+            }
+
+            appState.topic = topic;
+            elements.generateQuestionsBtn.disabled = true;
+            elements.generateQuestionsBtn.textContent = 'Generating questions...';
+
+            try {
+                // Create prompt for generating questions with options
+                const prompt = `Generate 10 clarifying questions for a presentation about "${topic}". For each question, provide 4 multiple choice options. Format your response as a JSON array where each object has a "question" field and an "options" array with 4 strings. The questions should help gather more information to create a comprehensive presentation.`;
+                
+                // Call Gemini API
+                const responseText = await callGeminiAPI(prompt);
+                
+                // Parse the response to extract questions and options
+                let questionsData;
+                try {
+                    questionsData = JSON.parse(responseText);
+                } catch (e) {
+                    // If the response is not valid JSON, create a fallback
+                    questionsData = [
+                        { question: "What is the main objective of your presentation?", options: ["Inform", "Persuade", "Entertain", "Educate"] },
+                        { question: "Who is your target audience?", options: ["Experts", "General public", "Students", "Business professionals"] },
+                        { question: "What is the desired length of your presentation?", options: ["Short (5-10 min)", "Medium (10-20 min)", "Long (20-30 min)", "Flexible"] },
+                        { question: "What tone would you like for your presentation?", options: ["Formal", "Informal", "Technical", "Inspirational"] },
+                        { question: "What key points do you want to emphasize?", options: ["Benefits", "Challenges", "Innovations", "Future outlook"] },
+                        { question: "Do you have specific data to include?", options: ["Statistics", "Case studies", "Research findings", "No specific data"] },
+                        { question: "What visual style do you prefer?", options: ["Minimalist", "Colorful", "Professional", "Creative"] },
+                        { question: "What is the call to action?", options: ["Learn more", "Adopt a solution", "Change perspective", "No specific action"] },
+                        { question: "What is your experience level with this topic?", options: ["Beginner", "Intermediate", "Advanced", "Expert"] },
+                        { question: "What makes your approach unique?", options: ["New methodology", "Unique perspective", "Innovative solution", "Comprehensive analysis"] }
+                    ];
+                }
+                
+                // Ensure we have exactly 10 questions
+                if (questionsData.length < 10) {
+                    // Fill with generic questions if needed
+                    const genericQuestions = [
+                        { question: "What is the main objective of your presentation?", options: ["Inform", "Persuade", "Entertain", "Educate"] },
+                        { question: "Who is your target audience?", options: ["Experts", "General public", "Students", "Business professionals"] },
+                        { question: "What is the desired length of your presentation?", options: ["Short (5-10 min)", "Medium (10-20 min)", "Long (20-30 min)", "Flexible"] },
+                        { question: "What tone would you like for your presentation?", options: ["Formal", "Informal", "Technical", "Inspirational"] },
+                        { question: "What key points do you want to emphasize?", options: ["Benefits", "Challenges", "Innovations", "Future outlook"] },
+                        { question: "Do you have specific data to include?", options: ["Statistics", "Case studies", "Research findings", "No specific data"] },
+                        { question: "What visual style do you prefer?", options: ["Minimalist", "Colorful", "Professional", "Creative"] },
+                        { question: "What is the call to action?", options: ["Learn more", "Adopt a solution", "Change perspective", "No specific action"] },
+                        { question: "What is your experience level with this topic?", options: ["Beginner", "Intermediate", "Advanced", "Expert"] },
+                        { question: "What makes your approach unique?", options: ["New methodology", "Unique perspective", "Innovative solution", "Comprehensive analysis"] }
+                    ];
+                    
+                    questionsData = [...questionsData, ...genericQuestions.slice(0, 10 - questionsData.length)];
+                }
+
+                appState.questions = questionsData.slice(0, 10); // Ensure we have exactly 10 questions
+                appState.answers = new Array(10).fill('');
+                appState.currentQuestionIndex = 0;
+                
+                showSection('questions');
+                renderCurrentQuestion();
+            } catch (error) {
+                showNotification(`Error generating questions: ${error.message}`, 'error');
+                elements.generateQuestionsBtn.disabled = false;
+                elements.generateQuestionsBtn.textContent = 'Generate Questions';
+            }
+        }
+
+        // Render Current Question with Options
+        function renderCurrentQuestion() {
+            const progress = ((appState.currentQuestionIndex + 1) / appState.questions.length) * 100;
+            elements.progressFill.style.width = `${progress}%`;
+            
+            const currentQuestion = appState.questions[appState.currentQuestionIndex];
+            const selectedOption = appState.answers[appState.currentQuestionIndex];
+            
+            elements.questionsContainer.innerHTML = `
+                <div class="question-container">
+                    <h3>Question ${appState.currentQuestionIndex + 1} of ${appState.questions.length}</h3>
+                    <p>${currentQuestion.question}</p>
+                    <div class="option-container">
+                        ${currentQuestion.options.map((option, index) => `
+                            <label class="option ${selectedOption === option ? 'selected' : ''}">
+                                <input type="radio" name="question-${appState.currentQuestionIndex}" value="${option}" ${selectedOption === option ? 'checked' : ''}>
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div style="margin-top: 15px;">
+                        ${appState.currentQuestionIndex > 0 ? '<button id="prev-question-btn">Previous</button>' : ''}
+                        ${appState.currentQuestionIndex < appState.questions.length - 1 ? '<button id="next-question-btn">Next</button>' : '<button id="finish-questions-btn">Finish</button>'}
+                    </div>
+                </div>
+            `;
+            
+            // Add event listeners for options
+            const optionElements = document.querySelectorAll('.option');
+            optionElements.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    optionElements.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Update the answer
+                    const input = option.querySelector('input');
+                    input.checked = true;
+                    appState.answers[appState.currentQuestionIndex] = input.value;
+                });
+            });
+            
+            if (appState.currentQuestionIndex > 0) {
+                document.getElementById('prev-question-btn').addEventListener('click', previousQuestion);
+            }
+            
+            if (appState.currentQuestionIndex < appState.questions.length - 1) {
+                document.getElementById('next-question-btn').addEventListener('click', nextQuestion);
+            } else {
+                document.getElementById('finish-questions-btn').addEventListener('click', finishQuestions);
+            }
+        }
+
+        // Question Navigation
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            renderCurrentQuestion();
+        }
+
+        function previousQuestion() {
+            appState.currentQuestionIndex--;
+            renderCurrentQuestion();
+        }
+
+        function finishQuestions() {
+            // Check if all questions have answers
+            const allAnswered = appState.answers.every(answer => answer.trim() !== '');
+            if (!allAnswered) {
+                showNotification('Please answer all questions before proceeding', 'error');
+                return;
+            }
+            
+            elements.generatePresentationBtn.disabled = false;
+            showNotification('All questions answered. You can now generate your presentation!');
+        }
+
+        // Presentation Generation
+        async function generatePresentation() {
+            elements.generatePresentationBtn.disabled = true;
+            elements.generatePresentationBtn.textContent = 'Generating presentation...';
+            
+            // Show generating animation
+            showSection('generating');
+            
+            try {
+                // Prepare the answers for the API call
+                const answersText = appState.answers.map((answer, index) => 
+                    `Q${index + 1}: ${appState.questions[index].question}\nA${index + 1}: ${answer}`
+                ).join('\n\n');
+                
+                // Create prompt for generating the presentation
+                const prompt = `Generate a complete HTML presentation about "${appState.topic}" based on the following information:\n\n${answersText}\n\nThe presentation must follow this exact structure:\n\n1. A single HTML file with embedded CSS and JavaScript\n2. Include Three.js for 3D elements on each slide\n3. Implement arrow key navigation (left/right arrows)\n4. Add fullscreen toggle with 'F' key\n5. Include side-moving slide transitions with CSS transforms\n6. Add visual slide indicators (dots)\n7. Include Previous/Next control buttons\n8. Make it responsive with media queries\n9. Include fact cards and solution grid layouts where appropriate\n10. Add animated text effects (glow, slideUp)\n11. Include backdrop blur effects for UI elements\n12. Add the watermark "Developed under HOPE Research Team" and "Developed by Justin" to the bottom-right corner of each slide\n\nADDITIONAL REQUIREMENTS:\n13. Use Bootstrap 5 for professional UI components and responsive grid system\n14. Implement clean, modern design with consistent color scheme and typography\n15. Add subtle hover animations and micro-interactions\n16. Ensure smooth transitions between all UI elements\n17. Organize code with clear comments and proper indentation\n18. Use semantic HTML5 tags throughout\n19. Implement component-based structure for maintainability\n20. Add loading animations and progress indicators\n\nPROFESSIONAL 3D INTEGRATION:\n21. Create sophisticated Three.js scenes with professional lighting (ambient, directional, point lights)\n22. Implement particle systems for atmospheric effects where appropriate\n23. Add realistic materials with PBR (Physically Based Rendering) textures\n24. Include smooth camera animations and orbital controls\n25. Create interactive 3D elements that respond to mouse movement\n26. Add depth of field and post-processing effects\n27. Implement shadow mapping for realistic lighting\n28. Use professional color grading and tone mapping\n\nVISUAL ENHANCEMENTS:\n29. Create a cohesive visual theme with consistent color palette throughout\n30. Use gradient overlays and glassmorphism effects for modern UI elements\n31. Implement smooth parallax scrolling effects between background layers\n32. Add dynamic background animations (floating particles, gradient shifts)\n33. Use professional typography with clear hierarchy and emphasis\n34. Include high-quality icons and visual elements that complement content\n35. Implement reveal animations for content elements as slides transition\n36. Add subtle glow effects and shadows for depth perception\n37. Create visually striking title screens with impactful typography\n\nENGAGING CONTENT REQUIREMENTS:\n38. Design visually compelling layouts with dynamic compositions\n39. Use data visualization techniques for statistics (animated charts, infographics)\n40. Include compelling imagery and icons that enhance understanding\n41. Implement storytelling techniques with visual narrative flow\n42. Add surprise elements and reveal animations\n43. Use professional typography hierarchy with emphasis techniques\n44. Include relevant quotes or statistics in stylized callouts\n45. Implement parallax scrolling effects between slide layers\n46. Add subtle background animations (floating particles, gradient shifts)\n\nThe presentation should have exactly 6 slides with this specific structure:\n1. Introduction slide with title, subtitle, and brief overview\n2. Background/Context slide with historical context and foundational information\n3. Key Concepts slide with main principles, theories, or frameworks\n4. Current State/Analysis slide with present situation, data, or trends\n5. Future Outlook/Implications slide with predictions, opportunities, or challenges\n6. Conclusion slide with summary, key takeaways, and call to action\n\nCRITICAL: For the 3D elements on each slide, create objects that are specifically relevant to the presentation topic "${appState.topic}". The 3D elements must:\n- Be contextually appropriate for each slide's content\n- Directly relate to "${appState.topic}" in a meaningful way\n- Vary between slides while maintaining thematic consistency\n- Include appropriate lighting, camera angles, and animations\n- Have interactive elements where appropriate (rotation on hover, etc.)\n- Demonstrate professional 3D modeling techniques\n- Include realistic physics simulations where applicable\n- Use high-quality textures and materials\n- Implement smooth animations and transitions\n\nFor example:\n- If the topic is about space: use rotating planets with atmospheric glow, asteroid fields with particle systems, spacecraft with engine trails, starfields with parallax effect\n- If the topic is about technology: use circuit boards with animated data flow, holographic interfaces, rotating gears with metallic materials, digital networks with pulsing connections\n- If the topic is about environment: use growing trees with wind animation, water simulations with refraction, recycling symbols with particle effects, earth with rotating atmosphere\n- If the topic is about medicine: use DNA strands with molecular bonds, beating heart with blood flow, neural networks with synaptic firing, cells with organelle animations\n- If the topic is about education: use floating books with page-turning animations, lightbulbs with filament glow, graduation caps with confetti particles, chalkboards with dynamic writing\n- If the topic is about business: use growing charts with 3D bars, rotating globe with data connections, team avatars with dynamic interactions, currency symbols with floating animations\n\nEach slide should have a unique Three.js 3D scene that enhances the content and creates visual interest. The 3D elements should be professionally rendered with attention to detail.\n\nCODE QUALITY REQUIREMENTS:\n- Use Bootstrap classes for layout and components\n- Implement CSS custom properties for consistent theming\n- Add detailed comments explaining complex sections\n- Use BEM methodology for CSS class naming\n- Implement modular JavaScript with clear functions\n- Add proper error handling\n- Optimize performance with efficient rendering\n- Include accessibility features (ARIA labels, keyboard navigation)\n\nReturn only the complete HTML code without any additional explanations.`;                
+                const presentationHTML = await callGeminiAPI(prompt);
+                
+                // Ensure watermark is present in all slides
+                const finalHTML = ensureWatermark(presentationHTML);
+                
+                appState.generatedPresentation = finalHTML;
+                
+                // Save to history
+                saveToHistory(appState.topic, finalHTML);
+                
+                // Show preview section
+                showSection('preview');
+            } catch (error) {
+                showNotification(`Error generating presentation: ${error.message}`, 'error');
+                elements.generatePresentationBtn.disabled = false;
+                elements.generatePresentationBtn.textContent = 'Generate Presentation';
+                showSection('questions');
+            }
+        }
+
+        // Ensure watermark is present in the presentation
+        function ensureWatermark(html) {
+            // Check if watermark is already present
+            if (html.includes('Developed under HOPE Research Team') && html.includes('Developed by Justin')) {
+                return html;
+            }
+            
+            // Find each slide and add watermark if not present
+            const slidePattern = /<div class="slide-content">(.*?)<\/div>/gs;
+            const watermark = '<div class="watermark">Developed under HOPE Research Team<br>Developed by Justin</div>';
+            
+            return html.replace(slidePattern, (match, content) => {
+                if (!content.includes('watermark')) {
+                    return `<div class="slide-content">${content}${watermark}</div>`;
+                }
+                return match;
+            });
+        }
+
+        // Preview Function
+        function previewPresentation() {
+            const newWindow = window.open();
+            newWindow.document.write(appState.generatedPresentation);
+            newWindow.document.close();
+        }
+
+        // History Management
+        function saveToHistory(topic, presentation) {
+            const historyItem = {
+                id: Date.now(),
+                topic: topic,
+                timestamp: new Date().toISOString(),
+                presentation: presentation
+            };
+            
+            appState.presentationHistory.unshift(historyItem);
+            
+            // Keep only the last 10 presentations
+            if (appState.presentationHistory.length > 10) {
+                appState.presentationHistory = appState.presentationHistory.slice(0, 10);
+            }
+            
+            localStorage.setItem('presentationHistory', JSON.stringify(appState.presentationHistory));
+            loadHistory();
+        }
+
+        function loadHistory() {
+            const savedHistory = localStorage.getItem('presentationHistory');
+            if (savedHistory) {
+                appState.presentationHistory = JSON.parse(savedHistory);
+                renderHistory();
+            }
+        }
+
+        function renderHistory() {
+            if (appState.presentationHistory.length === 0) {
+                elements.historyContainer.innerHTML = '<p>No presentation history yet.</p>';
+                return;
+            }
+            
+            elements.historyContainer.innerHTML = appState.presentationHistory.map(item => `
+                <div class="history-item">
+                    <div>
+                        <h3>${item.topic}</h3>
+                        <p>${new Date(item.timestamp).toLocaleString()}</p>
+                    </div>
+                    <div>
+                        <button onclick="loadPresentationFromHistory(${item.id})">Load</button>
+                        <button onclick="deleteHistoryItem(${item.id})">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadPresentationFromHistory(id) {
+            const item = appState.presentationHistory.find(item => item.id === id);
+            if (item) {
+                appState.generatedPresentation = item.presentation;
+                appState.topic = item.topic;
+                showSection('preview');
+            }
+        }
+
+        function deleteHistoryItem(id) {
+            appState.presentationHistory = appState.presentationHistory.filter(item => item.id !== id);
+            localStorage.setItem('presentationHistory', JSON.stringify(appState.presentationHistory));
+            loadHistory();
+            showNotification('Presentation removed from history');
+        }
+
+        function clearHistory() {
+            if (confirm('Are you sure you want to clear all presentation history?')) {
+                appState.presentationHistory = [];
+                localStorage.removeItem('presentationHistory');
+                renderHistory();
+                showNotification('Presentation history cleared');
+            }
+        }
+
+        // Reset for New Presentation
+        function resetForNewPresentation() {
+            appState.topic = '';
+            appState.questions = [];
+            appState.answers = [];
+            appState.currentQuestionIndex = 0;
+            elements.presentationTopic.value = '';
+            showSection('topic');
+        }
+
+        // Utility Functions
+        function showNotification(message, type = 'success') {
+            elements.notification.textContent = message;
+            elements.notification.className = `notification ${type}`;
+            elements.notification.classList.add('show');
+            
+            setTimeout(() => {
+                elements.notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
