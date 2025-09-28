@@ -126,7 +126,7 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        input, textarea {
+        input, textarea, select {
             width: 100%;
             padding: 12px;
             border: none;
@@ -139,7 +139,7 @@
             transition: all 0.3s ease;
         }
 
-        input:focus, textarea:focus {
+        input:focus, textarea:focus, select:focus {
             outline: none;
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
@@ -484,6 +484,44 @@
             border-radius: 5px;
         }
 
+        /* Language dropdown styles */
+        .language-dropdown-container {
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .language-dropdown-container.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .language-search {
+            margin-bottom: 10px;
+        }
+        
+        .language-list {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        .language-option {
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .language-option:hover {
+            background: rgba(52, 152, 219, 0.2);
+        }
+        
+        .language-option.selected {
+            background: rgba(52, 152, 219, 0.3);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
@@ -579,6 +617,12 @@
                     <span id="color-code-2" class="color-code">#e74c3c</span>
                 </div>
             </div>
+            <div id="language-dropdown-container" class="language-dropdown-container">
+                <div class="language-search">
+                    <input type="text" id="language-search" placeholder="Search languages...">
+                </div>
+                <div id="language-list" class="language-list"></div>
+            </div>
             <button id="generate-presentation" disabled>Generate Presentation</button>
         </div>
         
@@ -631,10 +675,58 @@
             colorTheme: '',
             customColor1: '#3498db',
             customColor2: '#e74c3c',
+            descriptionLength: '',
+            bulletPointsCount: '',
+            fontSize: '',
+            includeImages: '',
+            termsdepth: '',
+            bgitem: '',
+            language: 'English',
+            presentationStyle: '',
+            advancedAnimations: '',
+            interactiveElements: '',
+            dataVisualization: '',
+            multimediaElements: '',
+            imageFallback: '',
             generatedPresentation: '',
             currentQuestionIndex: 0,
             presentationHistory: []
         };
+
+        // List of languages that LLMs are typically trained on
+        const languages = [
+            "English", "Spanish", "French", "German", "Italian", "Portuguese", "Dutch", "Russian", 
+            "Japanese", "Korean", "Chinese (Simplified)", "Chinese (Traditional)", "Arabic", 
+            "Hindi", "Bengali", "Punjabi", "Marathi", "Tamil", "Telugu", "Gujarati", "Kannada", 
+            "Malayalam", "Odia", "Assamese", "Urdu", "Persian", "Turkish", "Polish", "Ukrainian", 
+            "Romanian", "Czech", "Hungarian", "Swedish", "Danish", "Norwegian", "Finnish", 
+            "Greek", "Hebrew", "Thai", "Vietnamese", "Indonesian", "Malay", "Tagalog", 
+            "Swahili", "Zulu", "Afrikaans", "Amharic", "Yoruba", "Igbo", "Somali", 
+            "Nepali", "Sinhala", "Burmese", "Khmer", "Lao", "Mongolian", "Kazakh", 
+            "Uzbek", "Azerbaijani", "Georgian", "Armenian", "Lithuanian", "Latvian", 
+            "Estonian", "Slovak", "Slovenian", "Croatian", "Serbian", "Bosnian", 
+            "Montenegrin", "Macedonian", "Bulgarian", "Albanian", "Belarusian", 
+            "Moldovan", "Icelandic", "Faroese", "Basque", "Catalan", "Galician", 
+            "Welsh", "Irish", "Scottish Gaelic", "Breton", "Cornish", "Manx", 
+            "Esperanto", "Latin", "Ancient Greek", "Sanskrit", "Pali", "Tibetan", 
+            "Mongolian (Traditional)", "Javanese", "Sundanese", "Madurese", "Balinese", 
+            "Minangkabau", "Buginese", "Makassarese", "Acehnese", "Banjarese", 
+            "Tausug", "Maguindanao", "Maranao", "Ilocano", "Hiligaynon", "Waray-Waray", 
+            "Bicolano", "Pangasinan", "Kapampangan", "Ibanag", "Gaddang", "Ifugao", 
+            "Kalinga", "Bontoc", "Tboli", "T'boli", "Manobo", "Bagobo", "Mandaya", 
+            "Mansaka", "Dibabawon", "Manguangan", "Kalagan", "Tagakaulo", "Blan", 
+            "Talaandig", "Higaonon", "Bukidnon", "Tigwahanon", "Matigsalug", "Obo", 
+            "Tinananon", "Tigwa", "Umayamnon", "Western Bukidnon Manobo", "Eastern Bukidnon Manobo", 
+            "Kinamiging", "Cotabato Manobo", "Dibabawon Manobo", "Agusan Manobo", 
+            "Surigao Manobo", "Western Visayan", "Central Visayan", "Southern Visayan", 
+            "Northern Visayan", "Ati", "Sulod", "Magahat", "Negros Occidental Hiligaynon", 
+            "Capiznon", "Aklanon", "Kinaray-a", "Cuyonon", "Ratagnon", "Batak", 
+            "Palawano", "Tagbanwa", "Cuyonon", "Agutaynen", "Tausug", "Sama", 
+            "Yakan", "Jama Mapun", "Sama-Bajau", "Badjao", "Molbog", "Palawano", 
+            "Tagbanwa", "Cuyonon", "Agutaynen", "Tausug", "Sama", "Yakan", 
+            "Jama Mapun", "Sama-Bajau", "Badjao", "Molbog", "Palawano", "Tagbanwa", 
+            "Cuyonon", "Agutaynen"
+        ];
 
         // DOM Elements
         const sections = {
@@ -664,7 +756,11 @@
             notification: document.getElementById('notification'),
             historyToggle: document.getElementById('history-toggle'),
             splashScreen: document.getElementById('splash-screen'),
-            continueToApp: document.getElementById('continue-to-app')
+            continueToApp: document.getElementById('continue-to-app'),
+            customColorsContainer: document.getElementById('custom-colors-container'),
+            languageDropdownContainer: document.getElementById('language-dropdown-container'),
+            languageSearch: document.getElementById('language-search'),
+            languageList: document.getElementById('language-list')
         };
 
         // Gemini API Configuration
@@ -781,6 +877,12 @@
                     showSection('history');
                 }
             });
+
+            // Language search functionality
+            elements.languageSearch.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                renderLanguageList(searchTerm);
+            });
         }
 
         // Section Navigation
@@ -865,41 +967,96 @@
             elements.generateQuestionsBtn.disabled = true;
             elements.generateQuestionsBtn.textContent = 'Preparing questions...';
             
-            // Set predefined questions
+            // Set predefined questions with professional options
             appState.questions = [
                 {
+                    question: "What language do you want for your presentation?",
+                    options: ["Malayalam", "English", "Other"],
+                    variable: "language"
+                },
+                {
+                    question: "What presentation style do you prefer?",
+                    options: ["Professional Corporate", "Creative Modern", "Minimalist Clean", "Bold Impactful", "Academic Formal"],
+                    variable: "presentationStyle"
+                },
+                {
                     question: "What theme do you prefer?",
-                    options: ["Minimal", "Creative", "Professional", "HighTech"],
+                    options: ["Minimal", "Creative", "Professional", "HighTech", "Corporate", "Academic", "Modern", "Vintage"],
                     variable: "theme"
                 },
                 {
                     question: "How many slides do you want?",
-                    options: ["1-4", "1-6", "1-8", "1-10"],
+                    options: ["1-4", "1-6", "1-8", "1-10", "1-12", "1-15"],
                     variable: "slideCount"
                 },
                 {
                     question: "What structure do you prefer for each slide?",
-                    options: ["Heading with paragraph", "Heading with bullet points", "Heading only"],
+                    options: ["Title and content", "Title and bullet points", "Title, subtitle and content", "Title, subtitle and bullet points", "Two-column layout", "Three-column layout"],
                     variable: "structure"
                 },
                 {
                     question: "What animation style do you prefer?",
-                    options: ["Simple", "No animation", "Futuristic"],
+                    options: ["Simple transitions (fade, slide)", "Advanced animations (rotate, zoom, bounce)", "3D animations (flip, cube, carousel)", "No animation"],
                     variable: "animationStyle"
                 },
                 {
+                    question: "What level of 3D elements do you want?",
+                    options: ["None", "Basic 3D shapes", "Advanced 3D models", "Interactive 3D elements"],
+                    variable: "advancedAnimations"
+                },
+                {
+                    question: "What interactive elements do you want?",
+                    options: ["None", "Basic (click to reveal)", "Advanced (drag, zoom, rotate)", "Interactive quizzes", "Interactive simulations"],
+                    variable: "interactiveElements"
+                },
+                {
+                    question: "Do you want data visualization?",
+                    options: ["No", "Yes, basic charts", "Yes, advanced charts", "Yes, interactive charts"],
+                    variable: "dataVisualization"
+                },
+                {
+                    question: "Do you want multimedia elements?",
+                    options: ["No", "Audio only", "Video only", "Both audio and video"],
+                    variable: "multimediaElements"
+                },
+                {
+                    question: "What type of images do you want?",
+                    options: ["No images", "Icons only", "SVG graphics only", "Photographs only", "Mix of icons and SVG graphics", "Mix of SVG graphics and photographs", "Mix of all types"],
+                    variable: "includeImages"
+                },
+                {
+                    question: "What image fallback strategy do you prefer?",
+                    options: ["No fallback", "Text description fallback", "Placeholder image fallback", "Both text and placeholder fallback"],
+                    variable: "imageFallback"
+                },
+                {
                     question: "What color theme do you prefer?",
-                    options: ["Black white with accent", "Black white with blue accent", "Custom color (select two)"],
+                    options: ["Black and white with blue accent", "Black and white with green accent", "Black and white with red accent", "Black and white with purple accent", "Dark theme with blue", "Dark theme with green", "Dark theme with red", "Dark theme with purple", "Light theme with blue", "Light theme with green", "Light theme with red", "Light theme with purple", "Custom color (select two)"],
                     variable: "colorTheme"
                 },
                 {
                     question: "Content Depth Preference?",
-                    options: ["Simple Words", "Advanced Terms", "Semi-Advanced Terms"],
+                    options: ["Beginner level", "Intermediate level", "Expert level", "Mixed levels"],
                     variable: "termsdepth"
                 },
                 {
+                    question: "How long should descriptions be?",
+                    options: ["Very short (1 sentence)", "Short (2-3 sentences)", "Medium (4-5 sentences)", "Long (6-7 sentences)", "Very long (8+ sentences)"],
+                    variable: "descriptionLength"
+                },
+                {
+                    question: "How many bullet points per slide?",
+                    options: ["1-2", "3-4", "5-6", "7-8", "9-10"],
+                    variable: "bulletPointsCount"
+                },
+                {
+                    question: "What font size do you prefer?",
+                    options: ["Very small", "Small", "Medium", "Large", "Very large"],
+                    variable: "fontSize"
+                },
+                {
                     question: "Which 3D background do you prefer?",
-                    options: ["Stars in Universe", "3D nodes", "3D floating particles", "Abstract shapes", "No background"],
+                    options: ["Stars in Universe", "3D nodes", "3D floating particles", "Abstract shapes", "3D landscape", "3D cityscape", "3D underwater", "3D space nebula", "No background"],
                     variable: "bgitem"
                 }
             ];
@@ -941,11 +1098,18 @@
             `;
             
             // Show custom color pickers if color theme question and custom option is selected
-            const customColorsContainer = document.getElementById('custom-colors-container');
             if (currentQuestion.variable === "colorTheme" && selectedOption === "Custom color (select two)") {
-                customColorsContainer.classList.add('show');
+                elements.customColorsContainer.classList.add('show');
             } else {
-                customColorsContainer.classList.remove('show');
+                elements.customColorsContainer.classList.remove('show');
+            }
+            
+            // Show language dropdown if language question and "Other" option is selected
+            if (currentQuestion.variable === "language" && selectedOption === "Other") {
+                elements.languageDropdownContainer.classList.add('show');
+                renderLanguageList();
+            } else {
+                elements.languageDropdownContainer.classList.remove('show');
             }
             
             // Add event listeners for options
@@ -967,9 +1131,17 @@
                     
                     // Show/hide custom color pickers based on selection
                     if (variableName === "colorTheme" && input.value === "Custom color (select two)") {
-                        customColorsContainer.classList.add('show');
+                        elements.customColorsContainer.classList.add('show');
                     } else {
-                        customColorsContainer.classList.remove('show');
+                        elements.customColorsContainer.classList.remove('show');
+                    }
+                    
+                    // Show/hide language dropdown based on selection
+                    if (variableName === "language" && input.value === "Other") {
+                        elements.languageDropdownContainer.classList.add('show');
+                        renderLanguageList();
+                    } else {
+                        elements.languageDropdownContainer.classList.remove('show');
                     }
                 });
             });
@@ -980,15 +1152,19 @@
             const colorCode1 = document.getElementById('color-code-1');
             const colorCode2 = document.getElementById('color-code-2');
             
-            colorPicker1.addEventListener('input', (e) => {
-                appState.customColor1 = e.target.value;
-                colorCode1.textContent = e.target.value;
-            });
+            if (colorPicker1) {
+                colorPicker1.addEventListener('input', (e) => {
+                    appState.customColor1 = e.target.value;
+                    colorCode1.textContent = e.target.value;
+                });
+            }
             
-            colorPicker2.addEventListener('input', (e) => {
-                appState.customColor2 = e.target.value;
-                colorCode2.textContent = e.target.value;
-            });
+            if (colorPicker2) {
+                colorPicker2.addEventListener('input', (e) => {
+                    appState.customColor2 = e.target.value;
+                    colorCode2.textContent = e.target.value;
+                });
+            }
             
             if (appState.currentQuestionIndex > 0) {
                 document.getElementById('prev-question-btn').addEventListener('click', previousQuestion);
@@ -999,6 +1175,34 @@
             } else {
                 document.getElementById('finish-questions-btn').addEventListener('click', finishQuestions);
             }
+        }
+
+        // Render Language List
+        function renderLanguageList(searchTerm = '') {
+            const filteredLanguages = languages.filter(lang => 
+                lang.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            
+            elements.languageList.innerHTML = filteredLanguages.map(lang => `
+                <div class="language-option ${appState.language === lang ? 'selected' : ''}" data-lang="${lang}">
+                    ${lang}
+                </div>
+            `).join('');
+            
+            // Add event listeners to language options
+            const languageOptions = document.querySelectorAll('.language-option');
+            languageOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    languageOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Update the selected language
+                    appState.language = option.dataset.lang;
+                    // Update the answer in the answers array
+                    appState.answers[appState.currentQuestionIndex] = appState.language;
+                });
+            });
         }
 
         // Question Navigation
@@ -1028,6 +1232,12 @@
                 }
             }
             
+            // Check if language is "Other" and no specific language is selected
+            if (appState.language === "Other" && !appState.selectedLanguage) {
+                showNotification('Please select a specific language', 'error');
+                return;
+            }
+            
             elements.generatePresentationBtn.disabled = false;
             showNotification('All questions answered. You can now generate your presentation!');
         }
@@ -1042,7 +1252,35 @@
             
             try {
                 // Extract the parameters from appState
-                const { topic, theme, slideCount, structure, animationStyle, colorTheme, customColor1, customColor2, bgitem, termsdepth } = appState;
+                const { 
+                    topic, 
+                    theme, 
+                    slideCount, 
+                    structure, 
+                    animationStyle, 
+                    colorTheme, 
+                    customColor1, 
+                    customColor2, 
+                    bgitem, 
+                    termsdepth,
+                    descriptionLength,
+                    bulletPointsCount,
+                    fontSize,
+                    includeImages,
+                    imageFallback,
+                    language,
+                    presentationStyle,
+                    advancedAnimations,
+                    interactiveElements,
+                    dataVisualization,
+                    multimediaElements
+                } = appState;
+                
+                // Determine the actual language to use
+                let presentationLanguage = language;
+                if (language === "Other") {
+                    presentationLanguage = appState.selectedLanguage || "English";
+                }
                 
                 // Build the color theme string for the prompt
                 let colorThemeString;
@@ -1065,14 +1303,28 @@
 8. Structure: Each slide should follow the "${structure}" format.
 9. Theme: The overall theme should be "${theme}".
 10. Slide count: Create ${slideCount} slides with well-organized content.
+11. Description length: For slides with paragraphs, use ${descriptionLength}.
+12. Bullet points: For slides with bullet points, include ${bulletPointsCount} bullet points per slide.
+13. Font size: Use ${fontSize} font size throughout the presentation.
+14. Images: ${includeImages}. For SVG graphics, use inline SVG code for crisp rendering at any size.
+15. Image fallback: ${imageFallback}. Implement proper fallback mechanisms for images that fail to load.
+16. Language: Generate the entire presentation in ${presentationLanguage}. All text content, including headings, paragraphs, and bullet points, must be in ${presentationLanguage}.
+17. Presentation style: The presentation should follow a "${presentationStyle}" approach.
+18. 3D elements: Include ${advancedAnimations} in the slides.
+19. Interactive elements: Implement ${interactiveElements} for user engagement.
+20. Data visualization: ${dataVisualization} should be included where appropriate.
+21. Multimedia elements: ${multimediaElements} should be incorporated into the presentation.
 
 Additional requirements:
 - Include slide indicators (dots) at the bottom to show current slide position.
 - Add Previous/Next buttons for navigation.
 - Make the presentation responsive for different screen sizes.
+- Include a watermark "Developed under HOPE Research Team" and "By Justin" in the bottom-right corner of each slide.
 - Use semantic HTML5 tags throughout.
 - Add smooth transitions between slides.
 - Include professional typography with clear hierarchy.
+- For SVG images, use inline SVG code with proper viewBox attributes for scalability.
+- Implement image fallback strategies: ${imageFallback}. For text fallbacks, use descriptive alt text. For placeholder fallbacks, use a placeholder image with a message indicating the image could not be loaded.
 
 The presentation should be structured as follows:
 1. Title slide with the topic "${topic}" and a subtitle.
@@ -1212,6 +1464,18 @@ Return only the complete HTML code without any additional explanations.`;
             appState.colorTheme = '';
             appState.customColor1 = '#3498db';
             appState.customColor2 = '#e74c3c';
+            appState.descriptionLength = '';
+            appState.bulletPointsCount = '';
+            appState.fontSize = '';
+            appState.includeImages = '';
+            appState.imageFallback = '';
+            appState.language = 'English';
+            appState.selectedLanguage = '';
+            appState.presentationStyle = '';
+            appState.advancedAnimations = '';
+            appState.interactiveElements = '';
+            appState.dataVisualization = '';
+            appState.multimediaElements = '';
             appState.questions = [];
             appState.answers = [];
             appState.currentQuestionIndex = 0;
