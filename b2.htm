@@ -257,6 +257,82 @@
             padding: 8px 12px;
             font-size: 14px;
         }
+                /* Custom color picker styles */
+        .custom-colors-container {
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .custom-colors-container.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .color-picker-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .color-picker-group label {
+            min-width: 120px;
+            margin-right: 10px;
+        }
+        
+        .color-picker {
+            width: 50px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .color-code {
+            margin-left: 10px;
+            font-family: monospace;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        /* Language dropdown styles */
+        .language-dropdown-container {
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .language-dropdown-container.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .language-search {
+            margin-bottom: 10px;
+        }
+        
+        .language-list {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        .language-option {
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .language-option:hover {
+            background: rgba(52, 152, 219, 0.2);
+        }
+        
+        .language-option.selected {
+            background: rgba(52, 152, 219, 0.3);
+        }
+
 
         .preview-container {
             margin-top: 20px;
