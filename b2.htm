@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
     <!-- Essential Meta Tags -->
-    <title>HOPE-PPT | AI-Powered Presentation & Report Generator</title>
-    <meta name="description" content="Create stunning presentations and printable reports with AI. HOPE-PPT generates custom content using Gemini AI with beautiful designs.">
-    <meta name="keywords" content="presentation generator, report generator, AI presentations, AI reports, HOPE-PPT, Gemini AI">
+    <title>HOPE-PPT | AI-Powered Presentation, Report & Assignment Generator</title>
+    <meta name="description" content="Create stunning presentations, printable reports, and assignments with AI. HOPE-PPT generates custom content using Gemini AI with beautiful designs.">
+    <meta name="keywords" content="presentation generator, report generator, assignment generator, AI presentations, AI reports, AI assignments, HOPE-PPT, Gemini AI">
     <meta name="author" content="Justin">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://hope-ppt.vercel.app">
     
     <!-- Open Graph (OG) Tags -->
-    <meta property="og:title" content="HOPE-PPT | AI-Powered Presentation & Report Generator">
-    <meta property="og:description" content="Create stunning presentations and printable reports with AI. HOPE-PPT generates custom content using Gemini AI with beautiful designs.">
+    <meta property="og:title" content="HOPE-PPT | AI-Powered Presentation, Report & Assignment Generator">
+    <meta property="og:description" content="Create stunning presentations, printable reports, and assignments with AI. HOPE-PPT generates custom content using Gemini AI with beautiful designs.">
     <meta property="og:image" content="https://i.ibb.co/3yMXpZ71/Whats-App-Image-2025-09-29-at-12-03-39-AM.jpg">
     <meta property="og:url" content="https://hope-ppt.vercel.app">
     <meta property="og:type" content="website">
@@ -23,8 +23,8 @@
     
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="HOPE-PPT | AI-Powered Presentation & Report Generator">
-    <meta name="twitter:description" content="Create stunning presentations and printable reports with AI. HOPE-PPT generates custom content using Gemini AI with beautiful designs.">
+    <meta name="twitter:title" content="HOPE-PPT | AI-Powered Presentation, Report & Assignment Generator">
+    <meta name="twitter:description" content="Create stunning presentations, printable reports, and assignments with AI. HOPE-PPT generates custom content using Gemini AI with beautiful designs.">
     <meta name="twitter:image" content="https://hope-ppt.vercel.app/images/twitter-preview.jpg">
     <meta name="twitter:site" content="@hopeppt">
     <meta name="twitter:creator" content="@justindev">
@@ -614,6 +614,109 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
+        /* Assignment Section Styles */
+        .assignment-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .assignment-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .assignment-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #3498db, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .assignment-header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .assignment-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .assignment-step {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .step-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+
+        .step-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .step-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .step-content li {
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .step-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 10px;
+            margin: 15px auto;
+            display: block;
+            border: 2px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .assignment-actions {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .assignment-note {
+            background: rgba(52, 152, 219, 0.2);
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .assignment-note p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
@@ -643,6 +746,14 @@
             .step-content h3 {
                 font-size: 1.3rem;
             }
+
+            .assignment-header h2 {
+                font-size: 2rem;
+            }
+
+            .step-content h3 {
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
@@ -651,7 +762,7 @@
     <div id="splash-screen" class="splash-screen">
         <div class="splash-content">
             <h1 class="splash-title">HOPE-PPT</h1>
-            <p class="splash-subtitle">Create stunning presentations and printable reports with AI</p>
+            <p class="splash-subtitle">Create stunning presentations, printable reports, and assignments with AI</p>
             <div class="splash-animation">
                 <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_DMgKk1.json" background="transparent" speed="1" loop autoplay></lottie-player>
             </div>
@@ -673,7 +784,7 @@
             <div class="tutorial-section">
                 <div class="tutorial-header">
                     <h2>Welcome to HOPE-PPT!</h2>
-                    <p>Let's get you set up with your Gemini API key to start creating amazing presentations and reports</p>
+                    <p>Let's get you set up with your Gemini API key to start creating amazing presentations, reports, and assignments</p>
                 </div>
                 
                 <div class="tutorial-steps">
@@ -681,7 +792,7 @@
                         <div class="step-number">1</div>
                         <div class="step-content">
                             <h3>What is a Gemini API Key?</h3>
-                            <p>The Gemini API key is a unique identifier that allows HOPE-PPT to access Google's powerful Gemini AI model to generate your presentations and reports. It's like a password that gives our app permission to use Google's AI services.</p>
+                            <p>The Gemini API key is a unique identifier that allows HOPE-PPT to access Google's powerful Gemini AI model to generate your presentations, reports, and assignments. It's like a password that gives our app permission to use Google's AI services.</p>
                             <div class="tutorial-note">
                                 <p><strong>Note:</strong> Your API key is private and should never be shared with others. We store it securely in your browser only.</p>
                             </div>
@@ -711,7 +822,7 @@
                             <h3>API Key Benefits</h3>
                             <p>With your Gemini API key, you can:</p>
                             <ul>
-                                <li>Generate unlimited presentations and reports</li>
+                                <li>Generate unlimited presentations, reports, and assignments</li>
                                 <li>Access the latest AI models</li>
                                 <li>Create content in multiple languages</li>
                                 <li>Use advanced design features</li>
@@ -775,6 +886,10 @@
                     <h3>Create Printable Report</h3>
                     <p>Generate a professional report that can be downloaded as PDF</p>
                 </div>
+                <div class="option-card" id="create-assignment-card">
+                    <h3>Create Assignment</h3>
+                    <p>Generate a detailed assignment with questions, instructions, and grading criteria</p>
+                </div>
             </div>
         </div>
         
@@ -796,10 +911,41 @@
             <button id="generate-classification-questions">Next</button>
         </div>
         
+        <!-- Assignment Topic Section -->
+        <div id="assignment-topic-section" class="section">
+            <div class="form-group">
+                <label for="assignment-topic">Enter your assignment topic:</label>
+                <input type="text" id="assignment-topic" placeholder="e.g., Climate Change, Artificial Intelligence, etc.">
+            </div>
+            <button id="generate-assignment-classification-questions">Next</button>
+        </div>
+        
         <!-- Generating Classification Questions Section -->
         <div id="generating-classification-section" class="section">
             <div class="generating-animation">
                 <div class="generating-text">Generating classification questions...</div>
+                <div class="lottie-container">
+                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
+                <p>AI is analyzing your topic to create personalized questions</p>
+            </div>
+        </div>
+        
+        <!-- Generating Assignment Classification Questions Section -->
+        <div id="generating-assignment-classification-section" class="section">
+            <div class="generating-animation">
+                <div class="generating-text">Generating assignment classification questions...</div>
+                <div class="lottie-container">
+                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
+                <p>AI is analyzing your topic to create personalized questions</p>
+            </div>
+        </div>
+        
+        <!-- Generating PPT Classification Questions Section -->
+        <div id="generating-ppt-classification-section" class="section">
+            <div class="generating-animation">
+                <div class="generating-text">Generating presentation classification questions...</div>
                 <div class="lottie-container">
                     <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
                 </div>
@@ -814,6 +960,24 @@
             </div>
             <div id="classification-questions-container"></div>
             <button id="finish-classification-btn" disabled>Continue to Report Options</button>
+        </div>
+        
+        <!-- Assignment Classification Questions Section -->
+        <div id="assignment-classification-questions-section" class="section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="assignment-classification-progress-fill"></div>
+            </div>
+            <div id="assignment-classification-questions-container"></div>
+            <button id="finish-assignment-classification-btn" disabled>Continue to Assignment Options</button>
+        </div>
+        
+        <!-- PPT Classification Questions Section -->
+        <div id="ppt-classification-questions-section" class="section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="ppt-classification-progress-fill"></div>
+            </div>
+            <div id="ppt-classification-questions-container"></div>
+            <button id="finish-ppt-classification-btn" disabled>Continue to Presentation Options</button>
         </div>
         
         <!-- Questions Section -->
@@ -855,6 +1019,18 @@
             <button id="generate-report" disabled>Generate Report</button>
         </div>
         
+        <!-- Assignment Questions Section -->
+        <div id="assignment-questions-section" class="section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="assignment-progress-fill"></div>
+            </div>
+            <div id="assignment-questions-container"></div>
+            <div id="assignment-font-list-container" class="font-list">
+                <!-- Font options will be populated here -->
+            </div>
+            <button id="generate-assignment" disabled>Generate Assignment</button>
+        </div>
+        
         <!-- Generating Section -->
         <div id="generating-section" class="section">
             <div class="generating-animation">
@@ -877,6 +1053,17 @@
             </div>
         </div>
         
+        <!-- Generating Assignment Section -->
+        <div id="generating-assignment-section" class="section">
+            <div class="generating-animation">
+                <div class="generating-text">Creating your assignment...</div>
+                <div class="lottie-container">
+                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
+                <p>This may take a moment as we generate your custom assignment</p>
+            </div>
+        </div>
+        
         <!-- Preview Section -->
         <div id="preview-section" class="section">
             <h2>Your presentation is ready!</h2>
@@ -893,6 +1080,16 @@
                 <button id="preview-report-btn">Preview in New Tab</button>
                 <button id="download-report-btn">Download as PDF</button>
                 <button id="new-report-btn">Create New Report</button>
+            </div>
+        </div>
+        
+        <!-- Assignment Preview Section -->
+        <div id="assignment-preview-section" class="section">
+            <h2>Your assignment is ready!</h2>
+            <div class="preview-container">
+                <button id="preview-assignment-btn">Preview in New Tab</button>
+                <button id="download-assignment-btn">Download as PDF</button>
+                <button id="new-assignment-btn">Create New Assignment</button>
             </div>
         </div>
         
@@ -942,6 +1139,7 @@
             currentQuestionIndex: 0,
             presentationHistory: [],
             reportHistory: [],
+            assignmentHistory: [],
             hasSeenTutorial: false,
             
             // Report-specific state
@@ -959,7 +1157,32 @@
             // Classification questions state
             classificationQuestions: [],
             classificationAnswers: [],
-            currentClassificationQuestionIndex: 0
+            currentClassificationQuestionIndex: 0,
+            
+            // Assignment-specific state
+            assignmentTopic: '',
+            assignmentGradeLevel: '',
+            assignmentSubject: '',
+            assignmentType: '',
+            assignmentLength: '',
+            assignmentDifficulty: '',
+            assignmentResources: '',
+            assignmentSubmission: '',
+            selectedAssignmentFont: '',
+            generatedAssignment: '',
+            currentAssignmentQuestionIndex: 0,
+            assignmentQuestions: [],
+            assignmentAnswers: [],
+            
+            // Assignment classification questions state
+            assignmentClassificationQuestions: [],
+            assignmentClassificationAnswers: [],
+            currentAssignmentClassificationQuestionIndex: 0,
+            
+            // PPT classification questions state
+            pptClassificationQuestions: [],
+            pptClassificationAnswers: [],
+            currentPptClassificationQuestionIndex: 0
         };
 
         // List of languages that LLMs are typically trained on
@@ -996,7 +1219,7 @@
             "Badjao", "Molbog", "Palawano", "Tagbanwa", "Cuyonon", "Agutaynen"
         ];
         
-        // List of fonts for report
+        // List of fonts for report and assignment
         const fonts = [
             "Arial", "Verdana", "Helvetica", "Times New Roman", "Georgia", 
             "Courier New", "Brush Script MT", "Lucida Handwriting", "Comic Sans MS",
@@ -1048,6 +1271,54 @@
             }
         ];
 
+        // Fallback assignment classification questions
+        const fallbackAssignmentClassificationQuestions = [
+            {
+                question: "What is the grade level for this assignment?",
+                options: ["Elementary (K-5)", "Middle School (6-8)", "High School (9-12)", "College/University"]
+            },
+            {
+                question: "What subject area does this assignment belong to?",
+                options: ["Science", "Mathematics", "Language Arts", "Social Studies", "Arts", "Technology", "Physical Education"]
+            },
+            {
+                question: "What type of assignment do you want to create?",
+                options: ["Essay/Research Paper", "Problem Set", "Project-based", "Quiz/Test", "Presentation", "Lab Report"]
+            },
+            {
+                question: "How long should the assignment be?",
+                options: ["Short (1-2 pages)", "Medium (3-5 pages)", "Long (6+ pages)"]
+            },
+            {
+                question: "What difficulty level is appropriate?",
+                options: ["Beginner", "Intermediate", "Advanced", "Mixed Levels"]
+            }
+        ];
+
+        // Fallback PPT classification questions
+        const fallbackPptClassificationQuestions = [
+            {
+                question: "What is the primary purpose of this presentation?",
+                options: ["Educational", "Business", "Informative", "Entertainment"]
+            },
+            {
+                question: "Who is the target audience?",
+                options: ["Students", "Professionals", "General public", "Executives"]
+            },
+            {
+                question: "What presentation style do you prefer?",
+                options: ["Formal", "Casual", "Creative", "Technical"]
+            },
+            {
+                question: "How detailed should the content be?",
+                options: ["Overview", "Moderate detail", "In-depth", "Comprehensive"]
+            },
+            {
+                question: "What type of visuals do you want?",
+                options: ["Minimal", "Moderate", "Extensive", "Interactive"]
+            }
+        ];
+
         // DOM Elements
         const sections = {
             tutorial: document.getElementById('tutorial-section'),
@@ -1056,14 +1327,22 @@
             mainOptions: document.getElementById('main-options-section'),
             topic: document.getElementById('topic-section'),
             reportTopic: document.getElementById('report-topic-section'),
+            assignmentTopic: document.getElementById('assignment-topic-section'),
             generatingClassification: document.getElementById('generating-classification-section'),
+            generatingAssignmentClassification: document.getElementById('generating-assignment-classification-section'),
+            generatingPptClassification: document.getElementById('generating-ppt-classification-section'),
             classificationQuestions: document.getElementById('classification-questions-section'),
+            assignmentClassificationQuestions: document.getElementById('assignment-classification-questions-section'),
+            pptClassificationQuestions: document.getElementById('ppt-classification-questions-section'),
             questions: document.getElementById('questions-section'),
             reportQuestions: document.getElementById('report-questions-section'),
+            assignmentQuestions: document.getElementById('assignment-questions-section'),
             generating: document.getElementById('generating-section'),
             generatingReport: document.getElementById('generating-report-section'),
+            generatingAssignment: document.getElementById('generating-assignment-section'),
             preview: document.getElementById('preview-section'),
             reportPreview: document.getElementById('report-preview-section'),
+            assignmentPreview: document.getElementById('assignment-preview-section'),
             history: document.getElementById('history-section')
         };
 
@@ -1106,7 +1385,27 @@
             fontListContainer: document.getElementById('font-list-container'),
             previewReportBtn: document.getElementById('preview-report-btn'),
             downloadReportBtn: document.getElementById('download-report-btn'),
-            newReportBtn: document.getElementById('new-report-btn')
+            newReportBtn: document.getElementById('new-report-btn'),
+            
+            // Assignment elements
+            createAssignmentCard: document.getElementById('create-assignment-card'),
+            assignmentTopicInput: document.getElementById('assignment-topic'),
+            generateAssignmentClassificationQuestionsBtn: document.getElementById('generate-assignment-classification-questions'),
+            assignmentClassificationQuestionsContainer: document.getElementById('assignment-classification-questions-container'),
+            assignmentClassificationProgressFill: document.getElementById('assignment-classification-progress-fill'),
+            finishAssignmentClassificationBtn: document.getElementById('finish-assignment-classification-btn'),
+            assignmentQuestionsContainer: document.getElementById('assignment-questions-container'),
+            assignmentProgressFill: document.getElementById('assignment-progress-fill'),
+            generateAssignmentBtn: document.getElementById('generate-assignment'),
+            assignmentFontListContainer: document.getElementById('assignment-font-list-container'),
+            previewAssignmentBtn: document.getElementById('preview-assignment-btn'),
+            downloadAssignmentBtn: document.getElementById('download-assignment-btn'),
+            newAssignmentBtn: document.getElementById('new-assignment-btn'),
+            
+            // PPT classification elements
+            pptClassificationQuestionsContainer: document.getElementById('ppt-classification-questions-container'),
+            pptClassificationProgressFill: document.getElementById('ppt-classification-progress-fill'),
+            finishPptClassificationBtn: document.getElementById('finish-ppt-classification-btn')
         };
 
         // Gemini API Configuration
@@ -1208,7 +1507,7 @@
 
             // Event Listeners
             elements.saveApiKeyBtn.addEventListener('click', saveApiKey);
-            elements.generateQuestionsBtn.addEventListener('click', generateQuestions);
+            elements.generateQuestionsBtn.addEventListener('click', generatePptClassificationQuestions);
             elements.generatePresentationBtn.addEventListener('click', generatePresentation);
             elements.previewBtn.addEventListener('click', previewPresentation);
             elements.newPresentationBtn.addEventListener('click', resetForNewPresentation);
@@ -1246,6 +1545,10 @@
                 showSection('reportTopic');
             });
             
+            elements.createAssignmentCard.addEventListener('click', () => {
+                showSection('assignmentTopic');
+            });
+            
             // Report flow event listeners
             elements.generateClassificationQuestionsBtn.addEventListener('click', generateClassificationQuestions);
             elements.finishClassificationBtn.addEventListener('click', finishClassificationQuestions);
@@ -1253,6 +1556,17 @@
             elements.previewReportBtn.addEventListener('click', previewReport);
             elements.downloadReportBtn.addEventListener('click', downloadReportAsPDF);
             elements.newReportBtn.addEventListener('click', resetForNewReport);
+            
+            // Assignment flow event listeners
+            elements.generateAssignmentClassificationQuestionsBtn.addEventListener('click', generateAssignmentClassificationQuestions);
+            elements.finishAssignmentClassificationBtn.addEventListener('click', finishAssignmentClassificationQuestions);
+            elements.generateAssignmentBtn.addEventListener('click', generateAssignment);
+            elements.previewAssignmentBtn.addEventListener('click', previewAssignment);
+            elements.downloadAssignmentBtn.addEventListener('click', downloadAssignmentAsPDF);
+            elements.newAssignmentBtn.addEventListener('click', resetForNewAssignment);
+            
+            // PPT classification flow event listeners
+            elements.finishPptClassificationBtn.addEventListener('click', finishPptClassificationQuestions);
 
             // Language search functionality
             elements.languageSearch.addEventListener('input', (e) => {
@@ -1331,8 +1645,8 @@
             }
         }
 
-        // Topic Input and Question Generation
-        function generateQuestions() {
+        // Generate PPT Classification Questions
+        async function generatePptClassificationQuestions() {
             const topic = elements.presentationTopic.value.trim();
             if (!topic) {
                 showNotification('Please enter a presentation topic', 'error');
@@ -1341,9 +1655,182 @@
 
             appState.topic = topic;
             elements.generateQuestionsBtn.disabled = true;
+            elements.generateQuestionsBtn.textContent = 'Generating questions...';
+            
+            // Show generating animation
+            showSection('generatingPptClassification');
+            
+            try {
+                // Build the prompt to generate classification questions with strict formatting instructions
+                const prompt = `Based on the topic "${topic}", generate 3-5 specific classification questions that would help gather more information about what kind of presentation the user wants. These questions should help narrow down the focus, scope, and specific aspects of the presentation.
+
+For each question, provide 3-4 multiple choice options.
+
+IMPORTANT: You must return the response in valid JSON format exactly as shown below, with no additional text, explanations, or markdown formatting:
+
+{
+  "questions": [
+    {
+      "question": "Question text here",
+      "options": ["Option 1", "Option 2", "Option 3", "Option 4"]
+    },
+    {
+      "question": "Another question here",
+      "options": ["Option A", "Option B", "Option C"]
+    }
+  ]
+}
+
+Do not include any text before or after the JSON. The response must be pure JSON that can be parsed by JSON.parse().`;
+                
+                const response = await callGeminiAPI(prompt);
+                
+                // Try to parse the JSON response
+                let data;
+                try {
+                    // Clean the response - remove any markdown code blocks or extra text
+                    let cleanResponse = response.trim();
+                    if (cleanResponse.startsWith('```json')) {
+                        cleanResponse = cleanResponse.replace(/```json\n?/, '').replace(/\n?```$/, '');
+                    } else if (cleanResponse.startsWith('```')) {
+                        cleanResponse = cleanResponse.replace(/```\n?/, '').replace(/\n?```$/, '');
+                    }
+                    
+                    // Try to find JSON object in the response
+                    const jsonMatch = cleanResponse.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) {
+                        cleanResponse = jsonMatch[0];
+                    }
+                    
+                    data = JSON.parse(cleanResponse);
+                    
+                    // Validate the structure
+                    if (!data.questions || !Array.isArray(data.questions)) {
+                        throw new Error('Invalid JSON structure');
+                    }
+                    
+                    // Validate each question
+                    data.questions = data.questions.filter(q => 
+                        q.question && q.options && Array.isArray(q.options) && q.options.length >= 2
+                    );
+                    
+                    if (data.questions.length === 0) {
+                        throw new Error('No valid questions found');
+                    }
+                    
+                    // Limit to 5 questions
+                    if (data.questions.length > 5) {
+                        data.questions = data.questions.slice(0, 5);
+                    }
+                    
+                    appState.pptClassificationQuestions = data.questions;
+                } catch (parseError) {
+                    console.error('Failed to parse AI response:', parseError);
+                    console.log('Using fallback questions');
+                    
+                    // Use fallback questions - take first 5
+                    appState.pptClassificationQuestions = fallbackPptClassificationQuestions.slice(0, 5);
+                    showNotification('Using default questions due to AI response format issue', 'error');
+                }
+                
+                // Initialize answers array
+                appState.pptClassificationAnswers = new Array(appState.pptClassificationQuestions.length).fill('');
+                appState.currentPptClassificationQuestionIndex = 0;
+                
+                // Show the PPT classification questions section
+                showSection('pptClassificationQuestions');
+                renderCurrentPptClassificationQuestion();
+            } catch (error) {
+                showNotification(`Error generating classification questions: ${error.message}`, 'error');
+                elements.generateQuestionsBtn.disabled = false;
+                elements.generateQuestionsBtn.textContent = 'Generate Questions';
+                showSection('topic');
+            }
+        }
+
+        // Render Current PPT Classification Question
+        function renderCurrentPptClassificationQuestion() {
+            const progress = ((appState.currentPptClassificationQuestionIndex + 1) / appState.pptClassificationQuestions.length) * 100;
+            elements.pptClassificationProgressFill.style.width = `${progress}%`;
+            
+            const currentQuestion = appState.pptClassificationQuestions[appState.currentPptClassificationQuestionIndex];
+            const selectedOption = appState.pptClassificationAnswers[appState.currentPptClassificationQuestionIndex];
+            
+            elements.pptClassificationQuestionsContainer.innerHTML = `
+                <div class="question-container">
+                    <h3>Classification Question ${appState.currentPptClassificationQuestionIndex + 1} of ${appState.pptClassificationQuestions.length}</h3>
+                    <p>${currentQuestion.question}</p>
+                    <div class="option-container">
+                        ${currentQuestion.options.map((option, index) => `
+                            <label class="option ${selectedOption === option ? 'selected' : ''}">
+                                <input type="radio" name="ppt-classification-question-${appState.currentPptClassificationQuestionIndex}" value="${option}" ${selectedOption === option ? 'checked' : ''}>
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div style="margin-top: 15px;">
+                        ${appState.currentPptClassificationQuestionIndex > 0 ? '<button id="prev-ppt-classification-question-btn">Previous</button>' : ''}
+                        ${appState.currentPptClassificationQuestionIndex < appState.pptClassificationQuestions.length - 1 ? '<button id="next-ppt-classification-question-btn">Next</button>' : '<button id="finish-ppt-classification-btn">Continue to Presentation Options</button>'}
+                    </div>
+                </div>
+            `;
+            
+            // Add event listeners for options
+            const optionElements = document.querySelectorAll('.option');
+            optionElements.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    optionElements.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Update the answer
+                    const input = option.querySelector('input');
+                    input.checked = true;
+                    // Store the answer
+                    appState.pptClassificationAnswers[appState.currentPptClassificationQuestionIndex] = input.value;
+                });
+            });
+            
+            if (appState.currentPptClassificationQuestionIndex > 0) {
+                document.getElementById('prev-ppt-classification-question-btn').addEventListener('click', previousPptClassificationQuestion);
+            }
+            
+            if (appState.currentPptClassificationQuestionIndex < appState.pptClassificationQuestions.length - 1) {
+                document.getElementById('next-ppt-classification-question-btn').addEventListener('click', nextPptClassificationQuestion);
+            } else {
+                document.getElementById('finish-ppt-classification-btn').addEventListener('click', finishPptClassificationQuestions);
+            }
+        }
+
+        // PPT Classification Question Navigation
+        function nextPptClassificationQuestion() {
+            appState.currentPptClassificationQuestionIndex++;
+            renderCurrentPptClassificationQuestion();
+        }
+
+        function previousPptClassificationQuestion() {
+            appState.currentPptClassificationQuestionIndex--;
+            renderCurrentPptClassificationQuestion();
+        }
+
+        function finishPptClassificationQuestions() {
+            // Check if all questions have answers
+            const allAnswered = appState.pptClassificationAnswers.every(answer => answer.trim() !== '');
+            if (!allAnswered) {
+                showNotification('Please answer all classification questions before proceeding', 'error');
+                return;
+            }
+            
+            // Now proceed to the presentation customization questions
+            generatePresentationQuestions();
+        }
+
+        // Generate Presentation Questions
+        function generatePresentationQuestions() {
+            elements.generateQuestionsBtn.disabled = true;
             elements.generateQuestionsBtn.textContent = 'Preparing questions...';
             
-            // Set predefined questions with professional options
+            // Set predefined questions for the presentation
             appState.questions = [
                 {
                     question: "What language do you want for your presentation?",
@@ -1618,7 +2105,7 @@
             showNotification('All questions answered. You can now generate your presentation!');
         }
 
-        // Presentation Generation
+        // Presentation Generation - Updated to include classification answers
         async function generatePresentation() {
             elements.generatePresentationBtn.disabled = true;
             elements.generatePresentationBtn.textContent = 'Generating presentation...';
@@ -1649,7 +2136,9 @@
                     advancedAnimations,
                     interactiveElements,
                     dataVisualization,
-                    multimediaElements
+                    multimediaElements,
+                    pptClassificationQuestions,
+                    pptClassificationAnswers
                 } = appState;
                 
                 // Determine the actual language to use
@@ -1666,8 +2155,19 @@
                     colorThemeString = colorTheme;
                 }
                 
+                // Build classification information string
+                let classificationInfo = '';
+                for (let i = 0; i < pptClassificationQuestions.length; i++) {
+                    classificationInfo += `Q: ${pptClassificationQuestions[i].question}\nA: ${pptClassificationAnswers[i]}\n\n`;
+                }
+                
                 // Build the prompt
-                const prompt = `Create a complete HTML, CSS, and JavaScript file for a presentation about "${topic}". The presentation should have the following features:
+                const prompt = `Create a complete HTML, CSS, and JavaScript file for a presentation about "${topic}". 
+
+The user has provided the following additional classification information:
+ ${classificationInfo}
+
+The presentation should have the following features:
 
 1. Fullscreen functionality: When the user presses the 'F' key, the presentation should enter fullscreen mode.
 2. Navigation: Include arrow key navigation (left and right arrows) to move between slides in both directions.
@@ -2222,7 +2722,7 @@ Return only the complete HTML code without any additional explanations.`;
             showSection('reportTopic');
         }
 
-        // Reset for New Presentation
+        // Reset for New Presentation - Modified to reset classification state
         function resetForNewPresentation() {
             appState.topic = '';
             appState.theme = '';
@@ -2247,12 +2747,505 @@ Return only the complete HTML code without any additional explanations.`;
             appState.questions = [];
             appState.answers = [];
             appState.currentQuestionIndex = 0;
+            appState.pptClassificationQuestions = [];
+            appState.pptClassificationAnswers = [];
+            appState.currentPptClassificationQuestionIndex = 0;
             elements.presentationTopic.value = '';
             document.getElementById('custom-color-1').value = '#3498db';
             document.getElementById('custom-color-2').value = '#e74c3c';
             document.getElementById('color-code-1').textContent = '#3498db';
             document.getElementById('color-code-2').textContent = '#e74c3c';
             showSection('topic');
+        }
+
+        // Assignment Classification Questions Generation
+        async function generateAssignmentClassificationQuestions() {
+            const topic = elements.assignmentTopicInput.value.trim();
+            if (!topic) {
+                showNotification('Please enter an assignment topic', 'error');
+                return;
+            }
+
+            appState.assignmentTopic = topic;
+            elements.generateAssignmentClassificationQuestionsBtn.disabled = true;
+            elements.generateAssignmentClassificationQuestionsBtn.textContent = 'Generating questions...';
+            
+            // Show generating animation
+            showSection('generatingAssignmentClassification');
+            
+            try {
+                // Build the prompt to generate assignment classification questions with strict formatting instructions
+                const prompt = `Based on the topic "${topic}", generate 3-5 specific classification questions that would help gather more information about what kind of assignment the user wants. These questions should help narrow down the focus, scope, and specific aspects of the assignment.
+
+For each question, provide 3-4 multiple choice options.
+
+IMPORTANT: You must return the response in valid JSON format exactly as shown below, with no additional text, explanations, or markdown formatting:
+
+{
+  "questions": [
+    {
+      "question": "Question text here",
+      "options": ["Option 1", "Option 2", "Option 3", "Option 4"]
+    },
+    {
+      "question": "Another question here",
+      "options": ["Option A", "Option B", "Option C"]
+    }
+  ]
+}
+
+Do not include any text before or after the JSON. The response must be pure JSON that can be parsed by JSON.parse().`;
+                
+                const response = await callGeminiAPI(prompt);
+                
+                // Try to parse the JSON response
+                let data;
+                try {
+                    // Clean the response - remove any markdown code blocks or extra text
+                    let cleanResponse = response.trim();
+                    if (cleanResponse.startsWith('```json')) {
+                        cleanResponse = cleanResponse.replace(/```json\n?/, '').replace(/\n?```$/, '');
+                    } else if (cleanResponse.startsWith('```')) {
+                        cleanResponse = cleanResponse.replace(/```\n?/, '').replace(/\n?```$/, '');
+                    }
+                    
+                    // Try to find JSON object in the response
+                    const jsonMatch = cleanResponse.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) {
+                        cleanResponse = jsonMatch[0];
+                    }
+                    
+                    data = JSON.parse(cleanResponse);
+                    
+                    // Validate the structure
+                    if (!data.questions || !Array.isArray(data.questions)) {
+                        throw new Error('Invalid JSON structure');
+                    }
+                    
+                    // Validate each question
+                    data.questions = data.questions.filter(q => 
+                        q.question && q.options && Array.isArray(q.options) && q.options.length >= 2
+                    );
+                    
+                    if (data.questions.length === 0) {
+                        throw new Error('No valid questions found');
+                    }
+                    
+                    // Limit to 5 questions
+                    if (data.questions.length > 5) {
+                        data.questions = data.questions.slice(0, 5);
+                    }
+                    
+                    appState.assignmentClassificationQuestions = data.questions;
+                } catch (parseError) {
+                    console.error('Failed to parse AI response:', parseError);
+                    console.log('Using fallback questions');
+                    
+                    // Use fallback questions - take first 5
+                    appState.assignmentClassificationQuestions = fallbackAssignmentClassificationQuestions.slice(0, 5);
+                    showNotification('Using default questions due to AI response format issue', 'error');
+                }
+                
+                // Initialize answers array
+                appState.assignmentClassificationAnswers = new Array(appState.assignmentClassificationQuestions.length).fill('');
+                appState.currentAssignmentClassificationQuestionIndex = 0;
+                
+                // Show the assignment classification questions section
+                showSection('assignmentClassificationQuestions');
+                renderCurrentAssignmentClassificationQuestion();
+            } catch (error) {
+                showNotification(`Error generating assignment classification questions: ${error.message}`, 'error');
+                elements.generateAssignmentClassificationQuestionsBtn.disabled = false;
+                elements.generateAssignmentClassificationQuestionsBtn.textContent = 'Next';
+                showSection('assignmentTopic');
+            }
+        }
+
+        // Render Current Assignment Classification Question
+        function renderCurrentAssignmentClassificationQuestion() {
+            const progress = ((appState.currentAssignmentClassificationQuestionIndex + 1) / appState.assignmentClassificationQuestions.length) * 100;
+            elements.assignmentClassificationProgressFill.style.width = `${progress}%`;
+            
+            const currentQuestion = appState.assignmentClassificationQuestions[appState.currentAssignmentClassificationQuestionIndex];
+            const selectedOption = appState.assignmentClassificationAnswers[appState.currentAssignmentClassificationQuestionIndex];
+            
+            elements.assignmentClassificationQuestionsContainer.innerHTML = `
+                <div class="question-container">
+                    <h3>Classification Question ${appState.currentAssignmentClassificationQuestionIndex + 1} of ${appState.assignmentClassificationQuestions.length}</h3>
+                    <p>${currentQuestion.question}</p>
+                    <div class="option-container">
+                        ${currentQuestion.options.map((option, index) => `
+                            <label class="option ${selectedOption === option ? 'selected' : ''}">
+                                <input type="radio" name="assignment-classification-question-${appState.currentAssignmentClassificationQuestionIndex}" value="${option}" ${selectedOption === option ? 'checked' : ''}>
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div style="margin-top: 15px;">
+                        ${appState.currentAssignmentClassificationQuestionIndex > 0 ? '<button id="prev-assignment-classification-question-btn">Previous</button>' : ''}
+                        ${appState.currentAssignmentClassificationQuestionIndex < appState.assignmentClassificationQuestions.length - 1 ? '<button id="next-assignment-classification-question-btn">Next</button>' : '<button id="finish-assignment-classification-btn">Continue to Assignment Options</button>'}
+                    </div>
+                </div>
+            `;
+            
+            // Add event listeners for options
+            const optionElements = document.querySelectorAll('.option');
+            optionElements.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    optionElements.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Update the answer
+                    const input = option.querySelector('input');
+                    input.checked = true;
+                    // Store the answer
+                    appState.assignmentClassificationAnswers[appState.currentAssignmentClassificationQuestionIndex] = input.value;
+                });
+            });
+            
+            if (appState.currentAssignmentClassificationQuestionIndex > 0) {
+                document.getElementById('prev-assignment-classification-question-btn').addEventListener('click', previousAssignmentClassificationQuestion);
+            }
+            
+            if (appState.currentAssignmentClassificationQuestionIndex < appState.assignmentClassificationQuestions.length - 1) {
+                document.getElementById('next-assignment-classification-question-btn').addEventListener('click', nextAssignmentClassificationQuestion);
+            } else {
+                document.getElementById('finish-assignment-classification-btn').addEventListener('click', finishAssignmentClassificationQuestions);
+            }
+        }
+
+        // Assignment Classification Question Navigation
+        function nextAssignmentClassificationQuestion() {
+            appState.currentAssignmentClassificationQuestionIndex++;
+            renderCurrentAssignmentClassificationQuestion();
+        }
+
+        function previousAssignmentClassificationQuestion() {
+            appState.currentAssignmentClassificationQuestionIndex--;
+            renderCurrentAssignmentClassificationQuestion();
+        }
+
+        function finishAssignmentClassificationQuestions() {
+            // Check if all questions have answers
+            const allAnswered = appState.assignmentClassificationAnswers.every(answer => answer.trim() !== '');
+            if (!allAnswered) {
+                showNotification('Please answer all classification questions before proceeding', 'error');
+                return;
+            }
+            
+            // Now proceed to the assignment customization questions
+            generateAssignmentQuestions();
+        }
+
+        // Assignment Questions Generation
+        function generateAssignmentQuestions() {
+            elements.generateAssignmentClassificationQuestionsBtn.disabled = true;
+            elements.generateAssignmentClassificationQuestionsBtn.textContent = 'Preparing questions...';
+            
+            // Set predefined questions for the assignment
+            appState.assignmentQuestions = [
+                {
+                    question: "What grade level is this assignment for?",
+                    options: ["Elementary (K-5)", "Middle School (6-8)", "High School (9-12)", "College/University"],
+                    variable: "assignmentGradeLevel"
+                },
+                {
+                    question: "What type of assignment do you want to create?",
+                    options: ["Essay/Research Paper", "Problem Set", "Project-based", "Quiz/Test", "Presentation", "Lab Report"],
+                    variable: "assignmentType"
+                },
+                {
+                    question: "How long should the assignment be?",
+                    options: ["Short (1-2 pages)", "Medium (3-5 pages)", "Long (6+ pages)"],
+                    variable: "assignmentLength"
+                },
+                {
+                    question: "What difficulty level is appropriate?",
+                    options: ["Beginner", "Intermediate", "Advanced", "Mixed Levels"],
+                    variable: "assignmentDifficulty"
+                },
+                {
+                    question: "What resources should be included?",
+                    options: ["None", "Reading list", "Research guidelines", "Templates", "All of the above"],
+                    variable: "assignmentResources"
+                },
+                {
+                    question: "What submission format do you prefer?",
+                    options: ["Written document", "Digital submission", "Presentation", "Physical project", "Online quiz"],
+                    variable: "assignmentSubmission"
+                },
+                {
+                    question: "What font style do you prefer?",
+                    options: ["Normal", "Handwritten", "Typewriter", "Other"],
+                    variable: "assignmentFont"
+                }
+            ];
+            
+            // Initialize answers array for these questions
+            appState.assignmentAnswers = new Array(appState.assignmentQuestions.length).fill('');
+            appState.currentAssignmentQuestionIndex = 0;
+            
+            // Show the assignment questions section
+            showSection('assignmentQuestions');
+            renderCurrentAssignmentQuestion();
+        }
+
+        // Render Current Assignment Question
+        function renderCurrentAssignmentQuestion() {
+            const progress = ((appState.currentAssignmentQuestionIndex + 1) / appState.assignmentQuestions.length) * 100;
+            elements.assignmentProgressFill.style.width = `${progress}%`;
+            
+            const currentQuestion = appState.assignmentQuestions[appState.currentAssignmentQuestionIndex];
+            const selectedOption = appState.assignmentAnswers[appState.currentAssignmentQuestionIndex];
+            
+            elements.assignmentQuestionsContainer.innerHTML = `
+                <div class="question-container">
+                    <h3>Question ${appState.currentAssignmentQuestionIndex + 1} of ${appState.assignmentQuestions.length}</h3>
+                    <p>${currentQuestion.question}</p>
+                    <div class="option-container">
+                        ${currentQuestion.options.map((option, index) => `
+                            <label class="option ${selectedOption === option ? 'selected' : ''}">
+                                <input type="radio" name="assignment-question-${appState.currentAssignmentQuestionIndex}" value="${option}" ${selectedOption === option ? 'checked' : ''}>
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div style="margin-top: 15px;">
+                        ${appState.currentAssignmentQuestionIndex > 0 ? '<button id="prev-assignment-question-btn">Previous</button>' : ''}
+                        ${appState.currentAssignmentQuestionIndex < appState.assignmentQuestions.length - 1 ? '<button id="next-assignment-question-btn">Next</button>' : '<button id="finish-assignment-questions-btn">Finish</button>'}
+                    </div>
+                </div>
+            `;
+            
+            // Show font list if font question and "Other" option is selected
+            if (currentQuestion.variable === "assignmentFont" && selectedOption === "Other") {
+                elements.assignmentFontListContainer.classList.add('show');
+                renderAssignmentFontList();
+            } else {
+                elements.assignmentFontListContainer.classList.remove('show');
+            }
+            
+            // Add event listeners for options
+            const optionElements = document.querySelectorAll('.option');
+            optionElements.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    optionElements.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Update the answer
+                    const input = option.querySelector('input');
+                    input.checked = true;
+                    // Store the answer in appState using the variable name
+                    const variableName = appState.assignmentQuestions[appState.currentAssignmentQuestionIndex].variable;
+                    appState[variableName] = input.value;
+                    // Also update the answers array for progress tracking
+                    appState.assignmentAnswers[appState.currentAssignmentQuestionIndex] = input.value;
+                    
+                    // Show/hide font list based on selection
+                    if (variableName === "assignmentFont" && input.value === "Other") {
+                        elements.assignmentFontListContainer.classList.add('show');
+                        renderAssignmentFontList();
+                    } else {
+                        elements.assignmentFontListContainer.classList.remove('show');
+                    }
+                });
+            });
+            
+            if (appState.currentAssignmentQuestionIndex > 0) {
+                document.getElementById('prev-assignment-question-btn').addEventListener('click', previousAssignmentQuestion);
+            }
+            
+            if (appState.currentAssignmentQuestionIndex < appState.assignmentQuestions.length - 1) {
+                document.getElementById('next-assignment-question-btn').addEventListener('click', nextAssignmentQuestion);
+            } else {
+                document.getElementById('finish-assignment-questions-btn').addEventListener('click', finishAssignmentQuestions);
+            }
+        }
+
+        // Render Assignment Font List
+        function renderAssignmentFontList() {
+            elements.assignmentFontListContainer.innerHTML = fonts.map(font => `
+                <div class="font-option ${appState.selectedAssignmentFont === font ? 'selected' : ''}" data-font="${font}">
+                    ${font}
+                </div>
+            `).join('');
+            
+            // Add event listeners to font options
+            const fontOptions = document.querySelectorAll('.font-option');
+            fontOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    fontOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Update the selected font
+                    appState.selectedAssignmentFont = option.dataset.font;
+                });
+            });
+        }
+
+        // Assignment Question Navigation
+        function nextAssignmentQuestion() {
+            appState.currentAssignmentQuestionIndex++;
+            renderCurrentAssignmentQuestion();
+        }
+
+        function previousAssignmentQuestion() {
+            appState.currentAssignmentQuestionIndex--;
+            renderCurrentAssignmentQuestion();
+        }
+
+        function finishAssignmentQuestions() {
+            // Check if all questions have answers
+            const allAnswered = appState.assignmentAnswers.every(answer => answer.trim() !== '');
+            if (!allAnswered) {
+                showNotification('Please answer all questions before proceeding', 'error');
+                return;
+            }
+            
+            // Check if font is "Other" and no specific font is selected
+            if (appState.assignmentFont === "Other" && !appState.selectedAssignmentFont) {
+                showNotification('Please select a specific font', 'error');
+                return;
+            }
+            
+            elements.generateAssignmentBtn.disabled = false;
+            showNotification('All questions answered. You can now generate your assignment!');
+        }
+
+        // Assignment Generation
+        async function generateAssignment() {
+            elements.generateAssignmentBtn.disabled = true;
+            elements.generateAssignmentBtn.textContent = 'Generating assignment...';
+            
+            // Show generating animation
+            showSection('generatingAssignment');
+            
+            try {
+                // Extract the parameters from appState
+                const { 
+                    assignmentTopic, 
+                    assignmentGradeLevel, 
+                    assignmentType, 
+                    assignmentLength, 
+                    assignmentDifficulty, 
+                    assignmentResources, 
+                    assignmentSubmission,
+                    assignmentFont,
+                    selectedAssignmentFont,
+                    assignmentClassificationQuestions,
+                    assignmentClassificationAnswers
+                } = appState;
+                
+                // Determine the actual font to use
+                let actualFont = assignmentFont;
+                if (assignmentFont === "Other") {
+                    actualFont = selectedAssignmentFont || "Arial";
+                }
+                
+                // Build classification information string
+                let classificationInfo = '';
+                for (let i = 0; i < assignmentClassificationQuestions.length; i++) {
+                    classificationInfo += `Q: ${assignmentClassificationQuestions[i].question}\nA: ${assignmentClassificationAnswers[i]}\n\n`;
+                }
+                
+                // Build the prompt
+                const prompt = `Create a complete HTML, CSS, and JavaScript file for an assignment about "${assignmentTopic}". 
+
+The user has provided the following additional classification information:
+ ${classificationInfo}
+
+The assignment should have the following features:
+
+1. Grade Level: ${assignmentGradeLevel}
+2. Assignment Type: ${assignmentType}
+3. Length: ${assignmentLength}
+4. Difficulty Level: ${assignmentDifficulty}
+5. Resources: ${assignmentResources}
+6. Submission Format: ${assignmentSubmission}
+7. Font Style: ${actualFont}
+
+The assignment should be well-structured with appropriate headings, instructions, questions, and possibly rubrics. Use the classification information to tailor the content to the user's specific needs and requirements.
+
+Additionally, include a download button at the top of the page with the id 'download-pdf-btn'. This button should trigger the download of the page as a PDF. Use the following JavaScript for the button:
+
+\`\`\`javascript
+document.getElementById('download-pdf-btn').addEventListener('click', function() {
+    window.print();
+});
+\`\`\`
+
+Also, add the following CSS to hide the button when printing:
+
+\`\`\`css
+@media print {
+    #download-pdf-btn {
+        display: none;
+    }
+}
+\`\`\`
+
+The assignment should be responsive and look good when printed on A4 paper.
+
+Include a watermark at the bottom of each page that says "Developed under HOPE Research Team | by Justin".
+
+Return only the complete HTML code without any additional explanations.`;
+                
+                const assignmentHTML = await callGeminiAPI(prompt);
+                appState.generatedAssignment = assignmentHTML;
+                
+                // Save to history
+                saveToHistory(appState.assignmentTopic, assignmentHTML, 'assignment');
+                
+                // Show preview section
+                showSection('assignmentPreview');
+            } catch (error) {
+                showNotification(`Error generating assignment: ${error.message}`, 'error');
+                elements.generateAssignmentBtn.disabled = false;
+                elements.generateAssignmentBtn.textContent = 'Generate Assignment';
+                showSection('assignmentQuestions');
+            }
+        }
+
+        // Assignment Preview and Download
+        function previewAssignment() {
+            const newWindow = window.open();
+            newWindow.document.write(appState.generatedAssignment);
+            newWindow.document.close();
+        }
+
+        function downloadAssignmentAsPDF() {
+            const newWindow = window.open();
+            newWindow.document.write(appState.generatedAssignment);
+            newWindow.document.close();
+            
+            // Wait for the content to load, then trigger print
+            setTimeout(() => {
+                newWindow.print();
+            }, 1000);
+        }
+
+        // Reset for New Assignment
+        function resetForNewAssignment() {
+            appState.assignmentTopic = '';
+            appState.assignmentGradeLevel = '';
+            appState.assignmentType = '';
+            appState.assignmentLength = '';
+            appState.assignmentDifficulty = '';
+            appState.assignmentResources = '';
+            appState.assignmentSubmission = '';
+            appState.assignmentFont = '';
+            appState.selectedAssignmentFont = '';
+            appState.assignmentQuestions = [];
+            appState.assignmentAnswers = [];
+            appState.currentAssignmentQuestionIndex = 0;
+            appState.assignmentClassificationQuestions = [];
+            appState.assignmentClassificationAnswers = [];
+            appState.currentAssignmentClassificationQuestionIndex = 0;
+            elements.assignmentTopicInput.value = '';
+            showSection('assignmentTopic');
         }
 
         // History Management
@@ -2279,6 +3272,13 @@ Return only the complete HTML code without any additional explanations.`;
                     appState.reportHistory = appState.reportHistory.slice(0, 10);
                 }
                 localStorage.setItem('reportHistory', JSON.stringify(appState.reportHistory));
+            } else if (type === 'assignment') {
+                appState.assignmentHistory.unshift(historyItem);
+                // Keep only the last 10 assignments
+                if (appState.assignmentHistory.length > 10) {
+                    appState.assignmentHistory = appState.assignmentHistory.slice(0, 10);
+                }
+                localStorage.setItem('assignmentHistory', JSON.stringify(appState.assignmentHistory));
             }
             
             loadHistory();
@@ -2287,6 +3287,7 @@ Return only the complete HTML code without any additional explanations.`;
         function loadHistory() {
             const savedPresentationHistory = localStorage.getItem('presentationHistory');
             const savedReportHistory = localStorage.getItem('reportHistory');
+            const savedAssignmentHistory = localStorage.getItem('assignmentHistory');
             
             if (savedPresentationHistory) {
                 appState.presentationHistory = JSON.parse(savedPresentationHistory);
@@ -2296,13 +3297,18 @@ Return only the complete HTML code without any additional explanations.`;
                 appState.reportHistory = JSON.parse(savedReportHistory);
             }
             
+            if (savedAssignmentHistory) {
+                appState.assignmentHistory = JSON.parse(savedAssignmentHistory);
+            }
+            
             renderHistory();
         }
 
         function renderHistory() {
             const allHistory = [
                 ...appState.presentationHistory.map(item => ({...item, type: 'presentation'})),
-                ...appState.reportHistory.map(item => ({...item, type: 'report'}))
+                ...appState.reportHistory.map(item => ({...item, type: 'report'})),
+                ...appState.assignmentHistory.map(item => ({...item, type: 'assignment'}))
             ].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
             
             if (allHistory.length === 0) {
@@ -2340,6 +3346,13 @@ Return only the complete HTML code without any additional explanations.`;
                     appState.reportTopic = item.topic;
                     showSection('reportPreview');
                 }
+            } else if (type === 'assignment') {
+                item = appState.assignmentHistory.find(item => item.id === id);
+                if (item) {
+                    appState.generatedAssignment = item.content;
+                    appState.assignmentTopic = item.topic;
+                    showSection('assignmentPreview');
+                }
             }
         }
 
@@ -2350,6 +3363,9 @@ Return only the complete HTML code without any additional explanations.`;
             } else if (type === 'report') {
                 appState.reportHistory = appState.reportHistory.filter(item => item.id !== id);
                 localStorage.setItem('reportHistory', JSON.stringify(appState.reportHistory));
+            } else if (type === 'assignment') {
+                appState.assignmentHistory = appState.assignmentHistory.filter(item => item.id !== id);
+                localStorage.setItem('assignmentHistory', JSON.stringify(appState.assignmentHistory));
             }
             loadHistory();
             showNotification('Item removed from history');
@@ -2359,8 +3375,10 @@ Return only the complete HTML code without any additional explanations.`;
             if (confirm('Are you sure you want to clear all history?')) {
                 appState.presentationHistory = [];
                 appState.reportHistory = [];
+                appState.assignmentHistory = [];
                 localStorage.removeItem('presentationHistory');
                 localStorage.removeItem('reportHistory');
+                localStorage.removeItem('assignmentHistory');
                 renderHistory();
                 showNotification('History cleared');
             }
