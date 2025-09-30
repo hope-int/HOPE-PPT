@@ -2109,7 +2109,6 @@ Return only the complete HTML code without any additional explanations.`;
             elements.notification.textContent = message;
             elements.notification.className = `notification ${type}`;
             elements.notification.classList.add('show');
-            
             setTimeout(() => {
                 elements.notification.classList.remove('show');
             }, 3000);

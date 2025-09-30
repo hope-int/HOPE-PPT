@@ -44,11 +44,9 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
     
-    <!-- Existing scripts and styles -->
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     
     <style>
         /* All existing styles remain unchanged */
@@ -1006,6 +1004,50 @@
             "Garamond", "Bookman", "Century Gothic", "Franklin Gothic Medium"
         ];
 
+        // Fallback classification questions for when AI response is invalid
+        const fallbackClassificationQuestions = [
+            {
+                question: "What is the primary purpose of this report?",
+                options: ["Informative", "Analytical", "Persuasive", "Instructional"]
+            },
+            {
+                question: "Who is the target audience for this report?",
+                options: ["General public", "Professionals", "Academics", "Executives"]
+            },
+            {
+                question: "What is the expected length of the report?",
+                options: ["Short (1-3 pages)", "Medium (4-10 pages)", "Long (11+ pages)"]
+            },
+            {
+                question: "What level of detail is required?",
+                options: ["Overview", "In-depth", "Comprehensive"]
+            },
+            {
+                question: "Should the report include data and statistics?",
+                options: ["Yes, extensively", "Yes, moderately", "No"]
+            },
+            {
+                question: "What type of visuals should be included?",
+                options: ["Charts and graphs", "Images and diagrams", "Tables", "No visuals"]
+            },
+            {
+                question: "Should the report include references or citations?",
+                options: ["Yes, formal", "Yes, informal", "No"]
+            },
+            {
+                question: "What is the desired tone of the report?",
+                options: ["Formal", "Neutral", "Conversational", "Technical"]
+            },
+            {
+                question: "Should the report include recommendations?",
+                options: ["Yes, detailed", "Yes, brief", "No"]
+            },
+            {
+                question: "What is the time frame covered by the report?",
+                options: ["Current status", "Historical", "Future projection", "Combination"]
+            }
+        ];
+
         // DOM Elements
         const sections = {
             tutorial: document.getElementById('tutorial-section'),
@@ -1730,27 +1772,77 @@ Return only the complete HTML code without any additional explanations.`;
             showSection('generatingClassification');
             
             try {
-                // Build the prompt to generate classification questions
+                // Build the prompt to generate classification questions with strict formatting instructions
                 const prompt = `Based on the topic "${topic}", generate 3-5 specific classification questions that would help gather more information about what kind of report the user wants. These questions should help narrow down the focus, scope, and specific aspects of the topic.
 
 For each question, provide 3-4 multiple choice options.
 
-Return the questions in the following JSON format:
+IMPORTANT: You must return the response in valid JSON format exactly as shown below, with no additional text, explanations, or markdown formatting:
+
 {
   "questions": [
     {
       "question": "Question text here",
       "options": ["Option 1", "Option 2", "Option 3", "Option 4"]
     },
-    ...
+    {
+      "question": "Another question here",
+      "options": ["Option A", "Option B", "Option C"]
+    }
   ]
 }
 
-Only return the JSON, no additional text.`;
+Do not include any text before or after the JSON. The response must be pure JSON that can be parsed by JSON.parse().`;
                 
                 const response = await callGeminiAPI(prompt);
-                const data = JSON.parse(response);
-                appState.classificationQuestions = data.questions;
+                
+                // Try to parse the JSON response
+                let data;
+                try {
+                    // Clean the response - remove any markdown code blocks or extra text
+                    let cleanResponse = response.trim();
+                    if (cleanResponse.startsWith('```json')) {
+                        cleanResponse = cleanResponse.replace(/```json\n?/, '').replace(/\n?```$/, '');
+                    } else if (cleanResponse.startsWith('```')) {
+                        cleanResponse = cleanResponse.replace(/```\n?/, '').replace(/\n?```$/, '');
+                    }
+                    
+                    // Try to find JSON object in the response
+                    const jsonMatch = cleanResponse.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) {
+                        cleanResponse = jsonMatch[0];
+                    }
+                    
+                    data = JSON.parse(cleanResponse);
+                    
+                    // Validate the structure
+                    if (!data.questions || !Array.isArray(data.questions)) {
+                        throw new Error('Invalid JSON structure');
+                    }
+                    
+                    // Validate each question
+                    data.questions = data.questions.filter(q => 
+                        q.question && q.options && Array.isArray(q.options) && q.options.length >= 2
+                    );
+                    
+                    if (data.questions.length === 0) {
+                        throw new Error('No valid questions found');
+                    }
+                    
+                    // Limit to 5 questions
+                    if (data.questions.length > 5) {
+                        data.questions = data.questions.slice(0, 5);
+                    }
+                    
+                    appState.classificationQuestions = data.questions;
+                } catch (parseError) {
+                    console.error('Failed to parse AI response:', parseError);
+                    console.log('Using fallback questions');
+                    
+                    // Use fallback questions - take first 5
+                    appState.classificationQuestions = fallbackClassificationQuestions.slice(0, 5);
+                    showNotification('Using default questions due to AI response format issue', 'error');
+                }
                 
                 // Initialize answers array
                 appState.classificationAnswers = new Array(appState.classificationQuestions.length).fill('');
@@ -1964,7 +2056,7 @@ Only return the JSON, no additional text.`;
             `).join('');
             
             // Add event listeners to font options
-            const fontOptions = elements.querySelectorAll('.font-option');
+            const fontOptions = document.querySelectorAll('.font-option');
             fontOptions.forEach(option => {
                 option.addEventListener('click', () => {
                     // Remove selected class from all options
@@ -2130,6 +2222,39 @@ Return only the complete HTML code without any additional explanations.`;
             showSection('reportTopic');
         }
 
+        // Reset for New Presentation
+        function resetForNewPresentation() {
+            appState.topic = '';
+            appState.theme = '';
+            appState.slideCount = '';
+            appState.structure = '';
+            appState.animationStyle = '';
+            appState.colorTheme = '';
+            appState.customColor1 = '#3498db';
+            appState.customColor2 = '#e74c3c';
+            appState.descriptionLength = '';
+            appState.bulletPointsCount = '';
+            appState.fontSize = '';
+            appState.includeImages = '';
+            appState.imageFallback = '';
+            appState.language = 'English';
+            appState.selectedLanguage = '';
+            appState.presentationStyle = '';
+            appState.advancedAnimations = '';
+            appState.interactiveElements = '';
+            appState.dataVisualization = '';
+            appState.multimediaElements = '';
+            appState.questions = [];
+            appState.answers = [];
+            appState.currentQuestionIndex = 0;
+            elements.presentationTopic.value = '';
+            document.getElementById('custom-color-1').value = '#3498db';
+            document.getElementById('custom-color-2').value = '#e74c3c';
+            document.getElementById('color-code-1').textContent = '#3498db';
+            document.getElementById('color-code-2').textContent = '#e74c3c';
+            showSection('topic');
+        }
+
         // History Management
         function saveToHistory(topic, content, type) {
             const historyItem = {
@@ -2239,39 +2364,6 @@ Return only the complete HTML code without any additional explanations.`;
                 renderHistory();
                 showNotification('History cleared');
             }
-        }
-
-        // Reset for New Presentation
-        function resetForNewPresentation() {
-            appState.topic = '';
-            appState.theme = '';
-            appState.slideCount = '';
-            appState.structure = '';
-            appState.animationStyle = '';
-            appState.colorTheme = '';
-            appState.customColor1 = '#3498db';
-            appState.customColor2 = '#e74c3c';
-            appState.descriptionLength = '';
-            appState.bulletPointsCount = '';
-            appState.fontSize = '';
-            appState.includeImages = '';
-            appState.imageFallback = '';
-            appState.language = 'English';
-            appState.selectedLanguage = '';
-            appState.presentationStyle = '';
-            appState.advancedAnimations = '';
-            appState.interactiveElements = '';
-            appState.dataVisualization = '';
-            appState.multimediaElements = '';
-            appState.questions = [];
-            appState.answers = [];
-            appState.currentQuestionIndex = 0;
-            elements.presentationTopic.value = '';
-            document.getElementById('custom-color-1').value = '#3498db';
-            document.getElementById('custom-color-2').value = '#e74c3c';
-            document.getElementById('color-code-1').textContent = '#3498db';
-            document.getElementById('color-code-2').textContent = '#e74c3c';
-            showSection('topic');
         }
 
         // Utility Functions
