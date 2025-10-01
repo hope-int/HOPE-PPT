@@ -5,35 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
     <!-- Essential Meta Tags -->
-    <title>HOPE-INT-CORE | AI-Powered Presentation, Report, Assignment & Project Generator</title>
-    <meta name="description" content="Create stunning presentations, printable reports, assignments, and complete projects with AI. HOPE-INT-CORE generates custom content using Gemini AI with beautiful designs.">
-    <meta name="keywords" content="presentation generator, report generator, assignment generator, project generator, AI presentations, AI reports, AI assignments, AI projects, HOPE-INT-CORE, Gemini AI">
+    <title>HOPE-PPT | AI-Powered Presentation, Report, Assignment & Project Generator</title>
+    <meta name="description" content="Create stunning presentations, printable reports, assignments, and complete projects with AI. HOPE-PPT generates custom content using Gemini AI with beautiful designs.">
+    <meta name="keywords" content="presentation generator, report generator, assignment generator, project generator, AI presentations, AI reports, AI assignments, AI projects, HOPE-PPT, Gemini AI">
     <meta name="author" content="Justin">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://HOPE-INT-CORE.vercel.app">
+    <link rel="canonical" href="https://hope-ppt.vercel.app">
     
     <!-- Open Graph (OG) Tags -->
-    <meta property="og:title" content="HOPE-INT-CORE | AI-Powered Presentation, Report, Assignment & Project Generator">
-    <meta property="og:description" content="Create stunning presentations, printable reports, assignments, and complete projects with AI. HOPE-INT-CORE generates custom content using Gemini AI with beautiful designs.">
+    <meta property="og:title" content="HOPE-PPT | AI-Powered Presentation, Report, Assignment & Project Generator">
+    <meta property="og:description" content="Create stunning presentations, printable reports, assignments, and complete projects with AI. HOPE-PPT generates custom content using Gemini AI with beautiful designs.">
     <meta property="og:image" content="https://i.ibb.co/3yMXpZ71/Whats-App-Image-2025-09-29-at-12-03-39-AM.jpg">
-    <meta property="og:url" content="https://HOPE-INT-CORE.vercel.app">
+    <meta property="og:url" content="https://hope-ppt.vercel.app">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="HOPE-INT-CORE">
+    <meta property="og:site_name" content="HOPE-PPT">
     <meta property="og:locale" content="en_US">
     
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="HOPE-INT-CORE | AI-Powered Presentation, Report, Assignment & Project Generator">
-    <meta name="twitter:description" content="Create stunning presentations, printable reports, assignments, and complete projects with AI. HOPE-INT-CORE generates custom content using Gemini AI with beautiful designs.">
-    <meta name="twitter:image" content="https://HOPE-INT-CORE.vercel.app/images/twitter-preview.jpg">
+    <meta name="twitter:title" content="HOPE-PPT | AI-Powered Presentation, Report, Assignment & Project Generator">
+    <meta name="twitter:description" content="Create stunning presentations, printable reports, assignments, and complete projects with AI. HOPE-PPT generates custom content using Gemini AI with beautiful designs.">
+    <meta name="twitter:image" content="https://hope-ppt.vercel.app/images/twitter-preview.jpg">
     <meta name="twitter:site" content="@hopeppt">
     <meta name="twitter:creator" content="@justindev">
     
     <!-- Additional Meta Tags -->
     <meta name="theme-color" content="#3498db">
     <meta name="msapplication-TileColor" content="#3498db">
-    <meta name="application-name" content="HOPE-INT-CORE">
-    <meta name="apple-mobile-web-app-title" content="HOPE-INT-CORE">
+    <meta name="application-name" content="HOPE-PPT">
+    <meta name="apple-mobile-web-app-title" content="HOPE-PPT">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -333,6 +333,60 @@
         
         .language-option.selected {
             background: rgba(52, 152, 219, 0.3);
+        }
+
+        /* Multi-select styles */
+        .multi-select-container {
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .multi-select-container.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .multi-select-options {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        .multi-select-option {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .multi-select-option:hover {
+            background: rgba(52, 152, 219, 0.2);
+        }
+        
+        .multi-select-option input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .selected-items {
+            margin-top: 10px;
+            padding: 8px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 8px;
+            min-height: 40px;
+        }
+        
+        .selected-item {
+            display: inline-block;
+            background: rgba(52, 152, 219, 0.3);
+            padding: 4px 8px;
+            margin: 2px;
+            border-radius: 4px;
+            font-size: 14px;
         }
 
 
@@ -934,7 +988,7 @@
     <!-- Splash Screen -->
     <div id="splash-screen" class="splash-screen">
         <div class="splash-content">
-            <h1 class="splash-title">HOPE-INT-CORE</h1>
+            <h1 class="splash-title">HOPE-PPT</h1>
             <p class="splash-subtitle">Create stunning presentations, printable reports, assignments, and complete projects with AI</p>
             <div class="splash-animation">
                 <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_DMgKk1.json" background="transparent" speed="1" loop autoplay></lottie-player>
@@ -950,13 +1004,13 @@
     <div id="three-background"></div>
     
     <div class="container">
-        <h1>HOPE-INT-CORE</h1>
+        <h1>HOPE-PPT</h1>
         
         <!-- Tutorial Section -->
         <div id="tutorial-section" class="section">
             <div class="tutorial-section">
                 <div class="tutorial-header">
-                    <h2>Welcome to HOPE-INT-CORE!</h2>
+                    <h2>Welcome to HOPE-PPT!</h2>
                     <p>Let's get you set up with your Gemini API key to start creating amazing presentations, reports, assignments, and projects</p>
                 </div>
                 
@@ -965,7 +1019,7 @@
                         <div class="step-number">1</div>
                         <div class="step-content">
                             <h3>What is a Gemini API Key?</h3>
-                            <p>The Gemini API key is a unique identifier that allows HOPE-INT-CORE to access Google's powerful Gemini AI model to generate your presentations, reports, assignments, and projects. It's like a password that gives our app permission to use Google's AI services.</p>
+                            <p>The Gemini API key is a unique identifier that allows HOPE-PPT to access Google's powerful Gemini AI model to generate your presentations, reports, assignments, and projects. It's like a password that gives our app permission to use Google's AI services.</p>
                             <div class="tutorial-note">
                                 <p><strong>Note:</strong> Your API key is private and should never be shared with others. We store it securely in your browser only.</p>
                             </div>
@@ -1064,7 +1118,7 @@
                     <p>Generate a detailed assignment with questions, instructions, and grading criteria</p>
                 </div>
                 <div class="option-card" id="create-project-card">
-                    <h3Create Complete Project</h3>
+                    <h3>Create Complete Project</h3>
                     <p>Generate a complete mini/final year project with source code, documentation, and workflow diagrams</p>
                 </div>
             </div>
@@ -1102,6 +1156,14 @@
             <div class="form-group">
                 <label for="project-topic">Enter your project topic:</label>
                 <input type="text" id="project-topic" placeholder="e.g., E-commerce Website, Mobile App, Data Analysis System, etc.">
+            </div>
+            <div class="form-group">
+                <label for="project-level">Select project level:</label>
+                <select id="project-level">
+                    <option value="">Select project level</option>
+                    <option value="mini">Mini Project</option>
+                    <option value="final">Final Year Project</option>
+                </select>
             </div>
             <button id="generate-project-classification-questions">Next</button>
         </div>
@@ -1414,9 +1476,10 @@
             
             // Project-specific state
             projectTopic: '',
+            projectLevel: '',
             projectType: '',
             projectComplexity: '',
-            projectLanguage: '',
+            projectLanguages: [],
             projectFramework: '',
             projectDatabase: '',
             projectUI: '',
@@ -1482,6 +1545,14 @@
             "Yakan", "Jama Mapun", "Sama-Bajau", "Badjao", "Molbog", "Palawano", "Tagbanwa", 
             "Cuyonon", "Agutaynen", "Tausug", "Sama", "Yakan", "Jama Mapun", "Sama-Bajau", 
             "Badjao", "Molbog", "Palawano", "Tagbanwa", "Cuyonon", "Agutaynen"
+        ];
+        
+        // List of programming languages for projects
+        const programmingLanguages = [
+            "JavaScript/TypeScript", "Python", "Java", "C#", "PHP", "Ruby", "Go", "Swift", 
+            "Kotlin", "C++", "C", "Rust", "Scala", "Perl", "MATLAB", "R", "SQL", "HTML/CSS",
+            "Dart", "Lua", "Assembly", "VB.NET", "Objective-C", "F#", "Haskell", "Elixir",
+            "Erlang", "Clojure", "Groovy", "Julia", "TypeScript", "Bash", "PowerShell"
         ];
         
         // List of fonts for report, assignment, and project
@@ -1700,6 +1771,7 @@
             // Project elements
             createProjectCard: document.getElementById('create-project-card'),
             projectTopicInput: document.getElementById('project-topic'),
+            projectLevelSelect: document.getElementById('project-level'),
             generateProjectClassificationQuestionsBtn: document.getElementById('generate-project-classification-questions'),
             projectClassificationQuestionsContainer: document.getElementById('project-classification-questions-container'),
             projectClassificationProgressFill: document.getElementById('project-classification-progress-fill'),
@@ -3574,12 +3646,20 @@ Return only the complete HTML code without any additional explanations.`;
         // Project Classification Questions Generation
         async function generateProjectClassificationQuestions() {
             const topic = elements.projectTopicInput.value.trim();
+            const level = elements.projectLevelSelect.value;
+            
             if (!topic) {
                 showNotification('Please enter a project topic', 'error');
                 return;
             }
+            
+            if (!level) {
+                showNotification('Please select a project level', 'error');
+                return;
+            }
 
             appState.projectTopic = topic;
+            appState.projectLevel = level;
             elements.generateProjectClassificationQuestionsBtn.disabled = true;
             elements.generateProjectClassificationQuestionsBtn.textContent = 'Generating questions...';
             
@@ -3588,7 +3668,7 @@ Return only the complete HTML code without any additional explanations.`;
             
             try {
                 // Build the prompt to generate project classification questions with strict formatting instructions
-                const prompt = `Based on the topic "${topic}", generate 3-5 specific classification questions that would help gather more information about what kind of project the user wants. These questions should help narrow down the focus, scope, and specific aspects of the project.
+                const prompt = `Based on the topic "${topic}" for a ${level} project, generate 3-5 specific classification questions that would help gather more information about what kind of project the user wants. These questions should help narrow down the focus, scope, and specific aspects of the project.
 
 For each question, provide 3-4 multiple choice options.
 
@@ -3764,13 +3844,14 @@ Do not include any text before or after the JSON. The response must be pure JSON
                     variable: "projectType"
                 },
                 {
-                    question: "What programming language do you prefer?",
-                    options: ["JavaScript/TypeScript", "Python", "Java", "C#", "PHP", "Ruby", "Go", "Swift", "Kotlin", "Other"],
-                    variable: "projectLanguage"
+                    question: "What programming languages do you prefer? (Select multiple)",
+                    options: programmingLanguages,
+                    variable: "projectLanguages",
+                    isMultiSelect: true
                 },
                 {
                     question: "What framework or technology stack do you prefer?",
-                    options: ["React", "Angular", "Vue.js", "Django", "Flask", "Spring Boot", "ASP.NET", "Laravel", "Express.js", "Other"],
+                    options: ["React", "Angular", "Vue.js", "Django", "Flask", "Spring Boot", "ASP.NET", "Laravel", "Express.js", "No framework"],
                     variable: "projectFramework"
                 },
                 {
@@ -3817,59 +3898,98 @@ Do not include any text before or after the JSON. The response must be pure JSON
             const currentQuestion = appState.projectQuestions[appState.currentProjectQuestionIndex];
             const selectedOption = appState.projectAnswers[appState.currentProjectQuestionIndex];
             
-            elements.projectQuestionsContainer.innerHTML = `
-                <div class="question-container">
-                    <h3>Question ${appState.currentProjectQuestionIndex + 1} of ${appState.projectQuestions.length}</h3>
-                    <p>${currentQuestion.question}</p>
-                    <div class="option-container">
-                        ${currentQuestion.options.map((option, index) => `
-                            <label class="option ${selectedOption === option ? 'selected' : ''}">
-                                <input type="radio" name="project-question-${appState.currentProjectQuestionIndex}" value="${option}" ${selectedOption === option ? 'checked' : ''}>
-                                ${option}
-                            </label>
-                        `).join('')}
+            if (currentQuestion.isMultiSelect) {
+                // Multi-select question rendering
+                elements.projectQuestionsContainer.innerHTML = `
+                    <div class="question-container">
+                        <h3>Question ${appState.currentProjectQuestionIndex + 1} of ${appState.projectQuestions.length}</h3>
+                        <p>${currentQuestion.question}</p>
+                        <div class="multi-select-container show">
+                            <div class="multi-select-options">
+                                ${currentQuestion.options.map((option, index) => `
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" id="lang-${index}" value="${option}" ${selectedOption && selectedOption.includes(option) ? 'checked' : ''}>
+                                        <label for="lang-${index}">${option}</label>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="selected-items" id="selected-languages">
+                                ${selectedOption ? selectedOption.map(lang => `<span class="selected-item">${lang}</span>`).join('') : 'No languages selected'}
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            ${appState.currentProjectQuestionIndex > 0 ? '<button id="prev-project-question-btn">Previous</button>' : ''}
+                            ${appState.currentProjectQuestionIndex < appState.projectQuestions.length - 1 ? '<button id="next-project-question-btn">Next</button>' : '<button id="finish-project-questions-btn">Finish</button>'}
+                        </div>
                     </div>
-                    <div style="margin-top: 15px;">
-                        ${appState.currentProjectQuestionIndex > 0 ? '<button id="prev-project-question-btn">Previous</button>' : ''}
-                        ${appState.currentProjectQuestionIndex < appState.projectQuestions.length - 1 ? '<button id="next-project-question-btn">Next</button>' : '<button id="finish-project-questions-btn">Finish</button>'}
-                    </div>
-                </div>
-            `;
-            
-            // Show font list if font question and "Other" option is selected
-            if (currentQuestion.variable === "projectFont" && selectedOption === "Other") {
-                elements.projectFontListContainer.classList.add('show');
-                renderProjectFontList();
-            } else {
-                elements.projectFontListContainer.classList.remove('show');
-            }
-            
-            // Add event listeners for options
-            const optionElements = document.querySelectorAll('.option');
-            optionElements.forEach(option => {
-                option.addEventListener('click', () => {
-                    // Remove selected class from all options
-                    optionElements.forEach(opt => opt.classList.remove('selected'));
-                    // Add selected class to clicked option
-                    option.classList.add('selected');
-                    // Update the answer
-                    const input = option.querySelector('input');
-                    input.checked = true;
-                    // Store the answer in appState using the variable name
-                    const variableName = appState.projectQuestions[appState.currentProjectQuestionIndex].variable;
-                    appState[variableName] = input.value;
-                    // Also update the answers array for progress tracking
-                    appState.projectAnswers[appState.currentProjectQuestionIndex] = input.value;
-                    
-                    // Show/hide font list based on selection
-                    if (variableName === "projectFont" && input.value === "Other") {
-                        elements.projectFontListContainer.classList.add('show');
-                        renderProjectFontList();
-                    } else {
-                        elements.projectFontListContainer.classList.remove('show');
-                    }
+                `;
+                
+                // Add event listeners for checkboxes
+                const checkboxes = document.querySelectorAll('.multi-select-option input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', () => {
+                        const checkedOptions = Array.from(checkboxes)
+                            .filter(cb => cb.checked)
+                            .map(cb => cb.value);
+                        appState.projectAnswers[appState.currentProjectQuestionIndex] = checkedOptions;
+                        
+                        // Update selected items display
+                        const selectedItemsDiv = document.getElementById('selected-languages');
+                        if (checkedOptions.length > 0) {
+                            selectedItemsDiv.innerHTML = checkedOptions.map(lang => `<span class="selected-item">${lang}</span>`).join('');
+                        } else {
+                            selectedItemsDiv.innerHTML = 'No languages selected';
+                        }
+                    });
                 });
-            });
+            } else {
+                // Regular single-select question rendering
+                elements.projectQuestionsContainer.innerHTML = `
+                    <div class="question-container">
+                        <h3>Question ${appState.currentProjectQuestionIndex + 1} of ${appState.projectQuestions.length}</h3>
+                        <p>${currentQuestion.question}</p>
+                        <div class="option-container">
+                            ${currentQuestion.options.map((option, index) => `
+                                <label class="option ${selectedOption === option ? 'selected' : ''}">
+                                    <input type="radio" name="project-question-${appState.currentProjectQuestionIndex}" value="${option}" ${selectedOption === option ? 'checked' : ''}>
+                                    ${option}
+                                </label>
+                            `).join('')}
+                        </div>
+                        <div style="margin-top: 15px;">
+                            ${appState.currentProjectQuestionIndex > 0 ? '<button id="prev-project-question-btn">Previous</button>' : ''}
+                            ${appState.currentProjectQuestionIndex < appState.projectQuestions.length - 1 ? '<button id="next-project-question-btn">Next</button>' : '<button id="finish-project-questions-btn">Finish</button>'}
+                        </div>
+                    </div>
+                `;
+                
+                // Add event listeners for options
+                const optionElements = document.querySelectorAll('.option');
+                optionElements.forEach(option => {
+                    option.addEventListener('click', () => {
+                        // Remove selected class from all options
+                        optionElements.forEach(opt => opt.classList.remove('selected'));
+                        // Add selected class to clicked option
+                        option.classList.add('selected');
+                        // Update the answer
+                        const input = option.querySelector('input');
+                        input.checked = true;
+                        // Store the answer in appState using the variable name
+                        const variableName = appState.projectQuestions[appState.currentProjectQuestionIndex].variable;
+                        appState[variableName] = input.value;
+                        // Also update the answers array for progress tracking
+                        appState.projectAnswers[appState.currentProjectQuestionIndex] = input.value;
+                        
+                        // Show/hide font list based on selection
+                        if (variableName === "projectFont" && input.value === "Other") {
+                            elements.projectFontListContainer.classList.add('show');
+                            renderProjectFontList();
+                        } else {
+                            elements.projectFontListContainer.classList.remove('show');
+                        }
+                    });
+                });
+            }
             
             if (appState.currentProjectQuestionIndex > 0) {
                 document.getElementById('prev-project-question-btn').addEventListener('click', previousProjectQuestion);
@@ -3917,7 +4037,13 @@ Do not include any text before or after the JSON. The response must be pure JSON
 
         function finishProjectQuestions() {
             // Check if all questions have answers
-            const allAnswered = appState.projectAnswers.every(answer => answer.trim() !== '');
+            const allAnswered = appState.projectAnswers.every(answer => {
+                if (Array.isArray(answer)) {
+                    return answer.length > 0;
+                }
+                return answer && answer.trim() !== '';
+            });
+            
             if (!allAnswered) {
                 showNotification('Please answer all questions before proceeding', 'error');
                 return;
@@ -3945,8 +4071,9 @@ Do not include any text before or after the JSON. The response must be pure JSON
                 // Extract the parameters from appState
                 const { 
                     projectTopic, 
+                    projectLevel,
                     projectType, 
-                    projectLanguage, 
+                    projectLanguages,
                     projectFramework, 
                     projectDatabase, 
                     projectUI, 
@@ -3980,14 +4107,15 @@ Do not include any text before or after the JSON. The response must be pure JSON
                 };
                 
                 // Generate project documentation
-                const documentationPrompt = `Create comprehensive documentation for a ${projectType} project about "${projectTopic}". 
+                const documentationPrompt = `Create comprehensive documentation for a ${projectLevel} ${projectType} project about "${projectTopic}". 
 
 The user has provided the following additional classification information:
  ${classificationInfo}
 
 The project specifications are:
+- Level: ${projectLevel}
 - Type: ${projectType}
-- Language: ${projectLanguage}
+- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
 - Framework: ${projectFramework}
 - Database: ${projectDatabase}
 - UI/UX: ${projectUI}
@@ -4013,14 +4141,15 @@ Return only the complete HTML code without any additional explanations.`;
                 appState.generatedProject.documentation = await callGeminiAPI(documentationPrompt);
                 
                 // Generate project requirements
-                const requirementsPrompt = `Create a detailed requirements document for a ${projectType} project about "${projectTopic}". 
+                const requirementsPrompt = `Create a detailed requirements document for a ${projectLevel} ${projectType} project about "${projectTopic}". 
 
 The user has provided the following additional classification information:
  ${classificationInfo}
 
 The project specifications are:
+- Level: ${projectLevel}
 - Type: ${projectType}
-- Language: ${projectLanguage}
+- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
 - Framework: ${projectFramework}
 - Database: ${projectDatabase}
 - UI/UX: ${projectUI}
@@ -4042,14 +4171,15 @@ Return only the complete HTML code without any additional explanations.`;
                 appState.generatedProject.requirements = await callGeminiAPI(requirementsPrompt);
                 
                 // Generate README file
-                const readmePrompt = `Create a comprehensive README.md file for a ${projectType} project about "${projectTopic}". 
+                const readmePrompt = `Create a comprehensive README.md file for a ${projectLevel} ${projectType} project about "${projectTopic}". 
 
 The user has provided the following additional classification information:
  ${classificationInfo}
 
 The project specifications are:
+- Level: ${projectLevel}
 - Type: ${projectType}
-- Language: ${projectLanguage}
+- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
 - Framework: ${projectFramework}
 - Database: ${projectDatabase}
 - UI/UX: ${projectUI}
@@ -4076,14 +4206,15 @@ Return only the complete README.md content without any additional explanations.`
                 await generateSourceCode();
                 
                 // Generate workflow SVG
-                const workflowPrompt = `Create an SVG workflow diagram for a ${projectType} project about "${projectTopic}". 
+                const workflowPrompt = `Create an SVG workflow diagram for a ${projectLevel} ${projectType} project about "${projectTopic}". 
 
 The user has provided the following additional classification information:
  ${classificationInfo}
 
 The project specifications are:
+- Level: ${projectLevel}
 - Type: ${projectType}
-- Language: ${projectLanguage}
+- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
 - Framework: ${projectFramework}
 - Database: ${projectDatabase}
 - UI/UX: ${projectUI}
@@ -4114,22 +4245,23 @@ Return only the complete SVG code without any additional explanations.`;
 
         // Generate Source Code based on project type
         async function generateSourceCode() {
-            const { projectType, projectTopic, projectLanguage, projectFramework, projectDatabase } = appState;
+            const { projectLevel, projectType, projectTopic, projectLanguages, projectFramework, projectDatabase } = appState;
             
             try {
                 // Generate main application file
-                const mainFilePrompt = `Create the main application file for a ${projectType} project about "${projectTopic}" using ${projectLanguage} and ${projectFramework}. 
+                const mainFilePrompt = `Create the main application file for a ${projectLevel} ${projectType} project about "${projectTopic}" using ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages} and ${projectFramework}. 
 
 The project should:
 1. Be fully functional with proper error handling
 2. Include comments explaining the code
-3. Follow best practices for ${projectLanguage}
+3. Follow best practices for the selected languages
 4. Connect to ${projectDatabase} if applicable
 5. Implement core features related to "${projectTopic}"
+6. Include proper structure suitable for a ${projectLevel} project
 
 Return only the complete source code without any additional explanations.`;
                 
-                let mainFileExtension = getFileExtension(projectLanguage);
+                let mainFileExtension = getFileExtension(Array.isArray(projectLanguages) ? projectLanguages[0] : projectLanguages);
                 let mainFileName = `index.${mainFileExtension}`;
                 
                 if (projectType === "Web Application") {
@@ -4137,13 +4269,13 @@ Return only the complete source code without any additional explanations.`;
                     appState.generatedProject.sourceCode[mainFileName] = await callGeminiAPI(mainFilePrompt);
                     
                     // Generate CSS file
-                    const cssPrompt = `Create a CSS file for a ${projectType} about "${projectTopic}" with modern styling, responsive design, and animations. Use the ${appState.projectUI} design approach.
+                    const cssPrompt = `Create a CSS file for a ${projectLevel} ${projectType} about "${projectTopic}" with modern styling, responsive design, and animations. Use the ${appState.projectUI} design approach.
 
 Return only the complete CSS code without any additional explanations.`;
                     appState.generatedProject.sourceCode["styles.css"] = await callGeminiAPI(cssPrompt);
                     
                     // Generate JavaScript file
-                    const jsPrompt = `Create a JavaScript file for a ${projectType} about "${projectTopic}" with modern ES6+ syntax, proper error handling, and interactive features.
+                    const jsPrompt = `Create a JavaScript file for a ${projectLevel} ${projectType} about "${projectTopic}" with modern ES6+ syntax, proper error handling, and interactive features.
 
 Return only the complete JavaScript code without any additional explanations.`;
                     appState.generatedProject.sourceCode["script.js"] = await callGeminiAPI(jsPrompt);
@@ -4154,8 +4286,8 @@ Return only the complete JavaScript code without any additional explanations.`;
                 // Generate additional files based on project type
                 if (projectType === "Web Application" || projectType === "Mobile App") {
                     // Generate package.json for Node.js projects
-                    if (projectLanguage === "JavaScript/TypeScript" || projectFramework === "React" || projectFramework === "Angular" || projectFramework === "Vue.js" || projectFramework === "Express.js") {
-                        const packageJsonPrompt = `Create a package.json file for a ${projectType} about "${projectTopic}" using ${projectFramework}. Include appropriate dependencies, scripts, and project metadata.
+                    if (projectLanguages.includes("JavaScript/TypeScript") || projectFramework === "React" || projectFramework === "Angular" || projectFramework === "Vue.js" || projectFramework === "Express.js") {
+                        const packageJsonPrompt = `Create a package.json file for a ${projectLevel} ${projectType} about "${projectTopic}" using ${projectFramework}. Include appropriate dependencies, scripts, and project metadata.
 
 Return only the complete package.json content without any additional explanations.`;
                         appState.generatedProject.sourceCode["package.json"] = await callGeminiAPI(packageJsonPrompt);
@@ -4164,11 +4296,11 @@ Return only the complete package.json content without any additional explanation
                 
                 // Generate database configuration file if database is needed
                 if (projectDatabase !== "No database needed") {
-                    const dbConfigPrompt = `Create a database configuration file for a ${projectType} about "${projectTopic}" using ${projectDatabase}. Include connection settings, schema definition, and sample queries.
+                    const dbConfigPrompt = `Create a database configuration file for a ${projectLevel} ${projectType} about "${projectTopic}" using ${projectDatabase}. Include connection settings, schema definition, and sample queries.
 
 Return only the complete configuration code without any additional explanations.`;
                     
-                    let dbFileName = `db-config.${getFileExtension(projectLanguage)}`;
+                    let dbFileName = `db-config.${getFileExtension(Array.isArray(projectLanguages) ? projectLanguages[0] : projectLanguages)}`;
                     appState.generatedProject.sourceCode[dbFileName] = await callGeminiAPI(dbConfigPrompt);
                 }
                 
@@ -4192,7 +4324,12 @@ Return only the complete configuration code without any additional explanations.
                 "Ruby": "rb",
                 "Go": "go",
                 "Swift": "swift",
-                "Kotlin": "kt"
+                "Kotlin": "kt",
+                "C++": "cpp",
+                "C": "c",
+                "Rust": "rs",
+                "SQL": "sql",
+                "HTML/CSS": "html"
             };
             
             return extensions[language] || "txt";
@@ -4290,8 +4427,9 @@ Return only the complete configuration code without any additional explanations.
         // Reset for New Project
         function resetForNewProject() {
             appState.projectTopic = '';
+            appState.projectLevel = '';
             appState.projectType = '';
-            appState.projectLanguage = '';
+            appState.projectLanguages = [];
             appState.projectFramework = '';
             appState.projectDatabase = '';
             appState.projectUI = '';
@@ -4308,6 +4446,7 @@ Return only the complete configuration code without any additional explanations.
             appState.generatedProject = {};
             appState.projectFiles = [];
             elements.projectTopicInput.value = '';
+            elements.projectLevelSelect.value = '';
             showSection('projectTopic');
         }
 
