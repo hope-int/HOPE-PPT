@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Essential Meta Tags -->
-    <title>HOPE-INT-CORE | AI-Powered Presentation Generator</title>
-    <meta name="description" content="Create stunning interactive presentations with AI. HOPE-INT-CORE generates custom 3D presentations using Gemini AI with beautiful animations and themes.">
-    <meta name="keywords" content="presentation generator, AI presentations, 3D slides, HOPE-INT-CORE, Gemini AI, interactive presentations, slide creator">
-    <meta name="author" content="Justin">
+    <title>CodeFlash AI | Adaptive Programming Learning</title>
+    <meta name="description" content="Learn programming languages with AI-powered flashcards that adapt to your learning patterns">
+    <meta name="keywords" content="programming, learning, flashcards, OOP, Java, Python, C++, AI">
+    <meta name="author" content="CodeFlash AI Team">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://HOPE-INT-CORE.vercel.app">
+    <link rel="canonical" href="https://codeflash-ai.vercel.app">
     
     <!-- Open Graph (OG) Tags -->
-    <meta property="og:title" content="HOPE-INT-CORE | AI-Powered Presentation Generator">
-    <meta property="og:description" content="Create stunning interactive presentations with AI. HOPE-INT-CORE generates custom 3D presentations using Gemini AI with beautiful animations and themes.">
-    <meta property="og:image" content="https://HOPE-INT-CORE.vercel.app/images/og-preview.jpg">
-    <meta property="og:url" content="https://HOPE-INT-CORE.vercel.app">
+    <meta property="og:title" content="CodeFlash AI | Adaptive Programming Learning">
+    <meta property="og:description" content="Learn programming languages with AI-powered flashcards that adapt to your learning patterns">
+    <meta property="og:image" content="https://i.ibb.co/3yMXpZ71/codeflash-ai-preview.jpg">
+    <meta property="og:url" content="https://codeflash-ai.vercel.app">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="HOPE-INT-CORE">
+    <meta property="og:site_name" content="CodeFlash AI">
     <meta property="og:locale" content="en_US">
     
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="HOPE-INT-CORE | AI-Powered Presentation Generator">
-    <meta name="twitter:description" content="Create stunning interactive presentations with AI. HOPE-INT-CORE generates custom 3D presentations using Gemini AI with beautiful animations and themes.">
-    <meta name="twitter:image" content="https://HOPE-INT-CORE.vercel.app/images/twitter-preview.jpg">
-    <meta name="twitter:site" content="@hopeppt">
-    <meta name="twitter:creator" content="@justindev">
+    <meta name="twitter:title" content="CodeFlash AI | Adaptive Programming Learning">
+    <meta name="twitter:description" content="Learn programming languages with AI-powered flashcards that adapt to your learning patterns">
+    <meta name="twitter:image" content="https://codeflash-ai.vercel.app/images/twitter-preview.jpg">
+    <meta name="twitter:site" content="@codeflashai">
     
     <!-- Additional Meta Tags -->
     <meta name="theme-color" content="#3498db">
     <meta name="msapplication-TileColor" content="#3498db">
-    <meta name="application-name" content="HOPE-INT-CORE">
-    <meta name="apple-mobile-web-app-title" content="HOPE-INT-CORE">
+    <meta name="application-name" content="CodeFlash AI">
+    <meta name="apple-mobile-web-app-title" content="CodeFlash AI">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -44,11 +41,12 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
     
-    <!-- Existing scripts and styles -->
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-        <style>
-        /* All existing styles remain unchanged */
+    
+    <style>
+        /* Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -57,7 +55,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #000000, #1a1a2e);
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -79,7 +77,7 @@
 
         .container {
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
@@ -99,6 +97,13 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #3498db;
         }
 
         .section {
@@ -257,13 +262,6 @@
             font-size: 14px;
         }
 
-        .preview-container {
-            margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
         .notification {
             position: fixed;
             top: 20px;
@@ -359,7 +357,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #000000, #1a1a2e);
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -421,7 +419,251 @@
             box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
         }
 
-        .history-btn {
+        /* Language Selection Styles */
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .language-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .language-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(52, 152, 219, 0.4);
+            border-color: rgba(52, 152, 219, 0.6);
+        }
+
+        .language-card.selected {
+            background: rgba(52, 152, 219, 0.3);
+            border-color: #3498db;
+        }
+
+        .language-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .language-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .language-description {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Flashcard Styles */
+        .flashcard-container {
+            perspective: 1000px;
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+        }
+
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .flashcard-back {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+
+        .flashcard-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .flashcard-code {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            text-align: left;
+            overflow-x: auto;
+        }
+
+        .flashcard-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .difficulty-indicator {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .difficulty-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 3px;
+        }
+
+        .difficulty-easy { background-color: #2ecc71; }
+        .difficulty-medium { background-color: #f39c12; }
+        .difficulty-hard { background-color: #e74c3c; }
+
+        /* Chapter Progress Styles */
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .chapter-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(52, 152, 219, 0.4);
+            border-color: rgba(52, 152, 219, 0.6);
+        }
+
+        .chapter-card.completed {
+            background: rgba(46, 204, 113, 0.2);
+            border-color: rgba(46, 204, 113, 0.5);
+        }
+
+        .chapter-card.current {
+            background: rgba(52, 152, 219, 0.2);
+            border-color: rgba(52, 152, 219, 0.6);
+        }
+
+        .chapter-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+
+        .chapter-description {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 15px;
+        }
+
+        .chapter-progress {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .chapter-progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .chapter-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Dashboard Styles */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .dashboard-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: #3498db;
+        }
+
+        .profile-btn {
             position: fixed;
             bottom: 100px;
             right: 20px;
@@ -441,85 +683,169 @@
             transition: all 0.3s ease;
         }
 
-        .history-btn:hover {
+        .profile-btn:hover {
             transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
         }
 
-        /* Custom color picker styles */
-        .custom-colors-container {
-            margin-top: 15px;
-            display: none;
-        }
-        
-        .custom-colors-container.show {
-            display: block;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        
-        .color-picker-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .color-picker-group label {
-            min-width: 120px;
-            margin-right: 10px;
-        }
-        
-        .color-picker {
-            width: 50px;
-            height: 40px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        
-        .color-code {
-            margin-left: 10px;
-            font-family: monospace;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 10px;
-            border-radius: 5px;
+        /* Tutorial Section Styles */
+        .tutorial-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
         }
 
-        /* Language dropdown styles */
-        .language-dropdown-container {
-            margin-top: 15px;
-            display: none;
+        .tutorial-header {
+            text-align: center;
+            margin-bottom: 40px;
         }
-        
-        .language-dropdown-container.show {
-            display: block;
-            animation: fadeIn 0.3s ease-in-out;
+
+        .tutorial-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #3498db, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
-        .language-search {
-            margin-bottom: 10px;
+
+        .tutorial-header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
         }
-        
-        .language-list {
-            max-height: 200px;
-            overflow-y: auto;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 10px;
+
+        .tutorial-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
         }
-        
-        .language-option {
-            padding: 8px;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background 0.2s;
+
+        .tutorial-step {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
-        
-        .language-option:hover {
+
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .step-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+
+        .step-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .step-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .step-content li {
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .tutorial-actions {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .tutorial-note {
             background: rgba(52, 152, 219, 0.2);
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
         }
-        
-        .language-option.selected {
+
+        .tutorial-note p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .quiz-question {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: rgba(52, 152, 219, 0.2);
+            border-color: rgba(52, 152, 219, 0.6);
+        }
+
+        .quiz-option.selected {
             background: rgba(52, 152, 219, 0.3);
+            border-color: #3498db;
+        }
+
+        .quiz-option.correct {
+            background: rgba(46, 204, 113, 0.3);
+            border-color: #2ecc71;
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(231, 76, 60, 0.3);
+            border-color: #e74c3c;
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(52, 152, 219, 0.2);
+            border-left: 4px solid #3498db;
+        }
+
+        .quiz-score {
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: #3498db;
         }
 
         @media (max-width: 768px) {
@@ -543,223 +869,897 @@
             .splash-subtitle {
                 font-size: 1.2rem;
             }
+
+            .tutorial-header h2 {
+                font-size: 2rem;
+            }
+
+            .step-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .language-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chapter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
         }
-        </style>
+    </style>
 </head>
 <body>
     <!-- Splash Screen -->
     <div id="splash-screen" class="splash-screen">
         <div class="splash-content">
-            <h1 class="splash-title">HOPE-INT-CORE</h1>
-            <p class="splash-subtitle">Create stunning interactive presentations with AI</p>
+            <h1 class="splash-title">CodeFlash AI</h1>
+            <p class="splash-subtitle">Master programming with AI-powered adaptive learning</p>
             <div class="splash-animation">
                 <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_DMgKk1.json" background="transparent" speed="1" loop autoplay></lottie-player>
             </div>
             <div class="splash-footer">
-                <p>Developed by Justin</p>
-                <p>Under HOPE Research & development Team</p>
+                <p>Learn at your own pace with personalized content</p>
+                <p>Adaptive learning powered by AI</p>
             </div>
-            <button class="splash-continue" id="continue-to-app">Continue to App</button>
+            <button class="splash-continue" id="continue-to-app">Get Started</button>
         </div>
     </div>
 
     <div id="three-background"></div>
     
     <div class="container">
-        <h1>HOPE-INT-CORE</h1>
+        <h1>CodeFlash AI</h1>
+        
+        <!-- Tutorial Section -->
+        <div id="tutorial-section" class="section">
+            <div class="tutorial-section">
+                <div class="tutorial-header">
+                    <h2>Welcome to CodeFlash AI!</h2>
+                    <p>Let's get you set up for an adaptive learning experience</p>
+                </div>
+                
+                <div class="tutorial-steps">
+                    <div class="tutorial-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Create Your Profile</h3>
+                            <p>Your profile is your personal learning space. We'll create a unique account key based on your name and track your progress.</p>
+                            <div class="tutorial-note">
+                                <p><strong>Note:</strong> All your data is stored locally in your browser for privacy.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Choose Your Programming Language</h3>
+                            <p>Select the programming language you want to learn. We'll customize the content based on your choice.</p>
+                            <ul>
+                                <li>Java (default) - Comprehensive OOP concepts</li>
+                                <li>Python - Versatile and beginner-friendly</li>
+                                <li>C++ - Performance and system programming</li>
+                                <li>JavaScript - Web development and more</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Set Up AI Integration</h3>
+                            <p>Connect your Gemini API key to enable personalized learning experiences.</p>
+                            <ul>
+                                <li>Get your free API key from Google AI Studio</li>
+                                <li>Enter it in the setup screen</li>
+                                <li>Start learning with AI-powered content</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Adaptive Learning Experience</h3>
+                            <p>Our AI analyzes your learning patterns and adapts the content to your needs:</p>
+                            <ul>
+                                <li>Flashcards with varied difficulty</li>
+                                <li>Personalized quizzes based on weak areas</li>
+                                <li>Progress tracking and recommendations</li>
+                                <li>Spaced repetition for optimal retention</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-actions">
+                    <button id="got-it-btn" class="splash-continue">I Understand, Let's Start</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Profile Creation Section -->
+        <div id="profile-section" class="section">
+            <h2>Create Your Learning Profile</h2>
+            <div class="form-group">
+                <label for="user-name">Enter your name:</label>
+                <input type="text" id="user-name" placeholder="Your name">
+            </div>
+            <div class="form-group">
+                <label for="learning-goal">What's your learning goal?</label>
+                <select id="learning-goal">
+                    <option value="beginner">Complete beginner</option>
+                    <option value="student">Student</option>
+                    <option value="professional">Professional development</option>
+                    <option value="hobby">Hobby/Interest</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="session-length">Preferred session length (minutes):</label>
+                <select id="session-length">
+                    <option value="15">15 minutes</option>
+                    <option value="30">30 minutes</option>
+                    <option value="45">45 minutes</option>
+                    <option value="60">60 minutes</option>
+                </select>
+            </div>
+            <button id="create-profile-btn">Create Profile</button>
+            <div id="profile-status"></div>
+        </div>
+        
+        <!-- Language Selection Section -->
+        <div id="language-selection-section" class="section">
+            <h2>Choose Your Programming Language</h2>
+            <p>Select the programming language you want to learn. We'll customize the content based on your choice.</p>
+            <div class="language-grid">
+                <div class="language-card selected" data-language="java">
+                    <div class="language-icon">☕</div>
+                    <div class="language-name">Java</div>
+                    <div class="language-description">Comprehensive OOP concepts</div>
+                </div>
+                <div class="language-card" data-language="python">
+                    <div class="language-icon">🐍</div>
+                    <div class="language-name">Python</div>
+                    <div class="language-description">Versatile and beginner-friendly</div>
+                </div>
+                <div class="language-card" data-language="cpp">
+                    <div class="language-icon">⚙️</div>
+                    <div class="language-name">C++</div>
+                    <div class="language-description">Performance and system programming</div>
+                </div>
+                <div class="language-card" data-language="javascript">
+                    <div class="language-icon">🌐</div>
+                    <div class="language-name">JavaScript</div>
+                    <div class="language-description">Web development and more</div>
+                </div>
+            </div>
+            <button id="continue-to-api" style="margin-top: 20px;">Continue to API Setup</button>
+        </div>
         
         <!-- API Key Section -->
-        <div id="api-key-section" class="section active">
+        <div id="api-key-section" class="section">
+            <h2>Set Up AI Integration</h2>
             <div class="form-group">
                 <label for="api-key">Enter your Gemini API Key:</label>
                 <input type="password" id="api-key" placeholder="Your Gemini API Key">
             </div>
             <button id="save-api-key">Save API Key</button>
             <div id="api-status"></div>
+            <div style="margin-top: 20px;">
+                <button id="show-tutorial-btn" style="background: rgba(52, 152, 219, 0.3);">Need Help? Show Tutorial</button>
+            </div>
         </div>
         
         <!-- Loading Screen -->
         <div id="loading-section" class="section">
             <div class="loading-screen">
-                <div class="loading-text">AI now Getting ready</div>
-                <div class="loading-credit">Developed by Justin</div>
-                <div class="loading-credit">Developed under HOPE Research & development Team</div>
+                <div class="loading-text">AI is preparing your learning journey</div>
+                <div class="loading-credit">Analyzing your learning preferences</div>
+                <div class="loading-credit">Creating personalized content</div>
                 <div class="lottie-container">
                     <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_DMgKk1.json" background="transparent" speed="1" loop autoplay></lottie-player>
                 </div>
             </div>
         </div>
         
-        <!-- Topic Input Section -->
-        <div id="topic-section" class="section">
-            <div class="form-group">
-                <label for="presentation-topic">Enter your presentation topic:</label>
-                <input type="text" id="presentation-topic" placeholder="e.g., Climate Change, Artificial Intelligence, etc.">
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="section">
+            <h2>Welcome back, <span id="user-display-name"></span>!</h2>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="dashboard-title">Learning Progress</div>
+                    <div class="stat-item">
+                        <span class="stat-label">Current Chapter:</span>
+                        <span class="stat-value" id="current-chapter">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Completed Chapters:</span>
+                        <span class="stat-value" id="completed-chapters">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Flashcards:</span>
+                        <span class="stat-value" id="total-flashcards">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Mastered Concepts:</span>
+                        <span class="stat-value" id="mastered-concepts">0</span>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-title">Learning Patterns</div>
+                    <div class="stat-item">
+                        <span class="stat-label">Average Time/Flashcard:</span>
+                        <span class="stat-value" id="avg-time">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Best Performance Time:</span>
+                        <span class="stat-value" id="best-time">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Retention Rate:</span>
+                        <span class="stat-value" id="retention-rate">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Learning Velocity:</span>
+                        <span class="stat-value" id="learning-velocity">-</span>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-title">AI Recommendations</div>
+                    <div id="ai-recommendations">
+                        <p>Analyzing your learning patterns...</p>
+                    </div>
+                </div>
             </div>
-            <button id="generate-questions">Generate Questions</button>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button id="continue-learning-btn">Continue Learning</button>
+                <button id="view-chapters-btn">View All Chapters</button>
+            </div>
         </div>
         
-        <!-- Questions Section -->
-        <div id="questions-section" class="section">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
+        <!-- Chapters Section -->
+        <div id="chapters-section" class="section">
+            <h2>Learning Path</h2>
+            <div class="chapter-grid" id="chapter-grid">
+                <!-- Chapters will be populated here -->
             </div>
-            <div id="questions-container"></div>
-            <div id="custom-colors-container" class="custom-colors-container">
-                <div class="color-picker-group">
-                    <label for="custom-color-1">First Color:</label>
-                    <input type="color" id="custom-color-1" class="color-picker" value="#3498db">
-                    <span id="color-code-1" class="color-code">#3498db</span>
-                </div>
-                <div class="color-picker-group">
-                    <label for="custom-color-2">Second Color:</label>
-                    <input type="color" id="custom-color-2" class="color-picker" value="#e74c3c">
-                    <span id="color-code-2" class="color-code">#e74c3c</span>
-                </div>
-            </div>
-            <div id="language-dropdown-container" class="language-dropdown-container">
-                <div class="language-search">
-                    <input type="text" id="language-search" placeholder="Search languages...">
-                </div>
-                <div id="language-list" class="language-list"></div>
-            </div>
-            <button id="generate-presentation" disabled>Generate Presentation</button>
-        </div>
-        
-        <!-- Generating Section -->
-        <div id="generating-section" class="section">
-            <div class="generating-animation">
-                <div class="generating-text">Creating your presentation...</div>
-                <div class="lottie-container">
-                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
-                </div>
-                <p>This may take a moment as we generate your custom 3D presentation</p>
+            <div style="text-align: center; margin-top: 30px;">
+                <button id="back-to-dashboard-btn">Back to Dashboard</button>
             </div>
         </div>
         
-        <!-- Preview Section -->
-        <div id="preview-section" class="section">
-            <h2>Your presentation is ready!</h2>
-            <div class="preview-container">
-                <button id="preview-btn">Preview in New Tab</button>
-                <button id="new-presentation-btn">Create New Presentation</button>
+        <!-- Flashcard Section -->
+        <div id="flashcard-section" class="section">
+            <h2>Flashcard Learning</h2>
+            <div class="flashcard-container">
+                <div class="flashcard" id="flashcard">
+                    <div class="flashcard-face flashcard-front">
+                        <div class="flashcard-title" id="flashcard-title">Click to reveal</div>
+                        <div class="flashcard-content" id="flashcard-front-content">
+                            Loading content...
+                        </div>
+                    </div>
+                    <div class="flashcard-face flashcard-back">
+                        <div class="flashcard-title">Answer</div>
+                        <div class="flashcard-content" id="flashcard-back-content">
+                            Loading content...
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flashcard-controls">
+                <button id="prev-flashcard-btn">Previous</button>
+                <button id="flip-flashcard-btn">Flip Card</button>
+                <button id="next-flashcard-btn">Next</button>
+            </div>
+            
+            <div class="difficulty-indicator">
+                <span>Difficulty:</span>
+                <div class="difficulty-dot difficulty-easy"></div>
+                <div class="difficulty-dot difficulty-medium"></div>
+                <div class="difficulty-dot difficulty-hard"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button id="mark-easy-btn">Easy</button>
+                <button id="mark-medium-btn">Medium</button>
+                <button id="mark-hard-btn">Hard</button>
+                <button id="complete-chapter-btn">Complete Chapter</button>
             </div>
         </div>
         
-        <!-- History Section -->
-        <div id="history-section" class="section">
-            <h2>Recent Presentations</h2>
-            <div id="history-container"></div>
-            <button id="clear-history-btn">Clear History</button>
-            <button id="new-presentation-from-history-btn">Create New Presentation</button>
+        <!-- Quiz Section -->
+        <div id="quiz-section" class="section">
+            <h2>Chapter Quiz</h2>
+            <div id="quiz-container">
+                <!-- Quiz questions will be populated here -->
+            </div>
+            <div id="quiz-score" class="quiz-score" style="display: none;">
+                Your Score: <span id="score-value">0</span>%
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <button id="submit-quiz-btn" style="display: none;">Submit Quiz</button>
+                <button id="next-chapter-btn" style="display: none;">Next Chapter</button>
+                <button id="back-to-chapters-btn">Back to Chapters</button>
+            </div>
+        </div>
+        
+        <!-- Profile Section -->
+        <div id="profile-view-section" class="section">
+            <h2>Your Profile</h2>
+            <div class="dashboard-card">
+                <div class="dashboard-title">Account Information</div>
+                <div class="stat-item">
+                    <span class="stat-label">Name:</span>
+                    <span class="stat-value" id="profile-name">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Account Key:</span>
+                    <span class="stat-value" id="profile-key">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Created:</span>
+                    <span class="stat-value" id="profile-created">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Learning Language:</span>
+                    <span class="stat-value" id="profile-language">-</span>
+                </div>
+            </div>
+            
+            <div class="dashboard-card" style="margin-top: 20px;">
+                <div class="dashboard-title">Learning Statistics</div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Study Time:</span>
+                    <span class="stat-value" id="total-study-time">0 minutes</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Sessions Completed:</span>
+                    <span class="stat-value" id="sessions-completed">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Average Quiz Score:</span>
+                    <span class="stat-value" id="avg-quiz-score">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Current Streak:</span>
+                    <span class="stat-value" id="current-streak">0 days</span>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button id="export-data-btn">Export Learning Data</button>
+                <button id="reset-progress-btn" style="background: rgba(231, 76, 60, 0.7);">Reset Progress</button>
+                <button id="back-to-dashboard-from-profile-btn">Back to Dashboard</button>
+            </div>
         </div>
     </div>
     
     <footer>
-        Developed under HOPE Research Team | Developed by Justin
+        CodeFlash AI | Adaptive Programming Learning
     </footer>
     
-    <button class="history-btn" id="history-toggle" title="View History">📋</button>
+    <button class="profile-btn" id="profile-toggle" title="View Profile">👤</button>
     
     <div id="notification" class="notification"></div>
 
     <script>
         // Application State
         const appState = {
+            // User Profile
+            userName: '',
+            userKey: '',
+            createdDate: '',
+            learningGoal: '',
+            sessionLength: 30,
+            selectedLanguage: 'java',
+            
+            // API Configuration
             apiKey: '',
-            topic: '',
-            theme: '',
-            slideCount: '',
-            structure: '',
-            animationStyle: '',
-            colorTheme: '',
-            customColor1: '#3498db',
-            customColor2: '#e74c3c',
-            descriptionLength: '',
-            bulletPointsCount: '',
-            fontSize: '',
-            includeImages: '',
-            termsdepth: '',
-            bgitem: '',
-            language: 'English',
-            presentationStyle: '',
-            advancedAnimations: '',
-            interactiveElements: '',
-            dataVisualization: '',
-            multimediaElements: '',
-            generatedPresentation: '',
-            currentQuestionIndex: 0,
-            presentationHistory: []
+            
+            // Learning Progress
+            currentChapter: 1,
+            completedChapters: [],
+            totalFlashcards: 0,
+            masteredConcepts: 0,
+            
+            // Learning Patterns
+            flashcardData: {},
+            quizScores: {},
+            timeSpent: {},
+            learningPatterns: {
+                averageTimePerFlashcard: 0,
+                peakPerformanceTime: '',
+                difficultConcepts: [],
+                preferredLearningStyle: '',
+                retentionRate: 0,
+                commonMistakes: []
+            },
+            
+            // AI Recommendations
+            aiRecommendations: {
+                nextFocusAreas: [],
+                suggestedReviewTopics: [],
+                adaptedContent: false,
+                personalizedHints: false,
+                difficultyAdjustment: 0
+            },
+            
+            // Current Session
+            currentFlashcardIndex: 0,
+            currentFlashcards: [],
+            currentQuiz: [],
+            currentQuizAnswers: [],
+            sessionStartTime: null,
+            
+            // Chapter Content
+            chapters: {},
+            
+            // UI State
+            hasSeenTutorial: false,
+            currentSection: 'splash'
         };
 
-        // List of languages that LLMs are typically trained on
-        const languages = [
-            "English", "Spanish", "French", "German", "Italian", "Portuguese", "Dutch", "Russian", 
-            "Japanese", "Korean", "Chinese (Simplified)", "Chinese (Traditional)", "Arabic", 
-            "Hindi", "Bengali", "Punjabi", "Marathi", "Tamil", "Telugu", "Gujarati", "Kannada", 
-            "Malayalam", "Odia", "Assamese", "Urdu", "Persian", "Turkish", "Polish", "Ukrainian", 
-            "Romanian", "Czech", "Hungarian", "Swedish", "Danish", "Norwegian", "Finnish", 
-            "Greek", "Hebrew", "Thai", "Vietnamese", "Indonesian", "Malay", "Tagalog", 
-            "Swahili", "Zulu", "Afrikaans", "Amharic", "Yoruba", "Igbo", "Somali", 
-            "Nepali", "Sinhala", "Burmese", "Khmer", "Lao", "Mongolian", "Kazakh", 
-            "Uzbek", "Azerbaijani", "Georgian", "Armenian", "Lithuanian", "Latvian", 
-            "Estonian", "Slovak", "Slovenian", "Croatian", "Serbian", "Bosnian", 
-            "Montenegrin", "Macedonian", "Bulgarian", "Albanian", "Belarusian", 
-            "Moldovan", "Icelandic", "Faroese", "Basque", "Catalan", "Galician", 
-            "Welsh", "Irish", "Scottish Gaelic", "Breton", "Cornish", "Manx", 
-            "Esperanto", "Latin", "Ancient Greek", "Sanskrit", "Pali", "Tibetan", 
-            "Mongolian (Traditional)", "Javanese", "Sundanese", "Madurese", "Balinese", 
-            "Minangkabau", "Buginese", "Makassarese", "Acehnese", "Banjarese", 
-            "Tausug", "Maguindanao", "Maranao", "Ilocano", "Hiligaynon", "Waray-Waray", 
-            "Bicolano", "Pangasinan", "Kapampangan", "Ibanag", "Gaddang", "Ifugao", 
-            "Kalinga", "Bontoc", "Tboli", "T'boli", "Manobo", "Bagobo", "Mandaya", 
-            "Mansaka", "Dibabawon", "Manguangan", "Kalagan", "Tagakaulo", "Blan", 
-            "Talaandig", "Higaonon", "Bukidnon", "Tigwahanon", "Matigsalug", "Obo", 
-            "Tinananon", "Tigwa", "Umayamnon", "Western Bukidnon Manobo", "Eastern Bukidnon Manobo", 
-            "Kinamiging", "Cotabato Manobo", "Dibabawon Manobo", "Agusan Manobo", 
-            "Surigao Manobo", "Western Visayan", "Central Visayan", "Southern Visayan", 
-            "Northern Visayan", "Ati", "Sulod", "Magahat", "Negros Occidental Hiligaynon", 
-            "Capiznon", "Aklanon", "Kinaray-a", "Cuyonon", "Ratagnon", "Batak", 
-            "Palawano", "Tagbanwa", "Cuyonon", "Agutaynen", "Tausug", "Sama", 
-            "Yakan", "Jama Mapun", "Sama-Bajau", "Badjao", "Molbog", "Palawano", 
-            "Tagbanwa", "Cuyonon", "Agutaynen", "Tausug", "Sama", "Yakan", 
-            "Jama Mapun", "Sama-Bajau", "Badjao", "Molbog", "Palawano", "Tagbanwa", 
-            "Cuyonon", "Agutaynen"
-        ];
+        // Programming Language Content Structure
+        const languageContent = {
+            java: {
+                name: 'Java',
+                icon: '☕',
+                chapters: [
+                    {
+                        id: 1,
+                        title: 'Introduction to OOP',
+                        description: 'Understanding the fundamentals of Object-Oriented Programming',
+                        topics: [
+                            'Definition of OOP',
+                            'OOP vs Procedural Programming',
+                            'Benefits of OOP',
+                            'Real-world examples'
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: 'Classes and Objects',
+                        description: 'The building blocks of OOP',
+                        topics: [
+                            'Class definition',
+                            'Object creation',
+                            'The new keyword',
+                            'Class vs Object'
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: 'Encapsulation',
+                        description: 'Data hiding and protection',
+                        topics: [
+                            'Access modifiers',
+                            'Getters and setters',
+                            'Private vs Public',
+                            'Data security'
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: 'Inheritance',
+                        description: 'Reusing code through inheritance',
+                        topics: [
+                            'Base and derived classes',
+                            'The extends keyword',
+                            'Types of inheritance',
+                            'Method overriding'
+                        ]
+                    },
+                    {
+                        id: 5,
+                        title: 'Polymorphism',
+                        description: 'One interface, multiple implementations',
+                        topics: [
+                            'Method overloading',
+                            'Method overriding',
+                            'Dynamic binding',
+                            'Runtime polymorphism'
+                        ]
+                    },
+                    {
+                        id: 6,
+                        title: 'Abstraction',
+                        description: 'Hiding complexity, showing simplicity',
+                        topics: [
+                            'Abstract classes',
+                            'Interfaces',
+                            'Abstract methods',
+                            'Implementation details'
+                        ]
+                    },
+                    {
+                        id: 7,
+                        title: 'Constructors',
+                        description: 'Initializing objects',
+                        topics: [
+                            'Default constructors',
+                            'Parameterized constructors',
+                            'Constructor overloading',
+                            'The this keyword'
+                        ]
+                    },
+                    {
+                        id: 8,
+                        title: 'Static Members',
+                        description: 'Class-level members',
+                        topics: [
+                            'Static variables',
+                            'Static methods',
+                            'Static blocks',
+                            'Static vs Non-static'
+                        ]
+                    },
+                    {
+                        id: 9,
+                        title: 'The Super Keyword',
+                        description: 'Accessing parent class members',
+                        topics: [
+                            'Super with variables',
+                            'Super with methods',
+                            'Super with constructors',
+                            'Super vs This'
+                        ]
+                    },
+                    {
+                        id: 10,
+                        title: 'Packages',
+                        description: 'Organizing classes',
+                        topics: [
+                            'Package declaration',
+                            'Import statement',
+                            'Built-in packages',
+                            'Creating custom packages'
+                        ]
+                    },
+                    {
+                        id: 11,
+                        title: 'Advanced OOP Features',
+                        description: 'Beyond the basics',
+                        topics: [
+                            'High modularity',
+                            'Code reusability',
+                            'Layers of abstraction',
+                            'Message passing'
+                        ]
+                    },
+                    {
+                        id: 12,
+                        title: 'OOP Best Practices',
+                        description: 'Writing clean OOP code',
+                        topics: [
+                            'SOLID principles',
+                            'Design patterns',
+                            'Code organization',
+                            'Common pitfalls'
+                        ]
+                    }
+                ]
+            },
+            python: {
+                name: 'Python',
+                icon: '🐍',
+                chapters: [
+                    {
+                        id: 1,
+                        title: 'Introduction to OOP in Python',
+                        description: 'Understanding OOP concepts in Python',
+                        topics: [
+                            'Python OOP basics',
+                            'Why use OOP in Python',
+                            'Python vs other OOP languages',
+                            'Real-world applications'
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: 'Classes and Objects',
+                        description: 'Creating classes and objects in Python',
+                        topics: [
+                            'Class definition',
+                            'Object instantiation',
+                            '__init__ method',
+                            'Instance variables'
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: 'Encapsulation in Python',
+                        description: 'Data protection in Python',
+                        topics: [
+                            'Public, protected, private',
+                            'Name mangling',
+                            'Property decorators',
+                            'Getters and setters'
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: 'Inheritance in Python',
+                        description: 'Code reuse through inheritance',
+                        topics: [
+                            'Single inheritance',
+                            'Multiple inheritance',
+                            'Method Resolution Order',
+                            'Super() function'
+                        ]
+                    },
+                    {
+                        id: 5,
+                        title: 'Polymorphism in Python',
+                        description: 'Flexible behavior in Python',
+                        topics: [
+                            'Duck typing',
+                            'Method overriding',
+                            'Operator overloading',
+                            'Abstract base classes'
+                        ]
+                    },
+                    {
+                        id: 6,
+                        title: 'Abstraction in Python',
+                        description: 'Hiding implementation details',
+                        topics: [
+                            'Abstract classes',
+                            'ABC module',
+                            'Abstract methods',
+                            'Concrete implementations'
+                        ]
+                    }
+                ]
+            },
+            cpp: {
+                name: 'C++',
+                icon: '⚙️',
+                chapters: [
+                    {
+                        id: 1,
+                        title: 'Introduction to OOP in C++',
+                        description: 'Understanding OOP concepts in C++',
+                        topics: [
+                            'C++ OOP fundamentals',
+                            'C vs C++ OOP',
+                            'Benefits of OOP in C++',
+                            'Application domains'
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: 'Classes and Objects in C++',
+                        description: 'Creating classes and objects',
+                        topics: [
+                            'Class declaration',
+                            'Object definition',
+                            'Member functions',
+                            'Access specifiers'
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: 'Encapsulation in C++',
+                        description: 'Data hiding mechanisms',
+                        topics: [
+                            'Private members',
+                            'Public interface',
+                            'Protected members',
+                            'Friend functions'
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: 'Inheritance in C++',
+                        description: 'Inheritance types and usage',
+                        topics: [
+                            'Single inheritance',
+                            'Multiple inheritance',
+                            'Multilevel inheritance',
+                            'Hierarchical inheritance'
+                        ]
+                    },
+                    {
+                        id: 5,
+                        title: 'Polymorphism in C++',
+                        description: 'Compile-time and runtime polymorphism',
+                        topics: [
+                            'Function overloading',
+                            'Operator overloading',
+                            'Virtual functions',
+                            'Pure virtual functions'
+                        ]
+                    },
+                    {
+                        id: 6,
+                        title: 'Abstraction in C++',
+                        description: 'Abstract classes and interfaces',
+                        topics: [
+                            'Abstract classes',
+                            'Pure virtual functions',
+                            'Interfaces in C++',
+                            'Implementation strategies'
+                        ]
+                    }
+                ]
+            },
+            javascript: {
+                name: 'JavaScript',
+                icon: '🌐',
+                chapters: [
+                    {
+                        id: 1,
+                        title: 'Introduction to OOP in JavaScript',
+                        description: 'Understanding OOP in JavaScript',
+                        topics: [
+                            'JavaScript OOP basics',
+                            'Prototypal inheritance',
+                            'ES6 classes',
+                            'OOP patterns in JS'
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: 'Objects and Prototypes',
+                        description: 'JavaScript object model',
+                        topics: [
+                            'Object creation',
+                            'Prototype chain',
+                            'Constructor functions',
+                            'Object.create()'
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: 'ES6 Classes',
+                        description: 'Modern JavaScript OOP',
+                        topics: [
+                            'Class declaration',
+                            'Constructor',
+                            'Methods',
+                            'Static members'
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: 'Inheritance in JavaScript',
+                        description: 'Prototypal and class inheritance',
+                        topics: [
+                            'Prototype inheritance',
+                            'Class inheritance',
+                            'Extends keyword',
+                            'Super keyword'
+                        ]
+                    },
+                    {
+                        id: 5,
+                        title: 'Polymorphism in JavaScript',
+                        description: 'Dynamic behavior in JavaScript',
+                        topics: [
+                            'Method overriding',
+                            'Duck typing',
+                            'Dynamic dispatch',
+                            'Function polymorphism'
+                        ]
+                    },
+                    {
+                        id: 6,
+                        title: 'Encapsulation in JavaScript',
+                        description: 'Data hiding in JavaScript',
+                        topics: [
+                            'Private fields',
+                            'Getters and setters',
+                            'Closures',
+                            'Module pattern'
+                        ]
+                    }
+                ]
+            }
+        };
 
         // DOM Elements
         const sections = {
+            splash: document.getElementById('splash-screen'),
+            tutorial: document.getElementById('tutorial-section'),
+            profile: document.getElementById('profile-section'),
+            languageSelection: document.getElementById('language-selection-section'),
             apiKey: document.getElementById('api-key-section'),
             loading: document.getElementById('loading-section'),
-            topic: document.getElementById('topic-section'),
-            questions: document.getElementById('questions-section'),
-            generating: document.getElementById('generating-section'),
-            preview: document.getElementById('preview-section'),
-            history: document.getElementById('history-section')
+            dashboard: document.getElementById('dashboard-section'),
+            chapters: document.getElementById('chapters-section'),
+            flashcard: document.getElementById('flashcard-section'),
+            quiz: document.getElementById('quiz-section'),
+            profileView: document.getElementById('profile-view-section')
         };
 
         const elements = {
+            // Splash Screen
+            continueToApp: document.getElementById('continue-to-app'),
+            
+            // Tutorial
+            gotItBtn: document.getElementById('got-it-btn'),
+            showTutorialBtn: document.getElementById('show-tutorial-btn'),
+            
+            // Profile Creation
+            userName: document.getElementById('user-name'),
+            learningGoal: document.getElementById('learning-goal'),
+            sessionLength: document.getElementById('session-length'),
+            createProfileBtn: document.getElementById('create-profile-btn'),
+            profileStatus: document.getElementById('profile-status'),
+            
+            // Language Selection
+            languageCards: document.querySelectorAll('.language-card'),
+            continueToApi: document.getElementById('continue-to-api'),
+            
+            // API Key
             apiKeyInput: document.getElementById('api-key'),
             saveApiKeyBtn: document.getElementById('save-api-key'),
             apiStatus: document.getElementById('api-status'),
-            presentationTopic: document.getElementById('presentation-topic'),
-            generateQuestionsBtn: document.getElementById('generate-questions'),
-            questionsContainer: document.getElementById('questions-container'),
-            progressFill: document.getElementById('progress-fill'),
-            generatePresentationBtn: document.getElementById('generate-presentation'),
-            previewBtn: document.getElementById('preview-btn'),
-            newPresentationBtn: document.getElementById('new-presentation-btn'),
-            historyContainer: document.getElementById('history-container'),
-            clearHistoryBtn: document.getElementById('clear-history-btn'),
-            newPresentationFromHistoryBtn: document.getElementById('new-presentation-from-history-btn'),
-            notification: document.getElementById('notification'),
-            historyToggle: document.getElementById('history-toggle'),
-            splashScreen: document.getElementById('splash-screen'),
-            continueToApp: document.getElementById('continue-to-app'),
-            customColorsContainer: document.getElementById('custom-colors-container'),
-            languageDropdownContainer: document.getElementById('language-dropdown-container'),
-            languageSearch: document.getElementById('language-search'),
-            languageList: document.getElementById('language-list')
+            
+            // Dashboard
+            userDisplayName: document.getElementById('user-display-name'),
+            currentChapter: document.getElementById('current-chapter'),
+            completedChapters: document.getElementById('completed-chapters'),
+            totalFlashcards: document.getElementById('total-flashcards'),
+            masteredConcepts: document.getElementById('mastered-concepts'),
+            avgTime: document.getElementById('avg-time'),
+            bestTime: document.getElementById('best-time'),
+            retentionRate: document.getElementById('retention-rate'),
+            learningVelocity: document.getElementById('learning-velocity'),
+            aiRecommendations: document.getElementById('ai-recommendations'),
+            continueLearningBtn: document.getElementById('continue-learning-btn'),
+            viewChaptersBtn: document.getElementById('view-chapters-btn'),
+            
+            // Chapters
+            chapterGrid: document.getElementById('chapter-grid'),
+            backToDashboardBtn: document.getElementById('back-to-dashboard-btn'),
+            
+            // Flashcards
+            flashcard: document.getElementById('flashcard'),
+            flashcardTitle: document.getElementById('flashcard-title'),
+            flashcardFrontContent: document.getElementById('flashcard-front-content'),
+            flashcardBackContent: document.getElementById('flashcard-back-content'),
+            prevFlashcardBtn: document.getElementById('prev-flashcard-btn'),
+            flipFlashcardBtn: document.getElementById('flip-flashcard-btn'),
+            nextFlashcardBtn: document.getElementById('next-flashcard-btn'),
+            markEasyBtn: document.getElementById('mark-easy-btn'),
+            markMediumBtn: document.getElementById('mark-medium-btn'),
+            markHardBtn: document.getElementById('mark-hard-btn'),
+            completeChapterBtn: document.getElementById('complete-chapter-btn'),
+            
+            // Quiz
+            quizContainer: document.getElementById('quiz-container'),
+            quizScore: document.getElementById('quiz-score'),
+            scoreValue: document.getElementById('score-value'),
+            submitQuizBtn: document.getElementById('submit-quiz-btn'),
+            nextChapterBtn: document.getElementById('next-chapter-btn'),
+            backToChaptersBtn: document.getElementById('back-to-chapters-btn'),
+            
+            // Profile View
+            profileName: document.getElementById('profile-name'),
+            profileKey: document.getElementById('profile-key'),
+            profileCreated: document.getElementById('profile-created'),
+            profileLanguage: document.getElementById('profile-language'),
+            totalStudyTime: document.getElementById('total-study-time'),
+            sessionsCompleted: document.getElementById('sessions-completed'),
+            avgQuizScore: document.getElementById('avg-quiz-score'),
+            currentStreak: document.getElementById('current-streak'),
+            exportDataBtn: document.getElementById('export-data-btn'),
+            resetProgressBtn: document.getElementById('reset-progress-btn'),
+            backToDashboardFromProfileBtn: document.getElementById('back-to-dashboard-from-profile-btn'),
+            
+            // UI Elements
+            profileToggle: document.getElementById('profile-toggle'),
+            notification: document.getElementById('notification')
         };
 
         // Gemini API Configuration
@@ -833,55 +1833,110 @@
         function initApp() {
             // Show splash screen first
             elements.continueToApp.addEventListener('click', () => {
-                elements.splashScreen.style.opacity = '0';
+                sections.splash.style.opacity = '0';
                 setTimeout(() => {
-                    elements.splashScreen.style.display = 'none';
+                    sections.splash.style.display = 'none';
                     // Initialize Three.js background after splash screen
                     initThreeBackground();
                     
-                    // Check for existing API key
-                    const savedApiKey = localStorage.getItem('geminiApiKey');
-                    if (savedApiKey) {
-                        appState.apiKey = savedApiKey;
-                        elements.apiKeyInput.value = savedApiKey;
-                        showSection('topic');
-                        loadHistory();
+                    // Check if user has seen tutorial
+                    const hasSeenTutorial = localStorage.getItem('hasSeenTutorial');
+                    if (hasSeenTutorial) {
+                        // Check for existing profile
+                        const savedProfile = localStorage.getItem('userProfile');
+                        if (savedProfile) {
+                            loadUserProfile();
+                            showSection('dashboard');
+                        } else {
+                            showSection('profile');
+                        }
                     } else {
-                        showSection('apiKey');
+                        // First time user, show tutorial
+                        showSection('tutorial');
                     }
                 }, 1000);
             });
 
             // Event Listeners
-            elements.saveApiKeyBtn.addEventListener('click', saveApiKey);
-            elements.generateQuestionsBtn.addEventListener('click', generateQuestions);
-            elements.generatePresentationBtn.addEventListener('click', generatePresentation);
-            elements.previewBtn.addEventListener('click', previewPresentation);
-            elements.newPresentationBtn.addEventListener('click', resetForNewPresentation);
-            elements.clearHistoryBtn.addEventListener('click', clearHistory);
-            elements.newPresentationFromHistoryBtn.addEventListener('click', () => {
-                showSection('topic');
-            });
-            elements.historyToggle.addEventListener('click', () => {
-                if (sections.history.classList.contains('active')) {
-                    // If currently showing history, go back to previous section
-                    if (appState.generatedPresentation) {
-                        showSection('preview');
-                    } else {
-                        showSection('topic');
-                    }
-                } else {
-                    // Show history section
-                    loadHistory();
-                    showSection('history');
-                }
+            elements.gotItBtn.addEventListener('click', () => {
+                localStorage.setItem('hasSeenTutorial', 'true');
+                showSection('profile');
             });
 
-            // Language search functionality
-            elements.languageSearch.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                renderLanguageList(searchTerm);
+            elements.showTutorialBtn.addEventListener('click', () => {
+                showSection('tutorial');
             });
+            
+            // Profile Creation
+            elements.createProfileBtn.addEventListener('click', createProfile);
+            
+            // Language Selection
+            elements.languageCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Remove selected class from all cards
+                    elements.languageCards.forEach(c => c.classList.remove('selected'));
+                    // Add selected class to clicked card
+                    card.classList.add('selected');
+                    // Update selected language
+                    appState.selectedLanguage = card.dataset.language;
+                });
+            });
+            
+            elements.continueToApi.addEventListener('click', () => {
+                showSection('apiKey');
+            });
+            
+            // API Key Management
+            elements.saveApiKeyBtn.addEventListener('click', saveApiKey);
+            
+            // Dashboard Navigation
+            elements.continueLearningBtn.addEventListener('click', () => {
+                startLearningSession();
+            });
+            
+            elements.viewChaptersBtn.addEventListener('click', () => {
+                showSection('chapters');
+                renderChapters();
+            });
+            
+            // Chapters Navigation
+            elements.backToDashboardBtn.addEventListener('click', () => {
+                showSection('dashboard');
+            });
+            
+            // Flashcard Controls
+            elements.prevFlashcardBtn.addEventListener('click', previousFlashcard);
+            elements.flipFlashcardBtn.addEventListener('click', flipFlashcard);
+            elements.nextFlashcardBtn.addEventListener('click', nextFlashcard);
+            
+            elements.markEasyBtn.addEventListener('click', () => markDifficulty('easy'));
+            elements.markMediumBtn.addEventListener('click', () => markDifficulty('medium'));
+            elements.markHardBtn.addEventListener('click', () => markDifficulty('hard'));
+            
+            elements.completeChapterBtn.addEventListener('click', completeChapter);
+            
+            // Quiz Controls
+            elements.submitQuizBtn.addEventListener('click', submitQuiz);
+            elements.nextChapterBtn.addEventListener('click', nextChapter);
+            elements.backToChaptersBtn.addEventListener('click', () => {
+                showSection('chapters');
+            });
+            
+            // Profile View Controls
+            elements.profileToggle.addEventListener('click', () => {
+                showSection('profileView');
+                updateProfileView();
+            });
+            
+            elements.backToDashboardFromProfileBtn.addEventListener('click', () => {
+                showSection('dashboard');
+            });
+            
+            elements.exportDataBtn.addEventListener('click', exportLearningData);
+            elements.resetProgressBtn.addEventListener('click', resetProgress);
+            
+            // Flashcard flip event
+            elements.flashcard.addEventListener('click', flipFlashcard);
         }
 
         // Section Navigation
@@ -890,6 +1945,123 @@
                 section.classList.remove('active');
             });
             sections[sectionName].classList.add('active');
+            appState.currentSection = sectionName;
+        }
+
+        // Profile Creation
+        function createProfile() {
+            const userName = elements.userName.value.trim();
+            if (!userName) {
+                showNotification('Please enter your name', 'error');
+                return;
+            }
+
+            const today = new Date();
+            const dateString = today.toISOString().split('T')[0];
+            const userKey = `${userName}-${dateString}-12`;
+            
+            appState.userName = userName;
+            appState.userKey = userKey;
+            appState.createdDate = dateString;
+            appState.learningGoal = elements.learningGoal.value;
+            appState.sessionLength = parseInt(elements.sessionLength.value);
+            
+            // Save to localStorage
+            const userProfile = {
+                userName: appState.userName,
+                userKey: appState.userKey,
+                createdDate: appState.createdDate,
+                learningGoal: appState.learningGoal,
+                sessionLength: appState.sessionLength,
+                selectedLanguage: appState.selectedLanguage,
+                currentChapter: appState.currentChapter,
+                completedChapters: appState.completedChapters,
+                flashcardData: appState.flashcardData,
+                quizScores: appState.quizScores,
+                timeSpent: appState.timeSpent,
+                learningPatterns: appState.learningPatterns,
+                aiRecommendations: appState.aiRecommendations
+            };
+            
+            localStorage.setItem('userProfile', JSON.stringify(userProfile));
+            
+            elements.profileStatus.textContent = 'Profile created successfully!';
+            elements.profileStatus.style.color = '#3498db';
+            
+            // Show loading screen then proceed to language selection
+            showSection('loading');
+            setTimeout(() => {
+                showSection('languageSelection');
+            }, 2000);
+        }
+
+        // Load User Profile
+        function loadUserProfile() {
+            const savedProfile = localStorage.getItem('userProfile');
+            if (savedProfile) {
+                const profile = JSON.parse(savedProfile);
+                appState.userName = profile.userName;
+                appState.userKey = profile.userKey;
+                appState.createdDate = profile.createdDate;
+                appState.learningGoal = profile.learningGoal;
+                appState.sessionLength = profile.sessionLength;
+                appState.selectedLanguage = profile.selectedLanguage || 'java';
+                appState.currentChapter = profile.currentChapter || 1;
+                appState.completedChapters = profile.completedChapters || [];
+                appState.flashcardData = profile.flashcardData || {};
+                appState.quizScores = profile.quizScores || {};
+                appState.timeSpent = profile.timeSpent || {};
+                appState.learningPatterns = profile.learningPatterns || {
+                    averageTimePerFlashcard: 0,
+                    peakPerformanceTime: '',
+                    difficultConcepts: [],
+                    preferredLearningStyle: '',
+                    retentionRate: 0,
+                    commonMistakes: []
+                };
+                appState.aiRecommendations = profile.aiRecommendations || {
+                    nextFocusAreas: [],
+                    suggestedReviewTopics: [],
+                    adaptedContent: false,
+                    personalizedHints: false,
+                    difficultyAdjustment: 0
+                };
+                
+                // Load API key if available
+                const savedApiKey = localStorage.getItem('geminiApiKey');
+                if (savedApiKey) {
+                    appState.apiKey = savedApiKey;
+                }
+                
+                return true;
+            }
+            return false;
+        }
+
+        // Update Profile View
+        function updateProfileView() {
+            elements.profileName.textContent = appState.userName;
+            elements.profileKey.textContent = appState.userKey;
+            elements.profileCreated.textContent = appState.createdDate;
+            elements.profileLanguage.textContent = languageContent[appState.selectedLanguage].name;
+            
+            // Calculate statistics
+            const totalStudyTime = Object.values(appState.timeSpent).reduce((sum, time) => sum + time, 0);
+            elements.totalStudyTime.textContent = `${totalStudyTime} minutes`;
+            
+            const sessionsCompleted = Object.keys(appState.timeSpent).length;
+            elements.sessionsCompleted.textContent = sessionsCompleted;
+            
+            const quizScores = Object.values(appState.quizScores);
+            const avgScore = quizScores.length > 0 ? 
+                Math.round(quizScores.reduce((sum, score) => sum + score, 0) / quizScores.length) : 0;
+            elements.avgQuizScore.textContent = `${avgScore}%`;
+            
+            // Calculate current streak (simplified)
+            const today = new Date().toISOString().split('T')[0];
+            const lastStudyDate = Object.keys(appState.timeSpent).sort().pop() || '';
+            const currentStreak = lastStudyDate === today ? 1 : 0;
+            elements.currentStreak.textContent = `${currentStreak} days`;
         }
 
         // API Key Management
@@ -911,12 +2083,824 @@
             elements.apiStatus.textContent = 'API Key saved successfully!';
             elements.apiStatus.style.color = '#3498db';
             
-            // Show loading screen then proceed to topic input
+            // Show loading screen then proceed to dashboard
             showSection('loading');
             setTimeout(() => {
-                showSection('topic');
-                loadHistory();
+                showSection('dashboard');
+                updateDashboard();
             }, 3000);
+        }
+
+        // Update Dashboard
+        function updateDashboard() {
+            elements.userDisplayName.textContent = appState.userName;
+            
+            const currentChapterData = languageContent[appState.selectedLanguage].chapters.find(
+                ch => ch.id === appState.currentChapter
+            );
+            elements.currentChapter.textContent = currentChapterData ? currentChapterData.title : 'Not started';
+            
+            elements.completedChapters.textContent = appState.completedChapters.length;
+            
+            // Calculate total flashcards (simplified)
+            const totalFlashcards = Object.keys(appState.flashcardData).length;
+            elements.totalFlashcards.textContent = totalFlashcards;
+            
+            // Calculate mastered concepts (simplified)
+            const masteredConcepts = Object.values(appState.flashcardData).filter(
+                card => card.correctAnswers >= 3
+            ).length;
+            elements.masteredConcepts.textContent = masteredConcepts;
+            
+            // Update learning patterns
+            const avgTime = appState.learningPatterns.averageTimePerFlashcard;
+            elements.avgTime.textContent = avgTime ? `${avgTime.toFixed(1)}s` : '-';
+            
+            elements.bestTime.textContent = appState.learningPatterns.peakPerformanceTime || '-';
+            elements.retentionRate.textContent = appState.learningPatterns.retentionRate ? 
+                `${(appState.learningPatterns.retentionRate * 100).toFixed(0)}%` : '-';
+            
+            const velocity = appState.learningPatterns.learningVelocity;
+            elements.learningVelocity.textContent = velocity ? `${velocity.toFixed(1)}` : '-';
+            
+            // Update AI recommendations
+            updateAIRecommendations();
+        }
+
+        // Update AI Recommendations
+        function updateAIRecommendations() {
+            if (!appState.apiKey) {
+                elements.aiRecommendations.innerHTML = '<p>API key required for personalized recommendations</p>';
+                return;
+            }
+            
+            // Generate recommendations based on learning patterns
+            const recommendations = [];
+            
+            if (appState.learningPatterns.difficultConcepts.length > 0) {
+                recommendations.push(`<p><strong>Focus Areas:</strong> ${appState.learningPatterns.difficultConcepts.join(', ')}</p>`);
+            }
+            
+            if (appState.aiRecommendations.suggestedReviewTopics.length > 0) {
+                recommendations.push(`<p><strong>Review Topics:</strong> ${appState.aiRecommendations.suggestedReviewTopics.join(', ')}</p>`);
+            }
+            
+            if (appState.learningPatterns.commonMistakes.length > 0) {
+                recommendations.push(`<p><strong>Common Mistakes:</strong> ${appState.learningPatterns.commonMistakes.join(', ')}</p>`);
+            }
+            
+            if (recommendations.length === 0) {
+                recommendations.push('<p>Complete more flashcards to get personalized recommendations</p>');
+            }
+            
+            elements.aiRecommendations.innerHTML = recommendations.join('');
+        }
+
+        // Render Chapters
+        function renderChapters() {
+            const chapters = languageContent[appState.selectedLanguage].chapters;
+            
+            elements.chapterGrid.innerHTML = chapters.map(chapter => {
+                const isCompleted = appState.completedChapters.includes(chapter.id);
+                const isCurrent = chapter.id === appState.currentChapter;
+                
+                let progress = 0;
+                if (isCompleted) {
+                    progress = 100;
+                } else if (isCurrent) {
+                    // Calculate progress for current chapter (simplified)
+                    const chapterFlashcards = Object.keys(appState.flashcardData).filter(
+                        key => key.startsWith(`ch${chapter.id}_`)
+                    );
+                    progress = chapterFlashcards.length > 0 ? 
+                        Math.min(100, (chapterFlashcards.length / 10) * 100) : 0;
+                }
+                
+                return `
+                    <div class="chapter-card ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''}" 
+                         data-chapter-id="${chapter.id}">
+                        <div class="chapter-title">${chapter.title}</div>
+                        <div class="chapter-description">${chapter.description}</div>
+                        <div class="chapter-progress">
+                            <div class="chapter-progress-fill" style="width: ${progress}%"></div>
+                        </div>
+                        <div class="chapter-stats">
+                            <span>${isCompleted ? 'Completed' : isCurrent ? 'In Progress' : 'Not Started'}</span>
+                            <span>${progress.toFixed(0)}%</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Add event listeners to chapter cards
+            const chapterCards = document.querySelectorAll('.chapter-card');
+            chapterCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const chapterId = parseInt(card.dataset.chapterId);
+                    startChapter(chapterId);
+                });
+            });
+        }
+
+        // Start Learning Session
+        function startLearningSession() {
+            appState.sessionStartTime = new Date();
+            startChapter(appState.currentChapter);
+        }
+
+        // Start Chapter
+        function startChapter(chapterId) {
+            appState.currentChapter = chapterId;
+            
+            // Check if chapter is completed
+            if (appState.completedChapters.includes(chapterId)) {
+                showNotification('This chapter is already completed. Starting review mode.');
+            }
+            
+            // Generate flashcards for the chapter
+            generateChapterFlashcards(chapterId);
+        }
+
+        // Generate Chapter Flashcards
+        async function generateChapterFlashcards(chapterId) {
+            showSection('loading');
+            
+            const chapterData = languageContent[appState.selectedLanguage].chapters.find(
+                ch => ch.id === chapterId
+            );
+            
+            if (!chapterData) {
+                showNotification('Chapter not found', 'error');
+                showSection('chapters');
+                return;
+            }
+            
+            try {
+                // Check if we have existing flashcards for this chapter
+                const existingFlashcards = Object.keys(appState.flashcardData).filter(
+                    key => key.startsWith(`ch${chapterId}_`)
+                );
+                
+                if (existingFlashcards.length > 0) {
+                    // Load existing flashcards
+                    appState.currentFlashcards = existingFlashcards.map(key => {
+                        return {
+                            id: key,
+                            ...appState.flashcardData[key]
+                        };
+                    });
+                    
+                    appState.currentFlashcardIndex = 0;
+                    showSection('flashcard');
+                    renderCurrentFlashcard();
+                    return;
+                }
+                
+                // Generate new flashcards using AI
+                if (!appState.apiKey) {
+                    showNotification('API key required for generating flashcards', 'error');
+                    showSection('apiKey');
+                    return;
+                }
+                
+                const prompt = `Generate 10 flashcards for learning about "${chapterData.title}" in ${languageContent[appState.selectedLanguage].name}.
+                
+The chapter covers these topics:
+ ${chapterData.topics.map(topic => `- ${topic}`).join('\n')}
+
+For each flashcard, provide:
+1. A clear question or concept on the front
+2. A detailed answer or explanation on the back
+3. A code example if applicable
+4. Difficulty level (easy, medium, or hard)
+
+Return the response in valid JSON format exactly as shown below:
+{
+  "flashcards": [
+    {
+      "front": "Question or concept here",
+      "back": "Answer or explanation here",
+      "code": "Code example if applicable (or empty string)",
+      "difficulty": "easy|medium|hard"
+    }
+  ]
+}
+
+Do not include any text before or after the JSON. The response must be pure JSON that can be parsed by JSON.parse().`;
+                
+                const response = await callGeminiAPI(prompt);
+                
+                // Try to parse the JSON response
+                let data;
+                try {
+                    // Clean the response
+                    let cleanResponse = response.trim();
+                    if (cleanResponse.startsWith('```json')) {
+                        cleanResponse = cleanResponse.replace(/```json\n?/, '').replace(/\n?```$/, '');
+                    } else if (cleanResponse.startsWith('```')) {
+                        cleanResponse = cleanResponse.replace(/```\n?/, '').replace(/\n?```$/, '');
+                    }
+                    
+                    // Try to find JSON object in the response
+                    const jsonMatch = cleanResponse.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) {
+                        cleanResponse = jsonMatch[0];
+                    }
+                    
+                    data = JSON.parse(cleanResponse);
+                    
+                    if (!data.flashcards || !Array.isArray(data.flashcards)) {
+                        throw new Error('Invalid JSON structure');
+                    }
+                    
+                    // Validate each flashcard
+                    data.flashcards = data.flashcards.filter(card => 
+                        card.front && card.back && ['easy', 'medium', 'hard'].includes(card.difficulty)
+                    );
+                    
+                    if (data.flashcards.length === 0) {
+                        throw new Error('No valid flashcards found');
+                    }
+                } catch (parseError) {
+                    console.error('Failed to parse AI response:', parseError);
+                    showNotification('Error generating flashcards. Using fallback content.', 'error');
+                    
+                    // Use fallback flashcards
+                    data = generateFallbackFlashcards(chapterData);
+                }
+                
+                // Store flashcards in app state
+                appState.currentFlashcards = data.flashcards.map((card, index) => {
+                    const flashcardId = `ch${chapterId}_${index + 1}`;
+                    const flashcardData = {
+                        id: flashcardId,
+                        front: card.front,
+                        back: card.back,
+                        code: card.code || '',
+                        difficulty: card.difficulty,
+                        firstViewTime: 0,
+                        lastViewTime: 0,
+                        viewCount: 0,
+                        correctAnswers: 0,
+                        userRating: card.difficulty
+                    };
+                    
+                    // Store in flashcard data
+                    appState.flashcardData[flashcardId] = flashcardData;
+                    
+                    return flashcardData;
+                });
+                
+                appState.currentFlashcardIndex = 0;
+                
+                // Save to localStorage
+                saveUserProfile();
+                
+                showSection('flashcard');
+                renderCurrentFlashcard();
+            } catch (error) {
+                showNotification(`Error generating flashcards: ${error.message}`, 'error');
+                showSection('chapters');
+            }
+        }
+
+        // Generate Fallback Flashcards
+        function generateFallbackFlashcards(chapterData) {
+            const fallbackFlashcards = [];
+            
+            // Generate basic flashcards based on chapter topics
+            chapterData.topics.forEach((topic, index) => {
+                if (index < 10) { // Limit to 10 flashcards
+                    fallbackFlashcards.push({
+                        front: `What is ${topic}?`,
+                        back: `${topic} is a fundamental concept in ${languageContent[appState.selectedLanguage].name} Object-Oriented Programming.`,
+                        code: '',
+                        difficulty: 'medium'
+                    });
+                }
+            });
+            
+            // Ensure we have at least 10 flashcards
+            while (fallbackFlashcards.length < 10) {
+                fallbackFlashcards.push({
+                    front: `What are the key principles of ${chapterData.title}?`,
+                    back: `The key principles of ${chapterData.title} include understanding the core concepts and applying them in practical scenarios.`,
+                    code: '',
+                    difficulty: 'medium'
+                });
+            }
+            
+            return { flashcards: fallbackFlashcards };
+        }
+
+        // Render Current Flashcard
+        function renderCurrentFlashcard() {
+            if (appState.currentFlashcards.length === 0) {
+                showNotification('No flashcards available for this chapter', 'error');
+                showSection('chapters');
+                return;
+            }
+            
+            const flashcard = appState.currentFlashcards[appState.currentFlashcardIndex];
+            
+            elements.flashcardTitle.textContent = `Flashcard ${appState.currentFlashcardIndex + 1} of ${appState.currentFlashcards.length}`;
+            elements.flashcardFrontContent.innerHTML = `
+                <div>${flashcard.front}</div>
+                ${flashcard.code ? `<div class="flashcard-code">${flashcard.code}</div>` : ''}
+            `;
+            elements.flashcardBackContent.innerHTML = `
+                <div>${flashcard.back}</div>
+                ${flashcard.code ? `<div class="flashcard-code">${flashcard.code}</div>` : ''}
+            `;
+            
+            // Reset flip state
+            elements.flashcard.classList.remove('flipped');
+            
+            // Update difficulty indicator
+            updateDifficultyIndicator(flashcard.userRating);
+            
+            // Update button states
+            elements.prevFlashcardBtn.disabled = appState.currentFlashcardIndex === 0;
+            elements.nextFlashcardBtn.disabled = appState.currentFlashcardIndex === appState.currentFlashcards.length - 1;
+            
+            // Record view time
+            const viewStartTime = new Date();
+            
+            // Update flashcard data when navigating away
+            const updateViewData = () => {
+                const viewEndTime = new Date();
+                const viewTime = (viewEndTime - viewStartTime) / 1000; // in seconds
+                
+                if (!flashcard.firstViewTime) {
+                    flashcard.firstViewTime = viewTime;
+                }
+                flashcard.lastViewTime = viewTime;
+                flashcard.viewCount++;
+                
+                // Save to app state
+                appState.flashcardData[flashcard.id] = flashcard;
+                
+                // Update learning patterns
+                updateLearningPatterns();
+            };
+            
+            // Store update function for later use
+            elements.flashcard.updateViewData = updateViewData;
+        }
+
+        // Update Difficulty Indicator
+        function updateDifficultyIndicator(difficulty) {
+            const dots = document.querySelectorAll('.difficulty-dot');
+            dots.forEach(dot => dot.style.opacity = '0.3');
+            
+            if (difficulty === 'easy') {
+                dots[0].style.opacity = '1';
+            } else if (difficulty === 'medium') {
+                dots[1].style.opacity = '1';
+            } else if (difficulty === 'hard') {
+                dots[2].style.opacity = '1';
+            }
+        }
+
+        // Flashcard Navigation
+        function previousFlashcard() {
+            if (elements.flashcard.updateViewData) {
+                elements.flashcard.updateViewData();
+            }
+            
+            if (appState.currentFlashcardIndex > 0) {
+                appState.currentFlashcardIndex--;
+                renderCurrentFlashcard();
+            }
+        }
+
+        function nextFlashcard() {
+            if (elements.flashcard.updateViewData) {
+                elements.flashcard.updateViewData();
+            }
+            
+            if (appState.currentFlashcardIndex < appState.currentFlashcards.length - 1) {
+                appState.currentFlashcardIndex++;
+                renderCurrentFlashcard();
+            }
+        }
+
+        function flipFlashcard() {
+            elements.flashcard.classList.toggle('flipped');
+        }
+
+        // Mark Difficulty
+        function markDifficulty(difficulty) {
+            const flashcard = appState.currentFlashcards[appState.currentFlashcardIndex];
+            flashcard.userRating = difficulty;
+            
+            // Update in app state
+            appState.flashcardData[flashcard.id] = flashcard;
+            
+            // Update difficulty indicator
+            updateDifficultyIndicator(difficulty);
+            
+            // Save to localStorage
+            saveUserProfile();
+            
+            showNotification(`Marked as ${difficulty}`);
+        }
+
+        // Complete Chapter
+        function completeChapter() {
+            if (elements.flashcard.updateViewData) {
+                elements.flashcard.updateViewData();
+            }
+            
+            // Generate quiz for the chapter
+            generateChapterQuiz();
+        }
+
+        // Generate Chapter Quiz
+        async function generateChapterQuiz() {
+            showSection('loading');
+            
+            const chapterData = languageContent[appState.selectedLanguage].chapters.find(
+                ch => ch.id === appState.currentChapter
+            );
+            
+            if (!chapterData) {
+                showNotification('Chapter not found', 'error');
+                showSection('flashcard');
+                return;
+            }
+            
+            try {
+                if (!appState.apiKey) {
+                    showNotification('API key required for generating quiz', 'error');
+                    showSection('apiKey');
+                    return;
+                }
+                
+                const prompt = `Generate a 5-question quiz for "${chapterData.title}" in ${languageContent[appState.selectedLanguage].name}.
+                
+The chapter covers these topics:
+ ${chapterData.topics.map(topic => `- ${topic}`).join('\n')}
+
+For each question, provide:
+1. The question text
+2. 4 multiple choice options (A, B, C, D)
+3. The correct answer (A, B, C, or D)
+4. A brief explanation of why the answer is correct
+
+Focus on testing understanding of the key concepts. Include a mix of conceptual questions and practical application questions.
+
+Return the response in valid JSON format exactly as shown below:
+{
+  "questions": [
+    {
+      "question": "Question text here",
+      "options": ["Option A", "Option B", "Option C", "Option D"],
+      "correct": "A",
+      "explanation": "Explanation here"
+    }
+  ]
+}
+
+Do not include any text before or after the JSON. The response must be pure JSON that can be parsed by JSON.parse().`;
+                
+                const response = await callGeminiAPI(prompt);
+                
+                // Try to parse the JSON response
+                let data;
+                try {
+                    // Clean the response
+                    let cleanResponse = response.trim();
+                    if (cleanResponse.startsWith('```json')) {
+                        cleanResponse = cleanResponse.replace(/```json\n?/, '').replace(/\n?```$/, '');
+                    } else if (cleanResponse.startsWith('```')) {
+                        cleanResponse = cleanResponse.replace(/```\n?/, '').replace(/\n?```$/, '');
+                    }
+                    
+                    // Try to find JSON object in the response
+                    const jsonMatch = cleanResponse.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) {
+                        cleanResponse = jsonMatch[0];
+                    }
+                    
+                    data = JSON.parse(cleanResponse);
+                    
+                    if (!data.questions || !Array.isArray(data.questions)) {
+                        throw new Error('Invalid JSON structure');
+                    }
+                    
+                    // Validate each question
+                    data.questions = data.questions.filter(q => 
+                        q.question && q.options && q.options.length === 4 && 
+                        ['A', 'B', 'C', 'D'].includes(q.correct) && q.explanation
+                    );
+                    
+                    if (data.questions.length === 0) {
+                        throw new Error('No valid questions found');
+                    }
+                } catch (parseError) {
+                    console.error('Failed to parse AI response:', parseError);
+                    showNotification('Error generating quiz. Using fallback content.', 'error');
+                    
+                    // Use fallback quiz
+                    data = generateFallbackQuiz(chapterData);
+                }
+                
+                // Store quiz in app state
+                appState.currentQuiz = data.questions;
+                appState.currentQuizAnswers = new Array(data.questions.length).fill(null);
+                
+                showSection('quiz');
+                renderCurrentQuizQuestion();
+            } catch (error) {
+                showNotification(`Error generating quiz: ${error.message}`, 'error');
+                showSection('flashcard');
+            }
+        }
+
+        // Generate Fallback Quiz
+        function generateFallbackQuiz(chapterData) {
+            const fallbackQuestions = [];
+            
+            // Generate basic questions based on chapter topics
+            for (let i = 0; i < 5; i++) {
+                const topic = chapterData.topics[i % chapterData.topics.length];
+                fallbackQuestions.push({
+                    question: `What is the primary purpose of ${topic} in ${languageContent[appState.selectedLanguage].name}?`,
+                    options: [
+                        "To improve code organization",
+                        "To enhance performance",
+                        "To simplify syntax",
+                        "To enable networking"
+                    ],
+                    correct: "A",
+                    explanation: `${topic} is primarily used to improve code organization in ${languageContent[appState.selectedLanguage].name}.`
+                });
+            }
+            
+            return { questions: fallbackQuestions };
+        }
+
+        // Render Current Quiz Question
+        function renderCurrentQuizQuestion() {
+            if (appState.currentQuiz.length === 0) {
+                showNotification('No quiz questions available', 'error');
+                showSection('flashcard');
+                return;
+            }
+            
+            const currentQuestionIndex = appState.currentQuizAnswers.findIndex(
+                answer => answer === null
+            );
+            
+            if (currentQuestionIndex === -1) {
+                // All questions answered
+                showQuizResults();
+                return;
+            }
+            
+            const question = appState.currentQuiz[currentQuestionIndex];
+            
+            elements.quizContainer.innerHTML = `
+                <div class="quiz-container">
+                    <div class="quiz-question">Question ${currentQuestionIndex + 1} of ${appState.currentQuiz.length}: ${question.question}</div>
+                    <div class="quiz-options">
+                        ${question.options.map((option, index) => {
+                            const letter = String.fromCharCode(65 + index); // A, B, C, D
+                            const isSelected = appState.currentQuizAnswers[currentQuestionIndex] === letter;
+                            return `
+                                <div class="quiz-option ${isSelected ? 'selected' : ''}" data-answer="${letter}">
+                                    ${letter}. ${option}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // Add event listeners to options
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            quizOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    quizOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Store the answer
+                    const answer = option.dataset.answer;
+                    appState.currentQuizAnswers[currentQuestionIndex] = answer;
+                });
+            });
+            
+            // Show submit button if all questions are answered
+            const allAnswered = appState.currentQuizAnswers.every(answer => answer !== null);
+            elements.submitQuizBtn.style.display = allAnswered ? 'inline-block' : 'none';
+        }
+
+        // Submit Quiz
+        function submitQuiz() {
+            // Calculate score
+            let correctCount = 0;
+            const questionResults = [];
+            
+            appState.currentQuiz.forEach((question, index) => {
+                const userAnswer = appState.currentQuizAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                
+                if (isCorrect) {
+                    correctCount++;
+                }
+                
+                questionResults.push({
+                    question: question.question,
+                    userAnswer: userAnswer,
+                    correctAnswer: question.correct,
+                    isCorrect: isCorrect,
+                    explanation: question.explanation
+                });
+            });
+            
+            const score = Math.round((correctCount / appState.currentQuiz.length) * 100);
+            
+            // Store quiz score
+            appState.quizScores[`ch${appState.currentChapter}`] = score;
+            
+            // Save to localStorage
+            saveUserProfile();
+            
+            // Show results
+            showQuizResults(questionResults, score);
+        }
+
+        // Show Quiz Results
+        function showQuizResults(questionResults, score) {
+            if (!questionResults) {
+                // Calculate score if not provided
+                let correctCount = 0;
+                questionResults = [];
+                
+                appState.currentQuiz.forEach((question, index) => {
+                    const userAnswer = appState.currentQuizAnswers[index];
+                    const isCorrect = userAnswer === question.correct;
+                    
+                    if (isCorrect) {
+                        correctCount++;
+                    }
+                    
+                    questionResults.push({
+                        question: question.question,
+                        userAnswer: userAnswer,
+                        correctAnswer: question.correct,
+                        isCorrect: isCorrect,
+                        explanation: question.explanation
+                    });
+                });
+                
+                score = Math.round((correctCount / appState.currentQuiz.length) * 100);
+            }
+            
+            // Display results
+            elements.quizContainer.innerHTML = questionResults.map((result, index) => `
+                <div class="quiz-container">
+                    <div class="quiz-question">Question ${index + 1}: ${result.question}</div>
+                    <div class="quiz-options">
+                        ${appState.currentQuiz[index].options.map((option, optionIndex) => {
+                            const letter = String.fromCharCode(65 + optionIndex);
+                            const isUserAnswer = letter === result.userAnswer;
+                            const isCorrectAnswer = letter === result.correctAnswer;
+                            
+                            let className = 'quiz-option';
+                            if (isCorrectAnswer) {
+                                className += ' correct';
+                            } else if (isUserAnswer) {
+                                className += ' incorrect';
+                            }
+                            
+                            return `
+                                <div class="${className}">
+                                    ${letter}. ${option}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    ${!result.isCorrect ? `
+                        <div class="quiz-feedback">
+                            <strong>Explanation:</strong> ${result.explanation}
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+            
+            elements.quizScore.style.display = 'block';
+            elements.scoreValue.textContent = score;
+            
+            // Show next chapter button if score is good enough
+            if (score >= 70) {
+                elements.nextChapterBtn.style.display = 'inline-block';
+                
+                // Mark chapter as completed
+                if (!appState.completedChapters.includes(appState.currentChapter)) {
+                    appState.completedChapters.push(appState.currentChapter);
+                    saveUserProfile();
+                }
+            } else {
+                elements.nextChapterBtn.style.display = 'none';
+                showNotification('You need to score at least 70% to unlock the next chapter. Try again!', 'error');
+            }
+            
+            elements.submitQuizBtn.style.display = 'none';
+        }
+
+        // Next Chapter
+        function nextChapter() {
+            const chapters = languageContent[appState.selectedLanguage].chapters;
+            const currentChapterIndex = chapters.findIndex(ch => ch.id === appState.currentChapter);
+            
+            if (currentChapterIndex < chapters.length - 1) {
+                appState.currentChapter = chapters[currentChapterIndex + 1].id;
+                startChapter(appState.currentChapter);
+            } else {
+                showNotification('Congratulations! You have completed all chapters.', 'success');
+                showSection('dashboard');
+                updateDashboard();
+            }
+        }
+
+        // Update Learning Patterns
+        function updateLearningPatterns() {
+            const flashcards = Object.values(appState.flashcardData);
+            
+            if (flashcards.length === 0) return;
+            
+            // Calculate average time per flashcard
+            const totalTime = flashcards.reduce((sum, card) => sum + (card.lastViewTime || 0), 0);
+            appState.learningPatterns.averageTimePerFlashcard = totalTime / flashcards.length;
+            
+            // Determine peak performance time (simplified)
+            const hour = new Date().getHours();
+            if (hour >= 9 && hour <= 11) {
+                appState.learningPatterns.peakPerformanceTime = 'morning';
+            } else if (hour >= 14 && hour <= 16) {
+                appState.learningPatterns.peakPerformanceTime = 'afternoon';
+            } else if (hour >= 19 && hour <= 21) {
+                appState.learningPatterns.peakPerformanceTime = 'evening';
+            } else {
+                appState.learningPatterns.peakPerformanceTime = 'other';
+            }
+            
+            // Identify difficult concepts (cards marked as hard)
+            appState.learningPatterns.difficultConcepts = flashcards
+                .filter(card => card.userRating === 'hard')
+                .map(card => card.front.substring(0, 30) + '...');
+            
+            // Calculate retention rate (simplified)
+            const viewedCards = flashcards.filter(card => card.viewCount > 1);
+            if (viewedCards.length > 0) {
+                const correctCards = viewedCards.filter(card => card.correctAnswers >= card.viewCount * 0.7);
+                appState.learningPatterns.retentionRate = correctCards.length / viewedCards.length;
+            }
+            
+            // Calculate learning velocity (simplified)
+            const today = new Date().toISOString().split('T')[0];
+            const todayCards = flashcards.filter(card => 
+                card.lastViewTime && new Date(card.lastViewTime).toISOString().split('T')[0] === today
+            );
+            appState.learningPatterns.learningVelocity = todayCards.length;
+            
+            // Update AI recommendations based on patterns
+            updateAIRecommendationsBasedOnPatterns();
+        }
+
+        // Update AI Recommendations Based on Patterns
+        function updateAIRecommendationsBasedOnPatterns() {
+            // Focus on difficult concepts
+            appState.aiRecommendations.nextFocusAreas = appState.learningPatterns.difficultConcepts.slice(0, 3);
+            
+            // Suggest review topics based on retention rate
+            const lowRetentionCards = Object.values(appState.flashcardData).filter(card => 
+                card.viewCount > 1 && (card.correctAnswers / card.viewCount) < 0.7
+            );
+            appState.aiRecommendations.suggestedReviewTopics = lowRetentionCards
+                .map(card => card.front.substring(0, 30) + '...')
+                .slice(0, 3);
+            
+            // Mark content as adapted if we have enough data
+            appState.aiRecommendations.adaptedContent = Object.keys(appState.flashcardData).length > 20;
+            
+            // Enable personalized hints if user has struggled with concepts
+            appState.aiRecommendations.personalizedHints = appState.learningPatterns.difficultConcepts.length > 0;
+            
+            // Adjust difficulty based on performance
+            const avgScore = Object.values(appState.quizScores).reduce((sum, score) => sum + score, 0) / 
+                             Object.keys(appState.quizScores).length;
+            
+            if (avgScore < 60) {
+                appState.aiRecommendations.difficultyAdjustment = -0.2; // Make easier
+            } else if (avgScore > 85) {
+                appState.aiRecommendations.difficultyAdjustment = 0.2; // Make harder
+            } else {
+                appState.aiRecommendations.difficultyAdjustment = 0; // Keep same
+            }
         }
 
         // Gemini API Call Function
@@ -954,526 +2938,89 @@
             }
         }
 
-        // Topic Input and Question Generation
-        function generateQuestions() {
-            const topic = elements.presentationTopic.value.trim();
-            if (!topic) {
-                showNotification('Please enter a presentation topic', 'error');
-                return;
-            }
-
-            appState.topic = topic;
-            elements.generateQuestionsBtn.disabled = true;
-            elements.generateQuestionsBtn.textContent = 'Preparing questions...';
-            
-            // Set predefined questions with professional options
-            appState.questions = [
-                {
-                    question: "What language do you want for your presentation?",
-                    options: ["Malayalam", "English", "Other"],
-                    variable: "language"
-                },
-                {
-                    question: "What presentation style do you prefer?",
-                    options: ["Professional Corporate", "Creative Modern", "Minimalist Clean", "Bold Impactful", "Academic Formal"],
-                    variable: "presentationStyle"
-                },
-                {
-                    question: "What theme do you prefer?",
-                    options: ["Minimal", "Creative", "Professional", "HighTech", "Corporate", "Academic", "Modern", "Vintage"],
-                    variable: "theme"
-                },
-                {
-                    question: "How many slides do you want?",
-                    options: ["1-4", "1-6", "1-8", "1-10", "1-12", "1-15"],
-                    variable: "slideCount"
-                },
-                {
-                    question: "What structure do you prefer for each slide?",
-                    options: ["Title and content", "Title and bullet points", "Title, subtitle and content", "Title, subtitle and bullet points", "Two-column layout", "Three-column layout"],
-                    variable: "structure"
-                },
-                {
-                    question: "What animation style do you prefer?",
-                    options: ["Simple transitions (fade, slide)", "Advanced animations (rotate, zoom, bounce)", "3D animations (flip, cube, carousel)", "No animation"],
-                    variable: "animationStyle"
-                },
-                {
-                    question: "What level of 3D elements do you want?",
-                    options: ["None", "Basic 3D shapes", "Advanced 3D models", "Interactive 3D elements"],
-                    variable: "advancedAnimations"
-                },
-                {
-                    question: "What interactive elements do you want?",
-                    options: ["None", "Basic (click to reveal)", "Advanced (drag, zoom, rotate)", "Interactive quizzes", "Interactive simulations"],
-                    variable: "interactiveElements"
-                },
-                {
-                    question: "Do you want data visualization?",
-                    options: ["No", "Yes, basic charts", "Yes, advanced charts", "Yes, interactive charts"],
-                    variable: "dataVisualization"
-                },
-                {
-                    question: "Do you want multimedia elements?",
-                    options: ["No", "Audio only", "Video only", "Both audio and video"],
-                    variable: "multimediaElements"
-                },
-                {
-                    question: "What color theme do you prefer?",
-                    options: ["Black and white with blue accent", "Black and white with green accent", "Black and white with red accent", "Black and white with purple accent", "Dark theme with blue", "Dark theme with green", "Dark theme with red", "Dark theme with purple", "Light theme with blue", "Light theme with green", "Light theme with red", "Light theme with purple", "Custom color (select two)"],
-                    variable: "colorTheme"
-                },
-                {
-                    question: "Content Depth Preference?",
-                    options: ["Beginner level", "Intermediate level", "Expert level", "Mixed levels"],
-                    variable: "termsdepth"
-                },
-                {
-                    question: "How long should descriptions be?",
-                    options: ["Very short (1 sentence)", "Short (2-3 sentences)", "Medium (4-5 sentences)", "Long (6-7 sentences)", "Very long (8+ sentences)"],
-                    variable: "descriptionLength"
-                },
-                {
-                    question: "How many bullet points per slide?",
-                    options: ["1-2", "3-4", "5-6", "7-8", "9-10"],
-                    variable: "bulletPointsCount"
-                },
-                {
-                    question: "What font size do you prefer?",
-                    options: ["Very small", "Small", "Medium", "Large", "Very large"],
-                    variable: "fontSize"
-                },
-                {
-                    question: "Do you want to include images?",
-                    options: ["No images", "Icons only", "Illustrations only", "Photographs only", "Mix of icons and illustrations", "Mix of illustrations and photographs", "Mix of all types"],
-                    variable: "includeImages"
-                },
-                {
-                    question: "Which 3D background do you prefer?",
-                    options: ["Stars in Universe", "3D nodes", "3D floating particles", "Abstract shapes", "3D landscape", "3D cityscape", "3D underwater", "3D space nebula", "No background"],
-                    variable: "bgitem"
-                }
-            ];
-            
-            // Initialize answers array for these questions
-            appState.answers = new Array(appState.questions.length).fill('');
-            appState.currentQuestionIndex = 0;
-            
-            // Show the questions section
-            showSection('questions');
-            renderCurrentQuestion();
-        }
-
-        // Render Current Question with Options
-        function renderCurrentQuestion() {
-            const progress = ((appState.currentQuestionIndex + 1) / appState.questions.length) * 100;
-            elements.progressFill.style.width = `${progress}%`;
-            
-            const currentQuestion = appState.questions[appState.currentQuestionIndex];
-            const selectedOption = appState.answers[appState.currentQuestionIndex];
-            
-            elements.questionsContainer.innerHTML = `
-                <div class="question-container">
-                    <h3>Question ${appState.currentQuestionIndex + 1} of ${appState.questions.length}</h3>
-                    <p>${currentQuestion.question}</p>
-                    <div class="option-container">
-                        ${currentQuestion.options.map((option, index) => `
-                            <label class="option ${selectedOption === option ? 'selected' : ''}">
-                                <input type="radio" name="question-${appState.currentQuestionIndex}" value="${option}" ${selectedOption === option ? 'checked' : ''}>
-                                ${option}
-                            </label>
-                        `).join('')}
-                    </div>
-                    <div style="margin-top: 15px;">
-                        ${appState.currentQuestionIndex > 0 ? '<button id="prev-question-btn">Previous</button>' : ''}
-                        ${appState.currentQuestionIndex < appState.questions.length - 1 ? '<button id="next-question-btn">Next</button>' : '<button id="finish-questions-btn">Finish</button>'}
-                    </div>
-                </div>
-            `;
-            
-            // Show custom color pickers if color theme question and custom option is selected
-            if (currentQuestion.variable === "colorTheme" && selectedOption === "Custom color (select two)") {
-                elements.customColorsContainer.classList.add('show');
-            } else {
-                elements.customColorsContainer.classList.remove('show');
-            }
-            
-            // Show language dropdown if language question and "Other" option is selected
-            if (currentQuestion.variable === "language" && selectedOption === "Other") {
-                elements.languageDropdownContainer.classList.add('show');
-                renderLanguageList();
-            } else {
-                elements.languageDropdownContainer.classList.remove('show');
-            }
-            
-            // Add event listeners for options
-            const optionElements = document.querySelectorAll('.option');
-            optionElements.forEach(option => {
-                option.addEventListener('click', () => {
-                    // Remove selected class from all options
-                    optionElements.forEach(opt => opt.classList.remove('selected'));
-                    // Add selected class to clicked option
-                    option.classList.add('selected');
-                    // Update the answer
-                    const input = option.querySelector('input');
-                    input.checked = true;
-                    // Store the answer in appState using the variable name
-                    const variableName = appState.questions[appState.currentQuestionIndex].variable;
-                    appState[variableName] = input.value;
-                    // Also update the answers array for progress tracking
-                    appState.answers[appState.currentQuestionIndex] = input.value;
-                    
-                    // Show/hide custom color pickers based on selection
-                    if (variableName === "colorTheme" && input.value === "Custom color (select two)") {
-                        elements.customColorsContainer.classList.add('show');
-                    } else {
-                        elements.customColorsContainer.classList.remove('show');
-                    }
-                    
-                    // Show/hide language dropdown based on selection
-                    if (variableName === "language" && input.value === "Other") {
-                        elements.languageDropdownContainer.classList.add('show');
-                        renderLanguageList();
-                    } else {
-                        elements.languageDropdownContainer.classList.remove('show');
-                    }
-                });
-            });
-            
-            // Add event listeners for color pickers
-            const colorPicker1 = document.getElementById('custom-color-1');
-            const colorPicker2 = document.getElementById('custom-color-2');
-            const colorCode1 = document.getElementById('color-code-1');
-            const colorCode2 = document.getElementById('color-code-2');
-            
-            if (colorPicker1) {
-                colorPicker1.addEventListener('input', (e) => {
-                    appState.customColor1 = e.target.value;
-                    colorCode1.textContent = e.target.value;
-                });
-            }
-            
-            if (colorPicker2) {
-                colorPicker2.addEventListener('input', (e) => {
-                    appState.customColor2 = e.target.value;
-                    colorCode2.textContent = e.target.value;
-                });
-            }
-            
-            if (appState.currentQuestionIndex > 0) {
-                document.getElementById('prev-question-btn').addEventListener('click', previousQuestion);
-            }
-            
-            if (appState.currentQuestionIndex < appState.questions.length - 1) {
-                document.getElementById('next-question-btn').addEventListener('click', nextQuestion);
-            } else {
-                document.getElementById('finish-questions-btn').addEventListener('click', finishQuestions);
-            }
-        }
-
-        // Render Language List
-        function renderLanguageList(searchTerm = '') {
-            const filteredLanguages = languages.filter(lang => 
-                lang.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-            
-            elements.languageList.innerHTML = filteredLanguages.map(lang => `
-                <div class="language-option ${appState.language === lang ? 'selected' : ''}" data-lang="${lang}">
-                    ${lang}
-                </div>
-            `).join('');
-            
-            // Add event listeners to language options
-            const languageOptions = document.querySelectorAll('.language-option');
-            languageOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    // Remove selected class from all options
-                    languageOptions.forEach(opt => opt.classList.remove('selected'));
-                    // Add selected class to clicked option
-                    option.classList.add('selected');
-                    // Update the selected language
-                    appState.language = option.dataset.lang;
-                    // Update the answer in the answers array
-                    appState.answers[appState.currentQuestionIndex] = appState.language;
-                });
-            });
-        }
-
-        // Question Navigation
-        function nextQuestion() {
-            appState.currentQuestionIndex++;
-            renderCurrentQuestion();
-        }
-
-        function previousQuestion() {
-            appState.currentQuestionIndex--;
-            renderCurrentQuestion();
-        }
-
-        function finishQuestions() {
-            // Check if all questions have answers
-            const allAnswered = appState.answers.every(answer => answer.trim() !== '');
-            if (!allAnswered) {
-                showNotification('Please answer all questions before proceeding', 'error');
-                return;
-            }
-            
-            // Check if custom color option is selected and validate colors
-            if (appState.colorTheme === "Custom color (select two)") {
-                if (!appState.customColor1 || !appState.customColor2) {
-                    showNotification('Please select both custom colors', 'error');
-                    return;
-                }
-            }
-            
-            // Check if language is "Other" and no specific language is selected
-            if (appState.language === "Other" && !appState.selectedLanguage) {
-                showNotification('Please select a specific language', 'error');
-                return;
-            }
-            
-            elements.generatePresentationBtn.disabled = false;
-            showNotification('All questions answered. You can now generate your presentation!');
-        }
-
-        // Presentation Generation
-        async function generatePresentation() {
-            elements.generatePresentationBtn.disabled = true;
-            elements.generatePresentationBtn.textContent = 'Generating presentation...';
-            
-            // Show generating animation
-            showSection('generating');
-            
-            try {
-                // Extract the parameters from appState
-                const { 
-                    topic, 
-                    theme, 
-                    slideCount, 
-                    structure, 
-                    animationStyle, 
-                    colorTheme, 
-                    customColor1, 
-                    customColor2, 
-                    bgitem, 
-                    termsdepth,
-                    descriptionLength,
-                    bulletPointsCount,
-                    fontSize,
-                    includeImages,
-                    language,
-                    presentationStyle,
-                    advancedAnimations,
-                    interactiveElements,
-                    dataVisualization,
-                    multimediaElements
-                } = appState;
-                
-                // Determine the actual language to use
-                let presentationLanguage = language;
-                if (language === "Other") {
-                    presentationLanguage = appState.selectedLanguage || "English";
-                }
-                
-                // Build the color theme string for the prompt
-                let colorThemeString;
-                if (colorTheme === "Custom color (select two)") {
-                    colorThemeString = `Custom colors: ${customColor1} and ${customColor2}`;
-                } else {
-                    colorThemeString = colorTheme;
-                }
-                
-                // Build the prompt
-                const prompt = `Create a complete HTML, CSS, and JavaScript file for a presentation about "${topic}". The presentation should have the following features:
-
-1. Fullscreen functionality: When the user presses the 'F' key, the presentation should enter fullscreen mode.
-2. Navigation: Include arrow key navigation (left and right arrows) to move between slides in both directions.
-3. Design: Use clean, professional designs with glassmorphism UI elements. The UI should have a glass-like appearance with backdrop blur effects.
-4. Color scheme: Use colors suitable for the topic "${topic}". Apply the selected color theme: "${colorThemeString}".
-5. 3D theme background: Slide should have a Three.js 3D background as "${bgitem}".
-6. Content depth: Use "${termsdepth}" for the content language style.
-7. Animations: Use CSS for all animations. The animation style should be "${animationStyle}".
-8. Structure: Each slide should follow the "${structure}" format.
-9. Theme: The overall theme should be "${theme}".
-10. Slide count: Create ${slideCount} slides with well-organized content.
-11. Description length: For slides with paragraphs, use ${descriptionLength}.
-12. Bullet points: For slides with bullet points, include ${bulletPointsCount} bullet points per slide.
-13. Font size: Use ${fontSize} font size throughout the presentation.
-14. Images: ${includeImages}.
-15. Language: Generate the entire presentation in ${presentationLanguage}. All text content, including headings, paragraphs, and bullet points, must be in ${presentationLanguage}.
-16. Presentation style: The presentation should follow a "${presentationStyle}" approach.
-17. 3D elements: Include ${advancedAnimations} in the slides.
-18. Interactive elements: Implement ${interactiveElements} for user engagement.
-19. Data visualization: ${dataVisualization} should be included where appropriate.
-20. Multimedia elements: ${multimediaElements} should be incorporated into the presentation.
-
-Additional requirements:
-- Include slide indicators (dots) at the bottom to show current slide position.
-- Add Previous/Next buttons for navigation.
-- Make the presentation responsive for different screen sizes.
-- Include a watermark "Developed under HOPE Research Team" and "By Justin" in the bottom-right corner of each slide.
-- Use semantic HTML5 tags throughout.
-- Add smooth transitions between slides.
-- Include professional typography with clear hierarchy.
-
-The presentation should be structured as follows:
-1. Title slide with the topic "${topic}" and a subtitle.
-2. Introduction slide explaining key concepts.
-3. Main content slides with detailed information.
-4. Conclusion slide with key takeaways.
-
-3D theme background: Slide should have a Three.js 3D background as "${bgitem}".
-Return only the complete HTML code without any additional explanations.`;
-                
-                const presentationHTML = await callGeminiAPI(prompt);
-                
-                // Ensure watermark is present
-                const finalHTML = ensureWatermark(presentationHTML);
-                
-                appState.generatedPresentation = finalHTML;
-                
-                // Save to history
-                saveToHistory(appState.topic, finalHTML);
-                
-                // Show preview section
-                showSection('preview');
-            } catch (error) {
-                showNotification(`Error generating presentation: ${error.message}`, 'error');
-                elements.generatePresentationBtn.disabled = false;
-                elements.generatePresentationBtn.textContent = 'Generate Presentation';
-                showSection('questions');
-            }
-        }
-
-        // Ensure watermark is present in the presentation
-        function ensureWatermark(html) {
-            // Check if watermark is already present
-            if (html.includes('Developed under HOPE Research Team') && html.includes('By Justin')) {
-                return html;
-            }
-            
-            // Find each slide and add watermark if not present
-            const slidePattern = /<div class="slide-content">(.*?)<\/div>/gs;
-            const watermark = '<div class="watermark">Developed under HOPE Research Team<br> by Justin</div>';
-            
-            return html.replace(slidePattern, (match, content) => {
-                if (!content.includes('watermark')) {
-                    return `<div class="slide-content">${content}${watermark}</div>`;
-                }
-                return match;
-            });
-        }
-
-        // Preview Function
-        function previewPresentation() {
-            const newWindow = window.open();
-            newWindow.document.write(appState.generatedPresentation);
-            newWindow.document.close();
-        }
-
-        // History Management
-        function saveToHistory(topic, presentation) {
-            const historyItem = {
-                id: Date.now(),
-                topic: topic,
-                timestamp: new Date().toISOString(),
-                presentation: presentation
+        // Save User Profile to LocalStorage
+        function saveUserProfile() {
+            const userProfile = {
+                userName: appState.userName,
+                userKey: appState.userKey,
+                createdDate: appState.createdDate,
+                learningGoal: appState.learningGoal,
+                sessionLength: appState.sessionLength,
+                selectedLanguage: appState.selectedLanguage,
+                currentChapter: appState.currentChapter,
+                completedChapters: appState.completedChapters,
+                flashcardData: appState.flashcardData,
+                quizScores: appState.quizScores,
+                timeSpent: appState.timeSpent,
+                learningPatterns: appState.learningPatterns,
+                aiRecommendations: appState.aiRecommendations
             };
             
-            appState.presentationHistory.unshift(historyItem);
+            localStorage.setItem('userProfile', JSON.stringify(userProfile));
+        }
+
+        // Export Learning Data
+        function exportLearningData() {
+            const userProfile = {
+                userName: appState.userName,
+                userKey: appState.userKey,
+                createdDate: appState.createdDate,
+                learningGoal: appState.learningGoal,
+                selectedLanguage: appState.selectedLanguage,
+                currentChapter: appState.currentChapter,
+                completedChapters: appState.completedChapters,
+                flashcardData: appState.flashcardData,
+                quizScores: appState.quizScores,
+                timeSpent: appState.timeSpent,
+                learningPatterns: appState.learningPatterns,
+                aiRecommendations: appState.aiRecommendations
+            };
             
-            // Keep only the last 10 presentations
-            if (appState.presentationHistory.length > 10) {
-                appState.presentationHistory = appState.presentationHistory.slice(0, 10);
-            }
+            const dataStr = JSON.stringify(userProfile, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
             
-            localStorage.setItem('presentationHistory', JSON.stringify(appState.presentationHistory));
-            loadHistory();
-        }
-
-        function loadHistory() {
-            const savedHistory = localStorage.getItem('presentationHistory');
-            if (savedHistory) {
-                appState.presentationHistory = JSON.parse(savedHistory);
-                renderHistory();
-            }
-        }
-
-        function renderHistory() {
-            if (appState.presentationHistory.length === 0) {
-                elements.historyContainer.innerHTML = '<p>No presentation history yet.</p>';
-                return;
-            }
+            const exportFileDefaultName = `codeflash-ai-data-${appState.userName}-${new Date().toISOString().split('T')[0]}.json`;
             
-            elements.historyContainer.innerHTML = appState.presentationHistory.map(item => `
-                <div class="history-item">
-                    <div>
-                        <h3>${item.topic}</h3>
-                        <p>${new Date(item.timestamp).toLocaleString()}</p>
-                    </div>
-                    <div>
-                        <button onclick="loadPresentationFromHistory(${item.id})">Load</button>
-                        <button onclick="deleteHistoryItem(${item.id})">Delete</button>
-                    </div>
-                </div>
-            `).join('');
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showNotification('Learning data exported successfully');
         }
 
-        function loadPresentationFromHistory(id) {
-            const item = appState.presentationHistory.find(item => item.id === id);
-            if (item) {
-                appState.generatedPresentation = item.presentation;
-                appState.topic = item.topic;
-                showSection('preview');
+        // Reset Progress
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all your progress? This action cannot be undone.')) {
+                // Reset progress but keep profile info
+                appState.currentChapter = 1;
+                appState.completedChapters = [];
+                appState.flashcardData = {};
+                appState.quizScores = {};
+                appState.timeSpent = {};
+                appState.learningPatterns = {
+                    averageTimePerFlashcard: 0,
+                    peakPerformanceTime: '',
+                    difficultConcepts: [],
+                    preferredLearningStyle: '',
+                    retentionRate: 0,
+                    commonMistakes: []
+                };
+                appState.aiRecommendations = {
+                    nextFocusAreas: [],
+                    suggestedReviewTopics: [],
+                    adaptedContent: false,
+                    personalizedHints: false,
+                    difficultyAdjustment: 0
+                };
+                
+                // Save to localStorage
+                saveUserProfile();
+                
+                showNotification('Progress reset successfully');
+                showSection('dashboard');
+                updateDashboard();
             }
-        }
-
-        function deleteHistoryItem(id) {
-            appState.presentationHistory = appState.presentationHistory.filter(item => item.id !== id);
-            localStorage.setItem('presentationHistory', JSON.stringify(appState.presentationHistory));
-            loadHistory();
-            showNotification('Presentation removed from history');
-        }
-
-        function clearHistory() {
-            if (confirm('Are you sure you want to clear all presentation history?')) {
-                appState.presentationHistory = [];
-                localStorage.removeItem('presentationHistory');
-                renderHistory();
-                showNotification('Presentation history cleared');
-            }
-        }
-
-        // Reset for New Presentation
-        function resetForNewPresentation() {
-            appState.topic = '';
-            appState.theme = '';
-            appState.slideCount = '';
-            appState.structure = '';
-            appState.animationStyle = '';
-            appState.colorTheme = '';
-            appState.customColor1 = '#3498db';
-            appState.customColor2 = '#e74c3c';
-            appState.descriptionLength = '';
-            appState.bulletPointsCount = '';
-            appState.fontSize = '';
-            appState.includeImages = '';
-            appState.language = 'English';
-            appState.selectedLanguage = '';
-            appState.presentationStyle = '';
-            appState.advancedAnimations = '';
-            appState.interactiveElements = '';
-            appState.dataVisualization = '';
-            appState.multimediaElements = '';
-            appState.questions = [];
-            appState.answers = [];
-            appState.currentQuestionIndex = 0;
-            elements.presentationTopic.value = '';
-            document.getElementById('custom-color-1').value = '#3498db';
-            document.getElementById('custom-color-2').value = '#e74c3c';
-            document.getElementById('color-code-1').textContent = '#3498db';
-            document.getElementById('color-code-2').textContent = '#e74c3c';
-            showSection('topic');
         }
 
         // Utility Functions
