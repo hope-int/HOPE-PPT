@@ -153,6 +153,23 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
+        /* Fix for select dropdown styling */
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.7rem center;
+            background-size: 1.5em;
+            padding-right: 2.5rem;
+        }
+
+        select option {
+            background: #1a1a2e;
+            color: #ffffff;
+        }
+
         button {
             background: linear-gradient(45deg, #3498db, #2980b9);
             color: white;
@@ -1491,6 +1508,8 @@
             projectQuestions: [],
             projectAnswers: [],
             projectFiles: [],
+            includeCurrentDate: false,
+            currentDateTime: '',
             
             // Classification questions state
             classificationQuestions: [],
@@ -1791,8 +1810,8 @@
             finishPptClassificationBtn: document.getElementById('finish-ppt-classification-btn')
         };
 
-        // Gemini API Configuration
-        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent';
+        // Gemini API Configuration - Updated with correct endpoint
+        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
         // Initialize Three.js Background
         function initThreeBackground() {
@@ -2005,14 +2024,18 @@
             }, 3000);
         }
 
-        // Gemini API Call Function
+        // Gemini API Call Function - Updated with proper error handling
         async function callGeminiAPI(prompt) {
             try {
-                const response = await fetch(GEMINI_API_ENDPOINT, {
+                // Validate API key
+                if (!appState.apiKey || appState.apiKey.length < 20) {
+                    throw new Error('Invalid or missing API key. Please check your API key and try again.');
+                }
+
+                const response = await fetch(`${GEMINI_API_ENDPOINT}?key=${appState.apiKey}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-goog-api-key': appState.apiKey
                     },
                     body: JSON.stringify({
                         contents: [
@@ -2023,20 +2046,67 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        generationConfig: {
+                            temperature: 0.7,
+                            topK: 40,
+                            topP: 0.95,
+                            maxOutputTokens: 8192,
+                        }
                     })
                 });
 
+                // Check if response is ok
                 if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error?.message || 'API request failed');
+                    const errorData = await response.json().catch(() => ({}));
+                    const errorMessage = errorData.error?.message || errorData.error?.details || `HTTP ${response.status}: ${response.statusText}`;
+                    
+                    // Handle specific error cases
+                    if (response.status === 400) {
+                        if (errorMessage.includes('API key')) {
+                            throw new Error('Invalid API key. Please check your API key and try again.');
+                        } else if (errorMessage.includes('quota')) {
+                            throw new Error('API quota exceeded. Please try again later or check your billing settings.');
+                        } else {
+                            throw new Error(`Bad request: ${errorMessage}`);
+                        }
+                    } else if (response.status === 403) {
+                        throw new Error('Access forbidden. Please check your API key permissions.');
+                    } else if (response.status === 429) {
+                        throw new Error('Too many requests. Please wait a moment and try again.');
+                    } else if (response.status >= 500) {
+                        throw new Error('Server error. Please try again later.');
+                    } else {
+                        throw new Error(errorMessage);
+                    }
                 }
 
                 const data = await response.json();
-                return data.candidates[0].content.parts[0].text;
+                
+                // Check if response has the expected structure
+                if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                    throw new Error('Invalid response format from API');
+                }
+
+                const content = data.candidates[0].content;
+                
+                // Check if content has parts
+                if (!content.parts || !content.parts[0] || !content.parts[0].text) {
+                    throw new Error('No content received from API');
+                }
+
+                return content.parts[0].text;
             } catch (error) {
                 console.error('Gemini API Error:', error);
-                throw error;
+                
+                // Re-throw with more user-friendly message
+                if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    throw new Error('Network error. Please check your internet connection and try again.');
+                } else if (error.name === 'AbortError') {
+                    throw new Error('Request timed out. Please try again.');
+                } else {
+                    throw error;
+                }
             }
         }
 
@@ -3875,6 +3945,11 @@ Do not include any text before or after the JSON. The response must be pure JSON
                     variable: "projectDeployment"
                 },
                 {
+                    question: "Do you want to include the current date and time in the project?",
+                    options: ["Yes, include current date and time", "No, don't include date and time"],
+                    variable: "includeCurrentDate"
+                },
+                {
                     question: "What font style do you prefer for documentation?",
                     options: ["Normal", "Handwritten", "Typewriter", "Other"],
                     variable: "projectFont"
@@ -3987,6 +4062,16 @@ Do not include any text before or after the JSON. The response must be pure JSON
                         } else {
                             elements.projectFontListContainer.classList.remove('show');
                         }
+                        
+                        // Handle includeCurrentDate option
+                        if (variableName === "includeCurrentDate") {
+                            appState.includeCurrentDate = input.value === "Yes, include current date and time";
+                            if (appState.includeCurrentDate) {
+                                // Get current date and time
+                                const now = new Date();
+                                appState.currentDateTime = now.toLocaleString();
+                            }
+                        }
                     });
                 });
             }
@@ -4082,7 +4167,9 @@ Do not include any text before or after the JSON. The response must be pure JSON
                     projectFont,
                     selectedProjectFont,
                     projectClassificationQuestions,
-                    projectClassificationAnswers
+                    projectClassificationAnswers,
+                    includeCurrentDate,
+                    currentDateTime
                 } = appState;
                 
                 // Determine the actual font to use
@@ -4095,6 +4182,12 @@ Do not include any text before or after the JSON. The response must be pure JSON
                 let classificationInfo = '';
                 for (let i = 0; i < projectClassificationQuestions.length; i++) {
                     classificationInfo += `Q: ${projectClassificationQuestions[i].question}\nA: ${projectClassificationAnswers[i]}\n\n`;
+                }
+                
+                // Add date information if requested
+                let dateInfo = '';
+                if (includeCurrentDate && currentDateTime) {
+                    dateInfo = `The current date and time is: ${currentDateTime}. Please include this information in the project documentation where appropriate.`;
                 }
                 
                 // Initialize project files object
@@ -4111,6 +4204,8 @@ Do not include any text before or after the JSON. The response must be pure JSON
 
 The user has provided the following additional classification information:
  ${classificationInfo}
+
+ ${dateInfo}
 
 The project specifications are:
 - Level: ${projectLevel}
@@ -4146,6 +4241,8 @@ Return only the complete HTML code without any additional explanations.`;
 The user has provided the following additional classification information:
  ${classificationInfo}
 
+ ${dateInfo}
+
 The project specifications are:
 - Level: ${projectLevel}
 - Type: ${projectType}
@@ -4175,6 +4272,8 @@ Return only the complete HTML code without any additional explanations.`;
 
 The user has provided the following additional classification information:
  ${classificationInfo}
+
+ ${dateInfo}
 
 The project specifications are:
 - Level: ${projectLevel}
@@ -4211,6 +4310,8 @@ Return only the complete README.md content without any additional explanations.`
 The user has provided the following additional classification information:
  ${classificationInfo}
 
+ ${dateInfo}
+
 The project specifications are:
 - Level: ${projectLevel}
 - Type: ${projectType}
@@ -4245,11 +4346,18 @@ Return only the complete SVG code without any additional explanations.`;
 
         // Generate Source Code based on project type
         async function generateSourceCode() {
-            const { projectLevel, projectType, projectTopic, projectLanguages, projectFramework, projectDatabase } = appState;
+            const { projectLevel, projectType, projectTopic, projectLanguages, projectFramework, projectDatabase, includeCurrentDate, currentDateTime } = appState;
             
             try {
                 // Generate main application file
+                let dateInfo = '';
+                if (includeCurrentDate && currentDateTime) {
+                    dateInfo = `The current date and time is: ${currentDateTime}. Please include this information in the code comments where appropriate.`;
+                }
+                
                 const mainFilePrompt = `Create the main application file for a ${projectLevel} ${projectType} project about "${projectTopic}" using ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages} and ${projectFramework}. 
+
+ ${dateInfo}
 
 The project should:
 1. Be fully functional with proper error handling
@@ -4271,11 +4379,15 @@ Return only the complete source code without any additional explanations.`;
                     // Generate CSS file
                     const cssPrompt = `Create a CSS file for a ${projectLevel} ${projectType} about "${projectTopic}" with modern styling, responsive design, and animations. Use the ${appState.projectUI} design approach.
 
+ ${dateInfo}
+
 Return only the complete CSS code without any additional explanations.`;
                     appState.generatedProject.sourceCode["styles.css"] = await callGeminiAPI(cssPrompt);
                     
                     // Generate JavaScript file
                     const jsPrompt = `Create a JavaScript file for a ${projectLevel} ${projectType} about "${projectTopic}" with modern ES6+ syntax, proper error handling, and interactive features.
+
+ ${dateInfo}
 
 Return only the complete JavaScript code without any additional explanations.`;
                     appState.generatedProject.sourceCode["script.js"] = await callGeminiAPI(jsPrompt);
@@ -4289,6 +4401,8 @@ Return only the complete JavaScript code without any additional explanations.`;
                     if (projectLanguages.includes("JavaScript/TypeScript") || projectFramework === "React" || projectFramework === "Angular" || projectFramework === "Vue.js" || projectFramework === "Express.js") {
                         const packageJsonPrompt = `Create a package.json file for a ${projectLevel} ${projectType} about "${projectTopic}" using ${projectFramework}. Include appropriate dependencies, scripts, and project metadata.
 
+ ${dateInfo}
+
 Return only the complete package.json content without any additional explanations.`;
                         appState.generatedProject.sourceCode["package.json"] = await callGeminiAPI(packageJsonPrompt);
                     }
@@ -4297,6 +4411,8 @@ Return only the complete package.json content without any additional explanation
                 // Generate database configuration file if database is needed
                 if (projectDatabase !== "No database needed") {
                     const dbConfigPrompt = `Create a database configuration file for a ${projectLevel} ${projectType} about "${projectTopic}" using ${projectDatabase}. Include connection settings, schema definition, and sample queries.
+
+ ${dateInfo}
 
 Return only the complete configuration code without any additional explanations.`;
                     
@@ -4445,6 +4561,8 @@ Return only the complete configuration code without any additional explanations.
             appState.currentProjectClassificationQuestionIndex = 0;
             appState.generatedProject = {};
             appState.projectFiles = [];
+            appState.includeCurrentDate = false;
+            appState.currentDateTime = '';
             elements.projectTopicInput.value = '';
             elements.projectLevelSelect.value = '';
             showSection('projectTopic');
