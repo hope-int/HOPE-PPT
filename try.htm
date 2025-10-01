@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Essential Meta Tags -->
-    <title>HOPE-INT-CORE | AI-Powered Presentation Generator</title>
-    <meta name="description" content="Create stunning interactive presentations with AI. HOPE-INT-CORE generates custom 3D presentations using Gemini AI with beautiful animations and themes.">
-    <meta name="keywords" content="presentation generator, AI presentations, 3D slides, HOPE-INT-CORE, Gemini AI, interactive presentations, slide creator">
-    <meta name="author" content="Justin">
+    <title>CodeKids AI | Learn Programming the Fun Way!</title>
+    <meta name="description" content="Learn programming with AI-powered flashcards designed for kids">
+    <meta name="keywords" content="programming, learning, flashcards, OOP, Java, Python, kids, children">
+    <meta name="author" content="CodeKids AI Team">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://HOPE-INT-CORE.vercel.app">
+    <link rel="canonical" href="https://codekids-ai.vercel.app">
     
     <!-- Open Graph (OG) Tags -->
-    <meta property="og:title" content="HOPE-INT-CORE | AI-Powered Presentation Generator">
-    <meta property="og:description" content="Create stunning interactive presentations with AI. HOPE-INT-CORE generates custom 3D presentations using Gemini AI with beautiful animations and themes.">
-    <meta property="og:image" content="https://HOPE-INT-CORE.vercel.app/images/og-preview.jpg">
-    <meta property="og:url" content="https://HOPE-INT-CORE.vercel.app">
+    <meta property="og:title" content="CodeKids AI | Learn Programming the Fun Way!">
+    <meta property="og:description" content="Learn programming with AI-powered flashcards designed for kids">
+    <meta property="og:image" content="https://i.ibb.co/3yMXpZ71/codekids-ai-preview.jpg">
+    <meta property="og:url" content="https://codekids-ai.vercel.app">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="HOPE-INT-CORE">
+    <meta property="og:site_name" content="CodeKids AI">
     <meta property="og:locale" content="en_US">
     
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="HOPE-INT-CORE | AI-Powered Presentation Generator">
-    <meta name="twitter:description" content="Create stunning interactive presentations with AI. HOPE-INT-CORE generates custom 3D presentations using Gemini AI with beautiful animations and themes.">
-    <meta name="twitter:image" content="https://HOPE-INT-CORE.vercel.app/images/twitter-preview.jpg">
-    <meta name="twitter:site" content="@hopeppt">
-    <meta name="twitter:creator" content="@justindev">
+    <meta name="twitter:title" content="CodeKids AI | Learn Programming the Fun Way!">
+    <meta name="twitter:description" content="Learn programming with AI-powered flashcards designed for kids">
+    <meta name="twitter:image" content="https://codekids-ai.vercel.app/images/twitter-preview.jpg">
+    <meta name="twitter:site" content="@codekidsai">
     
     <!-- Additional Meta Tags -->
-    <meta name="theme-color" content="#3498db">
-    <meta name="msapplication-TileColor" content="#3498db">
-    <meta name="application-name" content="HOPE-INT-CORE">
-    <meta name="apple-mobile-web-app-title" content="HOPE-INT-CORE">
+    <meta name="theme-color" content="#FF6B6B">
+    <meta name="msapplication-TileColor" content="#FF6B6B">
+    <meta name="application-name" content="CodeKids AI">
+    <meta name="apple-mobile-web-app-title" content="CodeKids AI">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
@@ -44,21 +41,25 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
     
-    <!-- Existing scripts and styles -->
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-        <style>
-        /* All existing styles remain unchanged */
+    
+    <style>
+        /* Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Fredoka', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #000000, #1a1a2e);
-            color: #ffffff;
+            background: linear-gradient(135deg, #FF9A8B, #FF6B6B, #FFC837);
+            color: #333;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -79,26 +80,32 @@
 
         .container {
             width: 100%;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(15px);
-            border-radius: 20px;
+            border-radius: 30px;
             padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 80px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 3px solid #FF9A8B;
+            margin-bottom: 100px;
         }
 
         h1 {
             text-align: center;
             margin-bottom: 30px;
-            font-size: 2.5rem;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(45deg, #3498db, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #FF6B6B;
+            text-shadow: 2px 2px 0px #FFC837;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+            color: #FF6B6B;
+            font-weight: 600;
         }
 
         .section {
@@ -116,61 +123,62 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
+            color: #FF6B6B;
+            font-size: 1.2rem;
         }
 
-        input, textarea {
+        input, textarea, select {
             width: 100%;
-            padding: 12px;
+            padding: 15px;
             border: none;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            font-size: 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
+            font-size: 1.1rem;
+            font-family: 'Fredoka', sans-serif;
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(52, 152, 219, 0.3);
+            border: 2px solid #FF9A8B;
             transition: all 0.3s ease;
         }
 
-        input:focus, textarea:focus {
+        input:focus, textarea:focus, select:focus {
             outline: none;
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
-            border-color: rgba(52, 152, 219, 0.6);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.4);
+            border-color: #FF6B6B;
         }
 
         input::placeholder, textarea::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: #FF9A8B;
         }
 
         button {
-            background: linear-gradient(45deg, #3498db, #2980b9);
+            background: linear-gradient(45deg, #FF6B6B, #FF9A8B);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 12px;
+            padding: 15px 30px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 1.2rem;
             font-weight: 600;
             transition: all 0.3s ease;
-            margin-right: 10px;
-            margin-top: 10px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            margin-right: 15px;
+            margin-top: 15px;
+            font-family: 'Fredoka', sans-serif;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
         }
 
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
-            background: linear-gradient(45deg, #2980b9, #3498db);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+            background: linear-gradient(45deg, #FF9A8B, #FF6B6B);
         }
 
         button:disabled {
@@ -188,20 +196,21 @@
         }
 
         .loading-text {
-            font-size: 2rem;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
             animation: pulse 1.5s infinite;
             text-align: center;
-            color: #3498db;
+            color: #FF6B6B;
+            font-weight: 600;
         }
 
         .loading-credit {
-            font-size: 1.2rem;
-            margin-top: 10px;
+            font-size: 1.4rem;
+            margin-top: 15px;
             opacity: 0;
             animation: fadeIn 1s forwards;
             animation-delay: 0.5s;
-            color: rgba(255, 255, 255, 0.8);
+            color: #FF9A8B;
         }
 
         .loading-credit:nth-child(3) {
@@ -209,75 +218,70 @@
         }
 
         @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
+            0% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.6; transform: scale(1); }
         }
 
         .question-container {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(52, 152, 219, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 25px;
+            margin-bottom: 25px;
+            border: 3px solid #FF9A8B;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .progress-bar {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            margin-bottom: 20px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            margin-bottom: 25px;
             overflow: hidden;
+            border: 2px solid #FF9A8B;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(45deg, #3498db, #2980b9);
+            background: linear-gradient(45deg, #FF6B6B, #FFC837);
             width: 0%;
-            transition: width 0.3s ease;
+            transition: width 0.5s ease;
         }
 
         .history-item {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 10px;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(52, 152, 219, 0.3);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid #FF9A8B;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .history-item button {
-            padding: 8px 12px;
-            font-size: 14px;
-        }
-
-        .preview-container {
-            margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            padding: 10px 15px;
+            font-size: 1rem;
         }
 
         .notification {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(52, 152, 219, 0.9);
+            background: rgba(255, 107, 107, 0.9);
             backdrop-filter: blur(10px);
             color: white;
-            padding: 15px 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            padding: 20px 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             transform: translateX(120%);
             transition: transform 0.3s ease;
             z-index: 1000;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-size: 1.1rem;
         }
 
         .notification.show {
@@ -285,7 +289,7 @@
         }
 
         .notification.error {
-            background: rgba(231, 76, 60, 0.9);
+            background: rgba(255, 59, 48, 0.9);
         }
 
         .generating-animation {
@@ -297,15 +301,16 @@
         }
 
         .generating-text {
-            font-size: 2rem;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
             text-align: center;
-            color: #3498db;
+            color: #FF6B6B;
+            font-weight: 600;
         }
 
         .lottie-container {
-            width: 200px;
-            height: 200px;
+            width: 250px;
+            height: 250px;
             margin: 20px 0;
         }
 
@@ -314,39 +319,45 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(15px);
             padding: 15px;
             text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(52, 152, 219, 0.3);
+            color: #FF6B6B;
+            font-size: 1rem;
+            border-top: 3px solid #FF9A8B;
             z-index: 100;
+            font-weight: 600;
         }
 
         .option-container {
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .option {
             display: block;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(52, 152, 219, 0.3);
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 3px solid #FF9A8B;
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
+            color: #333;
+            font-size: 1.1rem;
         }
 
         .option:hover {
-            background: rgba(52, 152, 219, 0.2);
-            border-color: rgba(52, 152, 219, 0.6);
+            background: rgba(255, 154, 139, 0.3);
+            border-color: #FF6B6B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
         }
 
         .option.selected {
-            background: rgba(52, 152, 219, 0.3);
-            border-color: #3498db;
+            background: rgba(255, 107, 107, 0.3);
+            border-color: #FF6B6B;
+            transform: scale(1.02);
         }
 
         .option input[type="radio"] {
@@ -359,7 +370,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #000000, #1a1a2e);
+            background: linear-gradient(135deg, #FF9A8B, #FF6B6B, #FFC837);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -370,118 +381,591 @@
 
         .splash-content {
             text-align: center;
-            max-width: 600px;
+            max-width: 700px;
             padding: 40px;
         }
 
         .splash-title {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #3498db, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            color: white;
+            text-shadow: 2px 2px 0px #FF6B6B;
+            font-weight: 700;
         }
 
         .splash-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            color: white;
+            font-weight: 500;
         }
 
         .splash-animation {
-            width: 300px;
-            height: 300px;
+            width: 350px;
+            height: 350px;
             margin: 20px auto;
         }
 
         .splash-footer {
             margin-top: 40px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
-            border-radius: 15px;
-            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .splash-continue {
-            margin-top: 30px;
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            background: linear-gradient(45deg, #3498db, #2980b9);
+            margin-top: 40px;
+            padding: 18px 40px;
+            font-size: 1.3rem;
+            background: white;
+            color: #FF6B6B;
             border: none;
-            color: white;
             border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
 
         .splash-continue:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(52, 152, 219, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .history-btn {
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
+        /* Language Selection Styles */
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .language-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 25px;
+            border: 3px solid #FF9A8B;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            color: #333;
+        }
+
+        .language-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.3);
+            border-color: #FF6B6B;
+        }
+
+        .language-card.selected {
+            background: rgba(255, 107, 107, 0.3);
+            border-color: #FF6B6B;
+            transform: scale(1.05);
+        }
+
+        .language-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .language-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #FF6B6B;
+        }
+
+        .language-description {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Flashcard Styles */
+        .flashcard-container {
+            perspective: 1000px;
+            width: 100%;
+            height: 450px;
+            margin: 25px 0;
+        }
+
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+            cursor: pointer;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 3px solid #FF9A8B;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .flashcard-back {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #FF6B6B;
+            font-weight: 600;
+        }
+
+        .flashcard-content {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .flashcard-code {
+            background: rgba(255, 154, 139, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            text-align: left;
+            overflow-x: auto;
+            border: 2px dashed #FF9A8B;
+        }
+
+        .flashcard-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        .difficulty-indicator {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            justify-content: center;
+        }
+
+        .difficulty-label {
+            font-size: 1.2rem;
+            margin-right: 10px;
+            color: #FF6B6B;
+            font-weight: 600;
+        }
+
+        .difficulty-dot {
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #3498db, #2980b9);
+            margin: 0 5px;
+        }
+
+        .difficulty-easy { background-color: #4CAF50; }
+        .difficulty-medium { background-color: #FFC837; }
+        .difficulty-hard { background-color: #FF6B6B; }
+
+        /* Chapter Progress Styles */
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .chapter-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 25px;
+            border: 3px solid #FF9A8B;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #333;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.3);
+            border-color: #FF6B6B;
+        }
+
+        .chapter-card.completed {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+        }
+
+        .chapter-card.current {
+            background: rgba(255, 107, 107, 0.2);
+            border-color: #FF6B6B;
+        }
+
+        .chapter-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #FF6B6B;
+            font-weight: 600;
+        }
+
+        .chapter-description {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .chapter-progress {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            border: 2px solid #FF9A8B;
+        }
+
+        .chapter-progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #FF6B6B, #FFC837);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .chapter-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Dashboard Styles */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 25px;
+            border: 3px solid #FF9A8B;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .dashboard-title {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: #FF6B6B;
+            font-weight: 600;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed rgba(255, 154, 139, 0.5);
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: #FF6B6B;
+            font-size: 1.2rem;
+        }
+
+        .profile-btn {
+            position: fixed;
+            bottom: 120px;
+            right: 20px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #FF6B6B, #FF9A8B);
             color: white;
             border: none;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 24px;
+            font-size: 30px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
             z-index: 99;
             transition: all 0.3s ease;
         }
 
-        .history-btn:hover {
+        .profile-btn:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
         }
 
-        /* Custom color picker styles */
-        .custom-colors-container {
-            margin-top: 15px;
-            display: none;
+        /* Tutorial Section Styles */
+        .tutorial-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
         }
-        
-        .custom-colors-container.show {
-            display: block;
-            animation: fadeIn 0.3s ease-in-out;
+
+        .tutorial-header {
+            text-align: center;
+            margin-bottom: 40px;
         }
-        
-        .color-picker-group {
+
+        .tutorial-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #FF6B6B;
+            font-weight: 700;
+        }
+
+        .tutorial-header p {
+            font-size: 1.4rem;
+            color: #666;
+        }
+
+        .tutorial-steps {
             display: flex;
-            align-items: center;
-            margin-bottom: 10px;
+            flex-direction: column;
+            gap: 30px;
         }
-        
-        .color-picker-group label {
-            min-width: 120px;
-            margin-right: 10px;
+
+        .tutorial-step {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 30px;
+            border: 3px solid #FF9A8B;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            color: #333;
         }
-        
-        .color-picker {
+
+        .step-number {
+            display: inline-block;
             width: 50px;
-            height: 40px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
+            height: 50px;
+            background: linear-gradient(45deg, #FF6B6B, #FF9A8B);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.5rem;
         }
-        
-        .color-code {
-            margin-left: 10px;
-            font-family: monospace;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 10px;
-            border-radius: 5px;
+
+        .step-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #FF6B6B;
+            font-weight: 600;
+        }
+
+        .step-content p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        .step-content ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .step-content li {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        .tutorial-actions {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .tutorial-note {
+            background: rgba(255, 154, 139, 0.2);
+            border-left: 5px solid #FF6B6B;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .tutorial-note p {
+            margin: 0;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 30px;
+            border: 3px solid #FF9A8B;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .quiz-question {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            color: #FF6B6B;
+            font-weight: 600;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.8);
+            border: 3px solid #FF9A8B;
+            border-radius: 20px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255, 154, 139, 0.3);
+            border-color: #FF6B6B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .quiz-option.selected {
+            background: rgba(255, 107, 107, 0.3);
+            border-color: #FF6B6B;
+            transform: scale(1.02);
+        }
+
+        .quiz-option.correct {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: #4CAF50;
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(255, 59, 48, 0.3);
+            border-color: #FF3B30;
+        }
+
+        .quiz-feedback {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 154, 139, 0.2);
+            border-left: 5px solid #FF6B6B;
+            font-size: 1.2rem;
+        }
+
+        .quiz-score {
+            text-align: center;
+            font-size: 2rem;
+            margin: 25px 0;
+            color: #FF6B6B;
+            font-weight: 700;
+        }
+
+        /* Achievement Badge */
+        .achievement-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #FFC837, #FF6B6B);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* Character Avatar */
+        .character-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #FF6B6B, #FF9A8B);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            margin: 0 auto 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Fun Elements */
+        .fun-decoration {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 200, 55, 0.5);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .fun-decoration:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            width: 80px;
+            height: 80px;
+        }
+
+        .fun-decoration:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            width: 60px;
+            height: 60px;
+        }
+
+        .fun-decoration:nth-child(3) {
+            bottom: 15%;
+            left: 8%;
+            width: 70px;
+            height: 70px;
+        }
+
+        .fun-decoration:nth-child(4) {
+            bottom: 25%;
+            right: 5%;
+            width: 90px;
+            height: 90px;
         }
 
         @media (max-width: 768px) {
@@ -490,7 +974,7 @@
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             
             button {
@@ -499,178 +983,909 @@
             }
             
             .splash-title {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             
             .splash-subtitle {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
+            }
+
+            .tutorial-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .step-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .language-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chapter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
             }
         }
-        </style>
+    </style>
 </head>
 <body>
+    <!-- Fun Decorations -->
+    <div class="fun-decoration"></div>
+    <div class="fun-decoration"></div>
+    <div class="fun-decoration"></div>
+    <div class="fun-decoration"></div>
+    
     <!-- Splash Screen -->
     <div id="splash-screen" class="splash-screen">
         <div class="splash-content">
-            <h1 class="splash-title">HOPE-INT-CORE</h1>
-            <p class="splash-subtitle">Create stunning interactive presentations with AI</p>
+            <h1 class="splash-title">🚀 CodeKids AI 🚀</h1>
+            <p class="splash-subtitle">Learn programming the fun way with your AI friend!</p>
             <div class="splash-animation">
                 <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_DMgKk1.json" background="transparent" speed="1" loop autoplay></lottie-player>
             </div>
             <div class="splash-footer">
-                <p>Developed by Justin</p>
-                <p>Under HOPE Research & development Team</p>
+                <p>🎮 Play, Learn, and Code! 🎮</p>
+                <p>🌟 Your adventure starts here! 🌟</p>
             </div>
-            <button class="splash-continue" id="continue-to-app">Continue to App</button>
+            <button class="splash-continue" id="continue-to-app">Let's Start! 🎉</button>
         </div>
     </div>
 
     <div id="three-background"></div>
     
     <div class="container">
-        <h1>HOPE-INT-CORE</h1>
+        <h1>🚀 CodeKids AI 🚀</h1>
+        
+        <!-- Tutorial Section -->
+        <div id="tutorial-section" class="section">
+            <div class="tutorial-section">
+                <div class="tutorial-header">
+                    <h2>Welcome to CodeKids AI! 🎉</h2>
+                    <p>Let's get you started on your coding adventure!</p>
+                </div>
+                
+                <div class="tutorial-steps">
+                    <div class="tutorial-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Create Your Adventure Profile 🦸</h3>
+                            <p>Your profile is your special space where we'll track all your amazing coding progress!</p>
+                            <div class="tutorial-note">
+                                <p><strong>Fun Fact:</strong> All your data stays safe on your device, just like a secret diary!</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Choose Your Coding Language 🌍</h3>
+                            <p>Pick a programming language to start your journey. Each one is like a different superpower!</p>
+                            <ul>
+                                <li>☕ Java - Build amazing apps and games!</li>
+                                <li>🐍 Python - Perfect for beginners and super fun!</li>
+                                <li>⚙️ C++ - Create fast and powerful programs!</li>
+                                <li>🌐 JavaScript - Make websites come alive!</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Connect Your AI Helper 🤖</h3>
+                            <p>Your AI friend will help create fun learning adventures just for you!</p>
+                            <ul>
+                                <li>Get your free magic key from Google AI Studio</li>
+                                <li>Enter it in the setup screen</li>
+                                <li>Start your amazing learning journey!</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tutorial-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Start Your Learning Adventure 🎮</h3>
+                            <p>Your AI friend watches how you learn and creates special challenges just for you:</p>
+                            <ul>
+                                <li>🎴 Fun flashcards with cool pictures</li>
+                                <li>🧩 Puzzles based on what you need help with</li>
+                                <li>📊 Track your progress and earn badges</li>
+                                <li>🎯 Smart reviews to help you remember</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tutorial-actions">
+                    <button id="got-it-btn" class="splash-continue">I'm Ready! Let's Go! 🚀</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Profile Creation Section -->
+        <div id="profile-section" class="section">
+            <h2>Create Your Adventure Profile 🦸</h2>
+            <div class="form-group">
+                <label for="user-name">What's your name, young coder?</label>
+                <input type="text" id="user-name" placeholder="Your awesome name">
+            </div>
+            <div class="form-group">
+                <label for="learning-goal">What's your coding adventure goal?</label>
+                <select id="learning-goal">
+                    <option value="beginner">I'm just starting my coding journey! 🌱</option>
+                    <option value="student">I want to be a coding student! 🎓</option>
+                    <option value="professional">I want to build cool things! 💼</option>
+                    <option value="hobby">Coding is my super fun hobby! 🎮</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="session-length">How long do you want to play and learn?</label>
+                <select id="session-length">
+                    <option value="15">15 minutes - Quick adventure! ⚡</option>
+                    <option value="30">30 minutes - Perfect learning time! 🎯</option>
+                    <option value="45">45 minutes - Deep dive! 🌊</option>
+                    <option value="60">60 minutes - Super coder mode! 💪</option>
+                </select>
+            </div>
+            <button id="create-profile-btn">Create My Profile! 🎉</button>
+            <div id="profile-status"></div>
+        </div>
+        
+        <!-- Language Selection Section -->
+        <div id="language-selection-section" class="section">
+            <h2>Choose Your Coding Superpower! 🌟</h2>
+            <p>Each programming language is like a different superpower. Which one do you want to learn?</p>
+            <div class="language-grid">
+                <div class="language-card selected" data-language="java">
+                    <div class="language-icon">☕</div>
+                    <div class="language-name">Java</div>
+                    <div class="language-description">Build amazing apps and games!</div>
+                </div>
+                <div class="language-card" data-language="python">
+                    <div class="language-icon">🐍</div>
+                    <div class="language-name">Python</div>
+                    <div class="language-description">Perfect for beginners and super fun!</div>
+                </div>
+                <div class="language-card" data-language="cpp">
+                    <div class="language-icon">⚙️</div>
+                    <div class="language-name">C++</div>
+                    <div class="language-description">Create fast and powerful programs!</div>
+                </div>
+                <div class="language-card" data-language="javascript">
+                    <div class="language-icon">🌐</div>
+                    <div class="language-name">JavaScript</div>
+                    <div class="language-description">Make websites come alive!</div>
+                </div>
+            </div>
+            <button id="continue-to-api" style="margin-top: 25px;">Next Step! 🚀</button>
+        </div>
         
         <!-- API Key Section -->
-        <div id="api-key-section" class="section active">
+        <div id="api-key-section" class="section">
+            <h2>Connect Your AI Helper! 🤖</h2>
             <div class="form-group">
                 <label for="api-key">Enter your Gemini API Key:</label>
-                <input type="password" id="api-key" placeholder="Your Gemini API Key">
+                <input type="password" id="api-key" placeholder="Your special AI magic key">
             </div>
-            <button id="save-api-key">Save API Key</button>
+            <button id="save-api-key">Save My AI Key! 🔑</button>
             <div id="api-status"></div>
+            <div style="margin-top: 25px;">
+                <button id="show-tutorial-btn" style="background: rgba(255, 154, 139, 0.3);">Need Help? Show Tutorial 📚</button>
+            </div>
         </div>
         
         <!-- Loading Screen -->
         <div id="loading-section" class="section">
             <div class="loading-screen">
-                <div class="loading-text">AI now Getting ready</div>
-                <div class="loading-credit">Developed by Justin</div>
-                <div class="loading-credit">Developed under HOPE Research & development Team</div>
+                <div class="loading-text">AI is preparing your learning adventure...</div>
+                <div class="loading-credit">🎮 Creating fun challenges just for you!</div>
+                <div class="loading-credit">🌟 Making your special learning path!</div>
                 <div class="lottie-container">
                     <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_DMgKk1.json" background="transparent" speed="1" loop autoplay></lottie-player>
                 </div>
             </div>
         </div>
         
-        <!-- Topic Input Section -->
-        <div id="topic-section" class="section">
-            <div class="form-group">
-                <label for="presentation-topic">Enter your presentation topic:</label>
-                <input type="text" id="presentation-topic" placeholder="e.g., Climate Change, Artificial Intelligence, etc.">
-            </div>
-            <button id="generate-questions">Generate Questions</button>
-        </div>
-        
-        <!-- Questions Section -->
-        <div id="questions-section" class="section">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
-            </div>
-            <div id="questions-container"></div>
-            <div id="custom-colors-container" class="custom-colors-container">
-                <div class="color-picker-group">
-                    <label for="custom-color-1">First Color:</label>
-                    <input type="color" id="custom-color-1" class="color-picker" value="#3498db">
-                    <span id="color-code-1" class="color-code">#3498db</span>
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="section">
+            <h2>Welcome back, <span id="user-display-name"></span>! 🎉</h2>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="dashboard-title">Your Learning Adventure 📊</div>
+                    <div class="stat-item">
+                        <span class="stat-label">Current Mission:</span>
+                        <span class="stat-value" id="current-chapter">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Completed Missions:</span>
+                        <span class="stat-value" id="completed-chapters">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Flashcards Collected:</span>
+                        <span class="stat-value" id="total-flashcards">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Skills Mastered:</span>
+                        <span class="stat-value" id="mastered-concepts">0</span>
+                    </div>
                 </div>
-                <div class="color-picker-group">
-                    <label for="custom-color-2">Second Color:</label>
-                    <input type="color" id="custom-color-2" class="color-picker" value="#e74c3c">
-                    <span id="color-code-2" class="color-code">#e74c3c</span>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-title">Your Learning Superpowers 🦸‍♂️</div>
+                    <div class="stat-item">
+                        <span class="stat-label">Average Time:</span>
+                        <span class="stat-value" id="avg-time">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Best Learning Time:</span>
+                        <span class="stat-value" id="best-time">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Memory Power:</span>
+                        <span class="stat-value" id="retention-rate">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Learning Speed:</span>
+                        <span class="stat-value" id="learning-velocity">-</span>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <div class="dashboard-title">AI Friend's Tips 🤖</div>
+                    <div id="ai-recommendations">
+                        <p>🤔 Your AI friend is thinking of special tips for you...</p>
+                    </div>
                 </div>
             </div>
-            <button id="generate-presentation" disabled>Generate Presentation</button>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <button id="continue-learning-btn">Continue Learning! 🎮</button>
+                <button id="view-chapters-btn">View All Missions! 🗺️</button>
+            </div>
         </div>
         
-        <!-- Generating Section -->
-        <div id="generating-section" class="section">
-            <div class="generating-animation">
-                <div class="generating-text">Creating your presentation...</div>
-                <div class="lottie-container">
-                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
+        <!-- Chapters Section -->
+        <div id="chapters-section" class="section">
+            <h2>Your Coding Missions! 🗺️</h2>
+            <div class="chapter-grid" id="chapter-grid">
+                <!-- Chapters will be populated here -->
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <button id="back-to-dashboard-btn">Back to Dashboard! 🏠</button>
+            </div>
+        </div>
+        
+        <!-- Flashcard Section -->
+        <div id="flashcard-section" class="section">
+            <h2>Learning Flashcards! 🎴</h2>
+            <div class="flashcard-container">
+                <div class="flashcard" id="flashcard">
+                    <div class="flashcard-face flashcard-front">
+                        <div class="flashcard-title" id="flashcard-title">Click to reveal! 👆</div>
+                        <div class="flashcard-content" id="flashcard-front-content">
+                            Loading your fun learning card...
+                        </div>
+                    </div>
+                    <div class="flashcard-face flashcard-back">
+                        <div class="flashcard-title">Answer! 🎉</div>
+                        <div class="flashcard-content" id="flashcard-back-content">
+                            Loading the surprise answer...
+                        </div>
+                    </div>
                 </div>
-                <p>This may take a moment as we generate your custom 3D presentation</p>
+            </div>
+            
+            <div class="flashcard-controls">
+                <button id="prev-flashcard-btn">Previous Card ⬅️</button>
+                <button id="flip-flashcard-btn">Flip Card! 🔄</button>
+                <button id="next-flashcard-btn">Next Card ➡️</button>
+            </div>
+            
+            <div class="difficulty-indicator">
+                <span class="difficulty-label">How hard was this?</span>
+                <div class="difficulty-dot difficulty-easy"></div>
+                <div class="difficulty-dot difficulty-medium"></div>
+                <div class="difficulty-dot difficulty-hard"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <button id="mark-easy-btn">Too Easy! 😎</button>
+                <button id="mark-medium-btn">Just Right! 😊</button>
+                <button id="mark-hard-btn">A Bit Hard! 🤔</button>
+                <button id="complete-chapter-btn">Mission Complete! 🏆</button>
             </div>
         </div>
         
-        <!-- Preview Section -->
-        <div id="preview-section" class="section">
-            <h2>Your presentation is ready!</h2>
-            <div class="preview-container">
-                <button id="preview-btn">Preview in New Tab</button>
-                <button id="new-presentation-btn">Create New Presentation</button>
+        <!-- Quiz Section -->
+        <div id="quiz-section" class="section">
+            <h2>Mission Quiz! 🧩</h2>
+            <div id="quiz-container">
+                <!-- Quiz questions will be populated here -->
+            </div>
+            <div id="quiz-score" class="quiz-score" style="display: none;">
+                Your Score: <span id="score-value">0</span>%
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <button id="submit-quiz-btn" style="display: none;">Submit Quiz! 📤</button>
+                <button id="next-chapter-btn" style="display: none;">Next Mission! 🚀</button>
+                <button id="back-to-chapters-btn">Back to Missions! 🗺️</button>
             </div>
         </div>
         
-        <!-- History Section -->
-        <div id="history-section" class="section">
-            <h2>Recent Presentations</h2>
-            <div id="history-container"></div>
-            <button id="clear-history-btn">Clear History</button>
-            <button id="new-presentation-from-history-btn">Create New Presentation</button>
+        <!-- Profile Section -->
+        <div id="profile-view-section" class="section">
+            <h2>Your Adventure Profile! 🦸</h2>
+            <div class="dashboard-card">
+                <div class="dashboard-title">Your Hero Info 🦸‍♂️</div>
+                <div class="stat-item">
+                    <span class="stat-label">Hero Name:</span>
+                    <span class="stat-value" id="profile-name">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Hero ID:</span>
+                    <span class="stat-value" id="profile-key">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Adventure Started:</span>
+                    <span class="stat-value" id="profile-created">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Coding Superpower:</span>
+                    <span class="stat-value" id="profile-language">-</span>
+                </div>
+            </div>
+            
+            <div class="dashboard-card" style="margin-top: 25px;">
+                <div class="dashboard-title">Your Achievements! 🏆</div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Learning Time:</span>
+                    <span class="stat-value" id="total-study-time">0 minutes</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Sessions Completed:</span>
+                    <span class="stat-value" id="sessions-completed">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Average Quiz Score:</span>
+                    <span class="stat-value" id="avg-quiz-score">0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Current Streak:</span>
+                    <span class="stat-value" id="current-streak">0 days</span>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <button id="export-data-btn">Save My Progress! 💾</button>
+                <button id="reset-progress-btn" style="background: rgba(255, 59, 48, 0.7);">Reset Adventure! 🔄</button>
+                <button id="back-to-dashboard-from-profile-btn">Back to Dashboard! 🏠</button>
+            </div>
         </div>
     </div>
     
     <footer>
-        Developed under HOPE Research Team | Developed by Justin
+        🚀 CodeKids AI | Learn Programming the Fun Way! 🚀
     </footer>
     
-    <button class="history-btn" id="history-toggle" title="View History">📋</button>
+    <button class="profile-btn" id="profile-toggle" title="View Profile">👤</button>
     
     <div id="notification" class="notification"></div>
 
     <script>
         // Application State
         const appState = {
+            // User Profile
+            userName: '',
+            userKey: '',
+            createdDate: '',
+            learningGoal: '',
+            sessionLength: 30,
+            selectedLanguage: 'java',
+            
+            // API Configuration
             apiKey: '',
-            topic: '',
-            theme: '',
-            slideCount: '',
-            structure: '',
-            animationStyle: '',
-            colorTheme: '',
-            customColor1: '#3498db',
-            customColor2: '#e74c3c',
-            descriptionLength: '',
-            bulletPointsCount: '',
-            fontSize: '',
-            includeImages: '',
-            termsdepth: '',
-            bgitem: '',
-            generatedPresentation: '',
-            currentQuestionIndex: 0,
-            presentationHistory: []
+            
+            // Learning Progress
+            currentChapter: 1,
+            completedChapters: [],
+            totalFlashcards: 0,
+            masteredConcepts: 0,
+            
+            // Learning Patterns
+            flashcardData: {},
+            quizScores: {},
+            timeSpent: {},
+            learningPatterns: {
+                averageTimePerFlashcard: 0,
+                peakPerformanceTime: '',
+                difficultConcepts: [],
+                preferredLearningStyle: '',
+                retentionRate: 0,
+                commonMistakes: []
+            },
+            
+            // AI Recommendations
+            aiRecommendations: {
+                nextFocusAreas: [],
+                suggestedReviewTopics: [],
+                adaptedContent: false,
+                personalizedHints: false,
+                difficultyAdjustment: 0
+            },
+            
+            // Current Session
+            currentFlashcardIndex: 0,
+            currentFlashcards: [],
+            currentQuiz: [],
+            currentQuizAnswers: [],
+            sessionStartTime: null,
+            
+            // Chapter Content
+            chapters: {},
+            
+            // UI State
+            hasSeenTutorial: false,
+            currentSection: 'splash'
+        };
+
+        // Programming Language Content Structure - Kid-Friendly Version
+        const languageContent = {
+            java: {
+                name: 'Java',
+                icon: '☕',
+                chapters: [
+                    {
+                        id: 1,
+                        title: 'What is Object-Oriented Programming? 🧩',
+                        description: 'Learn how to build with programming blocks!',
+                        topics: [
+                            'What is OOP? Like building with LEGOs!',
+                            'OOP vs Regular Programming',
+                            'Why OOP is super cool!',
+                            'Real-world examples of OOP'
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: 'Classes and Objects 🏗️',
+                        description: 'Create your own programming building blocks!',
+                        topics: [
+                            'What is a class? Like a blueprint!',
+                            'Creating objects from classes',
+                            'The magic "new" keyword',
+                            'Class vs Object - what\'s the difference?'
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: 'Encapsulation - Secret Boxes! 📦',
+                        description: 'Keep your code safe and organized!',
+                        topics: [
+                            'What is encapsulation? Like a treasure chest!',
+                            'Public and Private - who can see what?',
+                            'Getters and Setters - special doors!',
+                            'Why secrets are important in code'
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: 'Inheritance - Superpowers! 🦸‍♂️',
+                        description: 'Pass on your coding superpowers!',
+                        topics: [
+                            'What is inheritance? Like family traits!',
+                            'Parent and Child classes',
+                            'The "extends" magic word',
+                            'Method overriding - changing superpowers!'
+                        ]
+                    },
+                    {
+                        id: 5,
+                        title: 'Polymorphism - Shape Shifters! 🔄',
+                        description: 'One thing, many forms!',
+                        topics: [
+                            'What is polymorphism? Like a transformer!',
+                            'Method overloading - same name, different jobs',
+                            'Dynamic binding - magic at runtime!',
+                            'Real-world examples of polymorphism'
+                        ]
+                    },
+                    {
+                        id: 6,
+                        title: 'Abstraction - Magic Tricks! 🎩',
+                        description: 'Hide the complicated stuff!',
+                        topics: [
+                            'What is abstraction? Like a magic show!',
+                            'Abstract classes - special blueprints',
+                            'Interfaces - contracts for code',
+                            'Why hiding details is super helpful'
+                        ]
+                    },
+                    {
+                        id: 7,
+                        title: 'Constructors - Building Makers! 🏗️',
+                        description: 'Create objects the right way!',
+                        topics: [
+                            'What is a constructor? Like a factory!',
+                            'Default constructors - automatic builders',
+                            'Parameterized constructors - custom builders',
+                            'The "this" magic word'
+                        ]
+                    },
+                    {
+                        id: 8,
+                        title: 'Static Members - Class Powers! ⚡',
+                        description: 'Powers that belong to everyone!',
+                        topics: [
+                            'Static variables - shared treasures',
+                            'Static methods - class powers',
+                            'Static blocks - special startup code',
+                            'Static vs Non-static - what\'s the difference?'
+                        ]
+                    },
+                    {
+                        id: 9,
+                        title: 'The Super Keyword - Parent Powers! 👨‍👩‍👧‍👦',
+                        description: 'Connect with your parent class!',
+                        topics: [
+                            'Super with variables - parent treasures',
+                            'Super with methods - parent powers',
+                            'Super with constructors - parent builders',
+                            'Super vs This - family vs self'
+                        ]
+                    },
+                    {
+                        id: 10,
+                        title: 'Packages - Code Folders! 📁',
+                        description: 'Organize your code like a pro!',
+                        topics: [
+                            'What are packages? Like folders for code!',
+                            'Package declaration - naming your folder',
+                            'Import statement - bringing in friends',
+                            'Built-in packages - ready-made tools'
+                        ]
+                    },
+                    {
+                        id: 11,
+                        title: 'Advanced OOP Magic! 🪄',
+                        description: 'Become an OOP wizard!',
+                        topics: [
+                            'High modularity - building with blocks',
+                            'Code reusability - use it again!',
+                            'Layers of abstraction - hiding complexity',
+                            'Message passing - code talking to code'
+                        ]
+                    },
+                    {
+                        id: 12,
+                        title: 'OOP Best Practices - Pro Tips! 💡',
+                        description: 'Code like a programming superhero!',
+                        topics: [
+                            'SOLID principles - golden rules',
+                            'Design patterns - secret recipes',
+                            'Code organization - keeping it tidy',
+                            'Common mistakes to avoid'
+                        ]
+                    }
+                ]
+            },
+            python: {
+                name: 'Python',
+                icon: '🐍',
+                chapters: [
+                    {
+                        id: 1,
+                        title: 'Python OOP Adventure! 🐍',
+                        description: 'Start your Python object journey!',
+                        topics: [
+                            'Python OOP basics',
+                            'Why Python OOP is super fun',
+                            'Python vs other languages',
+                            'Real-world Python adventures'
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: 'Python Classes and Objects! 🏗️',
+                        description: 'Build with Python blocks!',
+                        topics: [
+                            'Class definition in Python',
+                            'Creating Python objects',
+                            'The magic __init__ method',
+                            'Instance variables in Python'
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: 'Python Encapsulation! 📦',
+                        description: 'Keep your Python code safe!',
+                        topics: [
+                            'Python access levels',
+                            'Name mangling magic',
+                            'Property decorators',
+                            'Python getters and setters'
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: 'Python Inheritance! 🦸‍♂️',
+                        description: 'Python family powers!',
+                        topics: [
+                            'Single inheritance in Python',
+                            'Multiple inheritance - many parents!',
+                            'Method Resolution Order',
+                            'The Super() function'
+                        ]
+                    },
+                    {
+                        id: 5,
+                        title: 'Python Polymorphism! 🔄',
+                        description: 'Python shape shifters!',
+                        topics: [
+                            'Duck typing in Python',
+                            'Method overriding',
+                            'Operator overloading',
+                            'Abstract base classes'
+                        ]
+                    },
+                    {
+                        id: 6,
+                        title: 'Python Abstraction! 🎩',
+                        description: 'Python magic tricks!',
+                        topics: [
+                            'Abstract classes in Python',
+                            'The ABC module',
+                            'Abstract methods',
+                            'Concrete implementations'
+                        ]
+                    }
+                ]
+            },
+            cpp: {
+                name: 'C++',
+                icon: '⚙️',
+                chapters: [
+                    {
+                        id: 1,
+                        title: 'C++ OOP Power! ⚡',
+                        description: 'Unleash C++ object magic!',
+                        topics: [
+                            'C++ OOP fundamentals',
+                            'C vs C++ OOP',
+                            'Why C++ OOP is powerful',
+                            'C++ OOP applications'
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: 'C++ Classes and Objects! 🏗️',
+                        description: 'Build with C++ blocks!',
+                        topics: [
+                            'Class declaration in C++',
+                            'Object definition',
+                            'Member functions',
+                            'Access specifiers'
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: 'C++ Encapsulation! 📦',
+                        description: 'C++ secret boxes!',
+                        topics: [
+                            'Private members in C++',
+                            'Public interface',
+                            'Protected members',
+                            'Friend functions'
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: 'C++ Inheritance! 🦸‍♂️',
+                        description: 'C++ family powers!',
+                        topics: [
+                            'Single inheritance',
+                            'Multiple inheritance',
+                            'Multilevel inheritance',
+                            'Hierarchical inheritance'
+                        ]
+                    },
+                    {
+                        id: 5,
+                        title: 'C++ Polymorphism! 🔄',
+                        description: 'C++ shape shifters!',
+                        topics: [
+                            'Function overloading',
+                            'Operator overloading',
+                            'Virtual functions',
+                            'Pure virtual functions'
+                        ]
+                    },
+                    {
+                        id: 6,
+                        title: 'C++ Abstraction! 🎩',
+                        description: 'C++ magic tricks!',
+                        topics: [
+                            'Abstract classes in C++',
+                            'Pure virtual functions',
+                            'Interfaces in C++',
+                            'Implementation strategies'
+                        ]
+                    }
+                ]
+            },
+            javascript: {
+                name: 'JavaScript',
+                icon: '🌐',
+                chapters: [
+                    {
+                        id: 1,
+                        title: 'JavaScript OOP Adventure! 🌐',
+                        description: 'Web object magic!',
+                        topics: [
+                            'JavaScript OOP basics',
+                            'Prototypal inheritance',
+                            'ES6 classes',
+                            'OOP patterns in JS'
+                        ]
+                    },
+                    {
+                        id: 2,
+                        title: 'JS Objects and Prototypes! 🏗️',
+                        description: 'Build with web blocks!',
+                        topics: [
+                            'Object creation in JS',
+                            'Prototype chain',
+                            'Constructor functions',
+                            'Object.create()'
+                        ]
+                    },
+                    {
+                        id: 3,
+                        title: 'ES6 Classes! 🎓',
+                        description: 'Modern JavaScript OOP!',
+                        topics: [
+                            'Class declaration',
+                            'Constructor',
+                            'Methods',
+                            'Static members'
+                        ]
+                    },
+                    {
+                        id: 4,
+                        title: 'JS Inheritance! 🦸‍♂️',
+                        description: 'Web family powers!',
+                        topics: [
+                            'Prototype inheritance',
+                            'Class inheritance',
+                            'Extends keyword',
+                            'Super keyword'
+                        ]
+                    },
+                    {
+                        id: 5,
+                        title: 'JS Polymorphism! 🔄',
+                        description: 'Web shape shifters!',
+                        topics: [
+                            'Method overriding',
+                            'Duck typing',
+                            'Dynamic dispatch',
+                            'Function polymorphism'
+                        ]
+                    },
+                    {
+                        id: 6,
+                        title: 'JS Encapsulation! 📦',
+                        description: 'Web secret boxes!',
+                        topics: [
+                            'Private fields',
+                            'Getters and setters',
+                            'Closures',
+                            'Module pattern'
+                        ]
+                    }
+                ]
+            }
         };
 
         // DOM Elements
         const sections = {
+            splash: document.getElementById('splash-screen'),
+            tutorial: document.getElementById('tutorial-section'),
+            profile: document.getElementById('profile-section'),
+            languageSelection: document.getElementById('language-selection-section'),
             apiKey: document.getElementById('api-key-section'),
             loading: document.getElementById('loading-section'),
-            topic: document.getElementById('topic-section'),
-            questions: document.getElementById('questions-section'),
-            generating: document.getElementById('generating-section'),
-            preview: document.getElementById('preview-section'),
-            history: document.getElementById('history-section')
+            dashboard: document.getElementById('dashboard-section'),
+            chapters: document.getElementById('chapters-section'),
+            flashcard: document.getElementById('flashcard-section'),
+            quiz: document.getElementById('quiz-section'),
+            profileView: document.getElementById('profile-view-section')
         };
 
         const elements = {
+            // Splash Screen
+            continueToApp: document.getElementById('continue-to-app'),
+            
+            // Tutorial
+            gotItBtn: document.getElementById('got-it-btn'),
+            showTutorialBtn: document.getElementById('show-tutorial-btn'),
+            
+            // Profile Creation
+            userName: document.getElementById('user-name'),
+            learningGoal: document.getElementById('learning-goal'),
+            sessionLength: document.getElementById('session-length'),
+            createProfileBtn: document.getElementById('create-profile-btn'),
+            profileStatus: document.getElementById('profile-status'),
+            
+            // Language Selection
+            languageCards: document.querySelectorAll('.language-card'),
+            continueToApi: document.getElementById('continue-to-api'),
+            
+            // API Key
             apiKeyInput: document.getElementById('api-key'),
             saveApiKeyBtn: document.getElementById('save-api-key'),
             apiStatus: document.getElementById('api-status'),
-            presentationTopic: document.getElementById('presentation-topic'),
-            generateQuestionsBtn: document.getElementById('generate-questions'),
-            questionsContainer: document.getElementById('questions-container'),
-            progressFill: document.getElementById('progress-fill'),
-            generatePresentationBtn: document.getElementById('generate-presentation'),
-            previewBtn: document.getElementById('preview-btn'),
-            newPresentationBtn: document.getElementById('new-presentation-btn'),
-            historyContainer: document.getElementById('history-container'),
-            clearHistoryBtn: document.getElementById('clear-history-btn'),
-            newPresentationFromHistoryBtn: document.getElementById('new-presentation-from-history-btn'),
-            notification: document.getElementById('notification'),
-            historyToggle: document.getElementById('history-toggle'),
-            splashScreen: document.getElementById('splash-screen'),
-            continueToApp: document.getElementById('continue-to-app')
+            
+            // Dashboard
+            userDisplayName: document.getElementById('user-display-name'),
+            currentChapter: document.getElementById('current-chapter'),
+            completedChapters: document.getElementById('completed-chapters'),
+            totalFlashcards: document.getElementById('total-flashcards'),
+            masteredConcepts: document.getElementById('mastered-concepts'),
+            avgTime: document.getElementById('avg-time'),
+            bestTime: document.getElementById('best-time'),
+            retentionRate: document.getElementById('retention-rate'),
+            learningVelocity: document.getElementById('learning-velocity'),
+            aiRecommendations: document.getElementById('ai-recommendations'),
+            continueLearningBtn: document.getElementById('continue-learning-btn'),
+            viewChaptersBtn: document.getElementById('view-chapters-btn'),
+            
+            // Chapters
+            chapterGrid: document.getElementById('chapter-grid'),
+            backToDashboardBtn: document.getElementById('back-to-dashboard-btn'),
+            
+            // Flashcards
+            flashcard: document.getElementById('flashcard'),
+            flashcardTitle: document.getElementById('flashcard-title'),
+            flashcardFrontContent: document.getElementById('flashcard-front-content'),
+            flashcardBackContent: document.getElementById('flashcard-back-content'),
+            prevFlashcardBtn: document.getElementById('prev-flashcard-btn'),
+            flipFlashcardBtn: document.getElementById('flip-flashcard-btn'),
+            nextFlashcardBtn: document.getElementById('next-flashcard-btn'),
+            markEasyBtn: document.getElementById('mark-easy-btn'),
+            markMediumBtn: document.getElementById('mark-medium-btn'),
+            markHardBtn: document.getElementById('mark-hard-btn'),
+            completeChapterBtn: document.getElementById('complete-chapter-btn'),
+            
+            // Quiz
+            quizContainer: document.getElementById('quiz-container'),
+            quizScore: document.getElementById('quiz-score'),
+            scoreValue: document.getElementById('score-value'),
+            submitQuizBtn: document.getElementById('submit-quiz-btn'),
+            nextChapterBtn: document.getElementById('next-chapter-btn'),
+            backToChaptersBtn: document.getElementById('back-to-chapters-btn'),
+            
+            // Profile View
+            profileName: document.getElementById('profile-name'),
+            profileKey: document.getElementById('profile-key'),
+            profileCreated: document.getElementById('profile-created'),
+            profileLanguage: document.getElementById('profile-language'),
+            totalStudyTime: document.getElementById('total-study-time'),
+            sessionsCompleted: document.getElementById('sessions-completed'),
+            avgQuizScore: document.getElementById('avg-quiz-score'),
+            currentStreak: document.getElementById('current-streak'),
+            exportDataBtn: document.getElementById('export-data-btn'),
+            resetProgressBtn: document.getElementById('reset-progress-btn'),
+            backToDashboardFromProfileBtn: document.getElementById('back-to-dashboard-from-profile-btn'),
+            
+            // UI Elements
+            profileToggle: document.getElementById('profile-toggle'),
+            notification: document.getElementById('notification')
         };
 
         // Gemini API Configuration
@@ -707,7 +1922,7 @@
             // Material
             const particlesMaterial = new THREE.PointsMaterial({
                 size: 0.02,
-                color: 0x3498db,
+                color: 0xFF6B6B,
                 transparent: true,
                 opacity: 0.8
             });
@@ -744,49 +1959,110 @@
         function initApp() {
             // Show splash screen first
             elements.continueToApp.addEventListener('click', () => {
-                elements.splashScreen.style.opacity = '0';
+                sections.splash.style.opacity = '0';
                 setTimeout(() => {
-                    elements.splashScreen.style.display = 'none';
+                    sections.splash.style.display = 'none';
                     // Initialize Three.js background after splash screen
                     initThreeBackground();
                     
-                    // Check for existing API key
-                    const savedApiKey = localStorage.getItem('geminiApiKey');
-                    if (savedApiKey) {
-                        appState.apiKey = savedApiKey;
-                        elements.apiKeyInput.value = savedApiKey;
-                        showSection('topic');
-                        loadHistory();
+                    // Check if user has seen tutorial
+                    const hasSeenTutorial = localStorage.getItem('hasSeenTutorial');
+                    if (hasSeenTutorial) {
+                        // Check for existing profile
+                        const savedProfile = localStorage.getItem('userProfile');
+                        if (savedProfile) {
+                            loadUserProfile();
+                            showSection('dashboard');
+                        } else {
+                            showSection('profile');
+                        }
                     } else {
-                        showSection('apiKey');
+                        // First time user, show tutorial
+                        showSection('tutorial');
                     }
                 }, 1000);
             });
 
             // Event Listeners
+            elements.gotItBtn.addEventListener('click', () => {
+                localStorage.setItem('hasSeenTutorial', 'true');
+                showSection('profile');
+            });
+
+            elements.showTutorialBtn.addEventListener('click', () => {
+                showSection('tutorial');
+            });
+            
+            // Profile Creation
+            elements.createProfileBtn.addEventListener('click', createProfile);
+            
+            // Language Selection
+            elements.languageCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Remove selected class from all cards
+                    elements.languageCards.forEach(c => c.classList.remove('selected'));
+                    // Add selected class to clicked card
+                    card.classList.add('selected');
+                    // Update selected language
+                    appState.selectedLanguage = card.dataset.language;
+                });
+            });
+            
+            elements.continueToApi.addEventListener('click', () => {
+                showSection('apiKey');
+            });
+            
+            // API Key Management
             elements.saveApiKeyBtn.addEventListener('click', saveApiKey);
-            elements.generateQuestionsBtn.addEventListener('click', generateQuestions);
-            elements.generatePresentationBtn.addEventListener('click', generatePresentation);
-            elements.previewBtn.addEventListener('click', previewPresentation);
-            elements.newPresentationBtn.addEventListener('click', resetForNewPresentation);
-            elements.clearHistoryBtn.addEventListener('click', clearHistory);
-            elements.newPresentationFromHistoryBtn.addEventListener('click', () => {
-                showSection('topic');
+            
+            // Dashboard Navigation
+            elements.continueLearningBtn.addEventListener('click', () => {
+                startLearningSession();
             });
-            elements.historyToggle.addEventListener('click', () => {
-                if (sections.history.classList.contains('active')) {
-                    // If currently showing history, go back to previous section
-                    if (appState.generatedPresentation) {
-                        showSection('preview');
-                    } else {
-                        showSection('topic');
-                    }
-                } else {
-                    // Show history section
-                    loadHistory();
-                    showSection('history');
-                }
+            
+            elements.viewChaptersBtn.addEventListener('click', () => {
+                showSection('chapters');
+                renderChapters();
             });
+            
+            // Chapters Navigation
+            elements.backToDashboardBtn.addEventListener('click', () => {
+                showSection('dashboard');
+            });
+            
+            // Flashcard Controls
+            elements.prevFlashcardBtn.addEventListener('click', previousFlashcard);
+            elements.flipFlashcardBtn.addEventListener('click', flipFlashcard);
+            elements.nextFlashcardBtn.addEventListener('click', nextFlashcard);
+            
+            elements.markEasyBtn.addEventListener('click', () => markDifficulty('easy'));
+            elements.markMediumBtn.addEventListener('click', () => markDifficulty('medium'));
+            elements.markHardBtn.addEventListener('click', () => markDifficulty('hard'));
+            
+            elements.completeChapterBtn.addEventListener('click', completeChapter);
+            
+            // Quiz Controls
+            elements.submitQuizBtn.addEventListener('click', submitQuiz);
+            elements.nextChapterBtn.addEventListener('click', nextChapter);
+            elements.backToChaptersBtn.addEventListener('click', () => {
+                showSection('chapters');
+            });
+            
+            // Profile View Controls
+            elements.profileToggle.addEventListener('click', () => {
+                showSection('profileView');
+                updateProfileView();
+            });
+            
+            elements.backToDashboardFromProfileBtn.addEventListener('click', () => {
+                showSection('dashboard');
+            });
+            
+            elements.exportDataBtn.addEventListener('click', exportLearningData);
+            elements.resetProgressBtn.addEventListener('click', resetProgress);
+            
+            // Flashcard flip event
+            elements.flashcard.addEventListener('click', flipFlashcard);
         }
 
         // Section Navigation
@@ -795,33 +2071,979 @@
                 section.classList.remove('active');
             });
             sections[sectionName].classList.add('active');
+            appState.currentSection = sectionName;
+        }
+
+        // Profile Creation
+        function createProfile() {
+            const userName = elements.userName.value.trim();
+            if (!userName) {
+                showNotification('Please enter your awesome name!', 'error');
+                return;
+            }
+
+            const today = new Date();
+            const dateString = today.toISOString().split('T')[0];
+            const userKey = `${userName}-${dateString}-12`;
+            
+            appState.userName = userName;
+            appState.userKey = userKey;
+            appState.createdDate = dateString;
+            appState.learningGoal = elements.learningGoal.value;
+            appState.sessionLength = parseInt(elements.sessionLength.value);
+            
+            // Save to localStorage
+            const userProfile = {
+                userName: appState.userName,
+                userKey: appState.userKey,
+                createdDate: appState.createdDate,
+                learningGoal: appState.learningGoal,
+                sessionLength: appState.sessionLength,
+                selectedLanguage: appState.selectedLanguage,
+                currentChapter: appState.currentChapter,
+                completedChapters: appState.completedChapters,
+                flashcardData: appState.flashcardData,
+                quizScores: appState.quizScores,
+                timeSpent: appState.timeSpent,
+                learningPatterns: appState.learningPatterns,
+                aiRecommendations: appState.aiRecommendations
+            };
+            
+            localStorage.setItem('userProfile', JSON.stringify(userProfile));
+            
+            elements.profileStatus.textContent = 'Profile created successfully! 🎉';
+            elements.profileStatus.style.color = '#4CAF50';
+            
+            // Show loading screen then proceed to language selection
+            showSection('loading');
+            setTimeout(() => {
+                showSection('languageSelection');
+            }, 2000);
+        }
+
+        // Load User Profile
+        function loadUserProfile() {
+            const savedProfile = localStorage.getItem('userProfile');
+            if (savedProfile) {
+                const profile = JSON.parse(savedProfile);
+                appState.userName = profile.userName;
+                appState.userKey = profile.userKey;
+                appState.createdDate = profile.createdDate;
+                appState.learningGoal = profile.learningGoal;
+                appState.sessionLength = profile.sessionLength;
+                appState.selectedLanguage = profile.selectedLanguage || 'java';
+                appState.currentChapter = profile.currentChapter || 1;
+                appState.completedChapters = profile.completedChapters || [];
+                appState.flashcardData = profile.flashcardData || {};
+                appState.quizScores = profile.quizScores || {};
+                appState.timeSpent = profile.timeSpent || {};
+                appState.learningPatterns = profile.learningPatterns || {
+                    averageTimePerFlashcard: 0,
+                    peakPerformanceTime: '',
+                    difficultConcepts: [],
+                    preferredLearningStyle: '',
+                    retentionRate: 0,
+                    commonMistakes: []
+                };
+                appState.aiRecommendations = profile.aiRecommendations || {
+                    nextFocusAreas: [],
+                    suggestedReviewTopics: [],
+                    adaptedContent: false,
+                    personalizedHints: false,
+                    difficultyAdjustment: 0
+                };
+                
+                // Load API key if available
+                const savedApiKey = localStorage.getItem('geminiApiKey');
+                if (savedApiKey) {
+                    appState.apiKey = savedApiKey;
+                }
+                
+                return true;
+            }
+            return false;
+        }
+
+        // Update Profile View
+        function updateProfileView() {
+            elements.profileName.textContent = appState.userName;
+            elements.profileKey.textContent = appState.userKey;
+            elements.profileCreated.textContent = appState.createdDate;
+            elements.profileLanguage.textContent = languageContent[appState.selectedLanguage].name;
+            
+            // Calculate statistics
+            const totalStudyTime = Object.values(appState.timeSpent).reduce((sum, time) => sum + time, 0);
+            elements.totalStudyTime.textContent = `${totalStudyTime} minutes`;
+            
+            const sessionsCompleted = Object.keys(appState.timeSpent).length;
+            elements.sessionsCompleted.textContent = sessionsCompleted;
+            
+            const quizScores = Object.values(appState.quizScores);
+            const avgScore = quizScores.length > 0 ? 
+                Math.round(quizScores.reduce((sum, score) => sum + score, 0) / quizScores.length) : 0;
+            elements.avgQuizScore.textContent = `${avgScore}%`;
+            
+            // Calculate current streak (simplified)
+            const today = new Date().toISOString().split('T')[0];
+            const lastStudyDate = Object.keys(appState.timeSpent).sort().pop() || '';
+            const currentStreak = lastStudyDate === today ? 1 : 0;
+            elements.currentStreak.textContent = `${currentStreak} days`;
         }
 
         // API Key Management
         function saveApiKey() {
             const apiKey = elements.apiKeyInput.value.trim();
             if (!apiKey) {
-                showNotification('Please enter a valid API key', 'error');
+                showNotification('Please enter your special AI magic key!', 'error');
                 return;
             }
 
             // Simple validation - check if it looks like a Gemini API key
             if (!apiKey.startsWith('AIza') || apiKey.length < 20) {
-                showNotification('Invalid API key format', 'error');
+                showNotification('That doesn\'t look like a magic key! Try again!', 'error');
                 return;
             }
 
             appState.apiKey = apiKey;
             localStorage.setItem('geminiApiKey', apiKey);
-            elements.apiStatus.textContent = 'API Key saved successfully!';
-            elements.apiStatus.style.color = '#3498db';
+            elements.apiStatus.textContent = 'AI key saved successfully! 🤖';
+            elements.apiStatus.style.color = '#4CAF50';
             
-            // Show loading screen then proceed to topic input
+            // Show loading screen then proceed to dashboard
             showSection('loading');
             setTimeout(() => {
-                showSection('topic');
-                loadHistory();
+                showSection('dashboard');
+                updateDashboard();
             }, 3000);
+        }
+
+        // Update Dashboard
+        function updateDashboard() {
+            elements.userDisplayName.textContent = appState.userName;
+            
+            const currentChapterData = languageContent[appState.selectedLanguage].chapters.find(
+                ch => ch.id === appState.currentChapter
+            );
+            elements.currentChapter.textContent = currentChapterData ? currentChapterData.title : 'Not started';
+            
+            elements.completedChapters.textContent = appState.completedChapters.length;
+            
+            // Calculate total flashcards (simplified)
+            const totalFlashcards = Object.keys(appState.flashcardData).length;
+            elements.totalFlashcards.textContent = totalFlashcards;
+            
+            // Calculate mastered concepts (simplified)
+            const masteredConcepts = Object.values(appState.flashcardData).filter(
+                card => card.correctAnswers >= 3
+            ).length;
+            elements.masteredConcepts.textContent = masteredConcepts;
+            
+            // Update learning patterns
+            const avgTime = appState.learningPatterns.averageTimePerFlashcard;
+            elements.avgTime.textContent = avgTime ? `${avgTime.toFixed(1)}s` : '-';
+            
+            elements.bestTime.textContent = appState.learningPatterns.peakPerformanceTime || '-';
+            elements.retentionRate.textContent = appState.learningPatterns.retentionRate ? 
+                `${(appState.learningPatterns.retentionRate * 100).toFixed(0)}%` : '-';
+            
+            const velocity = appState.learningPatterns.learningVelocity;
+            elements.learningVelocity.textContent = velocity ? `${velocity.toFixed(1)}` : '-';
+            
+            // Update AI recommendations
+            updateAIRecommendations();
+        }
+
+        // Update AI Recommendations
+        function updateAIRecommendations() {
+            if (!appState.apiKey) {
+                elements.aiRecommendations.innerHTML = '<p>🤖 Connect your AI helper to get personalized tips!</p>';
+                return;
+            }
+            
+            // Generate recommendations based on learning patterns
+            const recommendations = [];
+            
+            if (appState.learningPatterns.difficultConcepts.length > 0) {
+                recommendations.push(`<p>🎯 Focus Areas: ${appState.learningPatterns.difficultConcepts.join(', ')}</p>`);
+            }
+            
+            if (appState.aiRecommendations.suggestedReviewTopics.length > 0) {
+                recommendations.push(`<p>📚 Review Topics: ${appState.aiRecommendations.suggestedReviewTopics.join(', ')}</p>`);
+            }
+            
+            if (appState.learningPatterns.commonMistakes.length > 0) {
+                recommendations.push(`<p>🔍 Common Mistakes: ${appState.learningPatterns.commonMistakes.join(', ')}</p>`);
+            }
+            
+            if (recommendations.length === 0) {
+                recommendations.push('<p>🎮 Complete more flashcards to get personalized tips from your AI friend!</p>');
+            }
+            
+            elements.aiRecommendations.innerHTML = recommendations.join('');
+        }
+
+        // Render Chapters
+        function renderChapters() {
+            const chapters = languageContent[appState.selectedLanguage].chapters;
+            
+            elements.chapterGrid.innerHTML = chapters.map(chapter => {
+                const isCompleted = appState.completedChapters.includes(chapter.id);
+                const isCurrent = chapter.id === appState.currentChapter;
+                
+                let progress = 0;
+                if (isCompleted) {
+                    progress = 100;
+                } else if (isCurrent) {
+                    // Calculate progress for current chapter (simplified)
+                    const chapterFlashcards = Object.keys(appState.flashcardData).filter(
+                        key => key.startsWith(`ch${chapter.id}_`)
+                    );
+                    progress = chapterFlashcards.length > 0 ? 
+                        Math.min(100, (chapterFlashcards.length / 10) * 100) : 0;
+                }
+                
+                return `
+                    <div class="chapter-card ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''}" 
+                         data-chapter-id="${chapter.id}">
+                        <div class="chapter-title">${chapter.title}</div>
+                        <div class="chapter-description">${chapter.description}</div>
+                        <div class="chapter-progress">
+                            <div class="chapter-progress-fill" style="width: ${progress}%"></div>
+                        </div>
+                        <div class="chapter-stats">
+                            <span>${isCompleted ? 'Mission Complete! 🏆' : isCurrent ? 'In Progress! 🎮' : 'Not Started! 🌟'}</span>
+                            <span>${progress.toFixed(0)}%</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Add event listeners to chapter cards
+            const chapterCards = document.querySelectorAll('.chapter-card');
+            chapterCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const chapterId = parseInt(card.dataset.chapterId);
+                    startChapter(chapterId);
+                });
+            });
+        }
+
+        // Start Learning Session
+        function startLearningSession() {
+            appState.sessionStartTime = new Date();
+            startChapter(appState.currentChapter);
+        }
+
+        // Start Chapter
+        function startChapter(chapterId) {
+            appState.currentChapter = chapterId;
+            
+            // Check if chapter is completed
+            if (appState.completedChapters.includes(chapterId)) {
+                showNotification('This mission is already completed! Starting review mode! 🎮');
+            }
+            
+            // Generate flashcards for the chapter
+            generateChapterFlashcards(chapterId);
+        }
+
+        // Generate Chapter Flashcards
+        async function generateChapterFlashcards(chapterId) {
+            showSection('loading');
+            
+            const chapterData = languageContent[appState.selectedLanguage].chapters.find(
+                ch => ch.id === chapterId
+            );
+            
+            if (!chapterData) {
+                showNotification('Mission not found! 🤔', 'error');
+                showSection('chapters');
+                return;
+            }
+            
+            try {
+                // Check if we have existing flashcards for this chapter
+                const existingFlashcards = Object.keys(appState.flashcardData).filter(
+                    key => key.startsWith(`ch${chapterId}_`)
+                );
+                
+                if (existingFlashcards.length > 0) {
+                    // Load existing flashcards
+                    appState.currentFlashcards = existingFlashcards.map(key => {
+                        return {
+                            id: key,
+                            ...appState.flashcardData[key]
+                        };
+                    });
+                    
+                    appState.currentFlashcardIndex = 0;
+                    showSection('flashcard');
+                    renderCurrentFlashcard();
+                    return;
+                }
+                
+                // Generate new flashcards using AI
+                if (!appState.apiKey) {
+                    showNotification('AI helper needed for creating flashcards! 🤖', 'error');
+                    showSection('apiKey');
+                    return;
+                }
+                
+                const prompt = `Create 10 fun flashcards for a 10-year-old learning about "${chapterData.title}" in ${languageContent[appState.selectedLanguage].name}.
+                
+The chapter covers these topics:
+ ${chapterData.topics.map(topic => `- ${topic}`).join('\n')}
+
+IMPORTANT: Explain everything like you're talking to a 10-year-old child! Use simple language, fun analogies, and examples kids can understand.
+
+For each flashcard, provide:
+1. A fun question or concept on the front (simple language for kids)
+2. A detailed answer or explanation on the back (explain like to a 10-year-old)
+3. A simple code example if applicable (with comments explaining each part)
+4. Difficulty level (easy, medium, or hard)
+
+Return the response in valid JSON format exactly as shown below:
+{
+  "flashcards": [
+    {
+      "front": "Fun question or concept here (simple for kids)",
+      "back": "Simple answer or explanation here (explain like to a 10-year-old)",
+      "code": "Simple code example with comments (or empty string)",
+      "difficulty": "easy|medium|hard"
+    }
+  ]
+}
+
+Do not include any text before or after the JSON. The response must be pure JSON that can be parsed by JSON.parse().`;
+                
+                const response = await callGeminiAPI(prompt);
+                
+                // Try to parse the JSON response
+                let data;
+                try {
+                    // Clean the response
+                    let cleanResponse = response.trim();
+                    if (cleanResponse.startsWith('```json')) {
+                        cleanResponse = cleanResponse.replace(/```json\n?/, '').replace(/\n?```$/, '');
+                    } else if (cleanResponse.startsWith('```')) {
+                        cleanResponse = cleanResponse.replace(/```\n?/, '').replace(/\n?```$/, '');
+                    }
+                    
+                    // Try to find JSON object in the response
+                    const jsonMatch = cleanResponse.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) {
+                        cleanResponse = jsonMatch[0];
+                    }
+                    
+                    data = JSON.parse(cleanResponse);
+                    
+                    if (!data.flashcards || !Array.isArray(data.flashcards)) {
+                        throw new Error('Invalid JSON structure');
+                    }
+                    
+                    // Validate each flashcard
+                    data.flashcards = data.flashcards.filter(card => 
+                        card.front && card.back && ['easy', 'medium', 'hard'].includes(card.difficulty)
+                    );
+                    
+                    if (data.flashcards.length === 0) {
+                        throw new Error('No valid flashcards found');
+                    }
+                } catch (parseError) {
+                    console.error('Failed to parse AI response:', parseError);
+                    showNotification('AI helper had a problem! Using backup flashcards! 🤖', 'error');
+                    
+                    // Use fallback flashcards
+                    data = generateFallbackFlashcards(chapterData);
+                }
+                
+                // Store flashcards in app state
+                appState.currentFlashcards = data.flashcards.map((card, index) => {
+                    const flashcardId = `ch${chapterId}_${index + 1}`;
+                    const flashcardData = {
+                        id: flashcardId,
+                        front: card.front,
+                        back: card.back,
+                        code: card.code || '',
+                        difficulty: card.difficulty,
+                        firstViewTime: 0,
+                        lastViewTime: 0,
+                        viewCount: 0,
+                        correctAnswers: 0,
+                        userRating: card.difficulty
+                    };
+                    
+                    // Store in flashcard data
+                    appState.flashcardData[flashcardId] = flashcardData;
+                    
+                    return flashcardData;
+                });
+                
+                appState.currentFlashcardIndex = 0;
+                
+                // Save to localStorage
+                saveUserProfile();
+                
+                showSection('flashcard');
+                renderCurrentFlashcard();
+            } catch (error) {
+                showNotification(`Error creating flashcards: ${error.message}`, 'error');
+                showSection('chapters');
+            }
+        }
+
+        // Generate Fallback Flashcards
+        function generateFallbackFlashcards(chapterData) {
+            const fallbackFlashcards = [];
+            
+            // Generate basic flashcards based on chapter topics
+            chapterData.topics.forEach((topic, index) => {
+                if (index < 10) { // Limit to 10 flashcards
+                    fallbackFlashcards.push({
+                        front: `What is ${topic}? 🤔`,
+                        back: `${topic} is like a special tool in ${languageContent[appState.selectedLanguage].name} that helps you build amazing things! Think of it as a LEGO block for coding! 🧱`,
+                        code: '',
+                        difficulty: 'medium'
+                    });
+                }
+            });
+            
+            // Ensure we have at least 10 flashcards
+            while (fallbackFlashcards.length < 10) {
+                fallbackFlashcards.push({
+                    front: `What are the key ideas in ${chapterData.title}? 🌟`,
+                    back: `The key ideas in ${chapterData.title} are like special superpowers that help you create awesome programs! Each one helps you organize your code better! 🦸‍♂️`,
+                    code: '',
+                    difficulty: 'medium'
+                });
+            }
+            
+            return { flashcards: fallbackFlashcards };
+        }
+
+        // Render Current Flashcard
+        function renderCurrentFlashcard() {
+            if (appState.currentFlashcards.length === 0) {
+                showNotification('No flashcards available for this mission! 🤔', 'error');
+                showSection('chapters');
+                return;
+            }
+            
+            const flashcard = appState.currentFlashcards[appState.currentFlashcardIndex];
+            
+            elements.flashcardTitle.textContent = `Flashcard ${appState.currentFlashcardIndex + 1} of ${appState.currentFlashcards.length} 🎴`;
+            elements.flashcardFrontContent.innerHTML = `
+                <div>${flashcard.front}</div>
+                ${flashcard.code ? `<div class="flashcard-code">${flashcard.code}</div>` : ''}
+            `;
+            elements.flashcardBackContent.innerHTML = `
+                <div>${flashcard.back}</div>
+                ${flashcard.code ? `<div class="flashcard-code">${flashcard.code}</div>` : ''}
+            `;
+            
+            // Reset flip state
+            elements.flashcard.classList.remove('flipped');
+            
+            // Update difficulty indicator
+            updateDifficultyIndicator(flashcard.userRating);
+            
+            // Update button states
+            elements.prevFlashcardBtn.disabled = appState.currentFlashcardIndex === 0;
+            elements.nextFlashcardBtn.disabled = appState.currentFlashcardIndex === appState.currentFlashcards.length - 1;
+            
+            // Record view time
+            const viewStartTime = new Date();
+            
+            // Update flashcard data when navigating away
+            const updateViewData = () => {
+                const viewEndTime = new Date();
+                const viewTime = (viewEndTime - viewStartTime) / 1000; // in seconds
+                
+                if (!flashcard.firstViewTime) {
+                    flashcard.firstViewTime = viewTime;
+                }
+                flashcard.lastViewTime = viewTime;
+                flashcard.viewCount++;
+                
+                // Save to app state
+                appState.flashcardData[flashcard.id] = flashcard;
+                
+                // Update learning patterns
+                updateLearningPatterns();
+            };
+            
+            // Store update function for later use
+            elements.flashcard.updateViewData = updateViewData;
+        }
+
+        // Update Difficulty Indicator
+        function updateDifficultyIndicator(difficulty) {
+            const dots = document.querySelectorAll('.difficulty-dot');
+            dots.forEach(dot => dot.style.opacity = '0.3');
+            
+            if (difficulty === 'easy') {
+                dots[0].style.opacity = '1';
+            } else if (difficulty === 'medium') {
+                dots[1].style.opacity = '1';
+            } else if (difficulty === 'hard') {
+                dots[2].style.opacity = '1';
+            }
+        }
+
+        // Flashcard Navigation
+        function previousFlashcard() {
+            if (elements.flashcard.updateViewData) {
+                elements.flashcard.updateViewData();
+            }
+            
+            if (appState.currentFlashcardIndex > 0) {
+                appState.currentFlashcardIndex--;
+                renderCurrentFlashcard();
+            }
+        }
+
+        function nextFlashcard() {
+            if (elements.flashcard.updateViewData) {
+                elements.flashcard.updateViewData();
+            }
+            
+            if (appState.currentFlashcardIndex < appState.currentFlashcards.length - 1) {
+                appState.currentFlashcardIndex++;
+                renderCurrentFlashcard();
+            }
+        }
+
+        function flipFlashcard() {
+            elements.flashcard.classList.toggle('flipped');
+        }
+
+        // Mark Difficulty
+        function markDifficulty(difficulty) {
+            const flashcard = appState.currentFlashcards[appState.currentFlashcardIndex];
+            flashcard.userRating = difficulty;
+            
+            // Update in app state
+            appState.flashcardData[flashcard.id] = flashcard;
+            
+            // Update difficulty indicator
+            updateDifficultyIndicator(difficulty);
+            
+            // Save to localStorage
+            saveUserProfile();
+            
+            const messages = {
+                easy: 'Too easy! You\'re a super coder! 😎',
+                medium: 'Just right! Keep going! 😊',
+                hard: 'A bit tricky! You\'ll get it! 🤔'
+            };
+            
+            showNotification(messages[difficulty]);
+        }
+
+        // Complete Chapter
+        function completeChapter() {
+            if (elements.flashcard.updateViewData) {
+                elements.flashcard.updateViewData();
+            }
+            
+            // Generate quiz for the chapter
+            generateChapterQuiz();
+        }
+
+        // Generate Chapter Quiz
+        async function generateChapterQuiz() {
+            showSection('loading');
+            
+            const chapterData = languageContent[appState.selectedLanguage].chapters.find(
+                ch => ch.id === appState.currentChapter
+            );
+            
+            if (!chapterData) {
+                showNotification('Mission not found! 🤔', 'error');
+                showSection('flashcard');
+                return;
+            }
+            
+            try {
+                if (!appState.apiKey) {
+                    showNotification('AI helper needed for creating quiz! 🤖', 'error');
+                    showSection('apiKey');
+                    return;
+                }
+                
+                const prompt = `Create a fun 5-question quiz for a 10-year-old learning about "${chapterData.title}" in ${languageContent[appState.selectedLanguage].name}.
+                
+The chapter covers these topics:
+ ${chapterData.topics.map(topic => `- ${topic}`).join('\n')}
+
+IMPORTANT: Make this quiz fun and engaging for a 10-year-old! Use simple language and relatable examples.
+
+For each question, provide:
+1. A fun question text (simple for kids)
+2. 4 multiple choice options (A, B, C, D) - make them fun and engaging
+3. The correct answer (A, B, C, or D)
+4. A brief explanation of why the answer is correct (explain like to a 10-year-old)
+
+Focus on testing understanding of the key concepts in a fun way. Include a mix of conceptual questions and practical examples kids can relate to.
+
+Return the response in valid JSON format exactly as shown below:
+{
+  "questions": [
+    {
+      "question": "Fun question text here (simple for kids)",
+      "options": ["Fun Option A", "Fun Option B", "Fun Option C", "Fun Option D"],
+      "correct": "A",
+      "explanation": "Simple explanation here (explain like to a 10-year-old)"
+    }
+  ]
+}
+
+Do not include any text before or after the JSON. The response must be pure JSON that can be parsed by JSON.parse().`;
+                
+                const response = await callGeminiAPI(prompt);
+                
+                // Try to parse the JSON response
+                let data;
+                try {
+                    // Clean the response
+                    let cleanResponse = response.trim();
+                    if (cleanResponse.startsWith('```json')) {
+                        cleanResponse = cleanResponse.replace(/```json\n?/, '').replace(/\n?```$/, '');
+                    } else if (cleanResponse.startsWith('```')) {
+                        cleanResponse = cleanResponse.replace(/```\n?/, '').replace(/\n?```$/, '');
+                    }
+                    
+                    // Try to find JSON object in the response
+                    const jsonMatch = cleanResponse.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) {
+                        cleanResponse = jsonMatch[0];
+                    }
+                    
+                    data = JSON.parse(cleanResponse);
+                    
+                    if (!data.questions || !Array.isArray(data.questions)) {
+                        throw new Error('Invalid JSON structure');
+                    }
+                    
+                    // Validate each question
+                    data.questions = data.questions.filter(q => 
+                        q.question && q.options && q.options.length === 4 && 
+                        ['A', 'B', 'C', 'D'].includes(q.correct) && q.explanation
+                    );
+                    
+                    if (data.questions.length === 0) {
+                        throw new Error('No valid questions found');
+                    }
+                } catch (parseError) {
+                    console.error('Failed to parse AI response:', parseError);
+                    showNotification('AI helper had a problem! Using backup quiz! 🤖', 'error');
+                    
+                    // Use fallback quiz
+                    data = generateFallbackQuiz(chapterData);
+                }
+                
+                // Store quiz in app state
+                appState.currentQuiz = data.questions;
+                appState.currentQuizAnswers = new Array(data.questions.length).fill(null);
+                
+                showSection('quiz');
+                renderCurrentQuizQuestion();
+            } catch (error) {
+                showNotification(`Error creating quiz: ${error.message}`, 'error');
+                showSection('flashcard');
+            }
+        }
+
+        // Generate Fallback Quiz
+        function generateFallbackQuiz(chapterData) {
+            const fallbackQuestions = [];
+            
+            // Generate basic questions based on chapter topics
+            for (let i = 0; i < 5; i++) {
+                const topic = chapterData.topics[i % chapterData.topics.length];
+                fallbackQuestions.push({
+                    question: `What is ${topic} like in real life? 🤔`,
+                    options: [
+                        "Like building with LEGOs! 🧱",
+                        "Like playing video games! 🎮",
+                        "Like eating pizza! 🍕",
+                        "Like riding a bike! 🚲"
+                    ],
+                    correct: "A",
+                    explanation: `${topic} is like building with LEGOs - you use different pieces to create something amazing! 🧱`
+                });
+            }
+            
+            return { questions: fallbackQuestions };
+        }
+
+        // Render Current Quiz Question
+        function renderCurrentQuizQuestion() {
+            if (appState.currentQuiz.length === 0) {
+                showNotification('No quiz questions available! 🤔', 'error');
+                showSection('flashcard');
+                return;
+            }
+            
+            const currentQuestionIndex = appState.currentQuizAnswers.findIndex(
+                answer => answer === null
+            );
+            
+            if (currentQuestionIndex === -1) {
+                // All questions answered
+                showQuizResults();
+                return;
+            }
+            
+            const question = appState.currentQuiz[currentQuestionIndex];
+            
+            elements.quizContainer.innerHTML = `
+                <div class="quiz-container">
+                    <div class="quiz-question">Question ${currentQuestionIndex + 1} of ${appState.currentQuiz.length}: ${question.question}</div>
+                    <div class="quiz-options">
+                        ${question.options.map((option, index) => {
+                            const letter = String.fromCharCode(65 + index); // A, B, C, D
+                            const isSelected = appState.currentQuizAnswers[currentQuestionIndex] === letter;
+                            return `
+                                <div class="quiz-option ${isSelected ? 'selected' : ''}" data-answer="${letter}">
+                                    ${letter}. ${option}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // Add event listeners to options
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            quizOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    quizOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Store the answer
+                    const answer = option.dataset.answer;
+                    appState.currentQuizAnswers[currentQuestionIndex] = answer;
+                });
+            });
+            
+            // Show submit button if all questions are answered
+            const allAnswered = appState.currentQuizAnswers.every(answer => answer !== null);
+            elements.submitQuizBtn.style.display = allAnswered ? 'inline-block' : 'none';
+        }
+
+        // Submit Quiz
+        function submitQuiz() {
+            // Calculate score
+            let correctCount = 0;
+            const questionResults = [];
+            
+            appState.currentQuiz.forEach((question, index) => {
+                const userAnswer = appState.currentQuizAnswers[index];
+                const isCorrect = userAnswer === question.correct;
+                
+                if (isCorrect) {
+                    correctCount++;
+                }
+                
+                questionResults.push({
+                    question: question.question,
+                    userAnswer: userAnswer,
+                    correctAnswer: question.correct,
+                    isCorrect: isCorrect,
+                    explanation: question.explanation
+                });
+            });
+            
+            const score = Math.round((correctCount / appState.currentQuiz.length) * 100);
+            
+            // Store quiz score
+            appState.quizScores[`ch${appState.currentChapter}`] = score;
+            
+            // Save to localStorage
+            saveUserProfile();
+            
+            // Show results
+            showQuizResults(questionResults, score);
+        }
+
+        // Show Quiz Results
+        function showQuizResults(questionResults, score) {
+            if (!questionResults) {
+                // Calculate score if not provided
+                let correctCount = 0;
+                questionResults = [];
+                
+                appState.currentQuiz.forEach((question, index) => {
+                    const userAnswer = appState.currentQuizAnswers[index];
+                    const isCorrect = userAnswer === question.correct;
+                    
+                    if (isCorrect) {
+                        correctCount++;
+                    }
+                    
+                    questionResults.push({
+                        question: question.question,
+                        userAnswer: userAnswer,
+                        correctAnswer: question.correct,
+                        isCorrect: isCorrect,
+                        explanation: question.explanation
+                    });
+                });
+                
+                score = Math.round((correctCount / appState.currentQuiz.length) * 100);
+            }
+            
+            // Display results
+            elements.quizContainer.innerHTML = questionResults.map((result, index) => `
+                <div class="quiz-container">
+                    <div class="quiz-question">Question ${index + 1}: ${result.question}</div>
+                    <div class="quiz-options">
+                        ${appState.currentQuiz[index].options.map((option, optionIndex) => {
+                            const letter = String.fromCharCode(65 + optionIndex);
+                            const isUserAnswer = letter === result.userAnswer;
+                            const isCorrectAnswer = letter === result.correctAnswer;
+                            
+                            let className = 'quiz-option';
+                            if (isCorrectAnswer) {
+                                className += ' correct';
+                            } else if (isUserAnswer) {
+                                className += ' incorrect';
+                            }
+                            
+                            return `
+                                <div class="${className}">
+                                    ${letter}. ${option}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    ${!result.isCorrect ? `
+                        <div class="quiz-feedback">
+                            <strong>Fun Fact:</strong> ${result.explanation}
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+            
+            elements.quizScore.style.display = 'block';
+            elements.scoreValue.textContent = score;
+            
+            // Show next chapter button if score is good enough
+            if (score >= 70) {
+                elements.nextChapterBtn.style.display = 'inline-block';
+                
+                // Mark chapter as completed
+                if (!appState.completedChapters.includes(appState.currentChapter)) {
+                    appState.completedChapters.push(appState.currentChapter);
+                    saveUserProfile();
+                }
+                
+                // Show achievement message
+                if (score >= 90) {
+                    showNotification('Amazing job! You\'re a coding superstar! ⭐🌟⭐', 'success');
+                } else {
+                    showNotification('Great work! Mission completed! 🎉', 'success');
+                }
+            } else {
+                elements.nextChapterBtn.style.display = 'none';
+                showNotification('You need to score at least 70% to unlock the next mission. Try again! 💪', 'error');
+            }
+            
+            elements.submitQuizBtn.style.display = 'none';
+        }
+
+        // Next Chapter
+        function nextChapter() {
+            const chapters = languageContent[appState.selectedLanguage].chapters;
+            const currentChapterIndex = chapters.findIndex(ch => ch.id === appState.currentChapter);
+            
+            if (currentChapterIndex < chapters.length - 1) {
+                appState.currentChapter = chapters[currentChapterIndex + 1].id;
+                startChapter(appState.currentChapter);
+            } else {
+                showNotification('Congratulations! You\'ve completed all missions! You\'re a coding hero! 🦸‍♂️🎉', 'success');
+                showSection('dashboard');
+                updateDashboard();
+            }
+        }
+
+        // Update Learning Patterns
+        function updateLearningPatterns() {
+            const flashcards = Object.values(appState.flashcardData);
+            
+            if (flashcards.length === 0) return;
+            
+            // Calculate average time per flashcard
+            const totalTime = flashcards.reduce((sum, card) => sum + (card.lastViewTime || 0), 0);
+            appState.learningPatterns.averageTimePerFlashcard = totalTime / flashcards.length;
+            
+            // Determine peak performance time (simplified)
+            const hour = new Date().getHours();
+            if (hour >= 9 && hour <= 11) {
+                appState.learningPatterns.peakPerformanceTime = 'morning';
+            } else if (hour >= 14 && hour <= 16) {
+                appState.learningPatterns.peakPerformanceTime = 'afternoon';
+            } else if (hour >= 19 && hour <= 21) {
+                appState.learningPatterns.peakPerformanceTime = 'evening';
+            } else {
+                appState.learningPatterns.peakPerformanceTime = 'other';
+            }
+            
+            // Identify difficult concepts (cards marked as hard)
+            appState.learningPatterns.difficultConcepts = flashcards
+                .filter(card => card.userRating === 'hard')
+                .map(card => card.front.substring(0, 30) + '...');
+            
+            // Calculate retention rate (simplified)
+            const viewedCards = flashcards.filter(card => card.viewCount > 1);
+            if (viewedCards.length > 0) {
+                const correctCards = viewedCards.filter(card => card.correctAnswers >= card.viewCount * 0.7);
+                appState.learningPatterns.retentionRate = correctCards.length / viewedCards.length;
+            }
+            
+            // Calculate learning velocity (simplified)
+            const today = new Date().toISOString().split('T')[0];
+            const todayCards = flashcards.filter(card => 
+                card.lastViewTime && new Date(card.lastViewTime).toISOString().split('T')[0] === today
+            );
+            appState.learningPatterns.learningVelocity = todayCards.length;
+            
+            // Update AI recommendations based on patterns
+            updateAIRecommendationsBasedOnPatterns();
+        }
+
+        // Update AI Recommendations Based on Patterns
+        function updateAIRecommendationsBasedOnPatterns() {
+            // Focus on difficult concepts
+            appState.aiRecommendations.nextFocusAreas = appState.learningPatterns.difficultConcepts.slice(0, 3);
+            
+            // Suggest review topics based on retention rate
+            const lowRetentionCards = Object.values(appState.flashcardData).filter(card => 
+                card.viewCount > 1 && (card.correctAnswers / card.viewCount) < 0.7
+            );
+            appState.aiRecommendations.suggestedReviewTopics = lowRetentionCards
+                .map(card => card.front.substring(0, 30) + '...')
+                .slice(0, 3);
+            
+            // Mark content as adapted if we have enough data
+            appState.aiRecommendations.adaptedContent = Object.keys(appState.flashcardData).length > 20;
+            
+            // Enable personalized hints if user has struggled with concepts
+            appState.aiRecommendations.personalizedHints = appState.learningPatterns.difficultConcepts.length > 0;
+            
+            // Adjust difficulty based on performance
+            const avgScore = Object.values(appState.quizScores).reduce((sum, score) => sum + score, 0) / 
+                             Object.keys(appState.quizScores).length;
+            
+            if (avgScore < 60) {
+                appState.aiRecommendations.difficultyAdjustment = -0.2; // Make easier
+            } else if (avgScore > 85) {
+                appState.aiRecommendations.difficultyAdjustment = 0.2; // Make harder
+            } else {
+                appState.aiRecommendations.difficultyAdjustment = 0; // Keep same
+            }
         }
 
         // Gemini API Call Function
@@ -859,418 +3081,89 @@
             }
         }
 
-        // Topic Input and Question Generation
-        function generateQuestions() {
-            const topic = elements.presentationTopic.value.trim();
-            if (!topic) {
-                showNotification('Please enter a presentation topic', 'error');
-                return;
-            }
-
-            appState.topic = topic;
-            elements.generateQuestionsBtn.disabled = true;
-            elements.generateQuestionsBtn.textContent = 'Preparing questions...';
-            
-            // Set predefined questions
-            appState.questions = [
-                {
-                    question: "What theme do you prefer?",
-                    options: ["Minimal", "Creative", "Professional", "HighTech"],
-                    variable: "theme"
-                },
-                {
-                    question: "How many slides do you want?",
-                    options: ["1-4", "1-6", "1-8", "1-10"],
-                    variable: "slideCount"
-                },
-                {
-                    question: "What structure do you prefer for each slide?",
-                    options: ["Heading with paragraph", "Heading with bullet points", "Heading only"],
-                    variable: "structure"
-                },
-                {
-                    question: "What animation style do you prefer?",
-                    options: ["Simple", "No animation", "Futuristic"],
-                    variable: "animationStyle"
-                },
-                {
-                    question: "What color theme do you prefer?",
-                    options: ["Black white with accent", "Black white with blue accent", "Custom color (select two)"],
-                    variable: "colorTheme"
-                },
-                {
-                    question: "Content Depth Preference?",
-                    options: ["Simple Words", "Advanced Terms", "Semi-Advanced Terms"],
-                    variable: "termsdepth"
-                },
-                {
-                    question: "How long should descriptions be?",
-                    options: ["Short (1-2 sentences)", "Medium (3-4 sentences)", "Long (5+ sentences)"],
-                    variable: "descriptionLength"
-                },
-                {
-                    question: "How many bullet points per slide?",
-                    options: ["2-3", "4-5", "6-7"],
-                    variable: "bulletPointsCount"
-                },
-                {
-                    question: "What font size do you prefer?",
-                    options: ["Small", "Medium", "Large"],
-                    variable: "fontSize"
-                },
-                {
-                    question: "Do you want to include images?",
-                    options: ["Yes, real photos", "Yes, illustrations", "No images"],
-                    variable: "includeImages"
-                },
-                {
-                    question: "Which 3D background do you prefer?",
-                    options: ["Stars in Universe", "3D nodes", "3D floating particles", "Abstract shapes", "No background"],
-                    variable: "bgitem"
-                }
-            ];
-            
-            // Initialize answers array for these questions
-            appState.answers = new Array(appState.questions.length).fill('');
-            appState.currentQuestionIndex = 0;
-            
-            // Show the questions section
-            showSection('questions');
-            renderCurrentQuestion();
-        }
-
-        // Render Current Question with Options
-        function renderCurrentQuestion() {
-            const progress = ((appState.currentQuestionIndex + 1) / appState.questions.length) * 100;
-            elements.progressFill.style.width = `${progress}%`;
-            
-            const currentQuestion = appState.questions[appState.currentQuestionIndex];
-            const selectedOption = appState.answers[appState.currentQuestionIndex];
-            
-            elements.questionsContainer.innerHTML = `
-                <div class="question-container">
-                    <h3>Question ${appState.currentQuestionIndex + 1} of ${appState.questions.length}</h3>
-                    <p>${currentQuestion.question}</p>
-                    <div class="option-container">
-                        ${currentQuestion.options.map((option, index) => `
-                            <label class="option ${selectedOption === option ? 'selected' : ''}">
-                                <input type="radio" name="question-${appState.currentQuestionIndex}" value="${option}" ${selectedOption === option ? 'checked' : ''}>
-                                ${option}
-                            </label>
-                        `).join('')}
-                    </div>
-                    <div style="margin-top: 15px;">
-                        ${appState.currentQuestionIndex > 0 ? '<button id="prev-question-btn">Previous</button>' : ''}
-                        ${appState.currentQuestionIndex < appState.questions.length - 1 ? '<button id="next-question-btn">Next</button>' : '<button id="finish-questions-btn">Finish</button>'}
-                    </div>
-                </div>
-            `;
-            
-            // Show custom color pickers if color theme question and custom option is selected
-            const customColorsContainer = document.getElementById('custom-colors-container');
-            if (currentQuestion.variable === "colorTheme" && selectedOption === "Custom color (select two)") {
-                customColorsContainer.classList.add('show');
-            } else {
-                customColorsContainer.classList.remove('show');
-            }
-            
-            // Add event listeners for options
-            const optionElements = document.querySelectorAll('.option');
-            optionElements.forEach(option => {
-                option.addEventListener('click', () => {
-                    // Remove selected class from all options
-                    optionElements.forEach(opt => opt.classList.remove('selected'));
-                    // Add selected class to clicked option
-                    option.classList.add('selected');
-                    // Update the answer
-                    const input = option.querySelector('input');
-                    input.checked = true;
-                    // Store the answer in appState using the variable name
-                    const variableName = appState.questions[appState.currentQuestionIndex].variable;
-                    appState[variableName] = input.value;
-                    // Also update the answers array for progress tracking
-                    appState.answers[appState.currentQuestionIndex] = input.value;
-                    
-                    // Show/hide custom color pickers based on selection
-                    if (variableName === "colorTheme" && input.value === "Custom color (select two)") {
-                        customColorsContainer.classList.add('show');
-                    } else {
-                        customColorsContainer.classList.remove('show');
-                    }
-                });
-            });
-            
-            // Add event listeners for color pickers
-            const colorPicker1 = document.getElementById('custom-color-1');
-            const colorPicker2 = document.getElementById('custom-color-2');
-            const colorCode1 = document.getElementById('color-code-1');
-            const colorCode2 = document.getElementById('color-code-2');
-            
-            colorPicker1.addEventListener('input', (e) => {
-                appState.customColor1 = e.target.value;
-                colorCode1.textContent = e.target.value;
-            });
-            
-            colorPicker2.addEventListener('input', (e) => {
-                appState.customColor2 = e.target.value;
-                colorCode2.textContent = e.target.value;
-            });
-            
-            if (appState.currentQuestionIndex > 0) {
-                document.getElementById('prev-question-btn').addEventListener('click', previousQuestion);
-            }
-            
-            if (appState.currentQuestionIndex < appState.questions.length - 1) {
-                document.getElementById('next-question-btn').addEventListener('click', nextQuestion);
-            } else {
-                document.getElementById('finish-questions-btn').addEventListener('click', finishQuestions);
-            }
-        }
-
-        // Question Navigation
-        function nextQuestion() {
-            appState.currentQuestionIndex++;
-            renderCurrentQuestion();
-        }
-
-        function previousQuestion() {
-            appState.currentQuestionIndex--;
-            renderCurrentQuestion();
-        }
-
-        function finishQuestions() {
-            // Check if all questions have answers
-            const allAnswered = appState.answers.every(answer => answer.trim() !== '');
-            if (!allAnswered) {
-                showNotification('Please answer all questions before proceeding', 'error');
-                return;
-            }
-            
-            // Check if custom color option is selected and validate colors
-            if (appState.colorTheme === "Custom color (select two)") {
-                if (!appState.customColor1 || !appState.customColor2) {
-                    showNotification('Please select both custom colors', 'error');
-                    return;
-                }
-            }
-            
-            elements.generatePresentationBtn.disabled = false;
-            showNotification('All questions answered. You can now generate your presentation!');
-        }
-
-        // Presentation Generation
-        async function generatePresentation() {
-            elements.generatePresentationBtn.disabled = true;
-            elements.generatePresentationBtn.textContent = 'Generating presentation...';
-            
-            // Show generating animation
-            showSection('generating');
-            
-            try {
-                // Extract the parameters from appState
-                const { 
-                    topic, 
-                    theme, 
-                    slideCount, 
-                    structure, 
-                    animationStyle, 
-                    colorTheme, 
-                    customColor1, 
-                    customColor2, 
-                    bgitem, 
-                    termsdepth,
-                    descriptionLength,
-                    bulletPointsCount,
-                    fontSize,
-                    includeImages
-                } = appState;
-                
-                // Build the color theme string for the prompt
-                let colorThemeString;
-                if (colorTheme === "Custom color (select two)") {
-                    colorThemeString = `Custom colors: ${customColor1} and ${customColor2}`;
-                } else {
-                    colorThemeString = colorTheme;
-                }
-                
-                // Build the prompt
-                const prompt = `Create a complete HTML, CSS, and JavaScript file for a presentation about "${topic}". The presentation should have the following features:
-
-1. Fullscreen functionality: When the user presses the 'F' key, the presentation should enter fullscreen mode.
-2. Navigation: Include arrow key navigation (left and right arrows) to move between slides in both directions.
-3. Design: Use clean, professional designs with glassmorphism UI elements. The UI should have a glass-like appearance with backdrop blur effects.
-4. Color scheme: Use colors suitable for the topic "${topic}". Apply the selected color theme: "${colorThemeString}".
-5. 3D theme background: Slide should have a Three.js 3D background as "${bgitem}".
-6. Content depth: Use "${termsdepth}" for the content language style.
-7. Animations: Use CSS for all animations. The animation style should be "${animationStyle}".
-8. Structure: Each slide should follow the "${structure}" format.
-9. Theme: The overall theme should be "${theme}".
-10. Slide count: Create ${slideCount} slides with well-organized content.
-11. Description length: For slides with paragraphs, use ${descriptionLength}.
-12. Bullet points: For slides with bullet points, include ${bulletPointsCount} bullet points per slide.
-13. Font size: Use ${fontSize} font size throughout the presentation.
-14. Images: ${includeImages}.
-
-Additional requirements:
-- Include slide indicators (dots) at the bottom to show current slide position.
-- Add Previous/Next buttons for navigation.
-- Make the presentation responsive for different screen sizes.
-- Include a watermark "Developed under HOPE Research Team" and "By Justin" in the bottom-right corner of each slide.
-- Use semantic HTML5 tags throughout.
-- Add smooth transitions between slides.
-- Include professional typography with clear hierarchy.
-
-The presentation should be structured as follows:
-1. Title slide with the topic "${topic}" and a subtitle.
-2. Introduction slide explaining key concepts.
-3. Main content slides with detailed information.
-4. Conclusion slide with key takeaways.
-
-3D theme background: Slide should have a Three.js 3D background as "${bgitem}".
-Return only the complete HTML code without any additional explanations.`;
-                
-                const presentationHTML = await callGeminiAPI(prompt);
-                
-                // Ensure watermark is present
-                const finalHTML = ensureWatermark(presentationHTML);
-                
-                appState.generatedPresentation = finalHTML;
-                
-                // Save to history
-                saveToHistory(appState.topic, finalHTML);
-                
-                // Show preview section
-                showSection('preview');
-            } catch (error) {
-                showNotification(`Error generating presentation: ${error.message}`, 'error');
-                elements.generatePresentationBtn.disabled = false;
-                elements.generatePresentationBtn.textContent = 'Generate Presentation';
-                showSection('questions');
-            }
-        }
-
-        // Ensure watermark is present in the presentation
-        function ensureWatermark(html) {
-            // Check if watermark is already present
-            if (html.includes('Developed under HOPE Research Team') && html.includes('By Justin')) {
-                return html;
-            }
-            
-            // Find each slide and add watermark if not present
-            const slidePattern = /<div class="slide-content">(.*?)<\/div>/gs;
-            const watermark = '<div class="watermark">Developed under HOPE Research Team<br> by Justin</div>';
-            
-            return html.replace(slidePattern, (match, content) => {
-                if (!content.includes('watermark')) {
-                    return `<div class="slide-content">${content}${watermark}</div>`;
-                }
-                return match;
-            });
-        }
-
-        // Preview Function
-        function previewPresentation() {
-            const newWindow = window.open();
-            newWindow.document.write(appState.generatedPresentation);
-            newWindow.document.close();
-        }
-
-        // History Management
-        function saveToHistory(topic, presentation) {
-            const historyItem = {
-                id: Date.now(),
-                topic: topic,
-                timestamp: new Date().toISOString(),
-                presentation: presentation
+        // Save User Profile to LocalStorage
+        function saveUserProfile() {
+            const userProfile = {
+                userName: appState.userName,
+                userKey: appState.userKey,
+                createdDate: appState.createdDate,
+                learningGoal: appState.learningGoal,
+                sessionLength: appState.sessionLength,
+                selectedLanguage: appState.selectedLanguage,
+                currentChapter: appState.currentChapter,
+                completedChapters: appState.completedChapters,
+                flashcardData: appState.flashcardData,
+                quizScores: appState.quizScores,
+                timeSpent: appState.timeSpent,
+                learningPatterns: appState.learningPatterns,
+                aiRecommendations: appState.aiRecommendations
             };
             
-            appState.presentationHistory.unshift(historyItem);
+            localStorage.setItem('userProfile', JSON.stringify(userProfile));
+        }
+
+        // Export Learning Data
+        function exportLearningData() {
+            const userProfile = {
+                userName: appState.userName,
+                userKey: appState.userKey,
+                createdDate: appState.createdDate,
+                learningGoal: appState.learningGoal,
+                selectedLanguage: appState.selectedLanguage,
+                currentChapter: appState.currentChapter,
+                completedChapters: appState.completedChapters,
+                flashcardData: appState.flashcardData,
+                quizScores: appState.quizScores,
+                timeSpent: appState.timeSpent,
+                learningPatterns: appState.learningPatterns,
+                aiRecommendations: appState.aiRecommendations
+            };
             
-            // Keep only the last 10 presentations
-            if (appState.presentationHistory.length > 10) {
-                appState.presentationHistory = appState.presentationHistory.slice(0, 10);
-            }
+            const dataStr = JSON.stringify(userProfile, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
             
-            localStorage.setItem('presentationHistory', JSON.stringify(appState.presentationHistory));
-            loadHistory();
-        }
-
-        function loadHistory() {
-            const savedHistory = localStorage.getItem('presentationHistory');
-            if (savedHistory) {
-                appState.presentationHistory = JSON.parse(savedHistory);
-                renderHistory();
-            }
-        }
-
-        function renderHistory() {
-            if (appState.presentationHistory.length === 0) {
-                elements.historyContainer.innerHTML = '<p>No presentation history yet.</p>';
-                return;
-            }
+            const exportFileDefaultName = `codekids-data-${appState.userName}-${new Date().toISOString().split('T')[0]}.json`;
             
-            elements.historyContainer.innerHTML = appState.presentationHistory.map(item => `
-                <div class="history-item">
-                    <div>
-                        <h3>${item.topic}</h3>
-                        <p>${new Date(item.timestamp).toLocaleString()}</p>
-                    </div>
-                    <div>
-                        <button onclick="loadPresentationFromHistory(${item.id})">Load</button>
-                        <button onclick="deleteHistoryItem(${item.id})">Delete</button>
-                    </div>
-                </div>
-            `).join('');
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showNotification('Learning data saved successfully! 💾');
         }
 
-        function loadPresentationFromHistory(id) {
-            const item = appState.presentationHistory.find(item => item.id === id);
-            if (item) {
-                appState.generatedPresentation = item.presentation;
-                appState.topic = item.topic;
-                showSection('preview');
+        // Reset Progress
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all your progress? This will start your adventure over! 🔄')) {
+                // Reset progress but keep profile info
+                appState.currentChapter = 1;
+                appState.completedChapters = [];
+                appState.flashcardData = {};
+                appState.quizScores = {};
+                appState.timeSpent = {};
+                appState.learningPatterns = {
+                    averageTimePerFlashcard: 0,
+                    peakPerformanceTime: '',
+                    difficultConcepts: [],
+                    preferredLearningStyle: '',
+                    retentionRate: 0,
+                    commonMistakes: []
+                };
+                appState.aiRecommendations = {
+                    nextFocusAreas: [],
+                    suggestedReviewTopics: [],
+                    adaptedContent: false,
+                    personalizedHints: false,
+                    difficultyAdjustment: 0
+                };
+                
+                // Save to localStorage
+                saveUserProfile();
+                
+                showNotification('Adventure reset! Ready to start fresh! 🌟');
+                showSection('dashboard');
+                updateDashboard();
             }
-        }
-
-        function deleteHistoryItem(id) {
-            appState.presentationHistory = appState.presentationHistory.filter(item => item.id !== id);
-            localStorage.setItem('presentationHistory', JSON.stringify(appState.presentationHistory));
-            loadHistory();
-            showNotification('Presentation removed from history');
-        }
-
-        function clearHistory() {
-            if (confirm('Are you sure you want to clear all presentation history?')) {
-                appState.presentationHistory = [];
-                localStorage.removeItem('presentationHistory');
-                renderHistory();
-                showNotification('Presentation history cleared');
-            }
-        }
-
-        // Reset for New Presentation
-        function resetForNewPresentation() {
-            appState.topic = '';
-            appState.theme = '';
-            appState.slideCount = '';
-            appState.structure = '';
-            appState.animationStyle = '';
-            appState.colorTheme = '';
-            appState.customColor1 = '#3498db';
-            appState.customColor2 = '#e74c3c';
-            appState.descriptionLength = '';
-            appState.bulletPointsCount = '';
-            appState.fontSize = '';
-            appState.includeImages = '';
-            appState.questions = [];
-            appState.answers = [];
-            appState.currentQuestionIndex = 0;
-            elements.presentationTopic.value = '';
-            document.getElementById('custom-color-1').value = '#3498db';
-            document.getElementById('custom-color-2').value = '#e74c3c';
-            document.getElementById('color-code-1').textContent = '#3498db';
-            document.getElementById('color-code-2').textContent = '#e74c3c';
-            showSection('topic');
         }
 
         // Utility Functions
