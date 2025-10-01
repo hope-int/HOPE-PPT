@@ -153,6 +153,23 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
+        /* Fix for select dropdown styling */
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.7rem center;
+            background-size: 1.5em;
+            padding-right: 2.5rem;
+        }
+
+        select option {
+            background: #1a1a2e;
+            color: #ffffff;
+        }
+
         button {
             background: linear-gradient(45deg, #3498db, #2980b9);
             color: white;
@@ -1485,13 +1502,14 @@
             projectUI: '',
             projectDocumentation: '',
             projectDeployment: '',
-            projectUseCurrentDate: false,
             selectedProjectFont: '',
             generatedProject: {},
             currentProjectQuestionIndex: 0,
             projectQuestions: [],
             projectAnswers: [],
             projectFiles: [],
+            includeCurrentDate: false,
+            currentDateTime: '',
             
             // Classification questions state
             classificationQuestions: [],
@@ -1544,10 +1562,6 @@
             "Capiznon", "Aklanon", "Kinaray-a", "Cuyonon", "Ratagnon", "Batak", 
             "Palawano", "Tagbanwa", "Cuyonon", "Agutaynen", "Tausug", "Sama", 
             "Yakan", "Jama Mapun", "Sama-Bajau", "Badjao", "Molbog", "Palawano", "Tagbanwa", 
-            "Cuyonon", "Agutaynen", "Tausug", "Sama", "Yakan", "Jama Mapun", "Sama-Bajau", 
-            "Badjao", "Molbog", "Palawano", "Tagbanwa", 
-            "Cuyonon", "Agutaynen", "Tausug", "Sama", "Yakan", "Jama Mapun", "Sama-Bajau", 
-            "Badjao", "Molbog", "Palawano", "Tagbanwa", 
             "Cuyonon", "Agutaynen", "Tausug", "Sama", "Yakan", "Jama Mapun", "Sama-Bajau", 
             "Badjao", "Molbog", "Palawano", "Tagbanwa", "Cuyonon", "Agutaynen"
         ];
@@ -2168,10 +2182,9 @@ Do not include any text before or after the JSON. The response must be pure JSON
                             </label>
                         `).join('')}
                     </div>
-                    <div>
-                        <div style="margin-top: 15px;">
-                            ${appState.currentPptClassificationQuestionIndex > 0 ? '<button id="prev-ppt-classification-question-btn">Previous</button>' : ''}
-                            ${appState.currentPptClassificationQuestionIndex < appState.pptClassificationQuestions.length - 1 ? '<button id="next-ppt-classification-question-btn">Next</button>' : '<button id="finish-ppt-classification-btn">Continue to Presentation Options</button>'}
+                    <div style="margin-top: 15px;">
+                        ${appState.currentPptClassificationQuestionIndex > 0 ? '<button id="prev-ppt-classification-question-btn">Previous</button>' : ''}
+                        ${appState.currentPptClassificationQuestionIndex < appState.pptClassificationQuestions.length - 1 ? '<button id="next-ppt-classification-question-btn">Next</button>' : '<button id="finish-ppt-classification-btn">Continue to Presentation Options</button>'}
                     </div>
                 </div>
             `;
@@ -2181,7 +2194,7 @@ Do not include any text before or after the JSON. The response must be pure JSON
             optionElements.forEach(option => {
                 option.addEventListener('click', () => {
                     // Remove selected class from all options
-                    optionElements.forEach(opt => opt.classList.remove('selected');
+                    optionElements.forEach(opt => opt.classList.remove('selected'));
                     // Add selected class to clicked option
                     option.classList.add('selected');
                     // Update the answer
@@ -2381,7 +2394,7 @@ Do not include any text before or after the JSON. The response must be pure JSON
             optionElements.forEach(option => {
                 option.addEventListener('click', () => {
                     // Remove selected class from all options
-                    optionElements.forEach(opt => opt.classList.remove('selected');
+                    optionElements.forEach(opt => opt.classList.remove('selected'));
                     // Add selected class to clicked option
                     option.classList.add('selected');
                     // Update the answer
@@ -3145,7 +3158,6 @@ Return only the complete HTML code without any additional explanations.`;
             appState.interactiveElements = '';
             appState.dataVisualization = '';
             appState.multimediaElements = '';
-            appState.imageFallback = '';
             appState.questions = [];
             appState.answers = [];
             appState.currentQuestionIndex = 0;
@@ -3154,41 +3166,9 @@ Return only the complete HTML code without any additional explanations.`;
             appState.currentPptClassificationQuestionIndex = 0;
             elements.presentationTopic.value = '';
             document.getElementById('custom-color-1').value = '#3498db';
-            document.getElementById('color-code-1').textContent = '#3498db';
             document.getElementById('custom-color-2').value = '#e74c3c';
+            document.getElementById('color-code-1').textContent = '#3498db';
             document.getElementById('color-code-2').textContent = '#e74c3c';
-            showSection('topic');
-        }
-
-        // Reset for New Presentation - Modified to reset classification state
-        function resetForNewPresentation() {
-            appState.topic = '';
-            appState.theme = '';
-            appState.slideCount = '';
-            appState.structure = '';
-            appState.animationStyle = '';
-            appState.colorTheme = '';
-            appState.customColor1 = '#3498db';
-            appState.customColor2 = '#e74c3c';
-            appState.descriptionLength = '';
-            appState.bulletPointsCount = '';
-            appState.fontSize = '';
-            appState.includeImages = '';
-            appState.imageFallback = '';
-            appState.language = 'English';
-            appState.selectedLanguage = '';
-            appState.presentationStyle = '';
-            appState.advancedAnimations = '';
-            appState.interactiveElements = '';
-            appState.dataVisualization = '';
-            appState.multimediaElements = '';
-            appState.questions = [];
-            appState.answers = [];
-            appState.currentQuestionIndex = 0;
-            appState.pptClassificationQuestions = [];
-            appState.pptClassificationAnswers = [];
-            appState.currentPptClassificationQuestionIndex = 0;
-            elements.presentationTopic.value = '';
             showSection('topic');
         }
 
@@ -3396,12 +3376,12 @@ Do not include any text before or after the JSON. The response must be pure JSON
                 },
                 {
                     question: "What difficulty level is appropriate?",
-                    options: ["Beginner", "Intermediate", "Advanced", "Advanced", "Mixed Levels"],
+                    options: ["Beginner", "Intermediate", "Advanced", "Mixed Levels"],
                     variable: "assignmentDifficulty"
                 },
                 {
                     question: "What resources should be included?",
-                    options: ["None", "Reading list", "Research guidelines", "Research guidelines", "Templates", "All of the above"],
+                    options: ["None", "Reading list", "Research guidelines", "Templates", "All of the above"],
                     variable: "assignmentResources"
                 },
                 {
@@ -3445,7 +3425,7 @@ Do not include any text before or after the JSON. The response must be pure JSON
                             </label>
                         `).join('')}
                     </div>
-                    <div class="option-container">
+                    <div style="margin-top: 15px;">
                         ${appState.currentAssignmentQuestionIndex > 0 ? '<button id="prev-assignment-question-btn">Previous</button>' : ''}
                         ${appState.currentAssignmentQuestionIndex < appState.assignmentQuestions.length - 1 ? '<button id="next-assignment-question-btn">Next</button>' : '<button id="finish-assignment-questions-btn">Finish</button>'}
                     </div>
@@ -3465,7 +3445,7 @@ Do not include any text before or after the JSON. The response must be pure JSON
             optionElements.forEach(option => {
                 option.addEventListener('click', () => {
                     // Remove selected class from all options
-                    optionElements.forEach(opt => opt.classList.remove('selected');
+                    optionElements.forEach(opt => opt.classList.remove('selected'));
                     // Add selected class to clicked option
                     option.classList.add('selected');
                     // Update the answer
@@ -3717,7 +3697,7 @@ IMPORTANT: You must return the response in valid JSON format exactly as shown be
   "questions": [
     {
       "question": "Question text here",
-      "options": ["Option 1", "Option 2", "Option 2", "Option 3", "Option 4"]
+      "options": ["Option 1", "Option 2", "Option 3", "Option 4"]
     },
     {
       "question": "Another question here",
@@ -3905,18 +3885,18 @@ Do not include any text before or after the JSON. The response must be pure JSON
                 },
                 {
                     question: "What level of documentation do you need?",
-                    options: ["Basic comments in code", "Detailed documentation", "Complete with user manual", "Complete with user manual", "Academic level documentation"],
+                    options: ["Basic comments in code", "Detailed documentation", "Complete with user manual", "Academic level documentation"],
                     variable: "projectDocumentation"
                 },
                 {
-                    question: "How do you want to deploy?",
+                    question: "How do you want to deploy the project?",
                     options: ["Local deployment only", "Cloud deployment (AWS/Azure/GCP)", "Docker container", "Traditional server", "No deployment needed"],
                     variable: "projectDeployment"
                 },
                 {
-                    question: "What font style do you prefer for documentation?",
-                    options: ["Normal", "Handwritten", "Typewriter", "Typewriter", "Other"],
-                    variable: "projectFont"
+                    question: "Do you want to include the current date and time in the project?",
+                    options: ["Yes, include current date and time", "No, don't include date and time"],
+                    variable: "includeCurrentDate"
                 },
                 {
                     question: "What font style do you prefer for documentation?",
@@ -3940,6 +3920,7 @@ Do not include any text before or after the JSON. The response must be pure JSON
             elements.projectProgressFill.style.width = `${progress}%`;
             
             const currentQuestion = appState.projectQuestions[appState.currentProjectQuestionIndex];
+            const selectedOption = appState.projectAnswers[appState.currentProjectQuestionIndex];
             
             if (currentQuestion.isMultiSelect) {
                 // Multi-select question rendering
@@ -3952,30 +3933,39 @@ Do not include any text before or after the JSON. The response must be pure JSON
                                 ${currentQuestion.options.map((option, index) => `
                                     <div class="multi-select-option">
                                         <input type="checkbox" id="lang-${index}" value="${option}" ${selectedOption && selectedOption.includes(option) ? 'checked' : ''}>
-                                        <label for="lang-${index}">
-                                            <label for="lang-${index}">
-                                                ${option}
-                                            ${option}
-                                        ${option}
-                                    </label>
-                                        </div>
-                                    <div class="multi-select-option">
-                                        <input type="checkbox" id="lang-${index}" value="${option}" ${selectedOption && selectedOption.includes(option) ? 'checked' : ''}>
-                                        <label for="lang-${index}">
-                                            ${option}
-                                        ${option}
-                                    </label>
-                                </div>
-                                <div class="selected-items" id="selected-languages">
-                                    ${selectedOption.map(lang => `<span class="selected-item">${lang}</span>`).join('')}
-                                </div>
+                                        <label for="lang-${index}">${option}</label>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="selected-items" id="selected-languages">
+                                ${selectedOption ? selectedOption.map(lang => `<span class="selected-item">${lang}</span>`).join('') : 'No languages selected'}
                             </div>
                         </div>
+                        <div style="margin-top: 15px;">
+                            ${appState.currentProjectQuestionIndex > 0 ? '<button id="prev-project-question-btn">Previous</button>' : ''}
+                            ${appState.currentProjectQuestionIndex < appState.projectQuestions.length - 1 ? '<button id="next-project-question-btn">Next</button>' : '<button id="finish-project-questions-btn">Finish</button>'}
+                        </div>
                     </div>
-                    <div class="selected-items" id="selected-languages-container">
-                        ${selectedOption.length > 0 ? selectedOption.map(lang => `<span class="selected-item">${lang}</span>`).join('')}
-                    </div>
-                </div>
+                `;
+                
+                // Add event listeners for checkboxes
+                const checkboxes = document.querySelectorAll('.multi-select-option input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', () => {
+                        const checkedOptions = Array.from(checkboxes)
+                            .filter(cb => cb.checked)
+                            .map(cb => cb.value);
+                        appState.projectAnswers[appState.currentProjectQuestionIndex] = checkedOptions;
+                        
+                        // Update selected items display
+                        const selectedItemsDiv = document.getElementById('selected-languages');
+                        if (checkedOptions.length > 0) {
+                            selectedItemsDiv.innerHTML = checkedOptions.map(lang => `<span class="selected-item">${lang}</span>`).join('');
+                        } else {
+                            selectedItemsDiv.innerHTML = 'No languages selected';
+                        }
+                    });
+                });
             } else {
                 // Regular single-select question rendering
                 elements.projectQuestionsContainer.innerHTML = `
@@ -3985,55 +3975,54 @@ Do not include any text before or after the JSON. The response must be pure JSON
                         <div class="option-container">
                             ${currentQuestion.options.map((option, index) => `
                                 <label class="option ${selectedOption === option ? 'selected' : ''}">
-                                    <input type="radio" name="project-question-${appState.currentProjectQuestionIndex}" value="${option}" ${selectedOption && selectedOption.includes(option) ? 'checked' : ''}>
-                                        ${option}
-                                    </label>
-                                ${option}
-                            </label>
-                        `).join('')}
+                                    <input type="radio" name="project-question-${appState.currentProjectQuestionIndex}" value="${option}" ${selectedOption === option ? 'checked' : ''}>
+                                    ${option}
+                                </label>
+                            `).join('')}
+                        </div>
+                        <div style="margin-top: 15px;">
+                            ${appState.currentProjectQuestionIndex > 0 ? '<button id="prev-project-question-btn">Previous</button>' : ''}
+                            ${appState.currentProjectQuestionIndex < appState.projectQuestions.length - 1 ? '<button id="next-project-question-btn">Next</button>' : '<button id="finish-project-questions-btn">Finish</button>'}
+                        </div>
                     </div>
-                    <div style="margin-top: 15px;">
-                        ${appState.currentProjectQuestionIndex > 0 ? '<button id="prev-project-question-btn">Previous</button>' : ''}
-                        ${appState.currentProjectQuestionIndex < appState.projectQuestions.length - 1 ? '<button id="next-project-question-btn">Next</button>' : '<button id="finish-project-questions-btn">Finish</button>'}
-                    </div>
-                </div>
-            `;
-            
-            // Add event listeners for options
-            const optionElements = document.querySelectorAll('.option');
-            optionElements.forEach(option => {
-                option.addEventListener('click', () => {
-                    // Remove selected class from all options
-                    optionElements.forEach(opt => opt.classList.remove('selected'));
-                    // Add selected class to clicked option
-                    option.classList.add('selected');
-                    // Update the answer
-                    const input = option.querySelector('input');
-                    input.checked = true;
-                    // Store the answer in appState using the variable name
-                    const variableName = appState.projectQuestions[appState.currentProjectQuestionIndex].variable;
-                    appState[variableName] = input.value;
-                    // Also update the answers array for progress tracking
-                    appState.projectAnswers[appState.currentProjectQuestionIndex] = input.value;
-                    
-                    // Show/hide font list based on selection
-                    if (variableName === "projectFont" && input.value === "Other") {
-                        elements.projectFontListContainer.classList.add('show');
-                        renderProjectFontList();
-                    } else {
-                        elements.projectFontListContainer.classList.remove('show');
-                    }
+                `;
+                
+                // Add event listeners for options
+                const optionElements = document.querySelectorAll('.option');
+                optionElements.forEach(option => {
+                    option.addEventListener('click', () => {
+                        // Remove selected class from all options
+                        optionElements.forEach(opt => opt.classList.remove('selected'));
+                        // Add selected class to clicked option
+                        option.classList.add('selected');
+                        // Update the answer
+                        const input = option.querySelector('input');
+                        input.checked = true;
+                        // Store the answer in appState using the variable name
+                        const variableName = appState.projectQuestions[appState.currentProjectQuestionIndex].variable;
+                        appState[variableName] = input.value;
+                        // Also update the answers array for progress tracking
+                        appState.projectAnswers[appState.currentProjectQuestionIndex] = input.value;
+                        
+                        // Show/hide font list based on selection
+                        if (variableName === "projectFont" && input.value === "Other") {
+                            elements.projectFontListContainer.classList.add('show');
+                            renderProjectFontList();
+                        } else {
+                            elements.projectFontListContainer.classList.remove('show');
+                        }
+                        
+                        // Handle includeCurrentDate option
+                        if (variableName === "includeCurrentDate") {
+                            appState.includeCurrentDate = input.value === "Yes, include current date and time";
+                            if (appState.includeCurrentDate) {
+                                // Get current date and time
+                                const now = new Date();
+                                appState.currentDateTime = now.toLocaleString();
+                            }
+                        }
+                    });
                 });
-                
-                if (appState.currentProjectQuestionIndex > 0) {
-                    document.getElementById('prev-project-question-btn').addEventListener('click', previousProjectQuestion);
-                }
-                
-                if (appState.currentProjectQuestionIndex < appState.projectQuestions.length - 1) {
-                    document.getElementById('next-project-question-btn').addEventListener('click', nextProjectQuestion);
-                } else {
-                    document.getElementById('finish-project-questions-btn').addEventListener('click', finishProjectQuestions);
-                }
             }
             
             if (appState.currentProjectQuestionIndex > 0) {
@@ -4045,6 +4034,28 @@ Do not include any text before or after the JSON. The response must be pure JSON
             } else {
                 document.getElementById('finish-project-questions-btn').addEventListener('click', finishProjectQuestions);
             }
+        }
+
+        // Render Project Font List
+        function renderProjectFontList() {
+            elements.projectFontListContainer.innerHTML = fonts.map(font => `
+                <div class="font-option ${appState.selectedProjectFont === font ? 'selected' : ''}" data-font="${font}">
+                    ${font}
+                </div>
+            `).join('');
+            
+            // Add event listeners to font options
+            const fontOptions = document.querySelectorAll('.font-option');
+            fontOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    fontOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Update the selected font
+                    appState.selectedProjectFont = option.dataset.font;
+                });
+            });
         }
 
         // Project Question Navigation
@@ -4064,8 +4075,13 @@ Do not include any text before or after the JSON. The response must be pure JSON
                 if (Array.isArray(answer)) {
                     return answer.length > 0;
                 }
-                return answer.trim() !== '';
+                return answer && answer.trim() !== '';
             });
+            
+            if (!allAnswered) {
+                showNotification('Please answer all questions before proceeding', 'error');
+                return;
+            }
             
             // Check if font is "Other" and no specific font is selected
             if (appState.projectFont === "Other" && !appState.selectedProjectFont) {
@@ -4097,16 +4113,30 @@ Do not include any text before or after the JSON. The response must be pure JSON
                     projectUI, 
                     projectDocumentation, 
                     projectDeployment,
-                    projectUseCurrentDate,
                     projectFont,
+                    selectedProjectFont,
                     projectClassificationQuestions,
-                    projectClassificationAnswers
+                    projectClassificationAnswers,
+                    includeCurrentDate,
+                    currentDateTime
                 } = appState;
+                
+                // Determine the actual font to use
+                let actualFont = projectFont;
+                if (projectFont === "Other") {
+                    actualFont = selectedProjectFont || "Arial";
+                }
                 
                 // Build classification information string
                 let classificationInfo = '';
                 for (let i = 0; i < projectClassificationQuestions.length; i++) {
                     classificationInfo += `Q: ${projectClassificationQuestions[i].question}\nA: ${projectClassificationAnswers[i]}\n\n`;
+                }
+                
+                // Add date information if requested
+                let dateInfo = '';
+                if (includeCurrentDate && currentDateTime) {
+                    dateInfo = `The current date and time is: ${currentDateTime}. Please include this information in the project documentation where appropriate.`;
                 }
                 
                 // Initialize project files object
@@ -4124,17 +4154,7 @@ Do not include any text before or after the JSON. The response must be pure JSON
 The user has provided the following additional classification information:
  ${classificationInfo}
 
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation Level: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-- Current Date: ${new Date().toLocaleString()}
+ ${dateInfo}
 
 The project specifications are:
 - Level: ${projectLevel}
@@ -4145,8 +4165,32 @@ The project specifications are:
 - UI/UX: ${projectUI}
 - Documentation Level: ${projectDocumentation}
 - Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? new Date().toLocaleString() : 'No'}
-- Current Date: ${new Date().toLocaleString()}
+
+Create a detailed project documentation in HTML format with the following sections:
+1. Project Overview
+2. Features
+3. System Architecture
+4. Technology Stack
+5. Installation Guide
+6. User Guide
+7. API Documentation (if applicable)
+8. Testing Guide
+9. Deployment Guide
+10. Future Enhancements
+
+Use professional styling with ${actualFont} font. Include SVG illustrations for the system architecture and workflow diagrams.
+
+Return only the complete HTML code without any additional explanations.`;
+                
+                appState.generatedProject.documentation = await callGeminiAPI(documentationPrompt);
+                
+                // Generate project requirements
+                const requirementsPrompt = `Create a detailed requirements document for a ${projectLevel} ${projectType} project about "${projectTopic}". 
+
+The user has provided the following additional classification information:
+ ${classificationInfo}
+
+ ${dateInfo}
 
 The project specifications are:
 - Level: ${projectLevel}
@@ -4157,8 +4201,28 @@ The project specifications are:
 - UI/UX: ${projectUI}
 - Documentation Level: ${projectDocumentation}
 - Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-- Current Date: ${new Date().toLocaleString()}
+
+Create a requirements document in HTML format with the following sections:
+1. Functional Requirements
+2. Non-Functional Requirements
+3. User Requirements
+4. System Requirements
+5. Technical Specifications
+6. Constraints and Assumptions
+
+Use professional styling with ${actualFont} font.
+
+Return only the complete HTML code without any additional explanations.`;
+                
+                appState.generatedProject.requirements = await callGeminiAPI(requirementsPrompt);
+                
+                // Generate README file
+                const readmePrompt = `Create a comprehensive README.md file for a ${projectLevel} ${projectType} project about "${projectTopic}". 
+
+The user has provided the following additional classification information:
+ ${classificationInfo}
+
+ ${dateInfo}
 
 The project specifications are:
 - Level: ${projectLevel}
@@ -4169,7 +4233,33 @@ The project specifications are:
 - UI/UX: ${projectUI}
 - Documentation Level: ${projectDocumentation}
 - Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
+
+Create a README.md file with the following sections:
+1. Project Title and Description
+2. Features
+3. Installation Instructions
+4. Usage Guide
+5. Configuration
+6. Contributing Guidelines
+7. License Information
+8. Contact Information
+
+Use proper Markdown formatting.
+
+Return only the complete README.md content without any additional explanations.`;
+                
+                appState.generatedProject.readme = await callGeminiAPI(readmePrompt);
+                
+                // Generate source code files based on project type
+                await generateSourceCode();
+                
+                // Generate workflow SVG
+                const workflowPrompt = `Create an SVG workflow diagram for a ${projectLevel} ${projectType} project about "${projectTopic}". 
+
+The user has provided the following additional classification information:
+ ${classificationInfo}
+
+ ${dateInfo}
 
 The project specifications are:
 - Level: ${projectLevel}
@@ -4180,1073 +4270,428 @@ The project specifications are:
 - UI/UX: ${projectUI}
 - Documentation Level: ${projectDocumentation}
 - Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
 
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
+Create a professional workflow diagram showing the complete project flow from user interaction to data processing and storage. Use modern design with appropriate colors and shapes.
 
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseDate ? 'Yes' : 'No'}
-            </div>
-
-        // Initialize Application
-        function initApp() {
-            // Show splash screen first
-            elements.continueToApp.addEventListener('click', () => {
-                elements.splashScreen.style.opacity = '0';
-                setTimeout(() => {
-                    elements.splashScreen.style.opacity = '0';
-                    setTimeout(() => {
-                        elements.splashScreen.style.display = 'none';
-                        // Initialize Three.js background after splash screen
-                        initThreeBackground();
-                        
-                        // Check if user has seen tutorial
-                        const hasSeenTutorial = localStorage.getItem('hasSeenTutorial');
-                        if (hasSeenTutorial) {
-                            // Check for existing API key
-                            const savedApiKey = localStorage.getItem('geminiApiKey');
-                            if (savedApiKey) {
-                                appState.apiKey = savedApiKey;
-                                elements.apiKeyInput.value = savedApiKey;
-                                showSection('mainOptions');
-                                showSection('mainOptions');
-                                loadHistory();
-                            } else {
-                                showSection('apiKey');
-                            } else {
-                                showSection('apiKey');
-                            }
-                        }
-                }
-            });
-
-            // Event Listeners
-            elements.saveApiKeyBtn.addEventListener('click', saveApiKey);
-            elements.generateQuestionsBtn.addEventListener('click', generatePptClassificationQuestions);
-            elements.generatePresentationBtn.addEventListener('click', generatePresentation);
-            elements.previewBtn.addEventListener('click', previewPresentation);
-            elements.newPresentationBtn.addEventListener('click', resetForNewPresentation);
-            elements.clearHistoryBtn.addEventListener('click', clearHistory);
-            elements.newCreationFromHistoryBtn.addEventListener('click', () => {
-                showSection('mainOptions');
-            });
-            elements.historyToggle.addEventListener('click', () => {
-                if (sections.history.classList.contains('active')) {
-                    // If currently showing history, go back to main options
-                    showSection('mainOptions');
-                } else {
-                    // Show history section
-                    loadHistory();
-                    showSection('history');
-                }
-            });
-            
-            elements.languageSearch.addEventListener('input', (e) => {
-                if (e.target.value.trim() === '') {
-                    elements.languageSearch.value = '';
-                    renderLanguageList();
-                } else {
-                    elements.languageSearch.value = '';
-                }
-            });
-            
-            elements.languageSearch.addEventListener('input', (e) => {
-                renderLanguageList(e.target.value.toLowerCase());
-            });
-            
-            elements.generateProjectClassificationQuestionsBtn.addEventListener('click', generateProjectClassificationQuestions);
-            elements.finishProjectClassificationBtn.addEventListener('click', finishProjectClassificationQuestions);
-            
-            // Project flow event listeners
-            elements.generateProjectBtn.addEventListener('click', generateProject);
-            elements.previewDocumentationBtn.addEventListener('click', previewDocumentation);
-            elements.downloadProjectBtn.addEventListener('click', downloadProject);
-            elements.newProjectBtn.addEventListener('click', resetForNewProject);
-            
-            // Language search functionality
-            elements.languageSearch.addEventListener('input', (e) => {
-                if (e.target.value.trim() === '') {
-                    elements.languageSearch.value = '';
-                } else {
-                    elements.languageSearch.value = '';
-                }
-            });
-            
-            elements.generateProjectBtn.addEventListener('click', () => {
-                if (elements.projectTopicInput.value.trim() === '') {
-                    showNotification('Please enter a project topic', 'error');
-                    return;
-                }
+Return only the complete SVG code without any additional explanations.`;
                 
-                appState.projectTopic = elements.projectTopicInput.value;
-                appState.projectLevel = elements.projectLevelSelect.value;
+                appState.generatedProject.workflow = await callGeminiAPI(workflowPrompt);
                 
-                appState.projectLevel = elements.projectLevelSelect.value;
+                // Prepare file list for display
+                prepareProjectFileList();
                 
-                appState.projectClassificationBtn.disabled = true;
-                elements.generateProjectClassificationQuestionsBtn.textContent = 'Generating questions...';
+                // Save to history
+                saveToHistory(appState.projectTopic, appState.generatedProject, 'project');
                 
-                // Show generating animation
-                showSection('generatingProjectClassification');
-                
-                try {
-                    // Build the prompt to generate project classification questions with strict formatting instructions
-                    const prompt = `Based on the topic "${appState.projectTopic}" for a ${appState.projectLevel} project, generate 3-5 specific classification questions that would help gather more information about what kind of project the user wants. These questions should help narrow down the focus, scope, and specific aspects of the project.
-
-For each question, provide 3-4 multiple choice options.
-
-IMPORTANT: You must return the response in valid JSON format exactly as shown below, with no additional text, explanations, or markdown formatting:
-
-{
-  "questions": [
-    {
-      "question": "Question text here",
-      "options": ["Option 1", "Option 2", "Option 2", "Option 3", "Option 3", "Option 4"],
-      "options": ["Option A", "Option B", "Option C"]
-    },
-    {
-      "question": "Another question here",
-      "options": ["Option A", "Option B", "Option C"]
-    }
-  ]
-}
-
-Do not include any text before or after the JSON. The response must be pure JSON that can be parsed by JSON.parse().`;
-                
-                const response = await callGeminiAPI(prompt);
-                
-                // Try to parse the JSON response
-                let data;
-                try {
-                    // Clean the response - remove any markdown code blocks or extra text
-                    let cleanResponse = response.trim();
-                    if (cleanResponse.startsWith('```json\n?/, '').replace(/\n?/, '').replace(/\n?```$/, '');
-                    } else if (cleanResponse.startsWith('```')) {
-                        cleanResponse = cleanResponse.replace(/```\n?/, '').replace(/\n?```$/, '');
-                    } else if (cleanResponse.startsWith('```')) {
-                        cleanResponse = cleanResponse.replace(/```\n?, '').replace(/\n?$/, '');
-                    }
-                    
-                    // Try to find JSON object in the response
-                    const jsonMatch = cleanResponse.match(/\{[\s\S]*\}/);
-                    if (jsonMatch) {
-                        cleanResponse = jsonMatch[0];
-                    }
-                    
-                    data = JSON.parse(cleanResponse);
-                    
-                    // Validate the structure
-                    if (!data.questions || !Array.isArray(data.questions)) {
-                        throw new Error('Invalid JSON structure');
-                    }
-                    
-                    // Validate each question
-                    data.questions = data.questions.filter(q => 
-                        q.question && q.options && Array.isArray(q.options) && q.options.length >= 2
-                    );
-                    
-                    if (data.questions.length === 0) {
-                        throw new Error('No valid questions found');
-                    }
-                    
-                    // Limit to 5 questions
-                    if (data.questions.length > 5) {
-                        data.questions = data.questions.slice(0, 5);
-                    }
-                    
-                    appState.projectClassificationQuestions = data.questions;
-                } catch (parseError) {
-                    console.error('Failed to parse AI response:', parseError);
-                    console.log('Using fallback questions');
-                    
-                    // Use fallback questions - take first 5
-                    appState.projectClassificationQuestions = fallbackProjectClassificationQuestions.slice(0, 5);
-                    showNotification('Using default questions due to AI response format issue', 'error');
-                }
-                
-                // Initialize answers array
-                appState.projectClassificationAnswers = new Array(appState.projectClassificationQuestions.length).fill('');
-                appState.currentProjectClassificationQuestionIndex = 0;
-                
-                // Show the project classification questions section
-                showSection('projectClassificationQuestions');
-                renderCurrentProjectClassificationQuestion();
+                // Show preview section
+                showSection('projectPreview');
             } catch (error) {
-                showNotification(`Error generating project classification questions: ${error.message}`, 'error');
-                elements.generateProjectClassificationQuestionsBtn.disabled = false;
-                elements.generateProjectClassificationQuestionsBtn.textContent = 'Next';
-                showSection('projectTopic');
+                showNotification(`Error generating project: ${error.message}`, 'error');
+                elements.generateProjectBtn.disabled = false;
+                elements.generateProjectBtn.textContent = 'Generate Project';
+                showSection('projectQuestions');
+            }
+        }
+
+        // Generate Source Code based on project type
+        async function generateSourceCode() {
+            const { projectLevel, projectType, projectTopic, projectLanguages, projectFramework, projectDatabase, includeCurrentDate, currentDateTime } = appState;
+            
+            try {
+                // Generate main application file
+                let dateInfo = '';
+                if (includeCurrentDate && currentDateTime) {
+                    dateInfo = `The current date and time is: ${currentDateTime}. Please include this information in the code comments where appropriate.`;
+                }
+                
+                const mainFilePrompt = `Create the main application file for a ${projectLevel} ${projectType} project about "${projectTopic}" using ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages} and ${projectFramework}. 
+
+ ${dateInfo}
+
+The project should:
+1. Be fully functional with proper error handling
+2. Include comments explaining the code
+3. Follow best practices for the selected languages
+4. Connect to ${projectDatabase} if applicable
+5. Implement core features related to "${projectTopic}"
+6. Include proper structure suitable for a ${projectLevel} project
+
+Return only the complete source code without any additional explanations.`;
+                
+                let mainFileExtension = getFileExtension(Array.isArray(projectLanguages) ? projectLanguages[0] : projectLanguages);
+                let mainFileName = `index.${mainFileExtension}`;
+                
+                if (projectType === "Web Application") {
+                    mainFileName = `index.html`;
+                    appState.generatedProject.sourceCode[mainFileName] = await callGeminiAPI(mainFilePrompt);
+                    
+                    // Generate CSS file
+                    const cssPrompt = `Create a CSS file for a ${projectLevel} ${projectType} about "${projectTopic}" with modern styling, responsive design, and animations. Use the ${appState.projectUI} design approach.
+
+ ${dateInfo}
+
+Return only the complete CSS code without any additional explanations.`;
+                    appState.generatedProject.sourceCode["styles.css"] = await callGeminiAPI(cssPrompt);
+                    
+                    // Generate JavaScript file
+                    const jsPrompt = `Create a JavaScript file for a ${projectLevel} ${projectType} about "${projectTopic}" with modern ES6+ syntax, proper error handling, and interactive features.
+
+ ${dateInfo}
+
+Return only the complete JavaScript code without any additional explanations.`;
+                    appState.generatedProject.sourceCode["script.js"] = await callGeminiAPI(jsPrompt);
+                } else {
+                    appState.generatedProject.sourceCode[mainFileName] = await callGeminiAPI(mainFilePrompt);
+                }
+                
+                // Generate additional files based on project type
+                if (projectType === "Web Application" || projectType === "Mobile App") {
+                    // Generate package.json for Node.js projects
+                    if (projectLanguages.includes("JavaScript/TypeScript") || projectFramework === "React" || projectFramework === "Angular" || projectFramework === "Vue.js" || projectFramework === "Express.js") {
+                        const packageJsonPrompt = `Create a package.json file for a ${projectLevel} ${projectType} about "${projectTopic}" using ${projectFramework}. Include appropriate dependencies, scripts, and project metadata.
+
+ ${dateInfo}
+
+Return only the complete package.json content without any additional explanations.`;
+                        appState.generatedProject.sourceCode["package.json"] = await callGeminiAPI(packageJsonPrompt);
+                    }
+                }
+                
+                // Generate database configuration file if database is needed
+                if (projectDatabase !== "No database needed") {
+                    const dbConfigPrompt = `Create a database configuration file for a ${projectLevel} ${projectType} about "${projectTopic}" using ${projectDatabase}. Include connection settings, schema definition, and sample queries.
+
+ ${dateInfo}
+
+Return only the complete configuration code without any additional explanations.`;
+                    
+                    let dbFileName = `db-config.${getFileExtension(Array.isArray(projectLanguages) ? projectLanguages[0] : projectLanguages)}`;
+                    appState.generatedProject.sourceCode[dbFileName] = await callGeminiAPI(dbConfigPrompt);
+                }
+                
+                // Generate README.md file (already generated above)
+                appState.generatedProject.sourceCode["README.md"] = appState.generatedProject.readme;
+                
+            } catch (error) {
+                console.error('Error generating source code:', error);
+                showNotification(`Error generating source code: ${error.message}`, 'error');
+            }
+        }
+
+        // Get file extension based on programming language
+        function getFileExtension(language) {
+            const extensions = {
+                "JavaScript/TypeScript": "js",
+                "Python": "py",
+                "Java": "java",
+                "C#": "cs",
+                "PHP": "php",
+                "Ruby": "rb",
+                "Go": "go",
+                "Swift": "swift",
+                "Kotlin": "kt",
+                "C++": "cpp",
+                "C": "c",
+                "Rust": "rs",
+                "SQL": "sql",
+                "HTML/CSS": "html"
+            };
+            
+            return extensions[language] || "txt";
+        }
+
+        // Prepare project file list for display
+        function prepareProjectFileList() {
+            const fileList = [];
+            
+            // Add documentation file
+            fileList.push({
+                name: "Documentation.html",
+                size: "~" + Math.round(appState.generatedProject.documentation.length / 1024) + " KB",
+                type: "documentation"
+            });
+            
+            // Add requirements file
+            fileList.push({
+                name: "Requirements.html",
+                size: "~" + Math.round(appState.generatedProject.requirements.length / 1024) + " KB",
+                type: "requirements"
+            });
+            
+            // Add workflow file
+            fileList.push({
+                name: "Workflow.svg",
+                size: "~" + Math.round(appState.generatedProject.workflow.length / 1024) + " KB",
+                type: "workflow"
+            });
+            
+            // Add source code files
+            for (const [fileName, content] of Object.entries(appState.generatedProject.sourceCode)) {
+                fileList.push({
+                    name: fileName,
+                    size: "~" + Math.round(content.length / 1024) + " KB",
+                    type: "source"
+                });
             }
             
-            // Project Questions Generation
-            async function generateProject() {
-                elements.generateProjectBtn.disabled = true;
-                elements.generateProjectBtn.textContent = 'Generating project...';
+            appState.projectFiles = fileList;
+            
+            // Render file list in UI
+            elements.projectFileList.innerHTML = fileList.map(file => `
+                <div class="file-item">
+                    <div class="file-name">${file.name}</div>
+                    <div class="file-size">${file.size}</div>
+                </div>
+            `).join('');
+        }
+
+        // Download Project as ZIP
+        async function downloadProject() {
+            try {
+                // Create a new JSZip instance
+                const zip = new JSZip();
                 
-                // Show generating animation
-                showSection('generatingProject');
+                // Create a folder for the project
+                const projectFolder = zip.folder(appState.projectTopic.replace(/\s+/g, '_'));
                 
-                try {
-                    // Extract the parameters from appState
-                    const { 
-                        projectTopic, 
-                        projectLevel,
-                        projectType, 
-                        projectLanguages,
-                        projectFramework, 
-                        projectDatabase, 
-                        projectUI, 
-                        projectDocumentation, 
-                        projectDeployment, 
-                        projectClassificationQuestions, 
-                        projectClassificationAnswers
-                    } = appState;
-                    
-                    // Build classification information string
-                    let classificationInfo = '';
-                    for (let i = 0; i < projectClassificationQuestions.length; i++) {
-                        classificationInfo += `Q: ${projectClassificationQuestions[i].question}\nA: ${projectClassificationAnswers[i]}\n\n`;
-                    }
-                    
-                    // Initialize project files object
-                    appState.generatedProject = {
-                        documentation: '',
-                        sourceCode: {},
-                        requirements: '',
-                        workflow: '',
-                        readme: '',
-                        readme: ''
-                    };
-                    
-                    // Generate project documentation
-                    const documentationPrompt = `Create comprehensive documentation for a ${projectLevel} ${projectType} project about "${projectTopic}". 
+                // Add documentation
+                projectFolder.file("Documentation.html", appState.generatedProject.documentation);
+                
+                // Add requirements
+                projectFolder.file("Requirements.html", appState.generatedProject.requirements);
+                
+                // Add workflow
+                projectFolder.file("Workflow.svg", appState.generatedProject.workflow);
+                
+                // Add source code files
+                const sourceFolder = projectFolder.folder("Source_Code");
+                for (const [fileName, content] of Object.entries(appState.generatedProject.sourceCode)) {
+                    sourceFolder.file(fileName, content);
+                }
+                
+                // Generate the ZIP file
+                const content = await zip.generateAsync({type: "blob"});
+                
+                // Save the ZIP file
+                saveAs(content, `${appState.projectTopic.replace(/\s+/g, '_')}_Project.zip`);
+                
+                showNotification('Project downloaded successfully!');
+            } catch (error) {
+                console.error('Error downloading project:', error);
+                showNotification(`Error downloading project: ${error.message}`, 'error');
+            }
+        }
 
-The user has provided the following additional classification information:
- ${classificationInfo}
+        // Preview Documentation
+        function previewDocumentation() {
+            const newWindow = window.open();
+            newWindow.document.write(appState.generatedProject.documentation);
+            newWindow.document.close();
+        }
 
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-                    
-                    // Generate project documentation
-                    const documentationPrompt = `Create comprehensive documentation for a ${projectLevel} ${projectType} project about "${projectTopic}". 
+        // Reset for New Project
+        function resetForNewProject() {
+            appState.projectTopic = '';
+            appState.projectLevel = '';
+            appState.projectType = '';
+            appState.projectLanguages = [];
+            appState.projectFramework = '';
+            appState.projectDatabase = '';
+            appState.projectUI = '';
+            appState.projectDocumentation = '';
+            appState.projectDeployment = '';
+            appState.projectFont = '';
+            appState.selectedProjectFont = '';
+            appState.projectQuestions = [];
+            appState.projectAnswers = [];
+            appState.currentProjectQuestionIndex = 0;
+            appState.projectClassificationQuestions = [];
+            appState.projectClassificationAnswers = [];
+            appState.currentProjectClassificationQuestionIndex = 0;
+            appState.generatedProject = {};
+            appState.projectFiles = [];
+            appState.includeCurrentDate = false;
+            appState.currentDateTime = '';
+            elements.projectTopicInput.value = '';
+            elements.projectLevelSelect.value = '';
+            showSection('projectTopic');
+        }
 
-The user has provided the following additional classification information:
- ${classificationInfo}
+        // History Management
+        function saveToHistory(topic, content, type) {
+            const historyItem = {
+                id: Date.now(),
+                topic: topic,
+                type: type,
+                timestamp: new Date().toISOString(),
+                content: content
+            };
+            
+            if (type === 'presentation') {
+                appState.presentationHistory.unshift(historyItem);
+                // Keep only the last 10 presentations
+                if (appState.presentationHistory.length > 10) {
+                    appState.presentationHistory = appState.presentationHistory.slice(0, 10);
+                }
+                localStorage.setItem('presentationHistory', JSON.stringify(appState.presentationHistory));
+            } else if (type === 'report') {
+                appState.reportHistory.unshift(historyItem);
+                // Keep only the last 10 reports
+                if (appState.reportHistory.length > 10) {
+                    appState.reportHistory = appState.reportHistory.slice(0, 10);
+                }
+                localStorage.setItem('reportHistory', JSON.stringify(appState.reportHistory));
+            } else if (type === 'assignment') {
+                appState.assignmentHistory.unshift(historyItem);
+                // Keep only the last 10 assignments
+                if (appState.assignmentHistory.length > 10) {
+                    appState.assignmentHistory = appState.assignmentHistory.slice(0, 10);
+                }
+                localStorage.setItem('assignmentHistory', JSON.stringify(appState.assignmentHistory));
+            } else if (type === 'project') {
+                appState.projectHistory.unshift(historyItem);
+                // Keep only the last 10 projects
+                if (appState.projectHistory.length > 10) {
+                    appState.projectHistory = appState.projectHistory.slice(0, 10);
+                }
+                localStorage.setItem('projectHistory', JSON.stringify(appState.projectHistory));
+            }
+            
+            loadHistory();
+        }
 
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
-                    
-                    // Generate project documentation
-                    const documentationPrompt = `Create comprehensive documentation for a ${projectLevel} ${projectType} project about "${projectTopic}". 
+        function loadHistory() {
+            const savedPresentationHistory = localStorage.getItem('presentationHistory');
+            const savedReportHistory = localStorage.getItem('reportHistory');
+            const savedAssignmentHistory = localStorage.getItem('assignmentHistory');
+            const savedProjectHistory = localStorage.getItem('projectHistory');
+            
+            if (savedPresentationHistory) {
+                appState.presentationHistory = JSON.parse(savedPresentationHistory);
+            }
+            
+            if (savedReportHistory) {
+                appState.reportHistory = JSON.parse(savedReportHistory);
+            }
+            
+            if (savedAssignmentHistory) {
+                appState.assignmentHistory = JSON.parse(savedAssignmentHistory);
+            }
+            
+            if (savedProjectHistory) {
+                appState.projectHistory = JSON.parse(savedProjectHistory);
+            }
+            
+            renderHistory();
+        }
 
-The user has provided the following additional classification information:
- ${classificationInfo}
+        function renderHistory() {
+            const allHistory = [
+                ...appState.presentationHistory.map(item => ({...item, type: 'presentation'})),
+                ...appState.reportHistory.map(item => ({...item, type: 'report'})),
+                ...appState.assignmentHistory.map(item => ({...item, type: 'assignment'})),
+                ...appState.projectHistory.map(item => ({...item, type: 'project'}))
+            ].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            if (allHistory.length === 0) {
+                elements.historyContainer.innerHTML = '<p>No history yet.</p>';
+                return;
+            }
+            
+            elements.historyContainer.innerHTML = allHistory.map(item => `
+                <div class="history-item">
+                    <div>
+                        <h3>${item.topic} <span style="font-size: 0.8rem; opacity: 0.7;">(${item.type})</span></h3>
+                        <p>${new Date(item.timestamp).toLocaleString()}</p>
+                    </div>
+                    <div>
+                        <button onclick="loadFromHistory(${item.id}, '${item.type}')">Load</button>
+                        <button onclick="deleteHistoryItem(${item.id}, '${item.type}')">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectDeployment}
-- Use Current Date: ${projectUseCurrentDate ? 'Yes' : 'No'}
+        function loadFromHistory(id, type) {
+            let item;
+            if (type === 'presentation') {
+                item = appState.presentationHistory.find(item => item.id === id);
+                if (item) {
+                    appState.generatedPresentation = item.content;
+                    appState.topic = item.topic;
+                    showSection('preview');
+                }
+            } else if (type === 'report') {
+                item = appState.reportHistory.find(item => item.id === id);
+                if (item) {
+                    appState.generatedReport = item.content;
+                    appState.reportTopic = item.topic;
+                    showSection('reportPreview');
+                }
+            } else if (type === 'assignment') {
+                item = appState.assignmentHistory.find(item => item.id === id);
+                if (item) {
+                    appState.generatedAssignment = item.content;
+                    appState.assignmentTopic = item.topic;
+                    showSection('assignmentPreview');
+                }
+            } else if (type === 'project') {
+                item = appState.projectHistory.find(item => item.id === id);
+                if (item) {
+                    appState.generatedProject = item.content;
+                    appState.projectTopic = item.topic;
+                    prepareProjectFileList();
+                    showSection('projectPreview');
+                }
+            }
+        }
 
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectUseCurrentDate ? 'Yes' : 'No'}
-                    
-                // Generate project documentation
-                const documentationPrompt = `Create comprehensive documentation for a ${projectLevel} ${projectType} project about "${projectTopic}". 
+        function deleteHistoryItem(id, type) {
+            if (type === 'presentation') {
+                appState.presentationHistory = appState.presentationHistory.filter(item => item.id !== id);
+                localStorage.setItem('presentationHistory', JSON.stringify(appState.presentationHistory));
+            } else if (type === 'report') {
+                appState.reportHistory = appState.reportHistory.filter(item => item.id !== id);
+                localStorage.setItem('reportHistory', JSON.stringify(appState.reportHistory));
+            } else if (type === 'assignment') {
+                appState.assignmentHistory = appState.assignmentHistory.filter(item => item.id !== id);
+                localStorage.setItem('assignmentHistory', JSON.stringify(appState.assignmentHistory));
+            } else if (type === 'project') {
+                appState.projectHistory = appState.projectHistory.filter(item => item.id !== id);
+                localStorage.setItem('projectHistory', JSON.stringify(appState.projectHistory));
+            }
+            loadHistory();
+            showNotification('Item removed from history');
+        }
 
-The user has provided the following additional classification information:
- ${classificationInfo}
+        function clearHistory() {
+            if (confirm('Are you sure you want to clear all history?')) {
+                appState.presentationHistory = [];
+                appState.reportHistory = [];
+                appState.assignmentHistory = [];
+                appState.projectHistory = [];
+                localStorage.removeItem('presentationHistory');
+                localStorage.removeItem('reportHistory');
+                localStorage.removeItem('assignmentHistory');
+                localStorage.removeItem('projectHistory');
+                renderHistory();
+                showNotification('History cleared');
+            }
+        }
 
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectUseCurrentDate ? 'Yes' : 'No'}
-                    
-                // Generate project documentation
-                const documentationPrompt = `Create comprehensive documentation for a ${projectLevel} ${projectType} project about "${projectTopic}". 
+        // Utility Functions
+        function showNotification(message, type = 'success') {
+            elements.notification.textContent = message;
+            elements.notification.className = `notification ${type}`;
+            elements.notification.classList.add('show');
+            
+            setTimeout(() => {
+                elements.notification.classList.remove('show');
+            }, 3000);
+        }
 
-The user has provided the following additional classification information:
- ${classificationInfo}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectUseCurrentDate ? 'Yes' : 'No'}
-                    
-                // Generate project documentation
-                const documentationPrompt = `Create comprehensive documentation for a ${projectLevel} ${projectType} project about "${projectTopic}". 
-
-The user has provided the following additional classification information:
- ${classificationInfo}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectUseCurrentDate ? 'Yes' : 'No'}
-                    
-                // Generate project documentation
-                const documentationPrompt = `Create comprehensive documentation for a ${projectLevel} ${projectType} project about "${projectTopic}". 
-
-The user has provided the following additional classification information:
- ${classificationInfo}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages) : projectLanguages
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages) : projectLanguages
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages) : projectLanguages
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages) : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages) : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages) : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages) : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages) : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project specifications are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages) : projectLanguages
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectUseCurrentDate ? 'Yes' : 'No'}
-
-The project are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages) : projectLanguages}
-- Framework: ${projectFramework}
-- Database: ${projectDatabase}
-- UI/UX: ${projectUI}
-- Documentation: ${projectDocumentation}
-- Deployment: ${projectUseCurrentDate ? 'Yes' : 'No'}
-- Documentation: ${projectDocumentation}
-
-The project are:
-- Level: ${projectLevel}
-- Type: ${projectType}
-- Languages: ${Array(projectLanguages) ? projectLanguages) : projectLanguages) : projectLanguages)
-- Framework: ${projectFramework} ? projectFramework : projectFramework}
-- Database: ${projectDatabase} ? projectDatabase} : projectDatabase}
-- UI/UX: ${projectUI} ${projectDocumentation} ${projectUseCurrentDate ? 'No' : 'No'}
-            </div>
-
-        </div>
-        
         // Initialize the application when DOM is loaded
-        document.addEventListener('DOMContentLoaded', initApp());
+        document.addEventListener('DOMContentLoaded', initApp);
     </script>
-    </head>
+</body>
 </html>
