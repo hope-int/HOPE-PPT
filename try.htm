@@ -893,6 +893,25 @@
             font-weight: 600;
         }
 
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+            padding: 16px 0;
+        }
+
+        .quiz-progress {
+            flex: 1;
+            text-align: center;
+            color: #b8b8b8;
+            font-size: 0.9rem;
+        }
+
+        .quiz-progress-text {
+            margin-bottom: 8px;
+        }
+
         /* Professional Elements */
         .badge {
             display: inline-block;
@@ -1288,6 +1307,16 @@
             <div id="quiz-container">
                 <!-- Quiz questions will be populated here -->
             </div>
+            <div class="quiz-navigation">
+                <button id="prev-quiz-btn" style="display: none;">Previous Question</button>
+                <div class="quiz-progress">
+                    <div class="quiz-progress-text">Question <span id="current-question-num">1</span> of <span id="total-questions">5</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="quiz-progress-fill"></div>
+                    </div>
+                </div>
+                <button id="next-quiz-btn" style="display: none;">Next Question</button>
+            </div>
             <div id="quiz-score" class="quiz-score" style="display: none;">
                 Score: <span id="score-value">0</span>%
             </div>
@@ -1404,6 +1433,7 @@
             currentFlashcards: [],
             currentQuiz: [],
             currentQuizAnswers: [],
+            currentQuizIndex: 0,
             sessionStartTime: null,
             
             // Chapter Content
@@ -1849,6 +1879,11 @@
             submitQuizBtn: document.getElementById('submit-quiz-btn'),
             nextChapterBtn: document.getElementById('next-chapter-btn'),
             backToChaptersBtn: document.getElementById('back-to-chapters-btn'),
+            prevQuizBtn: document.getElementById('prev-quiz-btn'),
+            nextQuizBtn: document.getElementById('next-quiz-btn'),
+            currentQuestionNum: document.getElementById('current-question-num'),
+            totalQuestions: document.getElementById('total-questions'),
+            quizProgressFill: document.getElementById('quiz-progress-fill'),
             
             // Profile View
             profileName: document.getElementById('profile-name'),
@@ -2022,6 +2057,8 @@
             elements.completeChapterBtn.addEventListener('click', completeChapter);
             
             // Quiz Controls
+            elements.prevQuizBtn.addEventListener('click', previousQuizQuestion);
+            elements.nextQuizBtn.addEventListener('click', nextQuizQuestion);
             elements.submitQuizBtn.addEventListener('click', submitQuiz);
             elements.nextChapterBtn.addEventListener('click', nextChapter);
             elements.backToChaptersBtn.addEventListener('click', () => {
@@ -2719,6 +2756,7 @@ Do not include any text before or after the JSON. The response must be pure JSON
                 // Store quiz in app state
                 appState.currentQuiz = data.questions;
                 appState.currentQuizAnswers = new Array(data.questions.length).fill(null);
+                appState.currentQuizIndex = 0;
                 
                 showSection('quiz');
                 renderCurrentQuizQuestion();
@@ -2759,25 +2797,21 @@ Do not include any text before or after the JSON. The response must be pure JSON
                 return;
             }
             
-            const currentQuestionIndex = appState.currentQuizAnswers.findIndex(
-                answer => answer === null
-            );
+            const question = appState.currentQuiz[appState.currentQuizIndex];
             
-            if (currentQuestionIndex === -1) {
-                // All questions answered
-                showQuizResults();
-                return;
-            }
-            
-            const question = appState.currentQuiz[currentQuestionIndex];
+            // Update question number and progress
+            elements.currentQuestionNum.textContent = appState.currentQuizIndex + 1;
+            elements.totalQuestions.textContent = appState.currentQuiz.length;
+            const progress = ((appState.currentQuizIndex + 1) / appState.currentQuiz.length) * 100;
+            elements.quizProgressFill.style.width = `${progress}%`;
             
             elements.quizContainer.innerHTML = `
                 <div class="quiz-container">
-                    <div class="quiz-question">Question ${currentQuestionIndex + 1} of ${appState.currentQuiz.length}: ${question.question}</div>
+                    <div class="quiz-question">Question ${appState.currentQuizIndex + 1}: ${question.question}</div>
                     <div class="quiz-options">
                         ${question.options.map((option, index) => {
                             const letter = String.fromCharCode(65 + index); // A, B, C, D
-                            const isSelected = appState.currentQuizAnswers[currentQuestionIndex] === letter;
+                            const isSelected = appState.currentQuizAnswers[appState.currentQuizIndex] === letter;
                             return `
                                 <div class="quiz-option ${isSelected ? 'selected' : ''}" data-answer="${letter}">
                                     ${letter}. ${option}
@@ -2798,17 +2832,55 @@ Do not include any text before or after the JSON. The response must be pure JSON
                     option.classList.add('selected');
                     // Store the answer
                     const answer = option.dataset.answer;
-                    appState.currentQuizAnswers[currentQuestionIndex] = answer;
+                    appState.currentQuizAnswers[appState.currentQuizIndex] = answer;
                 });
             });
+            
+            // Update navigation buttons
+            elements.prevQuizBtn.style.display = appState.currentQuizIndex > 0 ? 'inline-block' : 'none';
+            elements.nextQuizBtn.style.display = appState.currentQuizIndex < appState.currentQuiz.length - 1 ? 'inline-block' : 'none';
             
             // Show submit button if all questions are answered
             const allAnswered = appState.currentQuizAnswers.every(answer => answer !== null);
             elements.submitQuizBtn.style.display = allAnswered ? 'inline-block' : 'none';
         }
 
+        // Quiz Navigation Functions
+        function previousQuizQuestion() {
+            // Save current answer if selected
+            if (appState.currentQuizAnswers[appState.currentQuizIndex] === null) {
+                showNotification('Please select an answer before moving to the previous question', 'error');
+                return;
+            }
+            
+            if (appState.currentQuizIndex > 0) {
+                appState.currentQuizIndex--;
+                renderCurrentQuizQuestion();
+            }
+        }
+
+        function nextQuizQuestion() {
+            // Save current answer if selected
+            if (appState.currentQuizAnswers[appState.currentQuizIndex] === null) {
+                showNotification('Please select an answer before moving to the next question', 'error');
+                return;
+            }
+            
+            if (appState.currentQuizIndex < appState.currentQuiz.length - 1) {
+                appState.currentQuizIndex++;
+                renderCurrentQuizQuestion();
+            }
+        }
+
         // Submit Quiz
         function submitQuiz() {
+            // Check if all questions are answered
+            const allAnswered = appState.currentQuizAnswers.every(answer => answer !== null);
+            if (!allAnswered) {
+                showNotification('Please answer all questions before submitting the quiz', 'error');
+                return;
+            }
+            
             // Calculate score
             let correctCount = 0;
             const questionResults = [];
@@ -2868,6 +2940,10 @@ Do not include any text before or after the JSON. The response must be pure JSON
                 
                 score = Math.round((correctCount / appState.currentQuiz.length) * 100);
             }
+            
+            // Hide navigation buttons
+            elements.prevQuizBtn.style.display = 'none';
+            elements.nextQuizBtn.style.display = 'none';
             
             // Display results
             elements.quizContainer.innerHTML = questionResults.map((result, index) => `
