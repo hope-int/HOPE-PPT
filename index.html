@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
     <!-- Essential Meta Tags -->
-    <title>HOPE-INT-CORE | AI-Powered Presentation, Report & Assignment Generator</title>
-    <meta name="description" content="Create stunning presentations, printable reports, and assignments with AI. HOPE-INT-CORE generates custom content using Gemini AI with beautiful designs.">
-    <meta name="keywords" content="presentation generator, report generator, assignment generator, AI presentations, AI reports, AI assignments, HOPE-INT-CORE, Gemini AI">
+    <title>HOPE-INT-CORE | AI-Powered Presentation, Report, Assignment & Project Generator</title>
+    <meta name="description" content="Create stunning presentations, printable reports, assignments, and complete projects with AI. HOPE-INT-CORE generates custom content using Gemini AI with beautiful designs.">
+    <meta name="keywords" content="presentation generator, report generator, assignment generator, project generator, AI presentations, AI reports, AI assignments, AI projects, HOPE-INT-CORE, Gemini AI">
     <meta name="author" content="Justin">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://HOPE-INT-CORE.vercel.app">
     
     <!-- Open Graph (OG) Tags -->
-    <meta property="og:title" content="HOPE-INT-CORE | AI-Powered Presentation, Report & Assignment Generator">
-    <meta property="og:description" content="Create stunning presentations, printable reports, and assignments with AI. HOPE-INT-CORE generates custom content using Gemini AI with beautiful designs.">
+    <meta property="og:title" content="HOPE-INT-CORE | AI-Powered Presentation, Report, Assignment & Project Generator">
+    <meta property="og:description" content="Create stunning presentations, printable reports, assignments, and complete projects with AI. HOPE-INT-CORE generates custom content using Gemini AI with beautiful designs.">
     <meta property="og:image" content="https://i.ibb.co/3yMXpZ71/Whats-App-Image-2025-09-29-at-12-03-39-AM.jpg">
     <meta property="og:url" content="https://HOPE-INT-CORE.vercel.app">
     <meta property="og:type" content="website">
@@ -23,8 +23,8 @@
     
     <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="HOPE-INT-CORE | AI-Powered Presentation, Report & Assignment Generator">
-    <meta name="twitter:description" content="Create stunning presentations, printable reports, and assignments with AI. HOPE-INT-CORE generates custom content using Gemini AI with beautiful designs.">
+    <meta name="twitter:title" content="HOPE-INT-CORE | AI-Powered Presentation, Report, Assignment & Project Generator">
+    <meta name="twitter:description" content="Create stunning presentations, printable reports, assignments, and complete projects with AI. HOPE-INT-CORE generates custom content using Gemini AI with beautiful designs.">
     <meta name="twitter:image" content="https://HOPE-INT-CORE.vercel.app/images/twitter-preview.jpg">
     <meta name="twitter:site" content="@hopeppt">
     <meta name="twitter:creator" content="@justindev">
@@ -47,6 +47,8 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     
     <style>
         /* All existing styles remain unchanged */
@@ -149,6 +151,23 @@
 
         input::placeholder, textarea::placeholder {
             color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Fix for select dropdown styling */
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.7rem center;
+            background-size: 1.5em;
+            padding-right: 2.5rem;
+        }
+
+        select option {
+            background: #1a1a2e;
+            color: #ffffff;
         }
 
         button {
@@ -331,6 +350,60 @@
         
         .language-option.selected {
             background: rgba(52, 152, 219, 0.3);
+        }
+
+        /* Multi-select styles */
+        .multi-select-container {
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .multi-select-container.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .multi-select-options {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        .multi-select-option {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .multi-select-option:hover {
+            background: rgba(52, 152, 219, 0.2);
+        }
+        
+        .multi-select-option input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .selected-items {
+            margin-top: 10px;
+            padding: 8px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 8px;
+            min-height: 40px;
+        }
+        
+        .selected-item {
+            display: inline-block;
+            background: rgba(52, 152, 219, 0.3);
+            padding: 4px 8px;
+            margin: 2px;
+            border-radius: 4px;
+            font-size: 14px;
         }
 
 
@@ -793,6 +866,93 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
+        /* Project Section Styles */
+        .project-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .project-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #3498db, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .project-header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .project-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .project-step {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-actions {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .project-note {
+            background: rgba(52, 152, 219, 0.2);
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .project-note p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .file-list {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .file-item:last-child {
+            border-bottom: none;
+        }
+
+        .file-name {
+            font-weight: 500;
+        }
+
+        .file-size {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px;
@@ -830,6 +990,14 @@
             .step-content h3 {
                 font-size: 1.3rem;
             }
+
+            .project-header h2 {
+                font-size: 2rem;
+            }
+
+            .step-content h3 {
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
@@ -838,7 +1006,7 @@
     <div id="splash-screen" class="splash-screen">
         <div class="splash-content">
             <h1 class="splash-title">HOPE-INT-CORE</h1>
-            <p class="splash-subtitle">Create stunning presentations, printable reports, and assignments with AI</p>
+            <p class="splash-subtitle">Create stunning presentations, printable reports, assignments, and complete projects with AI</p>
             <div class="splash-animation">
                 <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_DMgKk1.json" background="transparent" speed="1" loop autoplay></lottie-player>
             </div>
@@ -860,7 +1028,7 @@
             <div class="tutorial-section">
                 <div class="tutorial-header">
                     <h2>Welcome to HOPE-INT-CORE!</h2>
-                    <p>Let's get you set up with your Gemini API key to start creating amazing presentations, reports, and assignments</p>
+                    <p>Let's get you set up with your Gemini API key to start creating amazing presentations, reports, assignments, and projects</p>
                 </div>
                 
                 <div class="tutorial-steps">
@@ -868,7 +1036,7 @@
                         <div class="step-number">1</div>
                         <div class="step-content">
                             <h3>What is a Gemini API Key?</h3>
-                            <p>The Gemini API key is a unique identifier that allows HOPE-INT-CORE to access Google's powerful Gemini AI model to generate your presentations, reports, and assignments. It's like a password that gives our app permission to use Google's AI services.</p>
+                            <p>The Gemini API key is a unique identifier that allows HOPE-INT-CORE to access Google's powerful Gemini AI model to generate your presentations, reports, assignments, and projects. It's like a password that gives our app permission to use Google's AI services.</p>
                             <div class="tutorial-note">
                                 <p><strong>Note:</strong> Your API key is private and should never be shared with others. We store it securely in your browser only.</p>
                             </div>
@@ -898,7 +1066,7 @@
                             <h3>API Key Benefits</h3>
                             <p>With your Gemini API key, you can:</p>
                             <ul>
-                                <li>Generate unlimited presentations, reports, and assignments</li>
+                                <li>Generate unlimited presentations, reports, assignments, and projects</li>
                                 <li>Access the latest AI models</li>
                                 <li>Create content in multiple languages</li>
                                 <li>Use advanced design features</li>
@@ -966,6 +1134,10 @@
                     <h3>Create Assignment</h3>
                     <p>Generate a detailed assignment with questions, instructions, and grading criteria</p>
                 </div>
+                <div class="option-card" id="create-project-card">
+                    <h3>Create Complete Project</h3>
+                    <p>Generate a complete mini/final year project with source code, documentation, and workflow diagrams</p>
+                </div>
             </div>
         </div>
         
@@ -996,6 +1168,23 @@
             <button id="generate-assignment-classification-questions">Next</button>
         </div>
         
+        <!-- Project Topic Section -->
+        <div id="project-topic-section" class="section">
+            <div class="form-group">
+                <label for="project-topic">Enter your project topic:</label>
+                <input type="text" id="project-topic" placeholder="e.g., E-commerce Website, Mobile App, Data Analysis System, etc.">
+            </div>
+            <div class="form-group">
+                <label for="project-level">Select project level:</label>
+                <select id="project-level">
+                    <option value="">Select project level</option>
+                    <option value="mini">Mini Project</option>
+                    <option value="final">Final Year Project</option>
+                </select>
+            </div>
+            <button id="generate-project-classification-questions">Next</button>
+        </div>
+        
         <!-- Generating Classification Questions Section -->
         <div id="generating-classification-section" class="section">
             <div class="generating-animation">
@@ -1011,6 +1200,17 @@
         <div id="generating-assignment-classification-section" class="section">
             <div class="generating-animation">
                 <div class="generating-text">Generating assignment classification questions...</div>
+                <div class="lottie-container">
+                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
+                <p>AI is analyzing your topic to create personalized questions</p>
+            </div>
+        </div>
+        
+        <!-- Generating Project Classification Questions Section -->
+        <div id="generating-project-classification-section" class="section">
+            <div class="generating-animation">
+                <div class="generating-text">Generating project classification questions...</div>
                 <div class="lottie-container">
                     <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
                 </div>
@@ -1045,6 +1245,15 @@
             </div>
             <div id="assignment-classification-questions-container"></div>
             <button id="finish-assignment-classification-btn" disabled>Continue to Assignment Options</button>
+        </div>
+        
+        <!-- Project Classification Questions Section -->
+        <div id="project-classification-questions-section" class="section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="project-classification-progress-fill"></div>
+            </div>
+            <div id="project-classification-questions-container"></div>
+            <button id="finish-project-classification-btn" disabled>Continue to Project Options</button>
         </div>
         
         <!-- PPT Classification Questions Section -->
@@ -1107,6 +1316,18 @@
             <button id="generate-assignment" disabled>Generate Assignment</button>
         </div>
         
+        <!-- Project Questions Section -->
+        <div id="project-questions-section" class="section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="project-progress-fill"></div>
+            </div>
+            <div id="project-questions-container"></div>
+            <div id="project-font-list-container" class="font-list">
+                <!-- Font options will be populated here -->
+            </div>
+            <button id="generate-project" disabled>Generate Project</button>
+        </div>
+        
         <!-- Generating Section -->
         <div id="generating-section" class="section">
             <div class="generating-animation">
@@ -1140,6 +1361,17 @@
             </div>
         </div>
         
+        <!-- Generating Project Section -->
+        <div id="generating-project-section" class="section">
+            <div class="generating-animation">
+                <div class="generating-text">Creating your complete project...</div>
+                <div class="lottie-container">
+                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
+                <p>This may take a moment as we generate your complete project with source code, documentation, and workflow diagrams</p>
+            </div>
+        </div>
+        
         <!-- Preview Section -->
         <div id="preview-section" class="section">
             <h2>Your presentation is ready!</h2>
@@ -1166,6 +1398,19 @@
                 <button id="preview-assignment-btn">Preview in New Tab</button>
                 <button id="download-assignment-btn">Download as PDF</button>
                 <button id="new-assignment-btn">Create New Assignment</button>
+            </div>
+        </div>
+        
+        <!-- Project Preview Section -->
+        <div id="project-preview-section" class="section">
+            <h2>Your complete project is ready!</h2>
+            <div class="file-list" id="project-file-list">
+                <!-- Project files will be listed here -->
+            </div>
+            <div class="preview-container">
+                <button id="download-project-btn">Download Complete Project</button>
+                <button id="preview-documentation-btn">Preview Documentation</button>
+                <button id="new-project-btn">Create New Project</button>
             </div>
         </div>
         
@@ -1216,6 +1461,7 @@
             presentationHistory: [],
             reportHistory: [],
             assignmentHistory: [],
+            projectHistory: [],
             hasSeenTutorial: false,
             
             // Report-specific state
@@ -1229,11 +1475,6 @@
             currentReportQuestionIndex: 0,
             reportQuestions: [],
             reportAnswers: [],
-            
-            // Classification questions state
-            classificationQuestions: [],
-            classificationAnswers: [],
-            currentClassificationQuestionIndex: 0,
             
             // Assignment-specific state
             assignmentTopic: '',
@@ -1250,10 +1491,40 @@
             assignmentQuestions: [],
             assignmentAnswers: [],
             
+            // Project-specific state
+            projectTopic: '',
+            projectLevel: '',
+            projectType: '',
+            projectComplexity: '',
+            projectLanguages: [],
+            projectFramework: '',
+            projectDatabase: '',
+            projectUI: '',
+            projectDocumentation: '',
+            projectDeployment: '',
+            selectedProjectFont: '',
+            generatedProject: {},
+            currentProjectQuestionIndex: 0,
+            projectQuestions: [],
+            projectAnswers: [],
+            projectFiles: [],
+            includeCurrentDate: false,
+            currentDateTime: '',
+            
+            // Classification questions state
+            classificationQuestions: [],
+            classificationAnswers: [],
+            currentClassificationQuestionIndex: 0,
+            
             // Assignment classification questions state
             assignmentClassificationQuestions: [],
             assignmentClassificationAnswers: [],
             currentAssignmentClassificationQuestionIndex: 0,
+            
+            // Project classification questions state
+            projectClassificationQuestions: [],
+            projectClassificationAnswers: [],
+            currentProjectClassificationQuestionIndex: 0,
             
             // PPT classification questions state
             pptClassificationQuestions: [],
@@ -1295,7 +1566,15 @@
             "Badjao", "Molbog", "Palawano", "Tagbanwa", "Cuyonon", "Agutaynen"
         ];
         
-        // List of fonts for report and assignment
+        // List of programming languages for projects
+        const programmingLanguages = [
+            "JavaScript/TypeScript", "Python", "Java", "C#", "PHP", "Ruby", "Go", "Swift", 
+            "Kotlin", "C++", "C", "Rust", "Scala", "Perl", "MATLAB", "R", "SQL", "HTML/CSS",
+            "Dart", "Lua", "Assembly", "VB.NET", "Objective-C", "F#", "Haskell", "Elixir",
+            "Erlang", "Clojure", "Groovy", "Julia", "TypeScript", "Bash", "PowerShell"
+        ];
+        
+        // List of fonts for report, assignment, and project
         const fonts = [
             "Arial", "Verdana", "Helvetica", "Times New Roman", "Georgia", 
             "Courier New", "Brush Script MT", "Lucida Handwriting", "Comic Sans MS",
@@ -1371,6 +1650,30 @@
             }
         ];
 
+        // Fallback project classification questions
+        const fallbackProjectClassificationQuestions = [
+            {
+                question: "What type of project do you want to create?",
+                options: ["Web Application", "Mobile App", "Desktop Software", "Data Analysis System", "Machine Learning Model", "IoT Solution"]
+            },
+            {
+                question: "What is the primary purpose of this project?",
+                options: ["Educational", "Business", "Personal", "Research", "Entertainment"]
+            },
+            {
+                question: "Who is the target audience for this project?",
+                options: ["Students", "Professionals", "General public", "Specific industry", "Researchers"]
+            },
+            {
+                question: "What is the expected complexity level?",
+                options: ["Beginner", "Intermediate", "Advanced", "Expert"]
+            },
+            {
+                question: "What is the preferred development timeline?",
+                options: ["1-2 weeks", "3-4 weeks", "1-2 months", "3+ months"]
+            }
+        ];
+
         // Fallback PPT classification questions
         const fallbackPptClassificationQuestions = [
             {
@@ -1404,21 +1707,27 @@
             topic: document.getElementById('topic-section'),
             reportTopic: document.getElementById('report-topic-section'),
             assignmentTopic: document.getElementById('assignment-topic-section'),
+            projectTopic: document.getElementById('project-topic-section'),
             generatingClassification: document.getElementById('generating-classification-section'),
             generatingAssignmentClassification: document.getElementById('generating-assignment-classification-section'),
+            generatingProjectClassification: document.getElementById('generating-project-classification-section'),
             generatingPptClassification: document.getElementById('generating-ppt-classification-section'),
             classificationQuestions: document.getElementById('classification-questions-section'),
             assignmentClassificationQuestions: document.getElementById('assignment-classification-questions-section'),
+            projectClassificationQuestions: document.getElementById('project-classification-questions-section'),
             pptClassificationQuestions: document.getElementById('ppt-classification-questions-section'),
             questions: document.getElementById('questions-section'),
             reportQuestions: document.getElementById('report-questions-section'),
             assignmentQuestions: document.getElementById('assignment-questions-section'),
+            projectQuestions: document.getElementById('project-questions-section'),
             generating: document.getElementById('generating-section'),
             generatingReport: document.getElementById('generating-report-section'),
             generatingAssignment: document.getElementById('generating-assignment-section'),
+            generatingProject: document.getElementById('generating-project-section'),
             preview: document.getElementById('preview-section'),
             reportPreview: document.getElementById('report-preview-section'),
             assignmentPreview: document.getElementById('assignment-preview-section'),
+            projectPreview: document.getElementById('project-preview-section'),
             history: document.getElementById('history-section')
         };
 
@@ -1478,13 +1787,30 @@
             downloadAssignmentBtn: document.getElementById('download-assignment-btn'),
             newAssignmentBtn: document.getElementById('new-assignment-btn'),
             
+            // Project elements
+            createProjectCard: document.getElementById('create-project-card'),
+            projectTopicInput: document.getElementById('project-topic'),
+            projectLevelSelect: document.getElementById('project-level'),
+            generateProjectClassificationQuestionsBtn: document.getElementById('generate-project-classification-questions'),
+            projectClassificationQuestionsContainer: document.getElementById('project-classification-questions-container'),
+            projectClassificationProgressFill: document.getElementById('project-classification-progress-fill'),
+            finishProjectClassificationBtn: document.getElementById('finish-project-classification-btn'),
+            projectQuestionsContainer: document.getElementById('project-questions-container'),
+            projectProgressFill: document.getElementById('project-progress-fill'),
+            generateProjectBtn: document.getElementById('generate-project'),
+            projectFontListContainer: document.getElementById('project-font-list-container'),
+            projectFileList: document.getElementById('project-file-list'),
+            downloadProjectBtn: document.getElementById('download-project-btn'),
+            previewDocumentationBtn: document.getElementById('preview-documentation-btn'),
+            newProjectBtn: document.getElementById('new-project-btn'),
+            
             // PPT classification elements
             pptClassificationQuestionsContainer: document.getElementById('ppt-classification-questions-container'),
             pptClassificationProgressFill: document.getElementById('ppt-classification-progress-fill'),
             finishPptClassificationBtn: document.getElementById('finish-ppt-classification-btn')
         };
 
-        // Gemini API Configuration
+        // Gemini API Configuration - Updated with correct endpoint
         const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent';
 
         // Initialize Three.js Background
@@ -1625,6 +1951,10 @@
                 showSection('assignmentTopic');
             });
             
+            elements.createProjectCard.addEventListener('click', () => {
+                showSection('projectTopic');
+            });
+            
             // Report flow event listeners
             elements.generateClassificationQuestionsBtn.addEventListener('click', generateClassificationQuestions);
             elements.finishClassificationBtn.addEventListener('click', finishClassificationQuestions);
@@ -1640,6 +1970,14 @@
             elements.previewAssignmentBtn.addEventListener('click', previewAssignment);
             elements.downloadAssignmentBtn.addEventListener('click', downloadAssignmentAsPDF);
             elements.newAssignmentBtn.addEventListener('click', resetForNewAssignment);
+            
+            // Project flow event listeners
+            elements.generateProjectClassificationQuestionsBtn.addEventListener('click', generateProjectClassificationQuestions);
+            elements.finishProjectClassificationBtn.addEventListener('click', finishProjectClassificationQuestions);
+            elements.generateProjectBtn.addEventListener('click', generateProject);
+            elements.downloadProjectBtn.addEventListener('click', downloadProject);
+            elements.previewDocumentationBtn.addEventListener('click', previewDocumentation);
+            elements.newProjectBtn.addEventListener('click', resetForNewProject);
             
             // PPT classification flow event listeners
             elements.finishPptClassificationBtn.addEventListener('click', finishPptClassificationQuestions);
@@ -1686,14 +2024,18 @@
             }, 3000);
         }
 
-        // Gemini API Call Function
+        // Gemini API Call Function - Updated with proper error handling
         async function callGeminiAPI(prompt) {
             try {
-                const response = await fetch(GEMINI_API_ENDPOINT, {
+                // Validate API key
+                if (!appState.apiKey || appState.apiKey.length < 20) {
+                    throw new Error('Invalid or missing API key. Please check your API key and try again.');
+                }
+
+                const response = await fetch(`${GEMINI_API_ENDPOINT}?key=${appState.apiKey}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-goog-api-key': appState.apiKey
                     },
                     body: JSON.stringify({
                         contents: [
@@ -1704,20 +2046,67 @@
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        generationConfig: {
+                            temperature: 0.7,
+                            topK: 40,
+                            topP: 0.95,
+                            maxOutputTokens: 8192,
+                        }
                     })
                 });
 
+                // Check if response is ok
                 if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error?.message || 'API request failed');
+                    const errorData = await response.json().catch(() => ({}));
+                    const errorMessage = errorData.error?.message || errorData.error?.details || `HTTP ${response.status}: ${response.statusText}`;
+                    
+                    // Handle specific error cases
+                    if (response.status === 400) {
+                        if (errorMessage.includes('API key')) {
+                            throw new Error('Invalid API key. Please check your API key and try again.');
+                        } else if (errorMessage.includes('quota')) {
+                            throw new Error('API quota exceeded. Please try again later or check your billing settings.');
+                        } else {
+                            throw new Error(`Bad request: ${errorMessage}`);
+                        }
+                    } else if (response.status === 403) {
+                        throw new Error('Access forbidden. Please check your API key permissions.');
+                    } else if (response.status === 429) {
+                        throw new Error('Too many requests. Please wait a moment and try again.');
+                    } else if (response.status >= 500) {
+                        throw new Error('Server error. Please try again later.');
+                    } else {
+                        throw new Error(errorMessage);
+                    }
                 }
 
                 const data = await response.json();
-                return data.candidates[0].content.parts[0].text;
+                
+                // Check if response has the expected structure
+                if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                    throw new Error('Invalid response format from API');
+                }
+
+                const content = data.candidates[0].content;
+                
+                // Check if content has parts
+                if (!content.parts || !content.parts[0] || !content.parts[0].text) {
+                    throw new Error('No content received from API');
+                }
+
+                return content.parts[0].text;
             } catch (error) {
                 console.error('Gemini API Error:', error);
-                throw error;
+                
+                // Re-throw with more user-friendly message
+                if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    throw new Error('Network error. Please check your internet connection and try again.');
+                } else if (error.name === 'AbortError') {
+                    throw new Error('Request timed out. Please try again.');
+                } else {
+                    throw error;
+                }
             }
         }
 
@@ -3324,6 +3713,861 @@ Return only the complete HTML code without any additional explanations.`;
             showSection('assignmentTopic');
         }
 
+        // Project Classification Questions Generation
+        async function generateProjectClassificationQuestions() {
+            const topic = elements.projectTopicInput.value.trim();
+            const level = elements.projectLevelSelect.value;
+            
+            if (!topic) {
+                showNotification('Please enter a project topic', 'error');
+                return;
+            }
+            
+            if (!level) {
+                showNotification('Please select a project level', 'error');
+                return;
+            }
+
+            appState.projectTopic = topic;
+            appState.projectLevel = level;
+            elements.generateProjectClassificationQuestionsBtn.disabled = true;
+            elements.generateProjectClassificationQuestionsBtn.textContent = 'Generating questions...';
+            
+            // Show generating animation
+            showSection('generatingProjectClassification');
+            
+            try {
+                // Build the prompt to generate project classification questions with strict formatting instructions
+                const prompt = `Based on the topic "${topic}" for a ${level} project, generate 3-5 specific classification questions that would help gather more information about what kind of project the user wants. These questions should help narrow down the focus, scope, and specific aspects of the project.
+
+For each question, provide 3-4 multiple choice options.
+
+IMPORTANT: You must return the response in valid JSON format exactly as shown below, with no additional text, explanations, or markdown formatting:
+
+{
+  "questions": [
+    {
+      "question": "Question text here",
+      "options": ["Option 1", "Option 2", "Option 3", "Option 4"]
+    },
+    {
+      "question": "Another question here",
+      "options": ["Option A", "Option B", "Option C"]
+    }
+  ]
+}
+
+Do not include any text before or after the JSON. The response must be pure JSON that can be parsed by JSON.parse().`;
+                
+                const response = await callGeminiAPI(prompt);
+                
+                // Try to parse the JSON response
+                let data;
+                try {
+                    // Clean the response - remove any markdown code blocks or extra text
+                    let cleanResponse = response.trim();
+                    if (cleanResponse.startsWith('```json')) {
+                        cleanResponse = cleanResponse.replace(/```json\n?/, '').replace(/\n?```$/, '');
+                    } else if (cleanResponse.startsWith('```')) {
+                        cleanResponse = cleanResponse.replace(/```\n?/, '').replace(/\n?```$/, '');
+                    }
+                    
+                    // Try to find JSON object in the response
+                    const jsonMatch = cleanResponse.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) {
+                        cleanResponse = jsonMatch[0];
+                    }
+                    
+                    data = JSON.parse(cleanResponse);
+                    
+                    // Validate the structure
+                    if (!data.questions || !Array.isArray(data.questions)) {
+                        throw new Error('Invalid JSON structure');
+                    }
+                    
+                    // Validate each question
+                    data.questions = data.questions.filter(q => 
+                        q.question && q.options && Array.isArray(q.options) && q.options.length >= 2
+                    );
+                    
+                    if (data.questions.length === 0) {
+                        throw new Error('No valid questions found');
+                    }
+                    
+                    // Limit to 5 questions
+                    if (data.questions.length > 5) {
+                        data.questions = data.questions.slice(0, 5);
+                    }
+                    
+                    appState.projectClassificationQuestions = data.questions;
+                } catch (parseError) {
+                    console.error('Failed to parse AI response:', parseError);
+                    console.log('Using fallback questions');
+                    
+                    // Use fallback questions - take first 5
+                    appState.projectClassificationQuestions = fallbackProjectClassificationQuestions.slice(0, 5);
+                    showNotification('Using default questions due to AI response format issue', 'error');
+                }
+                
+                // Initialize answers array
+                appState.projectClassificationAnswers = new Array(appState.projectClassificationQuestions.length).fill('');
+                appState.currentProjectClassificationQuestionIndex = 0;
+                
+                // Show the project classification questions section
+                showSection('projectClassificationQuestions');
+                renderCurrentProjectClassificationQuestion();
+            } catch (error) {
+                showNotification(`Error generating project classification questions: ${error.message}`, 'error');
+                elements.generateProjectClassificationQuestionsBtn.disabled = false;
+                elements.generateProjectClassificationQuestionsBtn.textContent = 'Next';
+                showSection('projectTopic');
+            }
+        }
+
+        // Render Current Project Classification Question
+        function renderCurrentProjectClassificationQuestion() {
+            const progress = ((appState.currentProjectClassificationQuestionIndex + 1) / appState.projectClassificationQuestions.length) * 100;
+            elements.projectClassificationProgressFill.style.width = `${progress}%`;
+            
+            const currentQuestion = appState.projectClassificationQuestions[appState.currentProjectClassificationQuestionIndex];
+            const selectedOption = appState.projectClassificationAnswers[appState.currentProjectClassificationQuestionIndex];
+            
+            elements.projectClassificationQuestionsContainer.innerHTML = `
+                <div class="question-container">
+                    <h3>Classification Question ${appState.currentProjectClassificationQuestionIndex + 1} of ${appState.projectClassificationQuestions.length}</h3>
+                    <p>${currentQuestion.question}</p>
+                    <div class="option-container">
+                        ${currentQuestion.options.map((option, index) => `
+                            <label class="option ${selectedOption === option ? 'selected' : ''}">
+                                <input type="radio" name="project-classification-question-${appState.currentProjectClassificationQuestionIndex}" value="${option}" ${selectedOption === option ? 'checked' : ''}>
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div style="margin-top: 15px;">
+                        ${appState.currentProjectClassificationQuestionIndex > 0 ? '<button id="prev-project-classification-question-btn">Previous</button>' : ''}
+                        ${appState.currentProjectClassificationQuestionIndex < appState.projectClassificationQuestions.length - 1 ? '<button id="next-project-classification-question-btn">Next</button>' : '<button id="finish-project-classification-btn">Continue to Project Options</button>'}
+                    </div>
+                </div>
+            `;
+            
+            // Add event listeners for options
+            const optionElements = document.querySelectorAll('.option');
+            optionElements.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    optionElements.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Update the answer
+                    const input = option.querySelector('input');
+                    input.checked = true;
+                    // Store the answer
+                    appState.projectClassificationAnswers[appState.currentProjectClassificationQuestionIndex] = input.value;
+                });
+            });
+            
+            if (appState.currentProjectClassificationQuestionIndex > 0) {
+                document.getElementById('prev-project-classification-question-btn').addEventListener('click', previousProjectClassificationQuestion);
+            }
+            
+            if (appState.currentProjectClassificationQuestionIndex < appState.projectClassificationQuestions.length - 1) {
+                document.getElementById('next-project-classification-question-btn').addEventListener('click', nextProjectClassificationQuestion);
+            } else {
+                document.getElementById('finish-project-classification-btn').addEventListener('click', finishProjectClassificationQuestions);
+            }
+        }
+
+        // Project Classification Question Navigation
+        function nextProjectClassificationQuestion() {
+            appState.currentProjectClassificationQuestionIndex++;
+            renderCurrentProjectClassificationQuestion();
+        }
+
+        function previousProjectClassificationQuestion() {
+            appState.currentProjectClassificationQuestionIndex--;
+            renderCurrentProjectClassificationQuestion();
+        }
+
+        function finishProjectClassificationQuestions() {
+            // Check if all questions have answers
+            const allAnswered = appState.projectClassificationAnswers.every(answer => answer.trim() !== '');
+            if (!allAnswered) {
+                showNotification('Please answer all classification questions before proceeding', 'error');
+                return;
+            }
+            
+            // Now proceed to the project customization questions
+            generateProjectQuestions();
+        }
+
+        // Project Questions Generation
+        function generateProjectQuestions() {
+            elements.generateProjectClassificationQuestionsBtn.disabled = true;
+            elements.generateProjectClassificationQuestionsBtn.textContent = 'Preparing questions...';
+            
+            // Set predefined questions for the project
+            appState.projectQuestions = [
+                {
+                    question: "What type of project do you want to create?",
+                    options: ["Web Application", "Mobile App", "Desktop Software", "Data Analysis System", "Machine Learning Model", "IoT Solution"],
+                    variable: "projectType"
+                },
+                {
+                    question: "What programming languages do you prefer? (Select multiple)",
+                    options: programmingLanguages,
+                    variable: "projectLanguages",
+                    isMultiSelect: true
+                },
+                {
+                    question: "What framework or technology stack do you prefer?",
+                    options: ["React", "Angular", "Vue.js", "Django", "Flask", "Spring Boot", "ASP.NET", "Laravel", "Express.js", "No framework"],
+                    variable: "projectFramework"
+                },
+                {
+                    question: "What database do you want to use?",
+                    options: ["MySQL", "PostgreSQL", "MongoDB", "SQLite", "Firebase", "Oracle", "SQL Server", "No database needed"],
+                    variable: "projectDatabase"
+                },
+                {
+                    question: "What UI/UX design approach do you prefer?",
+                    options: ["Modern minimalist", "Colorful and vibrant", "Corporate professional", "Dark theme", "Custom design"],
+                    variable: "projectUI"
+                },
+                {
+                    question: "What level of documentation do you need?",
+                    options: ["Basic comments in code", "Detailed documentation", "Complete with user manual", "Academic level documentation"],
+                    variable: "projectDocumentation"
+                },
+                {
+                    question: "How do you want to deploy the project?",
+                    options: ["Local deployment only", "Cloud deployment (AWS/Azure/GCP)", "Docker container", "Traditional server", "No deployment needed"],
+                    variable: "projectDeployment"
+                },
+                {
+                    question: "Do you want to include the current date and time in the project?",
+                    options: ["Yes, include current date and time", "No, don't include date and time"],
+                    variable: "includeCurrentDate"
+                },
+                {
+                    question: "What font style do you prefer for documentation?",
+                    options: ["Normal", "Handwritten", "Typewriter", "Other"],
+                    variable: "projectFont"
+                }
+            ];
+            
+            // Initialize answers array for these questions
+            appState.projectAnswers = new Array(appState.projectQuestions.length).fill('');
+            appState.currentProjectQuestionIndex = 0;
+            
+            // Show the project questions section
+            showSection('projectQuestions');
+            renderCurrentProjectQuestion();
+        }
+
+        // Render Current Project Question
+        function renderCurrentProjectQuestion() {
+            const progress = ((appState.currentProjectQuestionIndex + 1) / appState.projectQuestions.length) * 100;
+            elements.projectProgressFill.style.width = `${progress}%`;
+            
+            const currentQuestion = appState.projectQuestions[appState.currentProjectQuestionIndex];
+            const selectedOption = appState.projectAnswers[appState.currentProjectQuestionIndex];
+            
+            if (currentQuestion.isMultiSelect) {
+                // Multi-select question rendering
+                elements.projectQuestionsContainer.innerHTML = `
+                    <div class="question-container">
+                        <h3>Question ${appState.currentProjectQuestionIndex + 1} of ${appState.projectQuestions.length}</h3>
+                        <p>${currentQuestion.question}</p>
+                        <div class="multi-select-container show">
+                            <div class="multi-select-options">
+                                ${currentQuestion.options.map((option, index) => `
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" id="lang-${index}" value="${option}" ${selectedOption && selectedOption.includes(option) ? 'checked' : ''}>
+                                        <label for="lang-${index}">${option}</label>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="selected-items" id="selected-languages">
+                                ${selectedOption ? selectedOption.map(lang => `<span class="selected-item">${lang}</span>`).join('') : 'No languages selected'}
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            ${appState.currentProjectQuestionIndex > 0 ? '<button id="prev-project-question-btn">Previous</button>' : ''}
+                            ${appState.currentProjectQuestionIndex < appState.projectQuestions.length - 1 ? '<button id="next-project-question-btn">Next</button>' : '<button id="finish-project-questions-btn">Finish</button>'}
+                        </div>
+                    </div>
+                `;
+                
+                // Add event listeners for checkboxes
+                const checkboxes = document.querySelectorAll('.multi-select-option input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', () => {
+                        const checkedOptions = Array.from(checkboxes)
+                            .filter(cb => cb.checked)
+                            .map(cb => cb.value);
+                        appState.projectAnswers[appState.currentProjectQuestionIndex] = checkedOptions;
+                        
+                        // Update selected items display
+                        const selectedItemsDiv = document.getElementById('selected-languages');
+                        if (checkedOptions.length > 0) {
+                            selectedItemsDiv.innerHTML = checkedOptions.map(lang => `<span class="selected-item">${lang}</span>`).join('');
+                        } else {
+                            selectedItemsDiv.innerHTML = 'No languages selected';
+                        }
+                    });
+                });
+            } else {
+                // Regular single-select question rendering
+                elements.projectQuestionsContainer.innerHTML = `
+                    <div class="question-container">
+                        <h3>Question ${appState.currentProjectQuestionIndex + 1} of ${appState.projectQuestions.length}</h3>
+                        <p>${currentQuestion.question}</p>
+                        <div class="option-container">
+                            ${currentQuestion.options.map((option, index) => `
+                                <label class="option ${selectedOption === option ? 'selected' : ''}">
+                                    <input type="radio" name="project-question-${appState.currentProjectQuestionIndex}" value="${option}" ${selectedOption === option ? 'checked' : ''}>
+                                    ${option}
+                                </label>
+                            `).join('')}
+                        </div>
+                        <div style="margin-top: 15px;">
+                            ${appState.currentProjectQuestionIndex > 0 ? '<button id="prev-project-question-btn">Previous</button>' : ''}
+                            ${appState.currentProjectQuestionIndex < appState.projectQuestions.length - 1 ? '<button id="next-project-question-btn">Next</button>' : '<button id="finish-project-questions-btn">Finish</button>'}
+                        </div>
+                    </div>
+                `;
+                
+                // Add event listeners for options
+                const optionElements = document.querySelectorAll('.option');
+                optionElements.forEach(option => {
+                    option.addEventListener('click', () => {
+                        // Remove selected class from all options
+                        optionElements.forEach(opt => opt.classList.remove('selected'));
+                        // Add selected class to clicked option
+                        option.classList.add('selected');
+                        // Update the answer
+                        const input = option.querySelector('input');
+                        input.checked = true;
+                        // Store the answer in appState using the variable name
+                        const variableName = appState.projectQuestions[appState.currentProjectQuestionIndex].variable;
+                        appState[variableName] = input.value;
+                        // Also update the answers array for progress tracking
+                        appState.projectAnswers[appState.currentProjectQuestionIndex] = input.value;
+                        
+                        // Show/hide font list based on selection
+                        if (variableName === "projectFont" && input.value === "Other") {
+                            elements.projectFontListContainer.classList.add('show');
+                            renderProjectFontList();
+                        } else {
+                            elements.projectFontListContainer.classList.remove('show');
+                        }
+                        
+                        // Handle includeCurrentDate option
+                        if (variableName === "includeCurrentDate") {
+                            appState.includeCurrentDate = input.value === "Yes, include current date and time";
+                            if (appState.includeCurrentDate) {
+                                // Get current date and time
+                                const now = new Date();
+                                appState.currentDateTime = now.toLocaleString();
+                            }
+                        }
+                    });
+                });
+            }
+            
+            if (appState.currentProjectQuestionIndex > 0) {
+                document.getElementById('prev-project-question-btn').addEventListener('click', previousProjectQuestion);
+            }
+            
+            if (appState.currentProjectQuestionIndex < appState.projectQuestions.length - 1) {
+                document.getElementById('next-project-question-btn').addEventListener('click', nextProjectQuestion);
+            } else {
+                document.getElementById('finish-project-questions-btn').addEventListener('click', finishProjectQuestions);
+            }
+        }
+
+        // Render Project Font List
+        function renderProjectFontList() {
+            elements.projectFontListContainer.innerHTML = fonts.map(font => `
+                <div class="font-option ${appState.selectedProjectFont === font ? 'selected' : ''}" data-font="${font}">
+                    ${font}
+                </div>
+            `).join('');
+            
+            // Add event listeners to font options
+            const fontOptions = document.querySelectorAll('.font-option');
+            fontOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    fontOptions.forEach(opt => opt.classList.remove('selected'));
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    // Update the selected font
+                    appState.selectedProjectFont = option.dataset.font;
+                });
+            });
+        }
+
+        // Project Question Navigation
+        function nextProjectQuestion() {
+            appState.currentProjectQuestionIndex++;
+            renderCurrentProjectQuestion();
+        }
+
+        function previousProjectQuestion() {
+            appState.currentProjectQuestionIndex--;
+            renderCurrentProjectQuestion();
+        }
+
+        function finishProjectQuestions() {
+            // Check if all questions have answers
+            const allAnswered = appState.projectAnswers.every(answer => {
+                if (Array.isArray(answer)) {
+                    return answer.length > 0;
+                }
+                return answer && answer.trim() !== '';
+            });
+            
+            if (!allAnswered) {
+                showNotification('Please answer all questions before proceeding', 'error');
+                return;
+            }
+            
+            // Check if font is "Other" and no specific font is selected
+            if (appState.projectFont === "Other" && !appState.selectedProjectFont) {
+                showNotification('Please select a specific font', 'error');
+                return;
+            }
+            
+            elements.generateProjectBtn.disabled = false;
+            showNotification('All questions answered. You can now generate your complete project!');
+        }
+
+        // Project Generation
+        async function generateProject() {
+            elements.generateProjectBtn.disabled = true;
+            elements.generateProjectBtn.textContent = 'Generating project...';
+            
+            // Show generating animation
+            showSection('generatingProject');
+            
+            try {
+                // Extract the parameters from appState
+                const { 
+                    projectTopic, 
+                    projectLevel,
+                    projectType, 
+                    projectLanguages,
+                    projectFramework, 
+                    projectDatabase, 
+                    projectUI, 
+                    projectDocumentation, 
+                    projectDeployment,
+                    projectFont,
+                    selectedProjectFont,
+                    projectClassificationQuestions,
+                    projectClassificationAnswers,
+                    includeCurrentDate,
+                    currentDateTime
+                } = appState;
+                
+                // Determine the actual font to use
+                let actualFont = projectFont;
+                if (projectFont === "Other") {
+                    actualFont = selectedProjectFont || "Arial";
+                }
+                
+                // Build classification information string
+                let classificationInfo = '';
+                for (let i = 0; i < projectClassificationQuestions.length; i++) {
+                    classificationInfo += `Q: ${projectClassificationQuestions[i].question}\nA: ${projectClassificationAnswers[i]}\n\n`;
+                }
+                
+                // Add date information if requested
+                let dateInfo = '';
+                if (includeCurrentDate && currentDateTime) {
+                    dateInfo = `The current date and time is: ${currentDateTime}. Please include this information in the project documentation where appropriate.`;
+                }
+                
+                // Initialize project files object
+                appState.generatedProject = {
+                    documentation: '',
+                    sourceCode: {},
+                    requirements: '',
+                    workflow: '',
+                    readme: ''
+                };
+                
+                // Generate project documentation
+                const documentationPrompt = `Create comprehensive documentation for a ${projectLevel} ${projectType} project about "${projectTopic}". 
+
+The user has provided the following additional classification information:
+ ${classificationInfo}
+
+ ${dateInfo}
+
+The project specifications are:
+- Level: ${projectLevel}
+- Type: ${projectType}
+- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
+- Framework: ${projectFramework}
+- Database: ${projectDatabase}
+- UI/UX: ${projectUI}
+- Documentation Level: ${projectDocumentation}
+- Deployment: ${projectDeployment}
+
+Create a detailed project documentation in HTML format with the following sections:
+1. Project Overview
+2. Features
+3. System Architecture
+4. Technology Stack
+5. Installation Guide
+6. User Guide
+7. API Documentation (if applicable)
+8. Testing Guide
+9. Deployment Guide
+10. Future Enhancements
+
+Use professional styling with ${actualFont} font. Include SVG illustrations for the system architecture and workflow diagrams.
+
+Return only the complete HTML code without any additional explanations.`;
+                
+                appState.generatedProject.documentation = await callGeminiAPI(documentationPrompt);
+                
+                // Generate project requirements
+                const requirementsPrompt = `Create a detailed requirements document for a ${projectLevel} ${projectType} project about "${projectTopic}". 
+
+The user has provided the following additional classification information:
+ ${classificationInfo}
+
+ ${dateInfo}
+
+The project specifications are:
+- Level: ${projectLevel}
+- Type: ${projectType}
+- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
+- Framework: ${projectFramework}
+- Database: ${projectDatabase}
+- UI/UX: ${projectUI}
+- Documentation Level: ${projectDocumentation}
+- Deployment: ${projectDeployment}
+
+Create a requirements document in HTML format with the following sections:
+1. Functional Requirements
+2. Non-Functional Requirements
+3. User Requirements
+4. System Requirements
+5. Technical Specifications
+6. Constraints and Assumptions
+
+Use professional styling with ${actualFont} font.
+
+Return only the complete HTML code without any additional explanations.`;
+                
+                appState.generatedProject.requirements = await callGeminiAPI(requirementsPrompt);
+                
+                // Generate README file
+                const readmePrompt = `Create a comprehensive README.md file for a ${projectLevel} ${projectType} project about "${projectTopic}". 
+
+The user has provided the following additional classification information:
+ ${classificationInfo}
+
+ ${dateInfo}
+
+The project specifications are:
+- Level: ${projectLevel}
+- Type: ${projectType}
+- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
+- Framework: ${projectFramework}
+- Database: ${projectDatabase}
+- UI/UX: ${projectUI}
+- Documentation Level: ${projectDocumentation}
+- Deployment: ${projectDeployment}
+
+Create a README.md file with the following sections:
+1. Project Title and Description
+2. Features
+3. Installation Instructions
+4. Usage Guide
+5. Configuration
+6. Contributing Guidelines
+7. License Information
+8. Contact Information
+
+Use proper Markdown formatting.
+
+Return only the complete README.md content without any additional explanations.`;
+                
+                appState.generatedProject.readme = await callGeminiAPI(readmePrompt);
+                
+                // Generate source code files based on project type
+                await generateSourceCode();
+                
+                // Generate workflow SVG
+                const workflowPrompt = `Create an SVG workflow diagram for a ${projectLevel} ${projectType} project about "${projectTopic}". 
+
+The user has provided the following additional classification information:
+ ${classificationInfo}
+
+ ${dateInfo}
+
+The project specifications are:
+- Level: ${projectLevel}
+- Type: ${projectType}
+- Languages: ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages}
+- Framework: ${projectFramework}
+- Database: ${projectDatabase}
+- UI/UX: ${projectUI}
+- Documentation Level: ${projectDocumentation}
+- Deployment: ${projectDeployment}
+
+Create a professional workflow diagram showing the complete project flow from user interaction to data processing and storage. Use modern design with appropriate colors and shapes.
+
+Return only the complete SVG code without any additional explanations.`;
+                
+                appState.generatedProject.workflow = await callGeminiAPI(workflowPrompt);
+                
+                // Prepare file list for display
+                prepareProjectFileList();
+                
+                // Save to history
+                saveToHistory(appState.projectTopic, appState.generatedProject, 'project');
+                
+                // Show preview section
+                showSection('projectPreview');
+            } catch (error) {
+                showNotification(`Error generating project: ${error.message}`, 'error');
+                elements.generateProjectBtn.disabled = false;
+                elements.generateProjectBtn.textContent = 'Generate Project';
+                showSection('projectQuestions');
+            }
+        }
+
+        // Generate Source Code based on project type
+        async function generateSourceCode() {
+            const { projectLevel, projectType, projectTopic, projectLanguages, projectFramework, projectDatabase, includeCurrentDate, currentDateTime } = appState;
+            
+            try {
+                // Generate main application file
+                let dateInfo = '';
+                if (includeCurrentDate && currentDateTime) {
+                    dateInfo = `The current date and time is: ${currentDateTime}. Please include this information in the code comments where appropriate.`;
+                }
+                
+                const mainFilePrompt = `Create the main application file for a ${projectLevel} ${projectType} project about "${projectTopic}" using ${Array.isArray(projectLanguages) ? projectLanguages.join(', ') : projectLanguages} and ${projectFramework}. 
+
+ ${dateInfo}
+
+The project should:
+1. Be fully functional with proper error handling
+2. Include comments explaining the code
+3. Follow best practices for the selected languages
+4. Connect to ${projectDatabase} if applicable
+5. Implement core features related to "${projectTopic}"
+6. Include proper structure suitable for a ${projectLevel} project
+
+Return only the complete source code without any additional explanations.`;
+                
+                let mainFileExtension = getFileExtension(Array.isArray(projectLanguages) ? projectLanguages[0] : projectLanguages);
+                let mainFileName = `index.${mainFileExtension}`;
+                
+                if (projectType === "Web Application") {
+                    mainFileName = `index.html`;
+                    appState.generatedProject.sourceCode[mainFileName] = await callGeminiAPI(mainFilePrompt);
+                    
+                    // Generate CSS file
+                    const cssPrompt = `Create a CSS file for a ${projectLevel} ${projectType} about "${projectTopic}" with modern styling, responsive design, and animations. Use the ${appState.projectUI} design approach.
+
+ ${dateInfo}
+
+Return only the complete CSS code without any additional explanations.`;
+                    appState.generatedProject.sourceCode["styles.css"] = await callGeminiAPI(cssPrompt);
+                    
+                    // Generate JavaScript file
+                    const jsPrompt = `Create a JavaScript file for a ${projectLevel} ${projectType} about "${projectTopic}" with modern ES6+ syntax, proper error handling, and interactive features.
+
+ ${dateInfo}
+
+Return only the complete JavaScript code without any additional explanations.`;
+                    appState.generatedProject.sourceCode["script.js"] = await callGeminiAPI(jsPrompt);
+                } else {
+                    appState.generatedProject.sourceCode[mainFileName] = await callGeminiAPI(mainFilePrompt);
+                }
+                
+                // Generate additional files based on project type
+                if (projectType === "Web Application" || projectType === "Mobile App") {
+                    // Generate package.json for Node.js projects
+                    if (projectLanguages.includes("JavaScript/TypeScript") || projectFramework === "React" || projectFramework === "Angular" || projectFramework === "Vue.js" || projectFramework === "Express.js") {
+                        const packageJsonPrompt = `Create a package.json file for a ${projectLevel} ${projectType} about "${projectTopic}" using ${projectFramework}. Include appropriate dependencies, scripts, and project metadata.
+
+ ${dateInfo}
+
+Return only the complete package.json content without any additional explanations.`;
+                        appState.generatedProject.sourceCode["package.json"] = await callGeminiAPI(packageJsonPrompt);
+                    }
+                }
+                
+                // Generate database configuration file if database is needed
+                if (projectDatabase !== "No database needed") {
+                    const dbConfigPrompt = `Create a database configuration file for a ${projectLevel} ${projectType} about "${projectTopic}" using ${projectDatabase}. Include connection settings, schema definition, and sample queries.
+
+ ${dateInfo}
+
+Return only the complete configuration code without any additional explanations.`;
+                    
+                    let dbFileName = `db-config.${getFileExtension(Array.isArray(projectLanguages) ? projectLanguages[0] : projectLanguages)}`;
+                    appState.generatedProject.sourceCode[dbFileName] = await callGeminiAPI(dbConfigPrompt);
+                }
+                
+                // Generate README.md file (already generated above)
+                appState.generatedProject.sourceCode["README.md"] = appState.generatedProject.readme;
+                
+            } catch (error) {
+                console.error('Error generating source code:', error);
+                showNotification(`Error generating source code: ${error.message}`, 'error');
+            }
+        }
+
+        // Get file extension based on programming language
+        function getFileExtension(language) {
+            const extensions = {
+                "JavaScript/TypeScript": "js",
+                "Python": "py",
+                "Java": "java",
+                "C#": "cs",
+                "PHP": "php",
+                "Ruby": "rb",
+                "Go": "go",
+                "Swift": "swift",
+                "Kotlin": "kt",
+                "C++": "cpp",
+                "C": "c",
+                "Rust": "rs",
+                "SQL": "sql",
+                "HTML/CSS": "html"
+            };
+            
+            return extensions[language] || "txt";
+        }
+
+        // Prepare project file list for display
+        function prepareProjectFileList() {
+            const fileList = [];
+            
+            // Add documentation file
+            fileList.push({
+                name: "Documentation.html",
+                size: "~" + Math.round(appState.generatedProject.documentation.length / 1024) + " KB",
+                type: "documentation"
+            });
+            
+            // Add requirements file
+            fileList.push({
+                name: "Requirements.html",
+                size: "~" + Math.round(appState.generatedProject.requirements.length / 1024) + " KB",
+                type: "requirements"
+            });
+            
+            // Add workflow file
+            fileList.push({
+                name: "Workflow.svg",
+                size: "~" + Math.round(appState.generatedProject.workflow.length / 1024) + " KB",
+                type: "workflow"
+            });
+            
+            // Add source code files
+            for (const [fileName, content] of Object.entries(appState.generatedProject.sourceCode)) {
+                fileList.push({
+                    name: fileName,
+                    size: "~" + Math.round(content.length / 1024) + " KB",
+                    type: "source"
+                });
+            }
+            
+            appState.projectFiles = fileList;
+            
+            // Render file list in UI
+            elements.projectFileList.innerHTML = fileList.map(file => `
+                <div class="file-item">
+                    <div class="file-name">${file.name}</div>
+                    <div class="file-size">${file.size}</div>
+                </div>
+            `).join('');
+        }
+
+        // Download Project as ZIP
+        async function downloadProject() {
+            try {
+                // Create a new JSZip instance
+                const zip = new JSZip();
+                
+                // Create a folder for the project
+                const projectFolder = zip.folder(appState.projectTopic.replace(/\s+/g, '_'));
+                
+                // Add documentation
+                projectFolder.file("Documentation.html", appState.generatedProject.documentation);
+                
+                // Add requirements
+                projectFolder.file("Requirements.html", appState.generatedProject.requirements);
+                
+                // Add workflow
+                projectFolder.file("Workflow.svg", appState.generatedProject.workflow);
+                
+                // Add source code files
+                const sourceFolder = projectFolder.folder("Source_Code");
+                for (const [fileName, content] of Object.entries(appState.generatedProject.sourceCode)) {
+                    sourceFolder.file(fileName, content);
+                }
+                
+                // Generate the ZIP file
+                const content = await zip.generateAsync({type: "blob"});
+                
+                // Save the ZIP file
+                saveAs(content, `${appState.projectTopic.replace(/\s+/g, '_')}_Project.zip`);
+                
+                showNotification('Project downloaded successfully!');
+            } catch (error) {
+                console.error('Error downloading project:', error);
+                showNotification(`Error downloading project: ${error.message}`, 'error');
+            }
+        }
+
+        // Preview Documentation
+        function previewDocumentation() {
+            const newWindow = window.open();
+            newWindow.document.write(appState.generatedProject.documentation);
+            newWindow.document.close();
+        }
+
+        // Reset for New Project
+        function resetForNewProject() {
+            appState.projectTopic = '';
+            appState.projectLevel = '';
+            appState.projectType = '';
+            appState.projectLanguages = [];
+            appState.projectFramework = '';
+            appState.projectDatabase = '';
+            appState.projectUI = '';
+            appState.projectDocumentation = '';
+            appState.projectDeployment = '';
+            appState.projectFont = '';
+            appState.selectedProjectFont = '';
+            appState.projectQuestions = [];
+            appState.projectAnswers = [];
+            appState.currentProjectQuestionIndex = 0;
+            appState.projectClassificationQuestions = [];
+            appState.projectClassificationAnswers = [];
+            appState.currentProjectClassificationQuestionIndex = 0;
+            appState.generatedProject = {};
+            appState.projectFiles = [];
+            appState.includeCurrentDate = false;
+            appState.currentDateTime = '';
+            elements.projectTopicInput.value = '';
+            elements.projectLevelSelect.value = '';
+            showSection('projectTopic');
+        }
+
         // History Management
         function saveToHistory(topic, content, type) {
             const historyItem = {
@@ -3355,6 +4599,13 @@ Return only the complete HTML code without any additional explanations.`;
                     appState.assignmentHistory = appState.assignmentHistory.slice(0, 10);
                 }
                 localStorage.setItem('assignmentHistory', JSON.stringify(appState.assignmentHistory));
+            } else if (type === 'project') {
+                appState.projectHistory.unshift(historyItem);
+                // Keep only the last 10 projects
+                if (appState.projectHistory.length > 10) {
+                    appState.projectHistory = appState.projectHistory.slice(0, 10);
+                }
+                localStorage.setItem('projectHistory', JSON.stringify(appState.projectHistory));
             }
             
             loadHistory();
@@ -3364,6 +4615,7 @@ Return only the complete HTML code without any additional explanations.`;
             const savedPresentationHistory = localStorage.getItem('presentationHistory');
             const savedReportHistory = localStorage.getItem('reportHistory');
             const savedAssignmentHistory = localStorage.getItem('assignmentHistory');
+            const savedProjectHistory = localStorage.getItem('projectHistory');
             
             if (savedPresentationHistory) {
                 appState.presentationHistory = JSON.parse(savedPresentationHistory);
@@ -3377,6 +4629,10 @@ Return only the complete HTML code without any additional explanations.`;
                 appState.assignmentHistory = JSON.parse(savedAssignmentHistory);
             }
             
+            if (savedProjectHistory) {
+                appState.projectHistory = JSON.parse(savedProjectHistory);
+            }
+            
             renderHistory();
         }
 
@@ -3384,7 +4640,8 @@ Return only the complete HTML code without any additional explanations.`;
             const allHistory = [
                 ...appState.presentationHistory.map(item => ({...item, type: 'presentation'})),
                 ...appState.reportHistory.map(item => ({...item, type: 'report'})),
-                ...appState.assignmentHistory.map(item => ({...item, type: 'assignment'}))
+                ...appState.assignmentHistory.map(item => ({...item, type: 'assignment'})),
+                ...appState.projectHistory.map(item => ({...item, type: 'project'}))
             ].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
             
             if (allHistory.length === 0) {
@@ -3429,6 +4686,14 @@ Return only the complete HTML code without any additional explanations.`;
                     appState.assignmentTopic = item.topic;
                     showSection('assignmentPreview');
                 }
+            } else if (type === 'project') {
+                item = appState.projectHistory.find(item => item.id === id);
+                if (item) {
+                    appState.generatedProject = item.content;
+                    appState.projectTopic = item.topic;
+                    prepareProjectFileList();
+                    showSection('projectPreview');
+                }
             }
         }
 
@@ -3442,6 +4707,9 @@ Return only the complete HTML code without any additional explanations.`;
             } else if (type === 'assignment') {
                 appState.assignmentHistory = appState.assignmentHistory.filter(item => item.id !== id);
                 localStorage.setItem('assignmentHistory', JSON.stringify(appState.assignmentHistory));
+            } else if (type === 'project') {
+                appState.projectHistory = appState.projectHistory.filter(item => item.id !== id);
+                localStorage.setItem('projectHistory', JSON.stringify(appState.projectHistory));
             }
             loadHistory();
             showNotification('Item removed from history');
@@ -3452,9 +4720,11 @@ Return only the complete HTML code without any additional explanations.`;
                 appState.presentationHistory = [];
                 appState.reportHistory = [];
                 appState.assignmentHistory = [];
+                appState.projectHistory = [];
                 localStorage.removeItem('presentationHistory');
                 localStorage.removeItem('reportHistory');
                 localStorage.removeItem('assignmentHistory');
+                localStorage.removeItem('projectHistory');
                 renderHistory();
                 showNotification('History cleared');
             }
