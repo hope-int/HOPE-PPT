@@ -2458,7 +2458,7 @@ Do not include any text before or after the JSON. The response must be pure JSON
                 },
                 {
                     question: "How many slides do you want?",
-                    options: ["1-4", "1-6", "1-8", "1-10", "1-12", "1-15"],
+                    options: ["1-4", "1-6", "1-8", "1-10"],
                     variable: "slideCount"
                 },
                 {
@@ -2487,11 +2487,6 @@ Do not include any text before or after the JSON. The response must be pure JSON
                     variable: "dataVisualization"
                 },
                 {
-                    question: "Do you want multimedia elements?",
-                    options: ["No", "Audio only", "Video only", "Both audio and video"],
-                    variable: "multimediaElements"
-                },
-                {
                     question: "What type of images do you want?",
                     options: ["No images", "Icons only", "SVG graphics only", "Photographs only", "Mix of icons and SVG graphics", "Mix of SVG graphics and photographs", "Mix of all types"],
                     variable: "includeImages"
@@ -2518,7 +2513,7 @@ Do not include any text before or after the JSON. The response must be pure JSON
                 },
                 {
                     question: "How many bullet points per slide?",
-                    options: ["1-2", "3-4", "5-6", "7-8", "9-10"],
+                    options: ["1-2", "3-4", "5-6", "7-8"],
                     variable: "bulletPointsCount"
                 },
                 {
@@ -2777,9 +2772,10 @@ The user has provided the following additional classification information:
  ${classificationInfo}
 
 The presentation should have the following features:
-
+IMPORTANT {
 1. Fullscreen functionality: When the user presses the 'F' key, the presentation should enter fullscreen mode.
 2. Navigation: Include arrow key navigation (left and right arrows) to move between slides in both directions.
+}
 3. Design: Use clean, professional designs with glassmorphism UI elements. The UI should have a glass-like appearance with backdrop blur effects.
 4. Color scheme: Use colors suitable for the topic "${topic}". Apply the selected color theme: "${colorThemeString}".
 5. 3D theme background: Slide should have a Three.js 3D background as "${bgitem}".
@@ -2798,10 +2794,10 @@ The presentation should have the following features:
 18. 3D elements: Include ${advancedAnimations} in the slides.
 19. Interactive elements: Implement ${interactiveElements} for user engagement.
 20. Data visualization: ${dataVisualization} should be included where appropriate.
-21. Multimedia elements: ${multimediaElements} should be incorporated into the presentation.
 
 Additional requirements:
 - Include slide indicators (dots) at the bottom to show current slide position.
+- Make sure that the html file have the funtions as F for full screen and arrows for the slide change.
 - Add Previous/Next buttons for navigation.
 - Make the presentation responsive for different screen sizes.
 - Use semantic HTML5 tags throughout.
@@ -2842,13 +2838,13 @@ Return only the complete HTML code without any additional explanations.`;
         // Ensure watermark is present in the presentation
         function ensureWatermark(html) {
             // Check if watermark is already present
-            if (html.includes('Developed under HOPE Research Team') && html.includes('By Justin')) {
+            if (html.includes('-') && html.includes('-')) {
                 return html;
             }
             
             // Find each slide and add watermark if not present
             const slidePattern = /<div class="slide-content">(.*?)<\/div>/gs;
-            const watermark = '<div class="watermark">Developed under HOPE Research Team<br> by Justin</div>';
+            const watermark = '<div class="watermark">-<br>-</div>';
             
             return html.replace(slidePattern, (match, content) => {
                 if (!content.includes('watermark')) {
