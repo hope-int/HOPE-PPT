@@ -2492,11 +2492,6 @@ Do not include any text before or after the JSON. The response must be pure JSON
                     variable: "includeImages"
                 },
                 {
-                    question: "What image fallback strategy do you prefer?",
-                    options: ["No fallback", "Text description fallback", "Placeholder image fallback", "Both text and placeholder fallback"],
-                    variable: "imageFallback"
-                },
-                {
                     question: "What color theme do you prefer?",
                     options: ["Black and white with blue accent", "Black and white with green accent", "Black and white with red accent", "Black and white with purple accent", "Dark theme with blue", "Dark theme with green", "Dark theme with red", "Dark theme with purple", "Light theme with blue", "Light theme with green", "Light theme with red", "Light theme with purple", "Custom color (select two)"],
                     variable: "colorTheme"
@@ -2505,21 +2500,6 @@ Do not include any text before or after the JSON. The response must be pure JSON
                     question: "Content Depth Preference?",
                     options: ["Beginner level", "Intermediate level", "Expert level", "Mixed levels"],
                     variable: "termsdepth"
-                },
-                {
-                    question: "How long should descriptions be?",
-                    options: ["Very short (1 sentence)", "Short (2-3 sentences)", "Medium (4-5 sentences)", "Long (6-7 sentences)", "Very long (8+ sentences)"],
-                    variable: "descriptionLength"
-                },
-                {
-                    question: "How many bullet points per slide?",
-                    options: ["1-2", "3-4", "5-6", "7-8"],
-                    variable: "bulletPointsCount"
-                },
-                {
-                    question: "What font size do you prefer?",
-                    options: ["Very small", "Small", "Medium", "Large", "Very large"],
-                    variable: "fontSize"
                 },
                 {
                     question: "Which 3D background do you prefer?",
@@ -2784,16 +2764,12 @@ IMPORTANT {
 8. Structure: Each slide should follow the "${structure}" format.
 9. Theme: The overall theme should be "${theme}".
 10. Slide count: Create ${slideCount} slides with well-organized content.
-11. Description length: For slides with paragraphs, use ${descriptionLength}.
-12. Bullet points: For slides with bullet points, include ${bulletPointsCount} bullet points per slide.
-13. Font size: Use ${fontSize} font size throughout the presentation.
-14. Images: ${includeImages}. For SVG graphics, use inline SVG code for crisp rendering at any size.
-15. Image fallback: ${imageFallback}. Implement proper fallback mechanisms for images that fail to load.
-16. Language: Generate the entire presentation in ${presentationLanguage}. All text content, including headings, paragraphs, and bullet points, must be in ${presentationLanguage}.
-17. Presentation style: The presentation should follow a "${presentationStyle}" approach.
-18. 3D elements: Include ${advancedAnimations} in the slides.
-19. Interactive elements: Implement ${interactiveElements} for user engagement.
-20. Data visualization: ${dataVisualization} should be included where appropriate.
+11. Images: ${includeImages}. For SVG graphics, use inline SVG code for crisp rendering at any size.
+12. Language: Generate the entire presentation in ${presentationLanguage}. All text content, including headings, paragraphs, and bullet points, must be in ${presentationLanguage}.
+13. Presentation style: The presentation should follow a "${presentationStyle}" approach.
+14. 3D elements: Include ${advancedAnimations} in the slides.
+15. Interactive elements: Implement ${interactiveElements} for user engagement.
+16. Data visualization: ${dataVisualization} should be included where appropriate.
 
 Additional requirements:
 - Output html must contain the js script to avoid developer tool usage and all.
@@ -2805,7 +2781,6 @@ Additional requirements:
 - Add smooth transitions between slides.
 - Include professional typography with clear hierarchy.
 - For SVG images, use inline SVG code with proper viewBox attributes for scalability.
-- Implement image fallback strategies: ${imageFallback}. For text fallbacks, use descriptive alt text. For placeholder fallbacks, use a placeholder image with a message indicating the image could not be loaded.
 
 The presentation should be structured as follows:
 1. Title slide with the topic "${topic}" and a subtitle.
