@@ -259,41 +259,6 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
-        .faq-item {
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(52, 152, 219, 0.2);
-            padding-bottom: 15px;
-        }
-
-        .faq-question {
-            font-weight: 600;
-            color: #3498db;
-            margin-bottom: 10px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-question::after {
-            content: '+';
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-question.open::after {
-            transform: rotate(45deg);
-        }
-
-        .faq-answer {
-            display: none;
-            padding-left: 20px;
-        }
-
-        .faq-answer.show {
-            display: block;
-        }
-
         .toc {
             background: rgba(52, 152, 219, 0.1);
             border-radius: 10px;
@@ -424,6 +389,212 @@
             color: #3498db;
         }
 
+        /* Enhanced Team Section */
+        .team-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .team-profile {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .team-profile:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .team-profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #3498db;
+        }
+
+        .team-profile-name {
+            font-size: 1.5rem;
+            color: #3498db;
+            margin: 0;
+        }
+
+        .team-profile-title {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 5px 0 0;
+        }
+
+        .team-profile-bio {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .team-profile-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .skill-tag {
+            background: rgba(52, 152, 219, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .team-profile-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .team-profile-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .team-profile-links a:hover {
+            color: #2980b9;
+        }
+
+        /* HOPE Team Section */
+        .hope-team-section {
+            background: rgba(52, 152, 219, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px solid rgba(52, 152, 219, 0.2);
+        }
+
+        .hope-team-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .hope-team-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .hope-team-title {
+            font-size: 1.8rem;
+            color: #3498db;
+            margin: 0;
+        }
+
+        .hope-team-description {
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .hope-team-values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .value-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(52, 152, 219, 0.2);
+        }
+
+        .value-card h4 {
+            color: #3498db;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .value-card p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* FAQ Accordion Styling */
+        .accordion-button {
+            background: rgba(255, 255, 255, 0.05) !important;
+            color: #3498db !important;
+            font-weight: 600;
+            border: none !important;
+            box-shadow: none !important;
+            font-size: 1rem;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: rgba(52, 152, 219, 0.2) !important;
+            color: #ffffff !important;
+        }
+
+        .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%233498db'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+            transform: rotate(0deg);
+        }
+
+        .accordion-button:not(.collapsed)::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+            transform: rotate(180deg);
+        }
+
+        .accordion-body {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .accordion-item {
+            background: transparent;
+            border: 1px solid rgba(52, 152, 219, 0.2);
+            margin-bottom: 10px;
+            border-radius: 10px !important;
+            overflow: hidden;
+        }
+
+        .accordion-item:first-of-type {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .accordion-item:last-of-type {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .accordion-collapse {
+            border: none;
+        }
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .logo h1 {
@@ -440,6 +611,19 @@
             
             .feature-card {
                 margin-bottom: 20px;
+            }
+            
+            .accordion-button {
+                font-size: 0.9rem;
+            }
+            
+            .team-showcase {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .hope-team-values {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -543,25 +727,119 @@
             <div id="about" class="wiki-section">
                 <h2>2. About the Creators</h2>
                 
-                <h3>HOPE Research & Development Team</h3>
-                <p>HOPE-INT-CORE is developed under the HOPE Research & Development Team, a group dedicated to creating innovative solutions that bridge the gap between technology and education. The team focuses on leveraging AI to enhance learning and productivity.</p>
+                <div class="hope-team-section">
+                    <div class="hope-team-header">
+                        <div class="hope-team-logo">HOPE</div>
+                        <h3 class="hope-team-title">HOPE Research & Development Team</h3>
+                    </div>
+                    
+                    <p class="hope-team-description">
+                        HOPE-INT-CORE is developed under the HOPE Research & Development Team, a group dedicated to creating innovative solutions that bridge the gap between technology and education. The team focuses on leveraging AI to enhance learning and productivity, with a mission to democratize access to advanced technology.
+                    </p>
+                    
+                    <div class="hope-team-values">
+                        <div class="value-card">
+                            <h4><i class="bi bi-lightbulb"></i> Innovation</h4>
+                            <p>Pioneering new approaches to AI-powered content creation and educational technology.</p>
+                        </div>
+                        <div class="value-card">
+                            <h4><i class="bi bi-people"></i> Accessibility</h4>
+                            <p>Making advanced technology available to everyone regardless of technical background.</p>
+                        </div>
+                        <div class="value-card">
+                            <h4><i class="bi bi-shield-check"></i> Quality</h4>
+                            <p>Ensuring high standards in all generated content and user experiences.</p>
+                        </div>
+                        <div class="value-card">
+                            <h4><i class="bi bi-graph-up"></i> Growth</h4>
+                            <p>Continuously improving and expanding capabilities based on user feedback.</p>
+                        </div>
+                    </div>
+                </div>
                 
                 <h3>Lead Developer: Justin</h3>
-                <p>Justin is the lead developer of HOPE-INT-CORE, responsible for the platform's architecture, design, and implementation. With expertise in web development, AI integration, and user experience design, Justin has created a platform that makes advanced AI capabilities accessible to users without technical expertise.</p>
                 
-                <p>Justin maintains a portfolio showcasing his work, including HOPE-INT-CORE and other projects. You can explore his portfolio to learn more about his background, skills, and other innovative projects.</p>
-                
-                <a href="https://justinalexia.vercel.app" target="_blank" class="portfolio-link">
-                    <i class="bi bi-box-arrow-up-right"></i>
-                    View Justin's Portfolio
-                </a>
-                
-                <h3>Social Media Presence</h3>
-                <p>The HOPE Research & Development Team and Justin are active on social media:</p>
-                <ul>
-                    <li><strong>HOPE Team Twitter:</strong> <a href="https://twitter.com/hopeppt" target="_blank">@hopeppt</a></li>
-                    <li><strong>Justin's Twitter:</strong> <a href="https://twitter.com/justindev" target="_blank">@justindev</a></li>
-                </ul>
+                <div class="team-showcase">
+                    <div class="team-profile">
+                        <div class="team-profile-header">
+                            <img src="https://justinalexia.vercel.app/_next/image?url=%2Fprofile.jpg&w=1920&q=75" alt="Justin" class="team-profile-image">
+                            <div>
+                                <h4 class="team-profile-name">Justin</h4>
+                                <p class="team-profile-title">Lead Developer & AI Specialist</p>
+                            </div>
+                        </div>
+                        
+                        <p class="team-profile-bio">
+                            Justin is the lead developer of HOPE-INT-CORE, responsible for the platform's architecture, design, and implementation. With expertise in web development, AI integration, and user experience design, Justin has created a platform that makes advanced AI capabilities accessible to users without technical expertise.
+                        </p>
+                        
+                        <p class="team-profile-bio">
+                            His work focuses on creating intuitive interfaces that hide the complexity of powerful AI models, allowing users to generate high-quality content with minimal effort. Justin's approach combines technical excellence with a deep understanding of user needs.
+                        </p>
+                        
+                        <div class="team-profile-skills">
+                            <div class="skill-tag">Web Development</div>
+                            <div class="skill-tag">AI Integration</div>
+                            <div class="skill-tag">UI/UX Design</div>
+                            <div class="skill-tag">JavaScript</div>
+                            <div class="skill-tag">Python</div>
+                            <div class="skill-tag">Google Gemini AI</div>
+                        </div>
+                        
+                        <div class="team-profile-links">
+                            <a href="https://justinalexia.vercel.app" target="_blank">
+                                <i class="bi bi-person-workspace"></i> Portfolio
+                            </a>
+                            <a href="https://twitter.com/justindev" target="_blank">
+                                <i class="bi bi-twitter"></i> Twitter
+                            </a>
+                            <a href="https://github.com/justinalexia" target="_blank">
+                                <i class="bi bi-github"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="team-profile">
+                        <div class="team-profile-header">
+                            <div class="team-profile-image" style="background: linear-gradient(45deg, #3498db, #2980b9); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                <i class="bi bi-people-fill" style="font-size: 2rem;"></i>
+                            </div>
+                            <div>
+                                <h4 class="team-profile-name">HOPE Team</h4>
+                                <p class="team-profile-title">Research & Development</p>
+                            </div>
+                        </div>
+                        
+                        <p class="team-profile-bio">
+                            The HOPE Research & Development Team is a collective of innovators, researchers, and developers dedicated to creating technology that enhances human potential. With a focus on AI and education, the team works to develop solutions that are both powerful and accessible.
+                        </p>
+                        
+                        <p class="team-profile-bio">
+                            Beyond HOPE-INT-CORE, the team is involved in various projects exploring the intersection of artificial intelligence, education, and human-computer interaction. Their work is guided by a commitment to ethical AI development and user-centered design.
+                        </p>
+                        
+                        <div class="team-profile-skills">
+                            <div class="skill-tag">AI Research</div>
+                            <div class="skill-tag">Educational Technology</div>
+                            <div class="skill-tag">Human-Computer Interaction</div>
+                            <div class="skill-tag">Ethical AI</div>
+                            <div class="skill-tag">User Experience</div>
+                            <div class="skill-tag">Innovation</div>
+                        </div>
+                        
+                        <div class="team-profile-links">
+                            <a href="https://twitter.com/hopeppt" target="_blank">
+                                <i class="bi bi-twitter"></i> Twitter
+                            </a>
+                            <a href="https://discord.gg/hope-int-core" target="_blank">
+                                <i class="bi bi-discord"></i> Discord
+                            </a>
+                            <a href="https://github.com/hope-research" target="_blank">
+                                <i class="bi bi-github"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 
                 <h3>Our Mission</h3>
                 <p>The HOPE Research & Development Team is committed to:</p>
@@ -572,6 +850,11 @@
                     <li>Promoting innovation in learning and professional development</li>
                     <li>Creating tools that save time and improve quality</li>
                 </ul>
+                
+                <a href="https://justinalexia.vercel.app" target="_blank" class="portfolio-link">
+                    <i class="bi bi-box-arrow-up-right"></i>
+                    Explore Justin's Portfolio
+                </a>
             </div>
             
             <div id="purpose" class="wiki-section">
