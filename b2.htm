@@ -15,7 +15,7 @@
     <!-- Open Graph (OG) Tags -->
     <meta property="og:title" content="HOPE-INT-CORE | AI-Powered Presentation, Report, Assignment & Project Generator">
     <meta property="og:description" content="Create stunning presentations, printable reports, assignments, and complete projects with AI. HOPE-INT-CORE generates custom content using Gemini AI with beautiful designs.">
-    <meta property="og:image" content="https://i.ibb.co/3yMXpZ71/Whats-App-Image-2025-09-29-at-12-03-39-AM.jpg">
+    <meta property="og:image" content="https://i.ibb.co/3yMXpZ7/Whats-App-Image-2025-09-29-at-12-03-39-AM.jpg">
     <meta property="og:url" content="https://HOPE-INT-CORE.vercel.app">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="HOPE-INT-CORE">
@@ -276,7 +276,8 @@
             padding: 8px 12px;
             font-size: 14px;
         }
-                /* Custom color picker styles */
+        
+        /* Custom color picker styles */
         .custom-colors-container {
             margin-top: 15px;
             display: none;
@@ -406,7 +407,6 @@
             font-size: 14px;
         }
 
-
         .preview-container {
             margin-top: 20px;
             display: flex;
@@ -436,6 +436,10 @@
 
         .notification.error {
             background: rgba(231, 76, 60, 0.9);
+        }
+
+        .notification.warning {
+            background: rgba(241, 196, 15, 0.9);
         }
 
         .generating-animation {
@@ -953,51 +957,43 @@
             font-size: 0.9rem;
         }
 
-        /* Timer Styles */
-        .timer-container {
-            background: rgba(52, 152, 219, 0.2);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: center;
+        /* Network Status Indicator */
+        .network-status {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 1000;
             display: flex;
-            flex-direction: column;
             align-items: center;
+            gap: 8px;
         }
 
-        .timer-display {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #3498db;
-            margin-bottom: 10px;
-            font-family: 'Courier New', monospace;
+        .network-status.online {
+            background: rgba(46, 204, 113, 0.7);
         }
 
-        .timer-label {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
+        .network-status.offline {
+            background: rgba(231, 76, 60, 0.7);
         }
 
-        .generation-stats {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 15px;
-            width: 100%;
+        .network-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: white;
         }
 
-        .stat-item {
-            text-align: center;
+        .network-status.online .network-status-dot {
+            background-color: #2ecc71;
         }
 
-        .stat-value {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #3498db;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.7);
+        .network-status.offline .network-status-dot {
+            background-color: #e74c3c;
         }
 
         @media (max-width: 768px) {
@@ -1049,6 +1045,12 @@
     </style>
 </head>
 <body>
+    <!-- Network Status Indicator -->
+    <div id="network-status" class="network-status">
+        <div class="network-status-dot"></div>
+        <span id="network-status-text">Checking...</span>
+    </div>
+
     <!-- Splash Screen -->
     <div id="splash-screen" class="splash-screen">
         <div class="splash-content">
@@ -1379,20 +1381,6 @@
         <div id="generating-section" class="section">
             <div class="generating-animation">
                 <div class="generating-text">Creating your presentation...</div>
-                <div class="timer-container">
-                    <div class="timer-display" id="presentation-timer">00:00</div>
-                    <div class="timer-label">Generation Time</div>
-                    <div class="generation-stats">
-                        <div class="stat-item">
-                            <div class="stat-value" id="presentation-words">0</div>
-                            <div class="stat-label">Words</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value" id="presentation-slides">0</div>
-                            <div class="stat-label">Slides</div>
-                        </div>
-                    </div>
-                </div>
                 <div class="lottie-container">
                     <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
                 </div>
@@ -1404,20 +1392,6 @@
         <div id="generating-report-section" class="section">
             <div class="generating-animation">
                 <div class="generating-text">Creating your report...</div>
-                <div class="timer-container">
-                    <div class="timer-display" id="report-timer">00:00</div>
-                    <div class="timer-label">Generation Time</div>
-                    <div class="generation-stats">
-                        <div class="stat-item">
-                            <div class="stat-value" id="report-words">0</div>
-                            <div class="stat-label">Words</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value" id="report-pages">0</div>
-                            <div class="stat-label">Pages</div>
-                        </div>
-                    </div>
-                </div>
                 <div class="lottie-container">
                     <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
                 </div>
@@ -1429,20 +1403,6 @@
         <div id="generating-assignment-section" class="section">
             <div class="generating-animation">
                 <div class="generating-text">Creating your assignment...</div>
-                <div class="timer-container">
-                    <div class="timer-display" id="assignment-timer">00:00</div>
-                    <div class="timer-label">Generation Time</div>
-                    <div class="generation-stats">
-                        <div class="stat-item">
-                            <div class="stat-value" id="assignment-words">0</div>
-                            <div class="stat-label">Words</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value" id="assignment-questions">0</div>
-                            <div class="stat-label">Questions</div>
-                        </div>
-                    </div>
-                </div>
                 <div class="lottie-container">
                     <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
                 </div>
@@ -1454,20 +1414,6 @@
         <div id="generating-project-section" class="section">
             <div class="generating-animation">
                 <div class="generating-text">Creating your complete project...</div>
-                <div class="timer-container">
-                    <div class="timer-display" id="project-timer">00:00</div>
-                    <div class="timer-label">Generation Time</div>
-                    <div class="generation-stats">
-                        <div class="stat-item">
-                            <div class="stat-value" id="project-files">0</div>
-                            <div class="stat-label">Files</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value" id="project-lines">0</div>
-                            <div class="stat-label">Lines of Code</div>
-                        </div>
-                    </div>
-                </div>
                 <div class="lottie-container">
                     <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
                 </div>
@@ -1478,21 +1424,9 @@
         <!-- Preview Section -->
         <div id="preview-section" class="section">
             <h2>Your presentation is ready!</h2>
-            <div class="timer-container" style="background: rgba(52, 152, 219, 0.1);">
-                <div class="timer-label">Generated in <span id="presentation-final-time" style="color: #3498db; font-weight: bold;">00:00</span></div>
-                <div class="generation-stats">
-                    <div class="stat-item">
-                        <div class="stat-value" id="presentation-final-words">0</div>
-                        <div class="stat-label">Words</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="presentation-final-slides">0</div>
-                        <div class="stat-label">Slides</div>
-                    </div>
-                </div>
-            </div>
             <div class="preview-container">
                 <button id="preview-btn">Preview in New Tab</button>
+                <button id="download-ppt-btn">Download HTML</button>
                 <button id="new-presentation-btn">Create New Presentation</button>
             </div>
         </div>
@@ -1500,19 +1434,6 @@
         <!-- Report Preview Section -->
         <div id="report-preview-section" class="section">
             <h2>Your report is ready!</h2>
-            <div class="timer-container" style="background: rgba(52, 152, 219, 0.1);">
-                <div class="timer-label">Generated in <span id="report-final-time" style="color: #3498db; font-weight: bold;">00:00</span></div>
-                <div class="generation-stats">
-                    <div class="stat-item">
-                        <div class="stat-value" id="report-final-words">0</div>
-                        <div class="stat-label">Words</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="report-final-pages">0</div>
-                        <div class="stat-label">Pages</div>
-                    </div>
-                </div>
-            </div>
             <div class="preview-container">
                 <button id="preview-report-btn">Preview in New Tab</button>
                 <button id="download-report-btn">Download as PDF</button>
@@ -1523,19 +1444,6 @@
         <!-- Assignment Preview Section -->
         <div id="assignment-preview-section" class="section">
             <h2>Your assignment is ready!</h2>
-            <div class="timer-container" style="background: rgba(52, 152, 219, 0.1);">
-                <div class="timer-label">Generated in <span id="assignment-final-time" style="color: #3498db; font-weight: bold;">00:00</span></div>
-                <div class="generation-stats">
-                    <div class="stat-item">
-                        <div class="stat-value" id="assignment-final-words">0</div>
-                        <div class="stat-label">Words</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="assignment-final-questions">0</div>
-                        <div class="stat-label">Questions</div>
-                    </div>
-                </div>
-            </div>
             <div class="preview-container">
                 <button id="preview-assignment-btn">Preview in New Tab</button>
                 <button id="download-assignment-btn">Download as PDF</button>
@@ -1546,19 +1454,6 @@
         <!-- Project Preview Section -->
         <div id="project-preview-section" class="section">
             <h2>Your complete project is ready!</h2>
-            <div class="timer-container" style="background: rgba(52, 152, 219, 0.1);">
-                <div class="timer-label">Generated in <span id="project-final-time" style="color: #3498db; font-weight: bold;">00:00</span></div>
-                <div class="generation-stats">
-                    <div class="stat-item">
-                        <div class="stat-value" id="project-final-files">0</div>
-                        <div class="stat-label">Files</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="project-final-lines">0</div>
-                        <div class="stat-label">Lines of Code</div>
-                    </div>
-                </div>
-            </div>
             <div class="file-list" id="project-file-list">
                 <!-- Project files will be listed here -->
             </div>
@@ -1618,6 +1513,7 @@
             assignmentHistory: [],
             projectHistory: [],
             hasSeenTutorial: false,
+            isOnline: navigator.onLine,
             
             // Report-specific state
             reportTopic: '',
@@ -1684,23 +1580,7 @@
             // PPT classification questions state
             pptClassificationQuestions: [],
             pptClassificationAnswers: [],
-            currentPptClassificationQuestionIndex: 0,
-            
-            // Timer state
-            timers: {
-                presentation: { startTime: 0, endTime: 0, intervalId: null },
-                report: { startTime: 0, endTime: 0, intervalId: null },
-                assignment: { startTime: 0, endTime: 0, intervalId: null },
-                project: { startTime: 0, endTime: 0, intervalId: null }
-            },
-            
-            // Statistics
-            stats: {
-                presentation: { words: 0, slides: 0 },
-                report: { words: 0, pages: 0 },
-                assignment: { words: 0, questions: 0 },
-                project: { files: 0, linesOfCode: 0 }
-            }
+            currentPptClassificationQuestionIndex: 0
         };
 
         // List of languages that LLMs are typically trained on
@@ -1912,6 +1792,7 @@
             progressFill: document.getElementById('progress-fill'),
             generatePresentationBtn: document.getElementById('generate-presentation'),
             previewBtn: document.getElementById('preview-btn'),
+            downloadPptBtn: document.getElementById('download-ppt-btn'),
             newPresentationBtn: document.getElementById('new-presentation-btn'),
             historyContainer: document.getElementById('history-container'),
             clearHistoryBtn: document.getElementById('clear-history-btn'),
@@ -1926,6 +1807,8 @@
             languageList: document.getElementById('language-list'),
             gotItBtn: document.getElementById('got-it-btn'),
             showTutorialBtn: document.getElementById('show-tutorial-btn'),
+            networkStatus: document.getElementById('network-status'),
+            networkStatusText: document.getElementById('network-status-text'),
             
             // Report elements
             createPptCard: document.getElementById('create-ppt-card'),
@@ -1978,41 +1861,11 @@
             // PPT classification elements
             pptClassificationQuestionsContainer: document.getElementById('ppt-classification-questions-container'),
             pptClassificationProgressFill: document.getElementById('ppt-classification-progress-fill'),
-            finishPptClassificationBtn: document.getElementById('finish-ppt-classification-btn'),
-            
-            // Timer elements
-            presentationTimer: document.getElementById('presentation-timer'),
-            reportTimer: document.getElementById('report-timer'),
-            assignmentTimer: document.getElementById('assignment-timer'),
-            projectTimer: document.getElementById('project-timer'),
-            
-            // Stats elements
-            presentationWords: document.getElementById('presentation-words'),
-            presentationSlides: document.getElementById('presentation-slides'),
-            reportWords: document.getElementById('report-words'),
-            reportPages: document.getElementById('report-pages'),
-            assignmentWords: document.getElementById('assignment-words'),
-            assignmentQuestions: document.getElementById('assignment-questions'),
-            projectFiles: document.getElementById('project-files'),
-            projectLines: document.getElementById('project-lines'),
-            
-            // Final stats elements
-            presentationFinalTime: document.getElementById('presentation-final-time'),
-            presentationFinalWords: document.getElementById('presentation-final-words'),
-            presentationFinalSlides: document.getElementById('presentation-final-slides'),
-            reportFinalTime: document.getElementById('report-final-time'),
-            reportFinalWords: document.getElementById('report-final-words'),
-            reportFinalPages: document.getElementById('report-final-pages'),
-            assignmentFinalTime: document.getElementById('assignment-final-time'),
-            assignmentFinalWords: document.getElementById('assignment-final-words'),
-            assignmentFinalQuestions: document.getElementById('assignment-final-questions'),
-            projectFinalTime: document.getElementById('project-final-time'),
-            projectFinalFiles: document.getElementById('project-final-files'),
-            projectFinalLines: document.getElementById('project-final-lines')
+            finishPptClassificationBtn: document.getElementById('finish-ppt-classification-btn')
         };
 
-        // Gemini API Configuration - Updated with correct endpoint
-        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent';
+        // Gemini API Configuration - Fixed with correct endpoint
+        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
         // Initialize Three.js Background
         function initThreeBackground() {
@@ -2078,177 +1931,76 @@
             });
         }
 
-        // Timer Functions
-        function startTimer(type) {
-            // Reset timer
-            appState.timers[type].startTime = Date.now();
-            appState.timers[type].endTime = 0;
+        // Network Status Management
+        function updateNetworkStatus() {
+            appState.isOnline = navigator.onLine;
             
-            // Clear any existing interval
-            if (appState.timers[type].intervalId) {
-                clearInterval(appState.timers[type].intervalId);
-            }
-            
-            // Update timer display every second
-            appState.timers[type].intervalId = setInterval(() => {
-                updateTimerDisplay(type);
-            }, 1000);
-        }
-
-        function stopTimer(type) {
-            appState.timers[type].endTime = Date.now();
-            
-            // Clear interval
-            if (appState.timers[type].intervalId) {
-                clearInterval(appState.timers[type].intervalId);
-                appState.timers[type].intervalId = null;
-            }
-            
-            // Final update
-            updateTimerDisplay(type);
-            updateFinalTimerDisplay(type);
-        }
-
-        function updateTimerDisplay(type) {
-            const currentTime = Date.now();
-            const elapsed = Math.floor((currentTime - appState.timers[type].startTime) / 1000);
-            const minutes = Math.floor(elapsed / 60);
-            const seconds = elapsed % 60;
-            const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            // Update the appropriate timer display
-            if (type === 'presentation') {
-                elements.presentationTimer.textContent = formattedTime;
-            } else if (type === 'report') {
-                elements.reportTimer.textContent = formattedTime;
-            } else if (type === 'assignment') {
-                elements.assignmentTimer.textContent = formattedTime;
-            } else if (type === 'project') {
-                elements.projectTimer.textContent = formattedTime;
+            if (appState.isOnline) {
+                elements.networkStatus.classList.remove('offline');
+                elements.networkStatus.classList.add('online');
+                elements.networkStatusText.textContent = 'Online';
+            } else {
+                elements.networkStatus.classList.remove('online');
+                elements.networkStatus.classList.add('offline');
+                elements.networkStatusText.textContent = 'Offline';
             }
         }
 
-        function updateFinalTimerDisplay(type) {
-            const elapsed = Math.floor((appState.timers[type].endTime - appState.timers[type].startTime) / 1000);
-            const minutes = Math.floor(elapsed / 60);
-            const seconds = elapsed % 60;
-            const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            // Update the appropriate final timer display
-            if (type === 'presentation') {
-                elements.presentationFinalTime.textContent = formattedTime;
-            } else if (type === 'report') {
-                elements.reportFinalTime.textContent = formattedTime;
-            } else if (type === 'assignment') {
-                elements.assignmentFinalTime.textContent = formattedTime;
-            } else if (type === 'project') {
-                elements.projectFinalTime.textContent = formattedTime;
-            }
-        }
-
-        function updateStats(type, data) {
-            // Update stats based on type
-            if (type === 'presentation') {
-                appState.stats.presentation.words = data.words || 0;
-                appState.stats.presentation.slides = data.slides || 0;
+        // Service Worker Registration for Offline Support
+        function registerServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                // Create a simple service worker inline
+                const swCode = `
+                    self.addEventListener('install', event => {
+                        event.waitUntil(
+                            caches.open('hope-int-core-v1').then(cache => {
+                                return cache.addAll([
+                                    '/',
+                                    'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
+                                    'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js',
+                                    'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
+                                    'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js',
+                                    'https://assets4.lottiefiles.com/packages/lf20_DMgKk1.json',
+                                    'https://assets9.lottiefiles.com/packages/lf20_DMgKk1.json',
+                                    'https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json',
+                                    'https://i.ibb.co/fY5w6PhH/Whats-App-Image-2025-09-28-at-11-58-35-PM.jpg'
+                                ]);
+                            })
+                        );
+                    });
+                    
+                    self.addEventListener('fetch', event => {
+                        event.respondWith(
+                            caches.match(event.request).then(response => {
+                                return response || fetch(event.request);
+                            })
+                        );
+                    });
+                `;
                 
-                // Update UI
-                elements.presentationWords.textContent = data.words || 0;
-                elements.presentationSlides.textContent = data.slides || 0;
-                elements.presentationFinalWords.textContent = data.words || 0;
-                elements.presentationFinalSlides.textContent = data.slides || 0;
-            } else if (type === 'report') {
-                appState.stats.report.words = data.words || 0;
-                appState.stats.report.pages = data.pages || 0;
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                const swUrl = URL.createObjectURL(blob);
                 
-                // Update UI
-                elements.reportWords.textContent = data.words || 0;
-                elements.reportPages.textContent = data.pages || 0;
-                elements.reportFinalWords.textContent = data.words || 0;
-                elements.reportFinalPages.textContent = data.pages || 0;
-            } else if (type === 'assignment') {
-                appState.stats.assignment.words = data.words || 0;
-                appState.stats.assignment.questions = data.questions || 0;
-                
-                // Update UI
-                elements.assignmentWords.textContent = data.words || 0;
-                elements.assignmentQuestions.textContent = data.questions || 0;
-                elements.assignmentFinalWords.textContent = data.words || 0;
-                elements.assignmentFinalQuestions.textContent = data.questions || 0;
-            } else if (type === 'project') {
-                appState.stats.project.files = data.files || 0;
-                appState.stats.project.linesOfCode = data.linesOfCode || 0;
-                
-                // Update UI
-                elements.projectFiles.textContent = data.files || 0;
-                elements.projectLines.textContent = data.linesOfCode || 0;
-                elements.projectFinalFiles.textContent = data.files || 0;
-                elements.projectFinalLines.textContent = data.linesOfCode || 0;
+                navigator.serviceWorker.register(swUrl)
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
             }
-        }
-
-        function countWords(text) {
-            // Remove HTML tags and count words
-            const plainText = text.replace(/<[^>]*>/g, ' ');
-            return plainText.trim().split(/\s+/).filter(word => word.length > 0).length;
-        }
-
-        function countSlides(html) {
-            // Count slide elements in the HTML
-            const slideMatches = html.match(/class="slide"/g);
-            return slideMatches ? slideMatches.length : 0;
-        }
-
-        function countPages(html) {
-            // Estimate pages based on word count (approx. 500 words per page)
-            const wordCount = countWords(html);
-            return Math.ceil(wordCount / 500);
-        }
-
-        function countQuestions(html) {
-            // Count question elements in the HTML
-            const questionMatches = html.match(/<h[1-6][^>]*>.*?(?:question|Q\.|Q\d)/gi) || 
-                                  html.match(/<p[^>]*>.*?(?:question|Q\.|Q\d)/gi) ||
-                                  html.match(/<li[^>]*>.*?(?:question|Q\.|Q\d)/gi);
-            return questionMatches ? questionMatches.length : 0;
-        }
-
-        function countFiles(project) {
-            // Count files in the project object
-            let fileCount = 0;
-            
-            if (project.documentation) fileCount++;
-            if (project.requirements) fileCount++;
-            if (project.workflow) fileCount++;
-            if (project.readme) fileCount++;
-            if (project.sourceCode) {
-                fileCount += Object.keys(project.sourceCode).length;
-            }
-            
-            return fileCount;
-        }
-
-        function countLinesOfCode(project) {
-            // Count lines of code in the project
-            let lineCount = 0;
-            
-            if (project.sourceCode) {
-                for (const [fileName, content] of Object.entries(project.sourceCode)) {
-                    // Only count lines in code files (not HTML, CSS, or documentation)
-                    if (!fileName.endsWith('.html') && 
-                        !fileName.endsWith('.css') && 
-                        !fileName.endsWith('.md') &&
-                        !fileName.includes('README')) {
-                        lineCount += content.split('\n').length;
-                    }
-                }
-            }
-            
-            return lineCount;
         }
 
         // Initialize Application
         function initApp() {
+            // Register service worker for offline support
+            registerServiceWorker();
+            
+            // Initialize network status
+            updateNetworkStatus();
+            window.addEventListener('online', updateNetworkStatus);
+            window.addEventListener('offline', updateNetworkStatus);
+            
             // Show splash screen first
             elements.continueToApp.addEventListener('click', () => {
                 elements.splashScreen.style.opacity = '0';
@@ -2282,6 +2034,7 @@
             elements.generateQuestionsBtn.addEventListener('click', generatePptClassificationQuestions);
             elements.generatePresentationBtn.addEventListener('click', generatePresentation);
             elements.previewBtn.addEventListener('click', previewPresentation);
+            elements.downloadPptBtn.addEventListener('click', downloadPresentation);
             elements.newPresentationBtn.addEventListener('click', resetForNewPresentation);
             elements.clearHistoryBtn.addEventListener('click', clearHistory);
             elements.newCreationFromHistoryBtn.addEventListener('click', () => {
@@ -2310,18 +2063,34 @@
             
             // Main options navigation
             elements.createPptCard.addEventListener('click', () => {
+                if (!appState.isOnline) {
+                    showNotification('You are currently offline. You can only view previously created presentations.', 'warning');
+                    return;
+                }
                 showSection('topic');
             });
             
             elements.createReportCard.addEventListener('click', () => {
+                if (!appState.isOnline) {
+                    showNotification('You are currently offline. You can only view previously created reports.', 'warning');
+                    return;
+                }
                 showSection('reportTopic');
             });
             
             elements.createAssignmentCard.addEventListener('click', () => {
+                if (!appState.isOnline) {
+                    showNotification('You are currently offline. You can only view previously created assignments.', 'warning');
+                    return;
+                }
                 showSection('assignmentTopic');
             });
             
             elements.createProjectCard.addEventListener('click', () => {
+                if (!appState.isOnline) {
+                    showNotification('You are currently offline. You can only view previously created projects.', 'warning');
+                    return;
+                }
                 showSection('projectTopic');
             });
             
@@ -2394,9 +2163,14 @@
             }, 3000);
         }
 
-        // Gemini API Call Function - Updated with proper error handling
+        // Gemini API Call Function - Fixed with proper error handling
         async function callGeminiAPI(prompt) {
             try {
+                // Check if online
+                if (!appState.isOnline) {
+                    throw new Error('You are currently offline. Please check your internet connection and try again.');
+                }
+                
                 // Validate API key
                 if (!appState.apiKey || appState.apiKey.length < 20) {
                     throw new Error('Invalid or missing API key. Please check your API key and try again.');
@@ -2945,9 +2719,8 @@ Do not include any text before or after the JSON. The response must be pure JSON
             elements.generatePresentationBtn.disabled = true;
             elements.generatePresentationBtn.textContent = 'Generating presentation...';
             
-            // Show generating animation and start timer
+            // Show generating animation
             showSection('generating');
-            startTimer('presentation');
             
             try {
                 // Extract the parameters from appState
@@ -3053,23 +2826,12 @@ Return only the complete HTML code without any additional explanations.`;
                 
                 appState.generatedPresentation = finalHTML;
                 
-                // Calculate statistics
-                const wordCount = countWords(finalHTML);
-                const slideCount = countSlides(finalHTML);
-                updateStats('presentation', { words: wordCount, slides: slideCount });
-                
-                // Stop timer
-                stopTimer('presentation');
-                
                 // Save to history
                 saveToHistory(appState.topic, finalHTML, 'presentation');
                 
                 // Show preview section
                 showSection('preview');
             } catch (error) {
-                // Stop timer on error
-                stopTimer('presentation');
-                
                 showNotification(`Error generating presentation: ${error.message}`, 'error');
                 elements.generatePresentationBtn.disabled = false;
                 elements.generatePresentationBtn.textContent = 'Generate Presentation';
@@ -3101,6 +2863,20 @@ Return only the complete HTML code without any additional explanations.`;
             const newWindow = window.open();
             newWindow.document.write(appState.generatedPresentation);
             newWindow.document.close();
+        }
+
+        // Download Presentation as HTML
+        function downloadPresentation() {
+            const blob = new Blob([appState.generatedPresentation], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${appState.topic.replace(/\s+/g, '_')}_presentation.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showNotification('Presentation downloaded successfully!');
         }
 
         // Generate Classification Questions
@@ -3450,9 +3226,8 @@ Do not include any text before or after the JSON. The response must be pure JSON
             elements.generateReportBtn.disabled = true;
             elements.generateReportBtn.textContent = 'Generating report...';
             
-            // Show generating animation and start timer
+            // Show generating animation
             showSection('generatingReport');
-            startTimer('report');
             
             try {
                 // Extract the parameters from appState
@@ -3521,23 +3296,12 @@ Return only the complete HTML code without any additional explanations.`;
                 const reportHTML = await callGeminiAPI(prompt);
                 appState.generatedReport = reportHTML;
                 
-                // Calculate statistics
-                const wordCount = countWords(reportHTML);
-                const pageCount = countPages(reportHTML);
-                updateStats('report', { words: wordCount, pages: pageCount });
-                
-                // Stop timer
-                stopTimer('report');
-                
                 // Save to history
                 saveToHistory(appState.reportTopic, reportHTML, 'report');
                 
                 // Show preview section
                 showSection('reportPreview');
             } catch (error) {
-                // Stop timer on error
-                stopTimer('report');
-                
                 showNotification(`Error generating report: ${error.message}`, 'error');
                 elements.generateReportBtn.disabled = false;
                 elements.generateReportBtn.textContent = 'Generate Report';
@@ -3979,9 +3743,8 @@ Do not include any text before or after the JSON. The response must be pure JSON
             elements.generateAssignmentBtn.disabled = true;
             elements.generateAssignmentBtn.textContent = 'Generating assignment...';
             
-            // Show generating animation and start timer
+            // Show generating animation
             showSection('generatingAssignment');
-            startTimer('assignment');
             
             try {
                 // Extract the parameters from appState
@@ -4056,23 +3819,12 @@ Return only the complete HTML code without any additional explanations.`;
                 const assignmentHTML = await callGeminiAPI(prompt);
                 appState.generatedAssignment = assignmentHTML;
                 
-                // Calculate statistics
-                const wordCount = countWords(assignmentHTML);
-                const questionCount = countQuestions(assignmentHTML);
-                updateStats('assignment', { words: wordCount, questions: questionCount });
-                
-                // Stop timer
-                stopTimer('assignment');
-                
                 // Save to history
                 saveToHistory(appState.assignmentTopic, assignmentHTML, 'assignment');
                 
                 // Show preview section
                 showSection('assignmentPreview');
             } catch (error) {
-                // Stop timer on error
-                stopTimer('assignment');
-                
                 showNotification(`Error generating assignment: ${error.message}`, 'error');
                 elements.generateAssignmentBtn.disabled = false;
                 elements.generateAssignmentBtn.textContent = 'Generate Assignment';
@@ -4555,9 +4307,8 @@ Do not include any text before or after the JSON. The response must be pure JSON
             elements.generateProjectBtn.disabled = true;
             elements.generateProjectBtn.textContent = 'Generating project...';
             
-            // Show generating animation and start timer
+            // Show generating animation
             showSection('generatingProject');
-            startTimer('project');
             
             try {
                 // Extract the parameters from appState
@@ -4735,16 +4486,8 @@ Return only the complete SVG code without any additional explanations.`;
                 
                 appState.generatedProject.workflow = await callGeminiAPI(workflowPrompt);
                 
-                // Calculate statistics
-                const fileCount = countFiles(appState.generatedProject);
-                const linesOfCode = countLinesOfCode(appState.generatedProject);
-                updateStats('project', { files: fileCount, linesOfCode: linesOfCode });
-                
                 // Prepare file list for display
                 prepareProjectFileList();
-                
-                // Stop timer
-                stopTimer('project');
                 
                 // Save to history
                 saveToHistory(appState.projectTopic, appState.generatedProject, 'project');
@@ -4752,9 +4495,6 @@ Return only the complete SVG code without any additional explanations.`;
                 // Show preview section
                 showSection('projectPreview');
             } catch (error) {
-                // Stop timer on error
-                stopTimer('project');
-                
                 showNotification(`Error generating project: ${error.message}`, 'error');
                 elements.generateProjectBtn.disabled = false;
                 elements.generateProjectBtn.textContent = 'Generate Project';
@@ -4993,9 +4733,7 @@ Return only the complete configuration code without any additional explanations.
                 topic: topic,
                 type: type,
                 timestamp: new Date().toISOString(),
-                content: content,
-                generationTime: appState.timers[type].endTime - appState.timers[type].startTime,
-                stats: { ...appState.stats[type] }
+                content: content
             };
             
             if (type === 'presentation') {
@@ -5069,38 +4807,18 @@ Return only the complete configuration code without any additional explanations.
                 return;
             }
             
-            elements.historyContainer.innerHTML = allHistory.map(item => {
-                // Format generation time
-                const generationTime = item.generationTime ? 
-                    `${Math.floor(item.generationTime / 1000 / 60)}:${(Math.floor(item.generationTime / 1000) % 60).toString().padStart(2, '0')}` : 
-                    'Unknown';
-                
-                // Format stats based on type
-                let statsInfo = '';
-                if (item.type === 'presentation' && item.stats) {
-                    statsInfo = `${item.stats.slides || 0} slides, ${item.stats.words || 0} words`;
-                } else if (item.type === 'report' && item.stats) {
-                    statsInfo = `${item.stats.pages || 0} pages, ${item.stats.words || 0} words`;
-                } else if (item.type === 'assignment' && item.stats) {
-                    statsInfo = `${item.stats.questions || 0} questions, ${item.stats.words || 0} words`;
-                } else if (item.type === 'project' && item.stats) {
-                    statsInfo = `${item.stats.files || 0} files, ${item.stats.linesOfCode || 0} lines`;
-                }
-                
-                return `
+            elements.historyContainer.innerHTML = allHistory.map(item => `
                 <div class="history-item">
                     <div>
                         <h3>${item.topic} <span style="font-size: 0.8rem; opacity: 0.7;">(${item.type})</span></h3>
                         <p>${new Date(item.timestamp).toLocaleString()}</p>
-                        <p style="font-size: 0.8rem; opacity: 0.7;">Generated in ${generationTime} | ${statsInfo}</p>
                     </div>
                     <div>
                         <button onclick="loadFromHistory(${item.id}, '${item.type}')">Load</button>
                         <button onclick="deleteHistoryItem(${item.id}, '${item.type}')">Delete</button>
                     </div>
                 </div>
-            `;
-            }).join('');
+            `).join('');
         }
 
         function loadFromHistory(id, type) {
@@ -5110,22 +4828,6 @@ Return only the complete configuration code without any additional explanations.
                 if (item) {
                     appState.generatedPresentation = item.content;
                     appState.topic = item.topic;
-                    
-                    // Restore stats
-                    if (item.stats) {
-                        appState.stats.presentation = item.stats;
-                        elements.presentationFinalWords.textContent = item.stats.words || 0;
-                        elements.presentationFinalSlides.textContent = item.stats.slides || 0;
-                    }
-                    
-                    // Restore timer
-                    if (item.generationTime) {
-                        const minutes = Math.floor(item.generationTime / 1000 / 60);
-                        const seconds = Math.floor(item.generationTime / 1000) % 60;
-                        elements.presentationFinalTime.textContent = 
-                            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    }
-                    
                     showSection('preview');
                 }
             } else if (type === 'report') {
@@ -5133,22 +4835,6 @@ Return only the complete configuration code without any additional explanations.
                 if (item) {
                     appState.generatedReport = item.content;
                     appState.reportTopic = item.topic;
-                    
-                    // Restore stats
-                    if (item.stats) {
-                        appState.stats.report = item.stats;
-                        elements.reportFinalWords.textContent = item.stats.words || 0;
-                        elements.reportFinalPages.textContent = item.stats.pages || 0;
-                    }
-                    
-                    // Restore timer
-                    if (item.generationTime) {
-                        const minutes = Math.floor(item.generationTime / 1000 / 60);
-                        const seconds = Math.floor(item.generationTime / 1000) % 60;
-                        elements.reportFinalTime.textContent = 
-                            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    }
-                    
                     showSection('reportPreview');
                 }
             } else if (type === 'assignment') {
@@ -5156,22 +4842,6 @@ Return only the complete configuration code without any additional explanations.
                 if (item) {
                     appState.generatedAssignment = item.content;
                     appState.assignmentTopic = item.topic;
-                    
-                    // Restore stats
-                    if (item.stats) {
-                        appState.stats.assignment = item.stats;
-                        elements.assignmentFinalWords.textContent = item.stats.words || 0;
-                        elements.assignmentFinalQuestions.textContent = item.stats.questions || 0;
-                    }
-                    
-                    // Restore timer
-                    if (item.generationTime) {
-                        const minutes = Math.floor(item.generationTime / 1000 / 60);
-                        const seconds = Math.floor(item.generationTime / 1000) % 60;
-                        elements.assignmentFinalTime.textContent = 
-                            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    }
-                    
                     showSection('assignmentPreview');
                 }
             } else if (type === 'project') {
@@ -5179,22 +4849,6 @@ Return only the complete configuration code without any additional explanations.
                 if (item) {
                     appState.generatedProject = item.content;
                     appState.projectTopic = item.topic;
-                    
-                    // Restore stats
-                    if (item.stats) {
-                        appState.stats.project = item.stats;
-                        elements.projectFinalFiles.textContent = item.stats.files || 0;
-                        elements.projectFinalLines.textContent = item.stats.linesOfCode || 0;
-                    }
-                    
-                    // Restore timer
-                    if (item.generationTime) {
-                        const minutes = Math.floor(item.generationTime / 1000 / 60);
-                        const seconds = Math.floor(item.generationTime / 1000) % 60;
-                        elements.projectFinalTime.textContent = 
-                            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    }
-                    
                     prepareProjectFileList();
                     showSection('projectPreview');
                 }
@@ -5244,6 +4898,10 @@ Return only the complete configuration code without any additional explanations.
                 elements.notification.classList.remove('show');
             }, 3000);
         }
+
+        // Expose functions to global scope for onclick handlers
+        window.loadFromHistory = loadFromHistory;
+        window.deleteHistoryItem = deleteHistoryItem;
 
         // Initialize the application when DOM is loaded
         document.addEventListener('DOMContentLoaded', initApp);
