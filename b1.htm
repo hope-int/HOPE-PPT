@@ -2314,7 +2314,7 @@ Do not include any text before or after the JSON. The response must be pure JSON
                 },
                 {
                     question: "How many slides do you want?",
-                    options: ["1-4", "1-6", "1-8", "1-10", "1-12", "1-15"],
+                    options: ["1-4", "1-6", "1-8", "1-10"],
                     variable: "slideCount"
                 },
                 {
@@ -2343,19 +2343,9 @@ Do not include any text before or after the JSON. The response must be pure JSON
                     variable: "dataVisualization"
                 },
                 {
-                    question: "Do you want multimedia elements?",
-                    options: ["No", "Audio only", "Video only", "Both audio and video"],
-                    variable: "multimediaElements"
-                },
-                {
                     question: "What type of images do you want?",
                     options: ["No images", "Icons only", "SVG graphics only", "Photographs only", "Mix of icons and SVG graphics", "Mix of SVG graphics and photographs", "Mix of all types"],
                     variable: "includeImages"
-                },
-                {
-                    question: "What image fallback strategy do you prefer?",
-                    options: ["No fallback", "Text description fallback", "Placeholder image fallback", "Both text and placeholder fallback"],
-                    variable: "imageFallback"
                 },
                 {
                     question: "What color theme do you prefer?",
@@ -2366,21 +2356,6 @@ Do not include any text before or after the JSON. The response must be pure JSON
                     question: "Content Depth Preference?",
                     options: ["Beginner level", "Intermediate level", "Expert level", "Mixed levels"],
                     variable: "termsdepth"
-                },
-                {
-                    question: "How long should descriptions be?",
-                    options: ["Very short (1 sentence)", "Short (2-3 sentences)", "Medium (4-5 sentences)", "Long (6-7 sentences)", "Very long (8+ sentences)"],
-                    variable: "descriptionLength"
-                },
-                {
-                    question: "How many bullet points per slide?",
-                    options: ["1-2", "3-4", "5-6", "7-8", "9-10"],
-                    variable: "bulletPointsCount"
-                },
-                {
-                    question: "What font size do you prefer?",
-                    options: ["Very small", "Small", "Medium", "Large", "Very large"],
-                    variable: "fontSize"
                 },
                 {
                     question: "Which 3D background do you prefer?",
@@ -2627,15 +2602,16 @@ Do not include any text before or after the JSON. The response must be pure JSON
                 }
                 
                 // Build the prompt
-                const prompt = `Create a complete HTML, CSS, and JavaScript file for a presentation about "${topic}". 
+                 const prompt = `Create a complete HTML, CSS, and JavaScript file for a presentation about "${topic}". 
 
 The user has provided the following additional classification information:
  ${classificationInfo}
 
 The presentation should have the following features:
-
+IMPORTANT {
 1. Fullscreen functionality: When the user presses the 'F' key, the presentation should enter fullscreen mode.
 2. Navigation: Include arrow key navigation (left and right arrows) to move between slides in both directions.
+}
 3. Design: Use clean, professional designs with glassmorphism UI elements. The UI should have a glass-like appearance with backdrop blur effects.
 4. Color scheme: Use colors suitable for the topic "${topic}". Apply the selected color theme: "${colorThemeString}".
 5. 3D theme background: Slide should have a Three.js 3D background as "${bgitem}".
@@ -2644,27 +2620,23 @@ The presentation should have the following features:
 8. Structure: Each slide should follow the "${structure}" format.
 9. Theme: The overall theme should be "${theme}".
 10. Slide count: Create ${slideCount} slides with well-organized content.
-11. Description length: For slides with paragraphs, use ${descriptionLength}.
-12. Bullet points: For slides with bullet points, include ${bulletPointsCount} bullet points per slide.
-13. Font size: Use ${fontSize} font size throughout the presentation.
-14. Images: ${includeImages}. For SVG graphics, use inline SVG code for crisp rendering at any size.
-15. Image fallback: ${imageFallback}. Implement proper fallback mechanisms for images that fail to load.
-16. Language: Generate the entire presentation in ${presentationLanguage}. All text content, including headings, paragraphs, and bullet points, must be in ${presentationLanguage}.
-17. Presentation style: The presentation should follow a "${presentationStyle}" approach.
-18. 3D elements: Include ${advancedAnimations} in the slides.
-19. Interactive elements: Implement ${interactiveElements} for user engagement.
-20. Data visualization: ${dataVisualization} should be included where appropriate.
-21. Multimedia elements: ${multimediaElements} should be incorporated into the presentation.
+11. Images: ${includeImages}. For SVG graphics, use inline SVG code for crisp rendering at any size.
+12. Language: Generate the entire presentation in ${presentationLanguage}. All text content, including headings, paragraphs, and bullet points, must be in ${presentationLanguage}.
+13. Presentation style: The presentation should follow a "${presentationStyle}" approach.
+14. 3D elements: Include ${advancedAnimations} in the slides.
+15. Interactive elements: Implement ${interactiveElements} for user engagement.
+16. Data visualization: ${dataVisualization} should be included where appropriate.
 
 Additional requirements:
+- Output html must contain the js script to avoid developer tool usage and all.
 - Include slide indicators (dots) at the bottom to show current slide position.
+- Make sure that the html file have the funtions as F for full screen and arrows for the slide change.
 - Add Previous/Next buttons for navigation.
 - Make the presentation responsive for different screen sizes.
 - Use semantic HTML5 tags throughout.
 - Add smooth transitions between slides.
 - Include professional typography with clear hierarchy.
 - For SVG images, use inline SVG code with proper viewBox attributes for scalability.
-- Implement image fallback strategies: ${imageFallback}. For text fallbacks, use descriptive alt text. For placeholder fallbacks, use a placeholder image with a message indicating the image could not be loaded.
 
 The presentation should be structured as follows:
 1. Title slide with the topic "${topic}" and a subtitle.
