@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOPE-INT-CORE Wiki - AI-Powered Content Generation Platform</title>
+    <meta name="description" content="Complete documentation for HOPE-INT-CORE, the AI-powered platform for creating presentations, reports, assignments, and projects using Google's Gemini AI.">
+    <meta name="keywords" content="HOPE-INT-CORE, AI content generation, presentations, reports, assignments, projects, Gemini AI, Justin, HOPE Research Team">
+    <meta name="author" content="Justin">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph (OG) Tags -->
+    <meta property="og:title" content="HOPE-INT-CORE Wiki - AI-Powered Content Generation Platform">
+    <meta property="og:description" content="Complete documentation for HOPE-INT-CORE, the AI-powered platform for creating presentations, reports, assignments, and projects using Google's Gemini AI.">
+    <meta property="og:image" content="https://i.ibb.co/3yMXpZ71/Whats-App-Image-2025-09-29-at-12-03-39-AM.jpg">
+    <meta property="og:url" content="https://HOPE-INT-CORE.vercel.app/wiki">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="HOPE-INT-CORE">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HOPE-INT-CORE Wiki - AI-Powered Content Generation Platform">
+    <meta name="twitter:description" content="Complete documentation for HOPE-INT-CORE, the AI-powered platform for creating presentations, reports, assignments, and projects using Google's Gemini AI.">
+    <meta name="twitter:image" content="https://HOPE-INT-CORE.vercel.app/images/wiki-preview.jpg">
+    <meta name="twitter:site" content="@hopeppt">
+    <meta name="twitter:creator" content="@justindev">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="theme-color" content="#3498db">
+    <meta name="msapplication-TileColor" content="#3498db">
+    <meta name="application-name" content="HOPE-INT-CORE Wiki">
+    <meta name="apple-mobile-web-app-title" content="HOPE-INT-CORE Wiki">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #000000, #1a1a2e);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #three-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            background: linear-gradient(45deg, #3498db, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo span {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .navbar-nav .nav-link {
+            color: #ffffff !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #3498db !important;
+        }
+
+        .navbar-nav .nav-link.active {
+            color: #3498db !important;
+            font-weight: 600;
+        }
+
+        .navbar-toggler {
+            border: none;
+            color: #ffffff;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex: 1;
+        }
+
+        .wiki-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .wiki-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #3498db;
+            border-bottom: 2px solid rgba(52, 152, 219, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .wiki-section h3 {
+            font-size: 1.5rem;
+            margin: 25px 0 15px;
+            color: #3498db;
+        }
+
+        .wiki-section h4 {
+            font-size: 1.2rem;
+            margin: 20px 0 10px;
+            color: #3498db;
+        }
+
+        .wiki-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .wiki-section ul, .wiki-section ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .wiki-section li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .wiki-section a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .wiki-section a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        .wiki-section code {
+            background: rgba(52, 152, 219, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .wiki-section pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        .wiki-section pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .feature-card h4 {
+            margin-top: 0;
+            color: #3498db;
+        }
+
+        .team-member {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .team-member img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(52, 152, 219, 0.5);
+        }
+
+        .team-member-info h4 {
+            margin: 0 0 5px;
+        }
+
+        .team-member-info p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(52, 152, 219, 0.2);
+            padding-bottom: 15px;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: #3498db;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.open::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            display: none;
+            padding-left: 20px;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        .toc {
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+
+        .toc ul {
+            list-style-type: none;
+            margin-left: 0;
+        }
+
+        .toc li {
+            margin-bottom: 8px;
+        }
+
+        .toc a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: #3498db;
+        }
+
+        .toc a.active {
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+            z-index: 99;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
+        }
+
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(52, 152, 219, 0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-link:hover {
+            background: rgba(52, 152, 219, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .highlight-box {
+            background: rgba(52, 152, 219, 0.15);
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .tech-item {
+            background: rgba(52, 152, 219, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #3498db;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .wiki-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .wiki-section h3 {
+                font-size: 1.3rem;
+            }
+            
+            .feature-card {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="three-background"></div>
+    
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <div class="logo">
+                    <h1>HOPE-INT-CORE</h1>
+                    <span>Wiki</span>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#overview">Overview</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#features">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#getting-started">Getting Started</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#technical">Technical</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#faq">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="container">
+            <div class="wiki-section">
+                <h2>Welcome to the HOPE-INT-CORE Wiki</h2>
+                <p>This comprehensive documentation provides detailed information about HOPE-INT-CORE, an AI-powered content generation platform that creates presentations, reports, assignments, and complete projects using Google's Gemini AI. Whether you're a student, educator, professional, or developer, you'll find valuable information here about the platform's capabilities, architecture, and usage.</p>
+                
+                <div class="toc">
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="#overview">1. Overview</a></li>
+                        <li><a href="#about">2. About the Creators</a></li>
+                        <li><a href="#purpose">3. Purpose and Vision</a></li>
+                        <li><a href="#features">4. Features</a></li>
+                        <li><a href="#getting-started">5. Getting Started</a></li>
+                        <li><a href="#technical">6. Technical Architecture</a></li>
+                        <li><a href="#security">7. Security and Privacy</a></li>
+                        <li><a href="#faq">8. Frequently Asked Questions</a></li>
+                        <li><a href="#contact">9. Contact & Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="overview" class="wiki-section">
+                <h2>1. Overview</h2>
+                <p>HOPE-INT-CORE is an innovative AI-powered content generation platform that leverages Google's Gemini AI to create high-quality educational and professional content. It enables users to generate presentations, reports, assignments, and complete projects with just a few clicks.</p>
+                
+                <h3>What is HOPE-INT-CORE?</h3>
+                <p>HOPE-INT-CORE stands for "Highly Optimized Presentation Engine - Intelligent Content Generation and Organization Resource Engine." It's a web-based application that combines the power of artificial intelligence with user-friendly interfaces to streamline content creation processes.</p>
+                
+                <div class="highlight-box">
+                    <p>HOPE-INT-CORE is developed by Justin under the HOPE Research & Development Team, with the goal of making advanced AI capabilities accessible to users without technical expertise.</p>
+                </div>
+                
+                <h3>Who is it for?</h3>
+                <p>The platform is designed for a wide range of users:</p>
+                <ul>
+                    <li><strong>Students:</strong> Create assignments, presentations, and projects efficiently</li>
+                    <li><strong>Educators:</strong> Generate teaching materials, assignments, and reports</li>
+                    <li><strong>Professionals:</strong> Produce business presentations, reports, and documentation</li>
+                    <li><strong>Researchers:</strong> Create research papers, presentations, and project documentation</li>
+                    <li><strong>Developers:</strong> Generate project code, documentation, and workflow diagrams</li>
+                </ul>
+                
+                <h3>Key Capabilities</h3>
+                <ul>
+                    <li>Generate interactive 3D presentations with animations and multimedia elements</li>
+                    <li>Create printable reports with professional formatting and PDF export</li>
+                    <li>Design detailed assignments with questions, instructions, and grading criteria</li>
+                    <li>Develop complete projects with source code, documentation, and workflow diagrams</li>
+                    <li>Support for multiple languages and extensive customization options</li>
+                    <li>Local storage of creation history for easy access to previous work</li>
+                </ul>
+            </div>
+            
+            <div id="about" class="wiki-section">
+                <h2>2. About the Creators</h2>
+                
+                <h3>HOPE Research & Development Team</h3>
+                <p>HOPE-INT-CORE is developed under the HOPE Research & Development Team, a group dedicated to creating innovative solutions that bridge the gap between technology and education. The team focuses on leveraging AI to enhance learning and productivity.</p>
+                
+                <h3>Lead Developer: Justin</h3>
+                <p>Justin is the lead developer of HOPE-INT-CORE, responsible for the platform's architecture, design, and implementation. With expertise in web development, AI integration, and user experience design, Justin has created a platform that makes advanced AI capabilities accessible to users without technical expertise.</p>
+                
+                <p>Justin maintains a portfolio showcasing his work, including HOPE-INT-CORE and other projects. You can explore his portfolio to learn more about his background, skills, and other innovative projects.</p>
+                
+                <a href="https://justinalexia.vercel.app" target="_blank" class="portfolio-link">
+                    <i class="bi bi-box-arrow-up-right"></i>
+                    View Justin's Portfolio
+                </a>
+                
+                <h3>Social Media Presence</h3>
+                <p>The HOPE Research & Development Team and Justin are active on social media:</p>
+                <ul>
+                    <li><strong>HOPE Team Twitter:</strong> <a href="https://twitter.com/hopeppt" target="_blank">@hopeppt</a></li>
+                    <li><strong>Justin's Twitter:</strong> <a href="https://twitter.com/justindev" target="_blank">@justindev</a></li>
+                </ul>
+                
+                <h3>Our Mission</h3>
+                <p>The HOPE Research & Development Team is committed to:</p>
+                <ul>
+                    <li>Making AI technology accessible to everyone</li>
+                    <li>Enhancing educational experiences through technology</li>
+                    <li>Streamlining content creation processes</li>
+                    <li>Promoting innovation in learning and professional development</li>
+                    <li>Creating tools that save time and improve quality</li>
+                </ul>
+            </div>
+            
+            <div id="purpose" class="wiki-section">
+                <h2>3. Purpose and Vision</h2>
+                
+                <h3>Why was HOPE-INT-CORE created?</h3>
+                <p>HOPE-INT-CORE was created to address several challenges faced by students, educators, and professionals:</p>
+                <ul>
+                    <li><strong>Time constraints:</strong> Creating quality content takes significant time and effort</li>
+                    <li><strong>Lack of technical skills:</strong> Many people struggle with design, formatting, and structuring content</li>
+                    <li><strong>Language barriers:</strong> Creating content in different languages can be challenging</li>
+                    <li><strong>Inconsistent quality:</strong> Maintaining high standards across different types of content is difficult</li>
+                    <li><strong>Resource limitations:</strong> Access to professional design tools and expertise is often limited</li>
+                </ul>
+                
+                <h3>Our Vision</h3>
+                <p>We envision a world where anyone can create professional-quality content regardless of their technical skills or background. HOPE-INT-CORE aims to democratize content creation by providing AI-powered tools that are accessible, intuitive, and effective.</p>
+                
+                <h3>Core Values</h3>
+                <ul>
+                    <li><strong>Accessibility:</strong> Making advanced technology available to everyone</li>
+                    <li><strong>Quality:</strong> Ensuring high standards in all generated content</li>
+                    <li><strong>Innovation:</strong> Continuously improving and expanding capabilities</li>
+                    <li><strong>User-centricity:</strong> Prioritizing user needs and experience</li>
+                    <li><strong>Privacy:</strong> Respecting user data and maintaining confidentiality</li>
+                </ul>
+            </div>
+            
+            <div id="features" class="wiki-section">
+                <h2>4. Features</h2>
+                
+                <h3>Content Generation Types</h3>
+                <p>HOPE-INT-CORE offers four main types of content generation, each with unique capabilities:</p>
+                
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="feature-card">
+                            <h4><i class="bi bi-presentation"></i> Interactive Presentations</h4>
+                            <p>Create stunning 3D presentations with animations, multimedia elements, and interactive features. Includes Three.js 3D backgrounds, customizable themes, and fullscreen functionality.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="feature-card">
+                            <h4><i class="bi bi-file-earmark-text"></i> Printable Reports</h4>
+                            <p>Generate professional reports with proper formatting, tables, charts, and citations. Export as PDF for easy sharing and printing with professional styling.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="feature-card">
+                            <h4><i class="bi bi-pencil-square"></i> Educational Assignments</h4>
+                            <p>Create detailed assignments with questions, instructions, rubrics, and grading criteria. Customize for different grade levels, subjects, and difficulty levels.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="feature-card">
+                            <h4><i class="bi bi-code-slash"></i> Complete Projects</h4>
+                            <p>Generate comprehensive projects including source code, documentation, workflow diagrams, and deployment guides. Perfect for mini-projects and final year projects.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>Customization Options</h3>
+                <p>Each content type offers extensive customization options:</p>
+                <ul>
+                    <li><strong>Themes and Styles:</strong> Choose from various design themes or create custom color schemes</li>
+                    <li><strong>Language Support:</strong> Generate content in 100+ languages including English, Spanish, French, German, Chinese, and many more</li>
+                    <li><strong>Formatting Options:</strong> Customize fonts, sizes, layouts, and structures</li>
+                    <li><strong>Content Depth:</strong> Adjust complexity and detail level to match your needs</li>
+                    <li><strong>Visual Elements:</strong> Include images, charts, diagrams, and multimedia</li>
+                </ul>
+                
+                <h3>Advanced Features</h3>
+                <ul>
+                    <li><strong>AI Classification:</strong> Smart questions to understand your specific needs before generating content</li>
+                    <li><strong>History Management:</strong> Save and access your previous creations (up to 10 of each type)</li>
+                    <li><strong>Export Options:</strong> Download in various formats (HTML, PDF, ZIP)</li>
+                    <li><strong>Preview Functionality:</strong> Review content before finalizing</li>
+                    <li><strong>Responsive Design:</strong> Works seamlessly on all devices</li>
+                    <li><strong>3D Backgrounds:</strong> Multiple Three.js 3D background options including stars, nodes, particles, and more</li>
+                </ul>
+            </div>
+            
+            <div id="getting-started" class="wiki-section">
+                <h2>5. Getting Started</h2>
+                
+                <h3>Step 1: Get Your Gemini API Key</h3>
+                <p>HOPE-INT-CORE uses Google's Gemini AI to generate content. You'll need to get your own API key:</p>
+                <ol>
+                    <li>Go to <a href="https://makersuite.google.com/app/apikey" target="_blank">Google AI Studio</a></li>
+                    <li>Sign in with your Google account</li>
+                    <li>Click on "Get API Key" button</li>
+                    <li>Choose "Create API key in new project"</li>
+                    <li>Create a new project and select it</li>
+                    <li>Copy the generated API key</li>
+                </ol>
+                
+                <div class="highlight-box">
+                    <p><strong>Important:</strong> Your API key is private and should never be shared with others. HOPE-INT-CORE stores it securely in your browser only.</p>
+                </div>
+                
+                <h3>Step 2: Set Up Your Account</h3>
+                <ol>
+                    <li>Visit the HOPE-INT-CORE platform</li>
+                    <li>Enter your Gemini API key when prompted</li>
+                    <li>Complete the tutorial to understand the platform</li>
+                    <li>Start creating content!</li>
+                </ol>
+                
+                <h3>Step 3: Create Your First Content</h3>
+                <ol>
+                    <li>Choose the type of content you want to create (Presentation, Report, Assignment, or Project)</li>
+                    <li>Enter your topic or subject</li>
+                    <li>Answer the classification questions to customize your content</li>
+                    <li>Select your preferences for formatting and style</li>
+                    <li>Generate and review your content</li>
+                    <li>Download or share your creation</li>
+                </ol>
+                
+                <h3>Tips for Best Results</h3>
+                <ul>
+                    <li><strong>Be Specific:</strong> Provide detailed topics and answers to classification questions</li>
+                    <li><strong>Experiment:</strong> Try different themes and styles to find what works best</li>
+                    <li><strong>Review:</strong> Always preview your content before finalizing</li>
+                    <li><strong>Customize:</strong> Don't hesitate to adjust settings to match your needs</li>
+                    <li><strong>Save:</strong> Keep track of your creations using the history feature</li>
+                </ul>
+            </div>
+            
+            <div id="technical" class="wiki-section">
+                <h2>6. Technical Architecture</h2>
+                
+                <h3>Frontend Technologies</h3>
+                <div class="tech-stack">
+                    <div class="tech-item">HTML5</div>
+                    <div class="tech-item">CSS3</div>
+                    <div class="tech-item">JavaScript</div>
+                    <div class="tech-item">Three.js</div>
+                    <div class="tech-item">Lottie</div>
+                    <div class="tech-item">JSZip</div>
+                    <div class="tech-item">FileSaver.js</div>
+                    <div class="tech-item">Bootstrap 5</div>
+                </div>
+                
+                <p>The platform is built with modern web technologies:</p>
+                <ul>
+                    <li><strong>HTML5:</strong> Semantic markup for content structure</li>
+                    <li><strong>CSS3:</strong> Styling with glassmorphism effects and animations</li>
+                    <li><strong>JavaScript:</strong> Interactive functionality and API integration</li>
+                    <li><strong>Three.js:</strong> 3D background effects and elements</li>
+                    <li><strong>Lottie:</strong> High-quality animations</li>
+                    <li><strong>JSZip:</strong> Creating ZIP files for project downloads</li>
+                    <li><strong>FileSaver.js:</strong> Handling file downloads</li>
+                    <li><strong>Bootstrap 5:</strong> Responsive design framework</li>
+                </ul>
+                
+                <h3>Backend Integration</h3>
+                <ul>
+                    <li><strong>AI Service:</strong> Google's Gemini AI API (gemini-2.5-pro model)</li>
+                    <li><strong>Endpoint:</strong> <code>https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent</code></li>
+                    <li><strong>Authentication:</strong> User-provided API keys</li>
+                    <li><strong>Data Flow:</strong> User input → Classification → Customization → AI generation → Output</li>
+                </ul>
+                
+                <h3>User Experience Design</h3>
+                <ul>
+                    <li><strong>Splash Screen:</strong> Introduction to the application</li>
+                    <li><strong>Tutorial Section:</strong> Guides users through API key setup</li>
+                    <li><strong>Progressive Questioning:</strong> Gathers requirements through classification and customization questions</li>
+                    <li><strong>Real-time Feedback:</strong> Loading animations and progress indicators</li>
+                    <li><strong>Responsive Design:</strong> Adapts to various screen sizes using Bootstrap</li>
+                </ul>
+                
+                <h3>Design Philosophy</h3>
+                <ul>
+                    <li><strong>Visual Design:</strong> Dark theme with blue accents (#3498db), glassmorphism with backdrop blur effects</li>
+                    <li><strong>UI Style:</strong> Clean, organized, and intuitive</li>
+                    <li><strong>Progressive Disclosure:</strong> Information revealed as needed</li>
+                    <li><strong>Guided Process:</strong> Step-by-step content creation</li>
+                    <li><strong>Feedback:</strong> Clear indicators of progress and status</li>
+                    <li><strong>Accessibility:</strong> Designed for various user skill levels</li>
+                </ul>
+            </div>
+            
+            <div id="security" class="wiki-section">
+                <h2>7. Security and Privacy</h2>
+                
+                <h3>Data Storage</h3>
+                <ul>
+                    <li><strong>Local Storage:</strong> API keys and history stored in user's browser</li>
+                    <li><strong>No Server Storage:</strong> No content or personal information stored on servers</li>
+                    <li><strong>User Control:</strong> Users can clear history at any time</li>
+                </ul>
+                
+                <h3>API Key Security</h3>
+                <ul>
+                    <li><strong>Private Storage:</strong> API keys stored securely in browser</li>
+                    <li><strong>User Warning:</strong> Clear instructions not to share API keys</li>
+                    <li><strong>Validation:</strong> API key format validation before use</li>
+                </ul>
+                
+                <h3>Privacy Considerations</h3>
+                <ul>
+                    <li><strong>No Tracking:</strong> No analytics or user tracking</li>
+                    <li><strong>No Third-Party Sharing:</strong> User content not shared with third parties</li>
+                    <li><strong>Transparency:</strong> Clear explanation of data usage</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <p><strong>Important:</strong> Your API key is stored locally in your browser and is never sent to our servers. Google's AI processes your topics, but we don't store any of your content or personal information.</p>
+                </div>
+            </div>
+            
+            <div id="faq" class="wiki-section">
+                <h2>8. Frequently Asked Questions</h2>
+                
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                                Is HOPE-INT-CORE free to use?
+                            </button>
+                        </h3>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>HOPE-INT-CORE is free to use, but you'll need your own Gemini API key, which may have associated costs based on your usage. Google offers a free tier that should be sufficient for most users.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                                How does the AI generate content?
+                            </button>
+                        </h3>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>The platform uses Google's Gemini AI model (gemini-2.5-pro) to understand your requirements and generate content based on your inputs. The AI has been trained on vast amounts of text data and can create high-quality content in various styles and formats.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                                Can I edit the generated content?
+                            </button>
+                        </h3>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>Yes! Once you generate content, you can download it and edit it using appropriate software. The generated HTML files can be edited with any web editor, and PDFs can be edited with PDF editing tools.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                                Is my data secure?
+                            </button>
+                        </h3>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>Absolutely. All content is generated locally on your device, and we don't store any of your data on our servers. Your API key is stored securely in your browser's local storage.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                                Can I use the generated content commercially?
+                            </button>
+                        </h3>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>Yes, you own the rights to the content generated using your API key. However, we recommend reviewing the content for accuracy and originality before commercial use.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6">
+                                How accurate is the generated content?
+                            </button>
+                        </h3>
+                        <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>The AI strives to generate accurate and high-quality content, but it's always a good idea to review and fact-check important information. The quality depends on the clarity of your inputs and the complexity of the topic.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq7" aria-expanded="false" aria-controls="faq7">
+                                What programming languages are supported for project generation?
+                            </button>
+                        </h3>
+                        <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>HOPE-INT-CORE supports a wide range of programming languages including JavaScript/TypeScript, Python, Java, C#, PHP, Ruby, Go, Swift, Kotlin, C++, C, Rust, and many more. You can select multiple languages when creating a project.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq8" aria-expanded="false" aria-controls="faq8">
+                                Can I contribute to the project?
+                            </button>
+                        </h3>
+                        <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>We appreciate your interest! Currently, the project is developed by the HOPE Research & Development Team, but you can contribute by providing feedback, reporting issues, or suggesting features.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq9" aria-expanded="false" aria-controls="faq9">
+                                What browsers are supported?
+                            </button>
+                        </h3>
+                        <div id="faq9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>HOPE-INT-CORE works best with modern browsers including Chrome (recommended), Firefox, Safari, and Edge. The platform uses modern web technologies that may not be fully supported in older browsers.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq10" aria-expanded="false" aria-controls="faq10">
+                                How many languages are supported for content generation?
+                            </button>
+                        </h3>
+                        <div id="faq10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>HOPE-INT-CORE supports content generation in 100+ languages including English, Spanish, French, German, Italian, Portuguese, Dutch, Russian, Japanese, Korean, Chinese (Simplified and Traditional), Arabic, Hindi, Bengali, Punjabi, Marathi, Tamil, Telugu, Gujarati, Kannada, Malayalam, and many more.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="contact" class="wiki-section">
+                <h2>9. Contact & Support</h2>
+                
+                <h3>Get in Touch</h3>
+                <p>If you have questions, feedback, or need support, we're here to help:</p>
+                <ul>
+                    <li><strong>Email:</strong> support@hope-int-core.com</li>
+                    <li><strong>Twitter:</strong> <a href="https://twitter.com/hopeppt" target="_blank">@hopeppt</a></li>
+                    <li><strong>Developer:</strong> <a href="https://twitter.com/justindev" target="_blank">@justindev</a></li>
+                </ul>
+                
+                <h3>Report Issues</h3>
+                <p>If you encounter any technical issues or bugs, please report them with details about:</p>
+                <ul>
+                    <li>The browser you're using</li>
+                    <li>Steps to reproduce the issue</li>
+                    <li>Screenshots if applicable</li>
+                    <li>Any error messages you received</li>
+                </ul>
+                
+                <h3>Feature Requests</h3>
+                <p>We're always looking to improve HOPE-INT-CORE. If you have ideas for new features or enhancements, please share them with us. Your feedback helps us prioritize future developments.</p>
+                
+                <h3>Community</h3>
+                <p>Join our community to connect with other users, share your creations, and stay updated on new features:</p>
+                <ul>
+                    <li><strong>Discord:</strong> <a href="https://discord.gg/hope-int-core" target="_blank">Join our Discord server</a></li>
+                    <li><strong>Reddit:</strong> <a href="https://reddit.com/r/hopeintcore" target="_blank">r/hopeintcore</a></li>
+                    <li><strong>YouTube:</strong> <a href="https://youtube.com/c/hopeintcore" target="_blank">HOPE-INT-CORE Channel</a></li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <p><strong>Note:</strong> For the most up-to-date information about HOPE-INT-CORE, including the latest features and announcements, follow us on Twitter or join our Discord community.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2023 HOPE Research & Development Team | Developed by Justin</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="footer-links text-md-end">
+                        <a href="https://hope-int-core.vercel.app" target="_blank">HOPE-INT-CORE Platform</a>
+                        <a href="https://justinalexia.vercel.app" target="_blank">Developer's Portfolio</a>
+                        <a href="https://twitter.com/hopeppt" target="_blank">Twitter</a>
+                        <a href="mailto:support@hope-int-core.com">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <div class="back-to-top" id="back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </div>
+    
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Initialize Three.js Background
+        function initThreeBackground() {
+            const container = document.getElementById('three-background');
+            
+            // Scene
+            const scene = new THREE.Scene();
+            
+            // Camera
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+            
+            // Renderer
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
+            
+            // Create floating particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 500;
+            const posArray = new Float32Array(particlesCount * 3);
+            
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 10;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            
+            // Material
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.02,
+                color: 0x3498db,
+                transparent: true,
+                opacity: 0.8
+            });
+            
+            // Mesh
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+            
+            // Add ambient light
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                particlesMesh.rotation.x += 0.001;
+                particlesMesh.rotation.y += 0.002;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Three.js background
+            initThreeBackground();
+            
+            // Back to top button
+            const backToTop = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+            
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Active navigation highlight
+            const sections = document.querySelectorAll('.wiki-section');
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (window.scrollY >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').slice(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // Smooth scrolling for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').slice(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
