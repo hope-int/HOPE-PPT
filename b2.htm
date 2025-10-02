@@ -2814,13 +2814,13 @@ Return only the complete HTML code without any additional explanations.`;
         // Ensure watermark is present in the presentation
         function ensureWatermark(html) {
             // Check if watermark is already present
-            if (html.includes('-') && html.includes('-')) {
+            if (html.includes('HOPE-INT-CORE') && html.includes('-')) {
                 return html;
             }
             
             // Find each slide and add watermark if not present
             const slidePattern = /<div class="slide-content">(.*?)<\/div>/gs;
-            const watermark = '<div class="watermark">-<br>-</div>';
+            const watermark = '<div class="watermark">HOPE-INT-CORE<br>-</div>';
             
             return html.replace(slidePattern, (match, content) => {
                 if (!content.includes('watermark')) {
