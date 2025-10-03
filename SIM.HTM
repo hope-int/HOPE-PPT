@@ -586,7 +586,7 @@
                 submission: '',
                 generatedContent: ''
             },
-            project: {
+            projectDetails: {
                 type: '',
                 languages: [],
                 framework: '',
@@ -825,6 +825,15 @@
                 const currentQuestion = this.questions[this.currentIndex];
                 const selectedOption = this.answers[this.currentIndex];
                 
+                // Check if this is a multi-select question
+                if (currentQuestion.isMultiSelect) {
+                    this.renderMultiSelectQuestion(currentQuestion, selectedOption);
+                } else {
+                    this.renderSingleSelectQuestion(currentQuestion, selectedOption);
+                }
+            }
+
+            renderSingleSelectQuestion(currentQuestion, selectedOption) {
                 this.container.innerHTML = `
                     <div class="question-container">
                         <h3>Question ${this.currentIndex + 1} of ${this.questions.length}</h3>
@@ -844,7 +853,40 @@
                     </div>
                 `;
                 
-                // Add event listeners
+                this.attachSingleSelectListeners();
+            }
+
+            renderMultiSelectQuestion(currentQuestion, selectedOptions) {
+                this.container.innerHTML = `
+                    <div class="question-container">
+                        <h3>Question ${this.currentIndex + 1} of ${this.questions.length}</h3>
+                        <p>${currentQuestion.question}</p>
+                        <div class="multi-select-container show">
+                            <div class="multi-select-options">
+                                ${currentQuestion.options.map((option, index) => `
+                                    <div class="multi-select-option">
+                                        <input type="checkbox" id="option-${index}" value="${option}" ${selectedOptions && selectedOptions.includes(option) ? 'checked' : ''}>
+                                        <label for="option-${index}">${option}</label>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="selected-items" id="selected-items">
+                                ${selectedOptions && selectedOptions.length > 0 ? 
+                                    selectedOptions.map(opt => `<span class="selected-item">${opt}</span>`).join('') : 
+                                    'No items selected'}
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            ${this.currentIndex > 0 ? '<button id="prev-question-btn">Previous</button>' : ''}
+                            ${this.currentIndex < this.questions.length - 1 ? '<button id="next-question-btn">Next</button>' : '<button id="finish-questions-btn">Finish</button>'}
+                        </div>
+                    </div>
+                `;
+                
+                this.attachMultiSelectListeners();
+            }
+
+            attachSingleSelectListeners() {
                 const optionElements = this.container.querySelectorAll('.option');
                 optionElements.forEach(option => {
                     option.addEventListener('click', () => {
@@ -853,6 +895,39 @@
                         const input = option.querySelector('input');
                         input.checked = true;
                         this.answers[this.currentIndex] = input.value;
+                    });
+                });
+                
+                if (this.currentIndex > 0) {
+                    document.getElementById('prev-question-btn').addEventListener('click', () => this.previous());
+                }
+                
+                if (this.currentIndex < this.questions.length - 1) {
+                    document.getElementById('next-question-btn').addEventListener('click', () => this.next());
+                } else {
+                    document.getElementById('finish-questions-btn').addEventListener('click', () => this.finish());
+                }
+            }
+
+            attachMultiSelectListeners() {
+                const checkboxes = this.container.querySelectorAll('.multi-select-option input[type="checkbox"]');
+                const selectedItemsDiv = document.getElementById('selected-items');
+                
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', () => {
+                        const checkedOptions = Array.from(checkboxes)
+                            .filter(cb => cb.checked)
+                            .map(cb => cb.value);
+                        
+                        this.answers[this.currentIndex] = checkedOptions;
+                        
+                        if (checkedOptions.length > 0) {
+                            selectedItemsDiv.innerHTML = checkedOptions.map(opt => 
+                                `<span class="selected-item">${opt}</span>`
+                            ).join('');
+                        } else {
+                            selectedItemsDiv.innerHTML = 'No items selected';
+                        }
                     });
                 });
                 
@@ -878,7 +953,14 @@
             }
 
             finish() {
-                const allAnswered = this.answers.every(answer => answer.trim() !== '');
+                // Check if all questions have answers
+                const allAnswered = this.answers.every((answer, index) => {
+                    if (this.questions[index].isMultiSelect) {
+                        return Array.isArray(answer) && answer.length > 0;
+                    }
+                    return answer && answer.trim() !== '';
+                });
+                
                 if (!allAnswered) {
                     showNotification('Please answer all questions before proceeding', 'error');
                     return;
@@ -962,15 +1044,38 @@
 
         function parseAIResponse(response) {
             try {
+                // Try direct parsing first
                 return JSON.parse(response);
             } catch (e) {
                 // Try to extract JSON from markdown
                 const jsonMatch = response.match(/```(?:json)?\n([\s\S]*?)\n```/);
-                if (jsonMatch) return JSON.parse(jsonMatch[1]);
+                if (jsonMatch) {
+                    try {
+                        return JSON.parse(jsonMatch[1]);
+                    } catch (e2) {
+                        // Continue to next method
+                    }
+                }
                 
                 // Try to find JSON object
                 const objectMatch = response.match(/\{[\s\S]*\}/);
-                if (objectMatch) return JSON.parse(objectMatch[0]);
+                if (objectMatch) {
+                    try {
+                        return JSON.parse(objectMatch[0]);
+                    } catch (e3) {
+                        // Continue to next method
+                    }
+                }
+                
+                // Try to extract JSON array
+                const arrayMatch = response.match(/\[[\s\S]*\]/);
+                if (arrayMatch) {
+                    try {
+                        return JSON.parse(arrayMatch[0]);
+                    } catch (e4) {
+                        // Continue to error
+                    }
+                }
                 
                 throw new Error('Invalid response format');
             }
@@ -1123,7 +1228,7 @@
             elements.generateProjectClassificationQuestionsBtn.addEventListener('click', () => generateClassificationQuestions('project'));
             elements.generateProjectBtn.addEventListener('click', generateProject);
             elements.downloadProjectBtn.addEventListener('click', downloadProject);
-            elements.previewDocumentationBtn.addEventListener('click', () => previewContent(appState.project.generatedContent.documentation));
+            elements.previewDocumentationBtn.addEventListener('click', () => previewContent(appState.projectDetails.generatedContent.documentation));
             elements.newProjectBtn.addEventListener('click', () => resetForNew('project'));
         }
 
@@ -1396,12 +1501,12 @@ Response format:
                     answers.forEach((answer, index) => {
                         const variable = questions[index].variable;
                         if (variable === 'includeCurrentDate') {
-                            appState.project[variable] = answer === "Yes";
-                            if (appState.project[variable]) {
-                                appState.project.currentDateTime = new Date().toLocaleString();
+                            appState.projectDetails[variable] = answer === "Yes";
+                            if (appState.projectDetails[variable]) {
+                                appState.projectDetails.currentDateTime = new Date().toLocaleString();
                             }
                         } else {
-                            appState.project[variable] = answer;
+                            appState.projectDetails[variable] = answer;
                         }
                     });
                     elements.generateProjectBtn.disabled = false;
@@ -1575,7 +1680,7 @@ Output complete HTML only.`;
             
             try {
                 const { topic, level } = appState.project;
-                const { type, languages, framework, database, ui, documentation, deployment, includeCurrentDate, currentDateTime } = appState.project;
+                const { type, languages, framework, database, ui, documentation, deployment, includeCurrentDate, currentDateTime } = appState.projectDetails;
                 
                 const classificationInfo = appState.classification.questions.map((q, i) => 
                     `Q: ${q.question}\nA: ${appState.classification.answers[i]}`
@@ -1631,7 +1736,7 @@ Output SVG only.`;
                 
                 const workflow = await callGeminiAPI(workflowPrompt);
                 
-                appState.project.generatedContent = {
+                appState.projectDetails.generatedContent = {
                     documentation,
                     readme,
                     workflow,
@@ -1642,7 +1747,7 @@ Output SVG only.`;
                 await generateSourceCode();
                 
                 prepareProjectFileList();
-                saveToHistory(topic, appState.project.generatedContent, 'project');
+                saveToHistory(topic, appState.projectDetails.generatedContent, 'project');
                 showSection('projectPreview');
             } catch (error) {
                 showNotification(`Error: ${error.message}`, 'error');
@@ -1654,7 +1759,7 @@ Output SVG only.`;
 
         // Generate Source Code
         async function generateSourceCode() {
-            const { topic, level, type, languages, framework, database, includeCurrentDate, currentDateTime } = appState.project;
+            const { topic, level, type, languages, framework, database, includeCurrentDate, currentDateTime } = appState.projectDetails;
             
             const dateInfo = includeCurrentDate ? `Current date: ${currentDateTime}` : '';
             
@@ -1677,21 +1782,21 @@ Output complete source code only.`;
             
             if (type === "Web Application") {
                 mainFileName = "index.html";
-                appState.project.generatedContent.sourceCode[mainFileName] = await callGeminiAPI(mainFilePrompt);
+                appState.projectDetails.generatedContent.sourceCode[mainFileName] = await callGeminiAPI(mainFilePrompt);
                 
                 // Generate CSS
                 const cssPrompt = `Create CSS for a ${level} ${type} about "${topic}" with modern styling.
 
 Output CSS only.`;
-                appState.project.generatedContent.sourceCode["styles.css"] = await callGeminiAPI(cssPrompt);
+                appState.projectDetails.generatedContent.sourceCode["styles.css"] = await callGeminiAPI(cssPrompt);
                 
                 // Generate JavaScript
                 const jsPrompt = `Create JavaScript for a ${level} ${type} about "${topic}".
 
 Output JavaScript only.`;
-                appState.project.generatedContent.sourceCode["script.js"] = await callGeminiAPI(jsPrompt);
+                appState.projectDetails.generatedContent.sourceCode["script.js"] = await callGeminiAPI(jsPrompt);
             } else {
-                appState.project.generatedContent.sourceCode[mainFileName] = await callGeminiAPI(mainFilePrompt);
+                appState.projectDetails.generatedContent.sourceCode[mainFileName] = await callGeminiAPI(mainFilePrompt);
             }
             
             // Generate package.json if needed
@@ -1699,7 +1804,7 @@ Output JavaScript only.`;
                 const packagePrompt = `Create package.json for a ${level} ${type} about "${topic}" using ${framework}.
 
 Output JSON only.`;
-                appState.project.generatedContent.sourceCode["package.json"] = await callGeminiAPI(packagePrompt);
+                appState.projectDetails.generatedContent.sourceCode["package.json"] = await callGeminiAPI(packagePrompt);
             }
             
             // Generate database config if needed
@@ -1709,10 +1814,10 @@ Output JSON only.`;
 Output config only.`;
                 
                 let dbFileName = `db-config.${getFileExtension(Array.isArray(languages) ? languages[0] : languages)}`;
-                appState.project.generatedContent.sourceCode[dbFileName] = await callGeminiAPI(dbPrompt);
+                appState.projectDetails.generatedContent.sourceCode[dbFileName] = await callGeminiAPI(dbPrompt);
             }
             
-            appState.project.generatedContent.sourceCode["README.md"] = appState.project.generatedContent.readme;
+            appState.projectDetails.generatedContent.sourceCode["README.md"] = appState.projectDetails.generatedContent.readme;
         }
 
         // Helper Functions
@@ -1768,23 +1873,23 @@ Output config only.`;
             
             fileList.push({
                 name: "Documentation.html",
-                size: "~" + Math.round(appState.project.generatedContent.documentation.length / 1024) + " KB",
+                size: "~" + Math.round(appState.projectDetails.generatedContent.documentation.length / 1024) + " KB",
                 type: "documentation"
             });
             
             fileList.push({
                 name: "README.md",
-                size: "~" + Math.round(appState.project.generatedContent.readme.length / 1024) + " KB",
+                size: "~" + Math.round(appState.projectDetails.generatedContent.readme.length / 1024) + " KB",
                 type: "readme"
             });
             
             fileList.push({
                 name: "Workflow.svg",
-                size: "~" + Math.round(appState.project.generatedContent.workflow.length / 1024) + " KB",
+                size: "~" + Math.round(appState.projectDetails.generatedContent.workflow.length / 1024) + " KB",
                 type: "workflow"
             });
             
-            for (const [fileName, content] of Object.entries(appState.project.generatedContent.sourceCode)) {
+            for (const [fileName, content] of Object.entries(appState.projectDetails.generatedContent.sourceCode)) {
                 fileList.push({
                     name: fileName,
                     size: "~" + Math.round(content.length / 1024) + " KB",
@@ -1805,12 +1910,12 @@ Output config only.`;
                 const zip = new JSZip();
                 const projectFolder = zip.folder(appState.project.topic.replace(/\s+/g, '_'));
                 
-                projectFolder.file("Documentation.html", appState.project.generatedContent.documentation);
-                projectFolder.file("README.md", appState.project.generatedContent.readme);
-                projectFolder.file("Workflow.svg", appState.project.generatedContent.workflow);
+                projectFolder.file("Documentation.html", appState.projectDetails.generatedContent.documentation);
+                projectFolder.file("README.md", appState.projectDetails.generatedContent.readme);
+                projectFolder.file("Workflow.svg", appState.projectDetails.generatedContent.workflow);
                 
                 const sourceFolder = projectFolder.folder("Source_Code");
-                for (const [fileName, content] of Object.entries(appState.project.generatedContent.sourceCode)) {
+                for (const [fileName, content] of Object.entries(appState.projectDetails.generatedContent.sourceCode)) {
                     sourceFolder.file(fileName, content);
                 }
                 
@@ -1858,7 +1963,7 @@ Output config only.`;
                 elements.assignmentTopicInput.value = '';
                 showSection('assignmentTopic');
             } else if (type === 'project') {
-                appState.project = {
+                appState.projectDetails = {
                     type: '',
                     languages: [],
                     framework: '',
@@ -1999,7 +2104,7 @@ Output config only.`;
             } else if (type === 'project') {
                 item = appState.history.projects.find(item => item.id === id);
                 if (item) {
-                    appState.project.generatedContent = item.content;
+                    appState.projectDetails.generatedContent = item.content;
                     appState.project.topic = item.topic;
                     prepareProjectFileList();
                     showSection('projectPreview');
