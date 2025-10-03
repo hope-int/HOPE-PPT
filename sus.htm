@@ -1707,7 +1707,7 @@ Classification info:
 
 Output complete HTML only.`;
                 
-                const documentation = await callGeminiAPI(docPrompt);
+                const projectDocumentation = await callGeminiAPI(docPrompt);
                 
                 // Generate README
                 const readmePrompt = `Create README.md for a ${level} ${type} project about "${topic}".
@@ -1737,7 +1737,7 @@ Output SVG only.`;
                 const workflow = await callGeminiAPI(workflowPrompt);
                 
                 appState.projectDetails.generatedContent = {
-                    documentation,
+                    documentation: projectDocumentation,
                     readme,
                     workflow,
                     sourceCode: {}
@@ -1782,7 +1782,8 @@ Output complete source code only.`;
             
             if (type === "Web Application") {
                 mainFileName = "index.html";
-                appState.projectDetails.generatedContent.sourceCode[mainFileName] = await callGeminiAPI(mainFilePrompt);
+                const mainFileContent = await callGeminiAPI(mainFilePrompt);
+                appState.projectDetails.generatedContent.sourceCode[mainFileName] = mainFileContent;
                 
                 // Generate CSS
                 const cssPrompt = `Create CSS for a ${level} ${type} about "${topic}" with modern styling.
@@ -1796,7 +1797,8 @@ Output CSS only.`;
 Output JavaScript only.`;
                 appState.projectDetails.generatedContent.sourceCode["script.js"] = await callGeminiAPI(jsPrompt);
             } else {
-                appState.projectDetails.generatedContent.sourceCode[mainFileName] = await callGeminiAPI(mainFilePrompt);
+                const mainFileContent = await callGeminiAPI(mainFilePrompt);
+                appState.projectDetails.generatedContent.sourceCode[mainFileName] = mainFileContent;
             }
             
             // Generate package.json if needed
