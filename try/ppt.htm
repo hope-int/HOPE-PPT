@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Presentation - HOPE-INT-CORE</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Create stunning AI-powered presentations with HOPE-INT-CORE">
+    
+    <!-- External Scripts -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #000000, #1a1a2e);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #three-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 80px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, #3498db, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 16px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
+            border-color: rgba(52, 152, 219, 0.6);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        button {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-top: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(45deg, #2980b9, #3498db);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .question-container {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .option-container {
+            margin-top: 15px;
+        }
+
+        .option {
+            display: block;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: rgba(52, 152, 219, 0.2);
+            border-color: rgba(52, 152, 219, 0.6);
+        }
+
+        .option.selected {
+            background: rgba(52, 152, 219, 0.3);
+            border-color: #3498db;
+        }
+
+        .option input[type="radio"] {
+            display: none;
+        }
+
+        .generating-animation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 60vh;
+        }
+
+        .generating-text {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #3498db;
+        }
+
+        .lottie-container {
+            width: 200px;
+            height: 200px;
+            margin: 20px 0;
+        }
+
+        .preview-container {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(52, 152, 219, 0.9);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: rgba(231, 76, 60, 0.9);
+        }
+
+        /* Custom color picker styles */
+        .custom-colors-container {
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .custom-colors-container.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .color-picker-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .color-picker-group label {
+            min-width: 120px;
+            margin-right: 10px;
+        }
+        
+        .color-picker {
+            width: 50px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .color-code {
+            margin-left: 10px;
+            font-family: monospace;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        /* Language dropdown styles */
+        .language-dropdown-container {
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .language-dropdown-container.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .language-search {
+            margin-bottom: 10px;
+        }
+        
+        .language-list {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        .language-option {
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .language-option:hover {
+            background: rgba(52, 152, 219, 0.2);
+        }
+        
+        .language-option.selected {
+            background: rgba(52, 152, 219, 0.3);
+        }
+
+        /* Navigation buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .nav-buttons button {
+            flex: 1;
+            margin: 0 5px;
+        }
+
+        /* Back button */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(52, 152, 219, 0.3);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-btn:hover {
+            background: rgba(52, 152, 219, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            padding: 15px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(52, 152, 219, 0.3);
+            z-index: 100;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            button {
+                width: 100%;
+                margin-right: 0;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+            }
+            
+            .nav-buttons button {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="three-background"></div>
+    
+    <div class="container">
+        <h1>Create Presentation</h1>
+        
+        <!-- Back Button -->
+        <button class="back-btn" onclick="goBack()">← Back to Home</button>
+        
+        <!-- Topic Input Section -->
+        <div id="topic-section" class="section active">
+            <div class="form-group">
+                <label for="presentation-topic">Enter your presentation topic:</label>
+                <input type="text" id="presentation-topic" placeholder="e.g., Climate Change, Artificial Intelligence, etc.">
+            </div>
+            <button id="generate-questions">Generate Questions</button>
+        </div>
+        
+        <!-- Generating Classification Questions Section -->
+        <div id="generating-classification-section" class="section">
+            <div class="generating-animation">
+                <div class="generating-text">Generating classification questions...</div>
+                <div class="lottie-container">
+                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
+                <p>AI is analyzing your topic to create personalized questions</p>
+            </div>
+        </div>
+        
+        <!-- Classification Questions Section -->
+        <div id="classification-questions-section" class="section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="classification-progress-fill"></div>
+            </div>
+            <div id="classification-questions-container"></div>
+            <button id="finish-classification-btn" disabled>Continue to Presentation Options</button>
+        </div>
+        
+        <!-- Questions Section -->
+        <div id="questions-section" class="section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div id="questions-container"></div>
+            <div id="custom-colors-container" class="custom-colors-container">
+                <div class="color-picker-group">
+                    <label for="custom-color-1">First Color:</label>
+                    <input type="color" id="custom-color-1" class="color-picker" value="#3498db">
+                    <span id="color-code-1" class="color-code">#3498db</span>
+                </div>
+                <div class="color-picker-group">
+                    <label for="custom-color-2">Second Color:</label>
+                    <input type="color" id="custom-color-2" class="color-picker" value="#e74c3c">
+                    <span id="color-code-2" class="color-code">#e74c3c</span>
+                </div>
+            </div>
+            <div id="language-dropdown-container" class="language-dropdown-container">
+                <div class="language-search">
+                    <input type="text" id="language-search" placeholder="Search languages...">
+                </div>
+                <div id="language-list" class="language-list"></div>
+            </div>
+            <button id="generate-presentation" disabled>Generate Presentation</button>
+        </div>
+        
+        <!-- Generating Section -->
+        <div id="generating-section" class="section">
+            <div class="generating-animation">
+                <div class="generating-text">Creating your presentation...</div>
+                <div class="lottie-container">
+                    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                </div>
+                <p>This may take a moment as we generate your custom presentation</p>
+            </div>
+        </div>
+        
+        <!-- Preview Section -->
+        <div id="preview-section" class="section">
+            <h2>Your presentation is ready!</h2>
+            <div class="preview-container">
+                <button id="preview-btn">Preview in New Tab</button>
+                <button id="new-presentation-btn">Create New Presentation</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        Developed under HOPE Research Team | Developed by Justin
+    </footer>
+    
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // Application State
+        const appState = {
+            apiKey: '',
+            topic: '',
+            theme: '',
+            slideCount: '',
+            structure: '',
+            animationStyle: '',
+            colorTheme: '',
+            customColor1: '#3498db',
+            customColor2: '#e74c3c',
+            bgitem: '',
+            termsdepth: '',
+            language: 'English',
+            presentationStyle: '',
+            advancedAnimations: '',
+            interactiveElements: '',
+            dataVisualization: '',
+            includeImages: '',
+            generatedPresentation: '',
+            currentQuestionIndex: 0,
+            questions: [],
+            answers: [],
+            classificationQuestions: [],
+            classificationAnswers: [],
+            currentClassificationQuestionIndex: 0,
+            selectedLanguage: ''
+        };
+
+        // List of languages
+        const languages = [
+            "English", "Spanish", "French", "German", "Italian", "Portuguese", "Dutch", "Russian", 
+            "Japanese", "Korean", "Chinese (Simplified)", "Chinese (Traditional)", "Arabic", 
+            "Hindi", "Bengali", "Punjabi", "Marathi", "Tamil", "Telugu", "Gujarati", "Kannada", 
+            "Malayalam", "Odia", "Assamese", "Urdu", "Persian", "Turkish", "Polish", "Ukrainian", 
+            "Romanian", "Czech", "Hungarian", "Swedish", "Danish", "Norwegian", "Finnish", 
+            "Greek", "Hebrew", "Thai", "Vietnamese", "Indonesian", "Malay", "Tagalog", 
+            "Swahili", "Zulu", "Afrikaans", "Amharic", "Yoruba", "Igbo", "Somali", 
+            "Nepali", "Sinhala", "Burmese", "Khmer", "Lao", "Mongolian", "Kazakh", 
+            "Uzbek", "Azerbaijani", "Georgian", "Armenian", "Lithuanian", "Latvian", 
+            "Estonian", "Slovak", "Slovenian", "Croatian", "Serbian", "Bosnian", 
+            "Montenegrin", "Macedonian", "Bulgarian", "Albanian", "Belarusian", 
+            "Moldovan", "Icelandic", "Faroese", "Basque", "Catalan", "Galician", 
+            "Welsh", "Irish", "Scottish Gaelic", "Breton", "Cornish", "Manx", 
+            "Esperanto", "Latin", "Ancient Greek", "Sanskrit", "Pali", "Tibetan", 
+            "Mongolian (Traditional)", "Javanese", "Sundanese", "Madurese", "Balinese", 
+            "Minangkabau", "Buginese", "Makassarese", "Acehnese", "Banjarese", 
+            "Tausug", "Maguindanao", "Maranao", "Ilocano", "Hiligaynon", "Waray-Waray", 
+            "Bicolano", "Pangasinan", "Kapampangan", "Ibanag", "Gaddang", "Ifugao", 
+            "Kalinga", "Bontoc", "Tboli", "T'boli", "Manobo", "Bagobo", "Mandaya", 
+            "Mansaka", "Dibabawon", "Manguangan", "Kalagan", "Tagakaulo", "Blan", 
+            "Talaandig", "Higaonon", "Bukidnon", "Tigwahanon", "Matigsalug", "Obo", 
+            "Tinananon", "Tigwa", "Umayamnon", "Western Bukidnon Manobo", "Eastern Bukidnon Manobo", 
+            "Kinamiging", "Cotabato Manobo", "Dibabawon Manobo", "Agusan Manobo", 
+            "Surigao Manobo", "Western Visayan", "Central Visayan", "Southern Visayan", 
+            "Northern Visayan", "Ati", "Sulod", "Magahat", "Negros Occidental Hiligaynon", 
+            "Capiznon", "Aklanon", "Kinaray-a", "Cuyonon", "Ratagnon", "Batak", 
+            "Palawano", "Tagbanwa", "Cuyonon", "Agutaynen", "Tausug", "Sama", 
+            "Yakan", "Jama Mapun", "Sama-Bajau", "Badjao", "Molbog", "Palawano", "Tagbanwa", 
+            "Cuyonon", "Agutaynen", "Tausug", "Sama", "Yakan", "Jama Mapun", "Sama-Bajau", 
+            "Badjao", "Molbog", "Palawano", "Tagbanwa", "Cuyonon", "Agutaynen"
+        ];
+
+        // Fallback classification questions - more focused
+        const fallbackClassificationQuestions = [
+            {
+                question: `What aspect of "${appState.topic || 'your topic'}" should be emphasized?`,
+                options: ["Technical details", "Practical applications", "Historical context", "Future trends"]
+            },
+            {
+                question: "Who is your target audience?",
+                options: ["Students", "Professionals", "General public", "Executives"]
+            },
+            {
+                question: "What presentation style do you prefer?",
+                options: ["Formal and structured", "Creative and visual", "Minimal and clean", "Interactive and engaging"]
+            }
+        ];
+
+        // Gemini API Configuration
+        const GEMINI_API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent';
+
+        // DOM Elements
+        const sections = {
+            topic: document.getElementById('topic-section'),
+            generatingClassification: document.getElementById('generating-classification-section'),
+            classificationQuestions: document.getElementById('classification-questions-section'),
+            questions: document.getElementById('questions-section'),
+            generating: document.getElementById('generating-section'),
+            preview: document.getElementById('preview-section')
+        };
+
+        const elements = {
+            presentationTopic: document.getElementById('presentation-topic'),
+            generateQuestionsBtn: document.getElementById('generate-questions'),
+            classificationQuestionsContainer: document.getElementById('classification-questions-container'),
+            classificationProgressFill: document.getElementById('classification-progress-fill'),
+            finishClassificationBtn: document.getElementById('finish-classification-btn'),
+            questionsContainer: document.getElementById('questions-container'),
+            progressFill: document.getElementById('progress-fill'),
+            generatePresentationBtn: document.getElementById('generate-presentation'),
+            previewBtn: document.getElementById('preview-btn'),
+            newPresentationBtn: document.getElementById('new-presentation-btn'),
+            notification: document.getElementById('notification'),
+            customColorsContainer: document.getElementById('custom-colors-container'),
+            languageDropdownContainer: document.getElementById('language-dropdown-container'),
+            languageSearch: document.getElementById('language-search'),
+            languageList: document.getElementById('language-list')
+        };
+
+        // Initialize Three.js Background
+        function initThreeBackground() {
+            const container = document.getElementById('three-background');
+            
+            // Scene
+            const scene = new THREE.Scene();
+            
+            // Camera
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+            
+            // Renderer
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
+            
+            // Create floating particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 500;
+            const posArray = new Float32Array(particlesCount * 3);
+            
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 10;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            
+            // Material
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.02,
+                color: 0x3498db,
+                transparent: true,
+                opacity: 0.8
+            });
+            
+            // Mesh
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+            
+            // Add ambient light
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                particlesMesh.rotation.x += 0.001;
+                particlesMesh.rotation.y += 0.002;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Initialize Application
+        function initApp() {
+            // Load API key from localStorage
+            const savedApiKey = localStorage.getItem('geminiApiKey');
+            if (savedApiKey) {
+                appState.apiKey = savedApiKey;
+            } else {
+                showNotification('API key not found. Please go back and enter your API key.', 'error');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                return;
+            }
+
+            // Initialize Three.js background
+            initThreeBackground();
+
+            // Event Listeners
+            elements.generateQuestionsBtn.addEventListener('click', generateClassificationQuestions);
+            elements.generatePresentationBtn.addEventListener('click', generatePresentation);
+            elements.previewBtn.addEventListener('click', previewPresentation);
+            elements.newPresentationBtn.addEventListener('click', resetForNewPresentation);
+
+            // Language search functionality
+            elements.languageSearch.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                renderLanguageList(searchTerm);
+            });
+        }
+
+        // Section Navigation
+        function showSection(sectionName) {
+            Object.values(sections).forEach(section => {
+                section.classList.remove('active');
+            });
+            sections[sectionName].classList.add('active');
+        }
+
+        // Generate Classification Questions
+        async function generateClassificationQuestions() {
+            const topic = elements.presentationTopic.value.trim();
+            if (!topic) {
+                showNotification('Please enter a presentation topic', 'error');
+                return;
+            }
+
+            appState.topic = topic;
+            elements.generateQuestionsBtn.disabled = true;
+            elements.generateQuestionsBtn.textContent = 'Generating questions...';
+            
+            // Show generating animation
+            showSection('generatingClassification');
+            
+            try {
+                // Simplified and structured prompt
+                const prompt = `Generate 3 classification questions for a presentation about "${topic}".
+
+Requirements:
+- Each question should help determine the presentation style and content focus
+- Provide 3-4 multiple choice options per question
+- Questions should be relevant to the topic
+
+Return format: JSON only
+{
+  "questions": [
+    {
+      "question": "Question text",
+      "options": ["Option 1", "Option 2", "Option 3"]
+    }
+  ]
+}`;
+
+                const response = await callGeminiAPI(prompt);
+                
+                // Parse the response
+                let data;
+                try {
+                    // Clean response
+                    let cleanResponse = response.trim();
+                    if (cleanResponse.startsWith('```json')) {
+                        cleanResponse = cleanResponse.replace(/```json\n?/, '').replace(/\n?```$/, '');
+                    } else if (cleanResponse.startsWith('```')) {
+                        cleanResponse = cleanResponse.replace(/```\n?/, '').replace(/\n?```$/, '');
+                    }
+                    
+                    const jsonMatch = cleanResponse.match(/\{[\s\S]*\}/);
+                    if (jsonMatch) {
+                        cleanResponse = jsonMatch[0];
+                    }
+                    
+                    data = JSON.parse(cleanResponse);
+                    
+                    // Validate structure
+                    if (!data.questions || !Array.isArray(data.questions)) {
+                        throw new Error('Invalid JSON structure');
+                    }
+                    
+                    // Validate each question
+                    data.questions = data.questions.filter(q => 
+                        q.question && q.options && Array.isArray(q.options) && q.options.length >= 2
+                    );
+                    
+                    if (data.questions.length === 0) {
+                        throw new Error('No valid questions found');
+                    }
+                    
+                    // Limit to 3 questions
+                    if (data.questions.length > 3) {
+                        data.questions = data.questions.slice(0, 3);
+                    }
+                    
+                    appState.classificationQuestions = data.questions;
+                } catch (parseError) {
+                    console.error('Failed to parse AI response:', parseError);
+                    // Use fallback questions
+                    appState.classificationQuestions = fallbackClassificationQuestions;
+                    showNotification('Using default questions', 'error');
+                }
+                
+                // Initialize answers array
+                appState.classificationAnswers = new Array(appState.classificationQuestions.length).fill('');
+                appState.currentClassificationQuestionIndex = 0;
+                
+                // Show the classification questions section
+                showSection('classificationQuestions');
+                renderCurrentClassificationQuestion();
+            } catch (error) {
+                showNotification(`Error generating questions: ${error.message}`, 'error');
+                elements.generateQuestionsBtn.disabled = false;
+                elements.generateQuestionsBtn.textContent = 'Generate Questions';
+                showSection('topic');
+            }
+        }
+
+        // Render Current Classification Question
+        function renderCurrentClassificationQuestion() {
+            const progress = ((appState.currentClassificationQuestionIndex + 1) / appState.classificationQuestions.length) * 100;
+            elements.classificationProgressFill.style.width = `${progress}%`;
+            
+            const currentQuestion = appState.classificationQuestions[appState.currentClassificationQuestionIndex];
+            const selectedOption = appState.classificationAnswers[appState.currentClassificationQuestionIndex];
+            
+            elements.classificationQuestionsContainer.innerHTML = `
+                <div class="question-container">
+                    <h3>Question ${appState.currentClassificationQuestionIndex + 1} of ${appState.classificationQuestions.length}</h3>
+                    <p>${currentQuestion.question}</p>
+                    <div class="option-container">
+                        ${currentQuestion.options.map((option, index) => `
+                            <label class="option ${selectedOption === option ? 'selected' : ''}">
+                                <input type="radio" name="classification-question-${appState.currentClassificationQuestionIndex}" value="${option}" ${selectedOption === option ? 'checked' : ''}>
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="nav-buttons">
+                        ${appState.currentClassificationQuestionIndex > 0 ? '<button id="prev-classification-question-btn">Previous</button>' : '<button style="visibility: hidden;">Previous</button>'}
+                        ${appState.currentClassificationQuestionIndex < appState.classificationQuestions.length - 1 ? '<button id="next-classification-question-btn">Next</button>' : '<button id="finish-classification-btn">Continue to Presentation Options</button>'}
+                    </div>
+                </div>
+            `;
+            
+            // Add event listeners for options
+            const optionElements = document.querySelectorAll('.option');
+            optionElements.forEach(option => {
+                option.addEventListener('click', () => {
+                    optionElements.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    const input = option.querySelector('input');
+                    input.checked = true;
+                    appState.classificationAnswers[appState.currentClassificationQuestionIndex] = input.value;
+                });
+            });
+            
+            if (appState.currentClassificationQuestionIndex > 0) {
+                document.getElementById('prev-classification-question-btn').addEventListener('click', previousClassificationQuestion);
+            }
+            
+            if (appState.currentClassificationQuestionIndex < appState.classificationQuestions.length - 1) {
+                document.getElementById('next-classification-question-btn').addEventListener('click', nextClassificationQuestion);
+            } else {
+                document.getElementById('finish-classification-btn').addEventListener('click', finishClassificationQuestions);
+            }
+        }
+
+        // Classification Question Navigation
+        function nextClassificationQuestion() {
+            appState.currentClassificationQuestionIndex++;
+            renderCurrentClassificationQuestion();
+        }
+
+        function previousClassificationQuestion() {
+            appState.currentClassificationQuestionIndex--;
+            renderCurrentClassificationQuestion();
+        }
+
+        function finishClassificationQuestions() {
+            const allAnswered = appState.classificationAnswers.every(answer => answer.trim() !== '');
+            if (!allAnswered) {
+                showNotification('Please answer all questions', 'error');
+                return;
+            }
+            
+            generatePresentationQuestions();
+        }
+
+        // Generate Presentation Questions
+        function generatePresentationQuestions() {
+            // Simplified set of questions
+            appState.questions = [
+                {
+                    question: "What language do you want?",
+                    options: ["English", "Spanish", "French", "Other"],
+                    variable: "language"
+                },
+                {
+                    question: "How many slides?",
+                    options: ["3-5", "5-8", "8-12", "12+"],
+                    variable: "slideCount"
+                },
+                {
+                    question: "What style?",
+                    options: ["Professional", "Creative", "Minimal", "Academic"],
+                    variable: "presentationStyle"
+                },
+                {
+                    question: "Color theme?",
+                    options: ["Blue", "Green", "Red", "Purple", "Custom"],
+                    variable: "colorTheme"
+                },
+                {
+                    question: "Include animations?",
+                    options: ["Simple", "Advanced", "3D", "None"],
+                    variable: "animationStyle"
+                }
+            ];
+            
+            appState.answers = new Array(appState.questions.length).fill('');
+            appState.currentQuestionIndex = 0;
+            
+            showSection('questions');
+            renderCurrentQuestion();
+        }
+
+        // Render Current Question
+        function renderCurrentQuestion() {
+            const progress = ((appState.currentQuestionIndex + 1) / appState.questions.length) * 100;
+            elements.progressFill.style.width = `${progress}%`;
+            
+            const currentQuestion = appState.questions[appState.currentQuestionIndex];
+            const selectedOption = appState.answers[appState.currentQuestionIndex];
+            
+            elements.questionsContainer.innerHTML = `
+                <div class="question-container">
+                    <h3>Question ${appState.currentQuestionIndex + 1} of ${appState.questions.length}</h3>
+                    <p>${currentQuestion.question}</p>
+                    <div class="option-container">
+                        ${currentQuestion.options.map((option, index) => `
+                            <label class="option ${selectedOption === option ? 'selected' : ''}">
+                                <input type="radio" name="question-${appState.currentQuestionIndex}" value="${option}" ${selectedOption === option ? 'checked' : ''}>
+                                ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="nav-buttons">
+                        ${appState.currentQuestionIndex > 0 ? '<button id="prev-question-btn">Previous</button>' : '<button style="visibility: hidden;">Previous</button>'}
+                        ${appState.currentQuestionIndex < appState.questions.length - 1 ? '<button id="next-question-btn">Next</button>' : '<button id="finish-questions-btn">Generate Presentation</button>'}
+                    </div>
+                </div>
+            `;
+            
+            // Show custom color pickers if custom option is selected
+            if (currentQuestion.variable === "colorTheme" && selectedOption === "Custom") {
+                elements.customColorsContainer.classList.add('show');
+            } else {
+                elements.customColorsContainer.classList.remove('show');
+            }
+            
+            // Show language dropdown if "Other" option is selected
+            if (currentQuestion.variable === "language" && selectedOption === "Other") {
+                elements.languageDropdownContainer.classList.add('show');
+                renderLanguageList();
+            } else {
+                elements.languageDropdownContainer.classList.remove('show');
+            }
+            
+            // Add event listeners
+            const optionElements = document.querySelectorAll('.option');
+            optionElements.forEach(option => {
+                option.addEventListener('click', () => {
+                    optionElements.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    const input = option.querySelector('input');
+                    input.checked = true;
+                    const variableName = appState.questions[appState.currentQuestionIndex].variable;
+                    appState[variableName] = input.value;
+                    appState.answers[appState.currentQuestionIndex] = input.value;
+                    
+                    if (variableName === "colorTheme" && input.value === "Custom") {
+                        elements.customColorsContainer.classList.add('show');
+                    } else {
+                        elements.customColorsContainer.classList.remove('show');
+                    }
+                    
+                    if (variableName === "language" && input.value === "Other") {
+                        elements.languageDropdownContainer.classList.add('show');
+                        renderLanguageList();
+                    } else {
+                        elements.languageDropdownContainer.classList.remove('show');
+                    }
+                });
+            });
+            
+            // Color picker event listeners
+            const colorPicker1 = document.getElementById('custom-color-1');
+            const colorPicker2 = document.getElementById('custom-color-2');
+            const colorCode1 = document.getElementById('color-code-1');
+            const colorCode2 = document.getElementById('color-code-2');
+            
+            if (colorPicker1) {
+                colorPicker1.addEventListener('input', (e) => {
+                    appState.customColor1 = e.target.value;
+                    colorCode1.textContent = e.target.value;
+                });
+            }
+            
+            if (colorPicker2) {
+                colorPicker2.addEventListener('input', (e) => {
+                    appState.customColor2 = e.target.value;
+                    colorCode2.textContent = e.target.value;
+                });
+            }
+            
+            if (appState.currentQuestionIndex > 0) {
+                document.getElementById('prev-question-btn').addEventListener('click', previousQuestion);
+            }
+            
+            if (appState.currentQuestionIndex < appState.questions.length - 1) {
+                document.getElementById('next-question-btn').addEventListener('click', nextQuestion);
+            } else {
+                document.getElementById('finish-questions-btn').addEventListener('click', finishQuestions);
+            }
+        }
+
+        // Render Language List
+        function renderLanguageList(searchTerm = '') {
+            const filteredLanguages = languages.filter(lang => 
+                lang.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            
+            elements.languageList.innerHTML = filteredLanguages.map(lang => `
+                <div class="language-option ${appState.selectedLanguage === lang ? 'selected' : ''}" data-lang="${lang}">
+                    ${lang}
+                </div>
+            `).join('');
+            
+            const languageOptions = document.querySelectorAll('.language-option');
+            languageOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    languageOptions.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    appState.selectedLanguage = option.dataset.lang;
+                    appState.answers[appState.currentQuestionIndex] = appState.selectedLanguage;
+                });
+            });
+        }
+
+        // Question Navigation
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            renderCurrentQuestion();
+        }
+
+        function previousQuestion() {
+            appState.currentQuestionIndex--;
+            renderCurrentQuestion();
+        }
+
+        function finishQuestions() {
+            const allAnswered = appState.answers.every(answer => answer.trim() !== '');
+            if (!allAnswered) {
+                showNotification('Please answer all questions', 'error');
+                return;
+            }
+            
+            if (appState.colorTheme === "Custom") {
+                if (!appState.customColor1 || !appState.customColor2) {
+                    showNotification('Please select both colors', 'error');
+                    return;
+                }
+            }
+            
+            if (appState.language === "Other" && !appState.selectedLanguage) {
+                showNotification('Please select a language', 'error');
+                return;
+            }
+            
+            elements.generatePresentationBtn.disabled = false;
+            showNotification('Ready to generate your presentation!');
+        }
+
+        // Gemini API Call
+        async function callGeminiAPI(prompt) {
+            try {
+                if (!appState.apiKey || appState.apiKey.length < 20) {
+                    throw new Error('Invalid API key');
+                }
+
+                const response = await fetch(`${GEMINI_API_ENDPOINT}?key=${appState.apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        generationConfig: {
+                            temperature: 0.7,
+                            topK: 40,
+                            topP: 0.95,
+                            maxOutputTokens: 8192,
+                        }
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    const errorMessage = errorData.error?.message || `HTTP ${response.status}`;
+                    throw new Error(errorMessage);
+                }
+
+                const data = await response.json();
+                
+                if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+                    throw new Error('Invalid response format');
+                }
+
+                return data.candidates[0].content.parts[0].text;
+            } catch (error) {
+                console.error('Gemini API Error:', error);
+                throw new Error(`Failed to generate content: ${error.message}`);
+            }
+        }
+
+        // Generate Presentation
+        async function generatePresentation() {
+            elements.generatePresentationBtn.disabled = true;
+            elements.generatePresentationBtn.textContent = 'Generating...';
+            showSection('generating');
+            
+            try {
+                // Get presentation language
+                let presentationLanguage = appState.language;
+                if (appState.language === "Other") {
+                    presentationLanguage = appState.selectedLanguage || "English";
+                }
+                
+                // Build color theme
+                let colorThemeString = appState.colorTheme;
+                if (appState.colorTheme === "Custom") {
+                    colorThemeString = `${appState.customColor1} and ${appState.customColor2}`;
+                }
+                
+                // Build classification info
+                let classificationInfo = '';
+                for (let i = 0; i < appState.classificationQuestions.length; i++) {
+                    classificationInfo += `${appState.classificationQuestions[i].question}: ${appState.classificationAnswers[i]}\n`;
+                }
+                
+                // Simplified and structured prompt
+                const prompt = `Create a presentation about "${appState.topic}".
+
+Specifications:
+- Language: ${presentationLanguage}
+- Slides: ${appState.slideCount}
+- Style: ${appState.presentationStyle}
+- Colors: ${colorThemeString}
+- Animations: ${appState.animationStyle}
+- User preferences: ${classificationInfo}
+
+Requirements:
+1. Complete HTML file with embedded CSS and JavaScript
+2. Fullscreen mode: Press 'F' key
+3. Navigation: Arrow keys (left/right)
+4. Slide indicators at bottom
+5. Watermark: "Developed under HOPE Research Team | by Justin"
+6. Responsive design
+7. Smooth transitions
+
+Structure:
+1. Title slide
+2. Introduction
+3. Main content (multiple slides)
+4. Conclusion
+
+Return HTML code only. No explanations.`;
+
+                const presentationHTML = await callGeminiAPI(prompt);
+                
+                // Ensure watermark
+                const finalHTML = ensureWatermark(presentationHTML);
+                
+                appState.generatedPresentation = finalHTML;
+                saveToHistory(appState.topic, finalHTML, 'presentation');
+                showSection('preview');
+            } catch (error) {
+                showNotification(`Error: ${error.message}`, 'error');
+                elements.generatePresentationBtn.disabled = false;
+                elements.generatePresentationBtn.textContent = 'Generate Presentation';
+                showSection('questions');
+            }
+        }
+
+        // Ensure watermark
+        function ensureWatermark(html) {
+            if (html.includes('Developed under HOPE Research Team')) {
+                return html;
+            }
+            
+            const watermark = '<div class="watermark">Developed under HOPE Research Team | by Justin</div>';
+            const slidePattern = /<div class="slide-content">(.*?)<\/div>/gs;
+            
+            return html.replace(slidePattern, (match, content) => {
+                if (!content.includes('watermark')) {
+                    return `<div class="slide-content">${content}${watermark}</div>`;
+                }
+                return match;
+            });
+        }
+
+        // Preview Function
+        function previewPresentation() {
+            const newWindow = window.open();
+            newWindow.document.write(appState.generatedPresentation);
+            newWindow.document.close();
+        }
+
+        // Reset for New Presentation
+        function resetForNewPresentation() {
+            appState.topic = '';
+            appState.theme = '';
+            appState.slideCount = '';
+            appState.structure = '';
+            appState.animationStyle = '';
+            appState.colorTheme = '';
+            appState.customColor1 = '#3498db';
+            appState.customColor2 = '#e74c3c';
+            appState.bgitem = '';
+            appState.termsdepth = '';
+            appState.language = 'English';
+            appState.selectedLanguage = '';
+            appState.presentationStyle = '';
+            appState.advancedAnimations = '';
+            appState.interactiveElements = '';
+            appState.dataVisualization = '';
+            appState.includeImages = '';
+            appState.questions = [];
+            appState.answers = [];
+            appState.currentQuestionIndex = 0;
+            appState.classificationQuestions = [];
+            appState.classificationAnswers = [];
+            appState.currentClassificationQuestionIndex = 0;
+            elements.presentationTopic.value = '';
+            document.getElementById('custom-color-1').value = '#3498db';
+            document.getElementById('custom-color-2').value = '#e74c3c';
+            document.getElementById('color-code-1').textContent = '#3498db';
+            document.getElementById('color-code-2').textContent = '#e74c3c';
+            showSection('topic');
+        }
+
+        // History Management
+        function saveToHistory(topic, content, type) {
+            const historyItem = {
+                id: Date.now(),
+                topic: topic,
+                type: type,
+                timestamp: new Date().toISOString(),
+                content: content
+            };
+            
+            let presentationHistory = JSON.parse(localStorage.getItem('presentationHistory') || '[]');
+            presentationHistory.unshift(historyItem);
+            
+            if (presentationHistory.length > 10) {
+                presentationHistory = presentationHistory.slice(0, 10);
+            }
+            
+            localStorage.setItem('presentationHistory', JSON.stringify(presentationHistory));
+        }
+
+        // Utility Functions
+        function showNotification(message, type = 'success') {
+            elements.notification.textContent = message;
+            elements.notification.className = `notification ${type}`;
+            elements.notification.classList.add('show');
+            
+            setTimeout(() => {
+                elements.notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
