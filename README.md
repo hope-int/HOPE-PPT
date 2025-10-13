@@ -1,63 +1,48 @@
 # HOPE PPT
 
-A lightweight academic prototyping tool that helps students quickly scaffold presentations, reports, assignments, and projects. Built as a minimal, open-source starting point for automated academic content generation.
+A prototype interface for generating academic and project-related content. Built as a lightweight entry point for students to initiate the creation of presentations, reports, assignments, and full projects.
 
-Part of the **HOPE Initiative**—supporting grassroots tech education in Kerala.
-
----
-
-## 🎯 What It Does (Current MVP)
-
-From a single interface, users can initiate the creation of:
-
-- **Interactive 3D Presentations**  
-  (with animations & multimedia)
-- **Printable PDF Reports**  
-  (professionally formatted)
-- **Structured Assignments**  
-  (with questions, instructions, grading criteria)
-- **Complete Projects**  
-  (including source code, documentation, workflow diagrams)
-
-> ⚠️ **Note**: This is a **frontend prototype**. Generation logic (PDF export, code scaffolding, etc.) is intended for future implementation or integration via backend services.
+Live at: https://hope-ppt.vercel.app
 
 ---
 
-## 🔗 Live Demo
+## 🧩 What It Offers (Per Live UI)
 
-👉 [https://hope-ppt.vercel.app](https://hope-ppt.vercel.app)
+- **Create Presentation**  
+  _Generate an interactive 3D presentation with animations and multimedia elements_
 
----
+- **Create Printable Report**  
+  _Generate a professional report that can be downloaded as PDF_
 
-## 📁 Current Implementation
+- **Create Assignment**  
+  _Generate a detailed assignment with questions, instructions, and grading criteria_
 
-- Single static `index.html` (hosted on Vercel)
-- No framework (plain HTML/CSS/JS for now)
-- Designed for **extensibility**—ready to plug into templating engines, report generators (e.g., Puppeteer), or LLM-powered content pipelines
+- **Create Complete Project**  
+  _Generate a complete mini/final year project with source code, documentation, and workflow diagrams_
 
----
-
-## 🚀 How to Extend
-
-1. Clone the repo
-2. Add dynamic handlers (e.g., `/api/generate-report`)
-3. Integrate with:
-   - **Puppeteer** for PDF reports
-   - **Three.js** or **Spline** for 3D slides
-   - **GitHub Copilot API** or local templates for project scaffolding
-4. Deploy back to Vercel
+> ⚠️ **Note**: This repository currently hosts a **static frontend prototype** (single HTML page). Backend logic, API integrations (e.g., Gemini), content generation, and storage are **not implemented in the public code** as of now.
 
 ---
 
-## 🌱 Why This Exists
+## 🚀 How to Use
 
-Many students waste hours on formatting instead of learning.  
-HOPE PPT starts as a **minimal interface**—but aims to become a **force multiplier** for:
-- IoT camp mentors
-- College project guides
-- Self-taught developers in resource-limited settings
+1. Visit [https://hope-ppt.vercel.app](https://hope-ppt.vercel.app)
+2. Select what you’d like to create
+3. (Future) Follow on-screen prompts to generate content
 
-Already used in early testing during **HOPE Summer IoT Camps**.
+---
+
+## 🛠️ Tech Notes
+
+- **Framework**: None (plain HTML/CSS/JS in current public version)
+- **Hosting**: Vercel
+- **State**: MVP prototype — intended as a UI shell for future AI-assisted generation
+
+---
+
+## 🌱 Purpose
+
+Part of the **HOPE Initiative** to reduce academic friction for engineering students in grassroots tech ecosystems—starting with a clear, simple interface.
 
 ---
 
@@ -69,8 +54,6 @@ MIT — see [LICENSE](./LICENSE)
 
 ## 👤 Built By
 
-**Justin Alexia Andrew** (Harinandan K.)  
+Justin Alexia Andrew  
 Kadalundi, Kozhikode | IES College of Engineering  
 [harinandhan972@gmail.com](mailto:harinandhan972@gmail.com)
-
-> “Tech + coordination = real impact.”
