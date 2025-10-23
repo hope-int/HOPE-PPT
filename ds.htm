@@ -1,0 +1,2763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures Viva Questions & Answers</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-bg: #f9f9f9;
+            --border-color: #ddd;
+            --text-color: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        
+        .question-section {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .question {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .answer {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .svg-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        svg {
+            border: 1px solid var(--border-color);
+            background-color: white;
+        }
+        
+        .code-block {
+            background-color: #f0f0f0;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .highlight {
+            background-color: #fff9c4;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .note {
+            font-style: italic;
+            color: #555;
+            margin-top: 10px;
+        }
+        
+        .toc {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .toc h2 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+        }
+        
+        .toc li {
+            margin-bottom: 8px;
+        }
+        
+        .toc a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Data Structures Viva Questions & Answers</h1>
+            <div class="subtitle">Comprehensive Exam Preparation Guide</div>
+        </header>
+        
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#stack">Stack (Q1-10, 54)</a></li>
+                <li><a href="#queue">Queue (Q11-30, 55)</a></li>
+                <li><a href="#linked-list">Linked List (Q34-53, 56, 101)</a></li>
+                <li><a href="#memory">Memory Management (Q58-61)</a></li>
+                <li><a href="#tree">Trees (Q62-88, 102-104)</a></li>
+                <li><a href="#graph">Graphs (Q73-81, 87-88, 110)</a></li>
+                <li><a href="#sorting">Sorting (Q89-91, 100)</a></li>
+                <li><a href="#searching">Searching (Q92-93, 98)</a></li>
+                <li><a href="#hashing">Hashing (Q94-99, 109)</a></li>
+                <li><a href="#operations">Operations (Q105-109)</a></li>
+            </ul>
+        </div>
+        
+        <div id="stack" class="question-section">
+            <div class="question">1. What is Data Structure?</div>
+            <div class="answer">
+                A data structure is a specialized format for organizing, processing, retrieving and storing data. It provides a way to manage large amounts of data efficiently for uses such as large databases and internet indexing services.
+            </div>
+            
+            <div class="question">2. What is a Stack?</div>
+            <div class="answer">
+                A stack is a linear data structure that follows the Last-In-First-Out (LIFO) principle. Elements are added (pushed) and removed (popped) from the same end, called the "top" of the stack.
+            </div>
+            
+            <div class="question">3. What are the basic operations of a Stack?</div>
+            <div class="answer">
+                The basic operations of a stack are:
+                <ul>
+                    <li><strong>Push:</strong> Add an element to the top of the stack</li>
+                    <li><strong>Pop:</strong> Remove the top element from the stack</li>
+                    <li><strong>Peek/Top:</strong> Return the top element without removing it</li>
+                    <li><strong>IsEmpty:</strong> Check if the stack is empty</li>
+                </ul>
+            </div>
+            
+            <div class="question">4. What are the applications of Stack?</div>
+            <div class="answer">
+                Applications of stack include:
+                <ul>
+                    <li>Function call management in recursion</li>
+                    <li>Expression evaluation and conversion (infix to postfix)</li>
+                    <li>Undo functionality in text editors</li>
+                    <li>Backtracking algorithms (maze solving, etc.)</li>
+                    <li>Browser history management</li>
+                </ul>
+            </div>
+            
+            <div class="question">5. How is a Stack implemented?</div>
+            <div class="answer">
+                A stack can be implemented using:
+                <ul>
+                    <li><strong>Arrays:</strong> Fixed size, contiguous memory allocation</li>
+                    <li><strong>Linked Lists:</strong> Dynamic size, non-contiguous memory allocation</li>
+                </ul>
+            </div>
+            
+            <div class="question">6. What is Stack Overflow and Underflow?</div>
+            <div class="answer">
+                <ul>
+                    <li><strong>Stack Overflow:</strong> Occurs when trying to push an element onto a stack that is already full (in fixed-size implementations)</li>
+                    <li><strong>Stack Underflow:</strong> Occurs when trying to pop an element from an empty stack</li>
+                </ul>
+            </div>
+            
+            <div class="question">7. What is the time complexity of stack operations?</div>
+            <div class="answer">
+                For a properly implemented stack:
+                <ul>
+                    <li>Push: O(1)</li>
+                    <li>Pop: O(1)</li>
+                    <li>Peek/Top: O(1)</li>
+                    <li>IsEmpty: O(1)</li>
+                </ul>
+            </div>
+            
+            <div class="question">8. How is Stack used in Expression Evaluation?</div>
+            <div class="answer">
+                Stacks are used to evaluate expressions by:
+                <ul>
+                    <li>Converting infix expressions to postfix (Reverse Polish Notation)</li>
+                    <li>Evaluating postfix expressions using a stack to store operands</li>
+                    <li>Handling operator precedence and parentheses</li>
+                </ul>
+            </div>
+            
+            <div class="question">9. How does Recursion use Stack?</div>
+            <div class="answer">
+                Recursion uses the system's call stack to:
+                <ul>
+                    <li>Store the return address of each function call</li>
+                    <li>Store local variables and parameters of each call</li>
+                    <li>Manage the execution order of recursive calls</li>
+                </ul>
+                When a function calls itself, a new stack frame is pushed onto the call stack. When the function returns, the stack frame is popped.
+            </div>
+            
+            <div class="question">10. What are the advantages of using Stack?</div>
+            <div class="answer">
+                Advantages of using a stack:
+                <ul>
+                    <li>Simple implementation with O(1) time complexity for basic operations</li>
+                    <li>Efficient memory utilization (especially with linked list implementation)</li>
+                    <li>Natural fit for problems requiring LIFO ordering</li>
+                    <li>Essential for many algorithms and system operations</li>
+                </ul>
+            </div>
+            
+            <div class="question">54. What is a Stack? Draw its structure.</div>
+            <div class="answer">
+                A stack is a linear data structure that follows the Last-In-First-Out (LIFO) principle.
+                
+                <div class="svg-container">
+                    <svg width="300" height="250" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Stack container -->
+                        <rect x="50" y="50" width="200" height="180" fill="none" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Stack elements -->
+                        <rect x="50" y="50" width="200" height="40" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="150" y="75" text-anchor="middle" fill="white" font-weight="bold">Element 3 (Top)</text>
+                        
+                        <rect x="50" y="90" width="200" height="40" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="150" y="115" text-anchor="middle" fill="white">Element 2</text>
+                        
+                        <rect x="50" y="130" width="200" height="40" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="150" y="155" text-anchor="middle" fill="white">Element 1</text>
+                        
+                        <rect x="50" y="170" width="200" height="40" fill="#f39c12" stroke="#333" stroke-width="1"/>
+                        <text x="150" y="195" text-anchor="middle" fill="white">Element 0 (Bottom)</text>
+                        
+                        <!-- Arrows -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                            </marker>
+                        </defs>
+                        
+                        <line x1="30" y1="70" x2="50" y2="70" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                        <text x="25" y="75" text-anchor="end" font-weight="bold">Push</text>
+                        
+                        <line x1="270" y1="70" x2="250" y2="70" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                        <text x="275" y="75" font-weight="bold">Pop</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <div id="queue" class="question-section">
+            <div class="question">11. What is a queue in data structures?</div>
+            <div class="answer">
+                A queue is a linear data structure that follows the First-In-First-Out (FIFO) principle. Elements are added at the rear (enqueue) and removed from the front (dequeue).
+            </div>
+            
+            <div class="question">12. What are the basic operations of a queue?</div>
+            <div class="answer">
+                The basic operations of a queue are:
+                <ul>
+                    <li><strong>Enqueue:</strong> Add an element to the rear of the queue</li>
+                    <li><strong>Dequeue:</strong> Remove an element from the front of the queue</li>
+                    <li><strong>Front/Peek:</strong> Return the front element without removing it</li>
+                    <li><strong>IsEmpty:</strong> Check if the queue is empty</li>
+                    <li><strong>IsFull:</strong> Check if the queue is full (for fixed-size implementations)</li>
+                </ul>
+            </div>
+            
+            <div class="question">13. How is a queue implemented using arrays?</div>
+            <div class="answer">
+                A queue can be implemented using an array by:
+                <ul>
+                    <li>Maintaining two pointers: <strong>front</strong> and <strong>rear</strong></li>
+                    <li>Incrementing <strong>rear</strong> when enqueueing (if space available)</li>
+                    <li>Incrementing <strong>front</strong> when dequeueing</li>
+                    <li>Handling the wrap-around when rear reaches the end of the array (circular queue)</li>
+                </ul>
+            </div>
+            
+            <div class="question">14. Simple Queue (Array) Code in C</div>
+            <div class="answer">
+                <div class="code-block">
+                    <pre>
+#define MAX 100
+
+int queue[MAX];
+int front = -1, rear = -1;
+
+// Enqueue operation
+void enqueue(int value) {
+    if (rear == MAX - 1) {
+        printf("Queue Overflow\n");
+        return;
+    }
+    if (front == -1) {
+        front = 0;
+    }
+    queue[++rear] = value;
+}
+
+// Dequeue operation
+int dequeue() {
+    if (front == -1 || front > rear) {
+        printf("Queue Underflow\n");
+        return -1;
+    }
+    return queue[front++];
+}
+
+// Check if queue is empty
+int isEmpty() {
+    return front == -1 || front > rear;
+}
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="question">15. What is a circular queue?</div>
+            <div class="answer">
+                A circular queue is a queue implementation that connects the last position back to the first position to form a circle. This allows the queue to reuse the empty space created when elements are dequeued, overcoming the limitation of linear queues.
+            </div>
+            
+            <div class="question">16. Formula to move rear in a circular queue</div>
+            <div class="answer">
+                The formula to move the rear pointer in a circular queue is:
+                <div class="highlight">rear = (rear + 1) % SIZE</div>
+                where SIZE is the maximum capacity of the queue.
+            </div>
+            
+            <div class="question">17. What is a priority queue?</div>
+            <div class="answer">
+                A priority queue is an abstract data type where each element has an associated priority. Elements with higher priority are served before elements with lower priority. It can be implemented using arrays, linked lists, or heaps.
+            </div>
+            
+            <div class="question">18. What is a double-ended queue (deque)?</div>
+            <div class="answer">
+                A double-ended queue (deque) is a linear data structure that allows insertion and deletion from both ends. It combines the properties of stacks and queues. Operations include:
+                <ul>
+                    <li>Insertion at front and rear</li>
+                    <li>Deletion from front and rear</li>
+                </ul>
+            </div>
+            
+            <div class="question">19. Applications of Queue</div>
+            <div class="answer">
+                Applications of queues include:
+                <ul>
+                    <li>CPU scheduling in operating systems</li>
+                    <li>Print job management</li>
+                    <li>Handling requests in web servers</li>
+                    <li>Breadth-First Search (BFS) algorithm</li>
+                    <li>Buffering in data communication</li>
+                    <li>Simulation of real-world queues (e.g., supermarket checkout)</li>
+                </ul>
+            </div>
+            
+            <div class="question">20. Code to implement queue using linked list in C</div>
+            <div class="answer">
+                <div class="code-block">
+                    <pre>
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* front = NULL;
+struct Node* rear = NULL;
+
+// Enqueue operation
+void enqueue(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+    
+    if (rear == NULL) {
+        front = rear = newNode;
+        return;
+    }
+    
+    rear->next = newNode;
+    rear = newNode;
+}
+
+// Dequeue operation
+int dequeue() {
+    if (front == NULL) {
+        printf("Queue Underflow\n");
+        return -1;
+    }
+    
+    struct Node* temp = front;
+    int value = temp->data;
+    front = front->next;
+    
+    if (front == NULL) {
+        rear = NULL;
+    }
+    
+    free(temp);
+    return value;
+}
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="question">21. Can a queue be implemented using stacks? How?</div>
+            <div class="answer">
+                Yes, a queue can be implemented using two stacks:
+                <ul>
+                    <li><strong>Method 1 (Making enqueue operation costly):</strong>
+                        <ul>
+                            <li>Use stack1 for enqueue operation</li>
+                            <li>For dequeue, pop all elements from stack1 and push to stack2, then pop from stack2</li>
+                            <li>Finally, pop all elements from stack2 back to stack1</li>
+                        </ul>
+                    </li>
+                    <li><strong>Method 2 (Making dequeue operation costly):</strong>
+                        <ul>
+                            <li>Enqueue: Simply push to stack1</li>
+                            <li>Dequeue: If stack2 is empty, pop all elements from stack1 and push to stack2, then pop from stack2</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="question">22. Can you implement a stack using queues?</div>
+            <div class="answer">
+                Yes, a stack can be implemented using two queues:
+                <ul>
+                    <li><strong>Push operation:</strong>
+                        <ul>
+                            <li>Add the new element to queue2</li>
+                            <li>Move all elements from queue1 to queue2</li>
+                            <li>Swap the names of queue1 and queue2</li>
+                        </ul>
+                    </li>
+                    <li><strong>Pop operation:</strong>
+                        <ul>
+                            <li>Simply dequeue from queue1</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="question">23. You are given a queue. How do you reverse it using a stack?</div>
+            <div class="answer">
+                To reverse a queue using a stack:
+                <ul>
+                    <li>Create an empty stack</li>
+                    <li>Dequeue all elements from the queue and push them onto the stack</li>
+                    <li>Pop all elements from the stack and enqueue them back into the queue</li>
+                </ul>
+                The queue will now be reversed.
+            </div>
+            
+            <div class="question">24. What is common between stack and queue in terms of implementation?</div>
+            <div class="answer">
+                Common aspects in stack and queue implementation:
+                <ul>
+                    <li>Both can be implemented using arrays or linked lists</li>
+                    <li>Both have O(1) time complexity for basic operations</li>
+                    <li>Both require handling of overflow and underflow conditions</li>
+                    <li>Both are linear data structures</li>
+                </ul>
+            </div>
+            
+            <div class="question">25. Which is better for undo functionality – stack or queue?</div>
+            <div class="answer">
+                A <strong>stack</strong> is better for undo functionality because:
+                <ul>
+                    <li>It follows LIFO (Last-In-First-Out) order, which matches the natural behavior of undo operations</li>
+                    <li>The most recent action should be undone first</li>
+                    <li>Stacks provide O(1) time complexity for push (recording action) and pop (undoing action)</li>
+                </ul>
+            </div>
+            
+            <div class="question">26. How would you check if a string is a palindrome using stack and queue?</div>
+            <div class="answer">
+                To check if a string is a palindrome using stack and queue:
+                <ul>
+                    <li>Push each character of the string onto a stack</li>
+                    <li>Enqueue each character of the string into a queue</li>
+                    <li>Pop from the stack and dequeue from the queue simultaneously, comparing each character</li>
+                    <li>If all characters match, the string is a palindrome</li>
+                </ul>
+                The stack reverses the order while the queue maintains the original order.
+            </div>
+            
+            <div class="question">27. Can you implement BFS using a stack instead of a queue?</div>
+            <div class="answer">
+                No, BFS (Breadth-First Search) cannot be implemented using a stack because:
+                <ul>
+                    <li>BFS requires exploring all neighbors at the present depth before moving to the next level</li>
+                    <li>Queues follow FIFO (First-In-First-Out) order, which is essential for BFS</li>
+                    <li>Stacks follow LIFO (Last-In-First-Out) order, which would implement DFS (Depth-First Search) instead</li>
+                </ul>
+            </div>
+            
+            <div class="question">28. What happens if you try to dequeue from an empty queue?</div>
+            <div class="answer">
+                Attempting to dequeue from an empty queue results in a <strong>queue underflow</strong> condition. This is an error state that should be handled by:
+                <ul>
+                    <li>Checking if the queue is empty before dequeueing</li>
+                    <li>Returning an error value or throwing an exception</li>
+                    <li>Displaying an appropriate error message</li>
+                </ul>
+            </div>
+            
+            <div class="question">29. Stack is LIFO. What if we want the oldest element?</div>
+            <div class="answer">
+                If you need to access the oldest (first) element in a LIFO structure, you have several options:
+                <ul>
+                    <li>Pop all elements until you reach the oldest one (inefficient)</li>
+                    <li>Use a different data structure like a queue (FIFO)</li>
+                    <li>Use a deque that allows access to both ends</li>
+                    <li>Use a linked list with a pointer to both head and tail</li>
+                </ul>
+            </div>
+            
+            <div class="question">30. Why is a stack used in infix to postfix conversion?</div>
+            <div class="answer">
+                A stack is used in infix to postfix conversion because:
+                <ul>
+                    <li>It helps handle operator precedence and associativity</li>
+                    <li>It stores operators temporarily until their operands are processed</li>
+                    <li>It allows parentheses to be handled naturally</li>
+                    <li>The LIFO property ensures that higher precedence operators are processed first</li>
+                </ul>
+            </div>
+            
+            <div class="question">31. Convert this infix expression to postfix: A + B * C - D</div>
+            <div class="answer">
+                To convert "A + B * C - D" to postfix:
+                <ul>
+                    <li>Process A: Output A</li>
+                    <li>Process +: Push to stack</li>
+                    <li>Process B: Output B</li>
+                    <li>Process *: Higher precedence than +, so push to stack</li>
+                    <li>Process C: Output C</li>
+                    <li>Process -: Pop * (higher precedence), output *, then pop + (same precedence), output +, then push -</li>
+                    <li>Process D: Output D</li>
+                    <li>Pop remaining - from stack</li>
+                </ul>
+                Result: <strong>A B C * + D -</strong>
+            </div>
+            
+            <div class="question">32. What is the postfix form of: (A + B) * (C - D)?</div>
+            <div class="answer">
+                To convert "(A + B) * (C - D)" to postfix:
+                <ul>
+                    <li>Process (: Push to stack</li>
+                    <li>Process A: Output A</li>
+                    <li>Process +: Push to stack</li>
+                    <li>Process B: Output B</li>
+                    <li>Process ): Pop +, output +</li>
+                    <li>Process *: Push to stack</li>
+                    <li>Process (: Push to stack</li>
+                    <li>Process C: Output C</li>
+                    <li>Process -: Push to stack</li>
+                    <li>Process D: Output D</li>
+                    <li>Process ): Pop -, output -</li>
+                    <li>Pop * from stack</li>
+                </ul>
+                Result: <strong>A B + C D - *</strong>
+            </div>
+            
+            <div class="question">33. What will be the result of this postfix expression? 5 6 2 + * 12 4 / -</div>
+            <div class="answer">
+                Evaluating "5 6 2 + * 12 4 / -":
+                <ul>
+                    <li>Read 5: Push 5</li>
+                    <li>Read 6: Push 6</li>
+                    <li>Read 2: Push 2</li>
+                    <li>Read +: Pop 2 and 6, compute 6 + 2 = 8, push 8</li>
+                    <li>Read *: Pop 8 and 5, compute 5 * 8 = 40, push 40</li>
+                    <li>Read 12: Push 12</li>
+                    <li>Read 4: Push 4</li>
+                    <li>Read /: Pop 4 and 12, compute 12 / 4 = 3, push 3</li>
+                    <li>Read -: Pop 3 and 40, compute 40 - 3 = 37, push 37</li>
+                </ul>
+                Result: <strong>37</strong>
+            </div>
+            
+            <div class="question">55. What is a Queue? Draw its structure.</div>
+            <div class="answer">
+                A queue is a linear data structure that follows the First-In-First-Out (FIFO) principle.
+                
+                <div class="svg-container">
+                    <svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Queue container -->
+                        <rect x="50" y="50" width="300" height="80" fill="none" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Queue elements -->
+                        <rect x="50" y="50" width="60" height="80" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="80" y="95" text-anchor="middle" fill="white" font-weight="bold">A</text>
+                        <text x="80" y="115" text-anchor="middle" fill="white">Front</text>
+                        
+                        <rect x="110" y="50" width="60" height="80" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="140" y="95" text-anchor="middle" fill="white">B</text>
+                        
+                        <rect x="170" y="50" width="60" height="80" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="200" y="95" text-anchor="middle" fill="white">C</text>
+                        
+                        <rect x="230" y="50" width="60" height="80" fill="#f39c12" stroke="#333" stroke-width="1"/>
+                        <text x="260" y="95" text-anchor="middle" fill="white">D</text>
+                        
+                        <rect x="290" y="50" width="60" height="80" fill="#9b59b6" stroke="#333" stroke-width="1"/>
+                        <text x="320" y="95" text-anchor="middle" fill="white" font-weight="bold">E</text>
+                        <text x="320" y="115" text-anchor="middle" fill="white">Rear</text>
+                        
+                        <!-- Arrows -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                            </marker>
+                        </defs>
+                        
+                        <line x1="30" y1="90" x2="50" y2="90" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                        <text x="25" y="95" text-anchor="end" font-weight="bold">Dequeue</text>
+                        
+                        <line x1="370" y1="90" x2="350" y2="90" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                        <text x="375" y="95" font-weight="bold">Enqueue</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <div id="linked-list" class="question-section">
+            <div class="question">34. What is a Linked List?</div>
+            <div class="answer">
+                A linked list is a linear data structure where elements are not stored at contiguous memory locations. Instead, each element (node) contains a data part and a pointer (or reference) to the next node in the sequence.
+            </div>
+            
+            <div class="question">35. What are the types of Linked Lists?</div>
+            <div class="answer">
+                Types of linked lists include:
+                <ul>
+                    <li><strong>Singly Linked List:</strong> Each node has a pointer to the next node</li>
+                    <li><strong>Doubly Linked List:</strong> Each node has pointers to both next and previous nodes</li>
+                    <li><strong>Circular Linked List:</strong> The last node points back to the first node</li>
+                    <li><strong>Circular Doubly Linked List:</strong> Combines properties of doubly and circular linked lists</li>
+                </ul>
+            </div>
+            
+            <div class="question">36. Structure of a Node in Singly Linked List</div>
+            <div class="answer">
+                <div class="code-block">
+                    <pre>
+struct Node {
+    int data;           // Data part of the node
+    struct Node* next;  // Pointer to the next node
+};
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="question">37. How do you insert a node at the beginning of a Singly Linked List?</div>
+            <div class="answer">
+                To insert a node at the beginning of a singly linked list:
+                <ul>
+                    <li>Create a new node</li>
+                    <li>Set the new node's next pointer to the current head</li>
+                    <li>Update the head pointer to point to the new node</li>
+                </ul>
+                <div class="code-block">
+                    <pre>
+void insertAtBeginning(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = head;
+    head = newNode;
+}
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="question">38. How do you insert a node at the end of a Singly Linked List?</div>
+            <div class="answer">
+                To insert a node at the end of a singly linked list:
+                <ul>
+                    <li>Create a new node</li>
+                    <li>If the list is empty, set head to the new node</li>
+                    <li>Otherwise, traverse to the last node</li>
+                    <li>Set the last node's next pointer to the new node</li>
+                </ul>
+                <div class="code-block">
+                    <pre>
+void insertAtEnd(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+    
+    if (head == NULL) {
+        head = newNode;
+        return;
+    }
+    
+    struct Node* temp = head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="question">39. How do you delete a node with a specific value?</div>
+            <div class="answer">
+                To delete a node with a specific value:
+                <ul>
+                    <li>Traverse the list to find the node with the given value</li>
+                    <li>Keep track of the previous node</li>
+                    <li>Set the previous node's next pointer to the node after the one to be deleted</li>
+                    <li>Free the memory of the deleted node</li>
+                </ul>
+                <div class="code-block">
+                    <pre>
+void deleteNode(int value) {
+    struct Node* temp = head;
+    struct Node* prev = NULL;
+    
+    // If the node to be deleted is the head
+    if (temp != NULL && temp->data == value) {
+        head = temp->next;
+        free(temp);
+        return;
+    }
+    
+    // Search for the node to be deleted
+    while (temp != NULL && temp->data != value) {
+        prev = temp;
+        temp = temp->next;
+    }
+    
+    // If node not found
+    if (temp == NULL) return;
+    
+    // Unlink the node
+    prev->next = temp->next;
+    free(temp);
+}
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="question">40. How do you reverse a singly linked list?</div>
+            <div class="answer">
+                To reverse a singly linked list:
+                <ul>
+                    <li>Initialize three pointers: prev, current, and next</li>
+                    <li>Traverse the list, changing each node's next pointer to point to the previous node</li>
+                    <li>Update the head pointer to the last node</li>
+                </ul>
+                <div class="code-block">
+                    <pre>
+void reverseList() {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* next = NULL;
+    
+    while (current != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    head = prev;
+}
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="question">41. How do you make a Circular Linked List?</div>
+            <div class="answer">
+                To make a circular linked list:
+                <ul>
+                    <li>Create a singly linked list</li>
+                    <li>Traverse to the last node</li>
+                    <li>Set the last node's next pointer to point back to the head node</li>
+                </ul>
+                <div class="code-block">
+                    <pre>
+void makeCircular() {
+    if (head == NULL) return;
+    
+    struct Node* temp = head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = head;  // Make it circular
+}
+                    </pre>
+                </div>
+            </div>
+            
+            <div class="question">42. What happens if you forget to update the head pointer after inserting?</div>
+            <div class="answer">
+                If you forget to update the head pointer after inserting at the beginning:
+                <ul>
+                    <li>The new node will be created but not connected to the list</li>
+                    <li>The list will remain unchanged from the head's perspective</li>
+                    <li>The new node will be "orphaned" and eventually cause a memory leak</li>
+                    <li>Any operations on the list will not include the new node</li>
+                </ul>
+            </div>
+            
+            <div class="question">43. What are real-life uses of Linked Lists?</div>
+            <div class="answer">
+                Real-life uses of linked lists include:
+                <ul>
+                    <li>Web browser history (forward and back navigation)</li>
+                    <li>Music playlists (next and previous track)</li>
+                    <li>Image viewers (next and previous image)</li>
+                    <li>Dynamic memory allocation</li>
+                    <li>Implementation of other data structures (stacks, queues, graphs)</li>
+                    <li>Operating system process scheduling</li>
+                </ul>
+            </div>
+            
+            <div class="question">44. You are at the last node of a singly linked list. Can you go back to the previous node?</div>
+            <div class="answer">
+                No, you cannot directly go back to the previous node in a singly linked list because:
+                <ul>
+                    <li>Each node only has a pointer to the next node, not the previous one</li>
+                    <li>To access the previous node, you would need to traverse the list from the head again</li>
+                    <li>This is O(n) operation and inefficient for large lists</li>
+                </ul>
+                For bidirectional traversal, a doubly linked list is needed.
+            </div>
+            
+            <div class="question">45. What happens if you delete the head node in a singly linked list?</div>
+            <div class="answer">
+                When deleting the head node in a singly linked list:
+                <ul>
+                    <li>The head pointer must be updated to point to the next node</li>
+                    <li>Memory of the original head node should be freed</li>
+                    <li>If not handled properly, it can cause:
+                        <ul>
+                            <li>Memory leaks</li>
+                            <li>Dangling pointers</li>
+                            <li>Loss of access to the rest of the list</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="question">46. Which is more memory efficient – SLL or DLL?</div>
+            <div class="answer">
+                <strong>Singly Linked List (SLL)</strong> is more memory efficient than Doubly Linked List (DLL) because:
+                <ul>
+                    <li>SLL nodes have only one pointer (next)</li>
+                    <li>DLL nodes have two pointers (next and prev)</li>
+                    <li>For the same number of nodes, SLL uses less memory</li>
+                    <li>Example: For 1000 nodes with 4-byte data and 4-byte pointers:
+                        <ul>
+                            <li>SLL: 1000 × (4 + 4) = 8000 bytes</li>
+                            <li>DLL: 1000 × (4 + 4 + 4) = 12000 bytes</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="question">47. What is the minimum number of pointers required to implement a doubly linked list?</div>
+            <div class="answer">
+                The minimum number of pointers required to implement a doubly linked list is <strong>two</strong>:
+                <ul>
+                    <li><strong>next</strong> pointer: Points to the next node in the sequence</li>
+                    <li><strong>prev</strong> pointer: Points to the previous node in the sequence</li>
+                </ul>
+            </div>
+            
+            <div class="question">48. Can you implement a circular singly linked list using just one pointer?</div>
+            <div class="answer">
+                Yes, you can implement a circular singly linked list using just one pointer (the <strong>next</strong> pointer) because:
+                <ul>
+                    <li>In a circular singly linked list, the last node's next pointer points back to the head</li>
+                    <li>No additional pointers are needed for the circular connection</li>
+                    <li>The same structure as a regular singly linked list, just with the last node pointing to the first</li>
+                </ul>
+            </div>
+            
+            <div class="question">49. Can a node in a doubly linked list point to itself in both prev and next?</div>
+            <div class="answer">
+                Yes, a node in a doubly linked list can point to itself in both prev and next pointers. This would create a self-referential node that forms a circular list with only one node. However, this is generally not useful in practice as it creates a loop with no other nodes.
+            </div>
+            
+            <div class="question">50. What happens if we forget to update prev in DLL while inserting a node?</div>
+            <div class="answer">
+                If you forget to update the prev pointer in a doubly linked list while inserting a node:
+                <ul>
+                    <li>The backward traversal will be broken</li>
+                    <li>The new node will not be accessible from its previous node</li>
+                    <li>The list will appear corrupted when traversed backward</li>
+                    <li>Operations that rely on the prev pointer will fail</li>
+                </ul>
+            </div>
+            
+            <div class="question">51. Which is easier to implement recursively — SLL or DLL?</div>
+            <div class="answer">
+                <strong>Singly Linked List (SLL)</strong> is generally easier to implement recursively than Doubly Linked List (DLL) because:
+                <ul>
+                    <li>Recursive operations naturally follow the forward direction (next pointer)</li>
+                    <li>With DLL, you would need to handle both directions, complicating the recursion</li>
+                    <li>Most recursive list operations (traversal, search, insertion at end) are simpler with SLL</li>
+                </ul>
+            </div>
+            
+            <div class="question">52. Can a DLL be circular too? What changes are needed?</div>
+            <div class="answer">
+                Yes, a Doubly Linked List (DLL) can be circular. The changes needed are:
+                <ul>
+                    <li>The head node's prev pointer should point to the tail node</li>
+                    <li>The tail node's next pointer should point to the head node</li>
+                    <li>This creates a bidirectional circular structure</li>
+                </ul>
+                This is called a Circular Doubly Linked List.
+            </div>
+            
+            <div class="question">53. Which is better for implementing browser history: SLL or DLL?</div>
+            <div class="answer">
+                <strong>Doubly Linked List (DLL)</strong> is better for implementing browser history because:
+                <ul>
+                    <li>Browser history requires both forward and backward navigation</li>
+                    <li>DLL provides O(1) time complexity for both next and previous operations</li>
+                    <li>With SLL, going back to a previous page would require traversing from the beginning (O(n))</li>
+                </ul>
+            </div>
+            
+            <div class="question">56. What is a Linked List? Draw a singly linked list.</div>
+            <div class="answer">
+                A linked list is a linear data structure where elements are not stored at contiguous memory locations. Each element (node) contains a data part and a pointer to the next node in the sequence.
+                
+                <div class="svg-container">
+                    <svg width="600" height="150" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Head pointer -->
+                        <text x="20" y="75" font-weight="bold">Head</text>
+                        <line x1="50" y1="70" x2="80" y2="70" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Node 1 -->
+                        <rect x="80" y="50" width="80" height="40" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="120" y="75" text-anchor="middle" fill="white">Data 1</text>
+                        <line x1="160" y1="70" x2="190" y2="70" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Node 2 -->
+                        <rect x="190" y="50" width="80" height="40" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="230" y="75" text-anchor="middle" fill="white">Data 2</text>
+                        <line x1="270" y1="70" x2="300" y2="70" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Node 3 -->
+                        <rect x="300" y="50" width="80" height="40" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="340" y="75" text-anchor="middle" fill="white">Data 3</text>
+                        <line x1="380" y1="70" x2="410" y2="70" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Node 4 -->
+                        <rect x="410" y="50" width="80" height="40" fill="#f39c12" stroke="#333" stroke-width="1"/>
+                        <text x="450" y="75" text-anchor="middle" fill="white">Data 4</text>
+                        <line x1="490" y1="70" x2="520" y2="70" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Null pointer -->
+                        <rect x="520" y="60" width="40" height="20" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="540" y="75" text-anchor="middle">NULL</text>
+                        
+                        <!-- Arrow marker definition -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="question">57. Advantages of Linked List over Arrays?</div>
+            <div class="answer">
+                Advantages of linked lists over arrays:
+                <ul>
+                    <li><strong>Dynamic size:</strong> Linked lists can grow and shrink in size at runtime</li>
+                    <li><strong>Efficient insertion/deletion:</strong> Insertion and deletion operations are O(1) when position is known</li>
+                    <li><strong>No memory wastage:</strong> Memory is allocated only when needed</li>
+                    <li><strong>Easy implementation:</strong> Complex data structures like stacks and queues can be easily implemented</li>
+                </ul>
+            </div>
+            
+            <div class="question">101. Draw and explain different types of Linked Lists.</div>
+            <div class="answer">
+                <strong>1. Singly Linked List:</strong><br>
+                Each node contains data and a pointer to the next node.
+                
+                <div class="svg-container">
+                    <svg width="500" height="120" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Node 1 -->
+                        <rect x="50" y="40" width="80" height="40" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="90" y="65" text-anchor="middle" fill="white">Data 1</text>
+                        <line x1="130" y1="60" x2="160" y2="60" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Node 2 -->
+                        <rect x="160" y="40" width="80" height="40" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="200" y="65" text-anchor="middle" fill="white">Data 2</text>
+                        <line x1="240" y1="60" x2="270" y2="60" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Node 3 -->
+                        <rect x="270" y="40" width="80" height="40" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="310" y="65" text-anchor="middle" fill="white">Data 3</text>
+                        <line x1="350" y1="60" x2="380" y2="60" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Null pointer -->
+                        <rect x="380" y="50" width="40" height="20" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="400" y="65" text-anchor="middle">NULL</text>
+                        
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+                
+                <strong>2. Doubly Linked List:</strong><br>
+                Each node contains data, a pointer to the next node, and a pointer to the previous node.
+                
+                <div class="svg-container">
+                    <svg width="500" height="120" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Node 1 -->
+                        <rect x="50" y="40" width="80" height="40" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="90" y="65" text-anchor="middle" fill="white">Data 1</text>
+                        <line x1="130" y1="60" x2="160" y2="60" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Node 2 -->
+                        <rect x="160" y="40" width="80" height="40" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="200" y="65" text-anchor="middle" fill="white">Data 2</text>
+                        <line x1="240" y1="60" x2="270" y2="60" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Node 3 -->
+                        <rect x="270" y="40" width="80" height="40" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="310" y="65" text-anchor="middle" fill="white">Data 3</text>
+                        
+                        <!-- Previous pointers -->
+                        <line x1="160" y1="50" x2="130" y2="50" stroke="#333" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrowhead)"/>
+                        <line x1="270" y1="50" x2="240" y2="50" stroke="#333" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Null pointers -->
+                        <line x1="50" y1="50" x2="20" y2="50" stroke="#333" stroke-width="1"/>
+                        <rect x="0" y="40" width="20" height="20" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="10" y="55" text-anchor="middle" font-size="10">N</text>
+                        
+                        <line x1="350" y1="60" x2="380" y2="60" stroke="#333" stroke-width="1"/>
+                        <rect x="380" y="50" width="40" height="20" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="400" y="65" text-anchor="middle">NULL</text>
+                        
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+                
+                <strong>3. Circular Linked List:</strong><br>
+                The last node points back to the first node, forming a circle.
+                
+                <div class="svg-container">
+                    <svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Node 1 -->
+                        <rect x="150" y="40" width="80" height="40" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="190" y="65" text-anchor="middle" fill="white">Data 1</text>
+                        
+                        <!-- Node 2 -->
+                        <rect x="250" y="100" width="80" height="40" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="290" y="125" text-anchor="middle" fill="white">Data 2</text>
+                        
+                        <!-- Node 3 -->
+                        <rect x="150" y="160" width="80" height="40" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="190" y="185" text-anchor="middle" fill="white">Data 3</text>
+                        
+                        <!-- Node 4 -->
+                        <rect x="50" y="100" width="80" height="40" fill="#f39c12" stroke="#333" stroke-width="1"/>
+                        <text x="90" y="125" text-anchor="middle" fill="white">Data 4</text>
+                        
+                        <!-- Arrows forming a circle -->
+                        <path d="M 230 60 Q 270 60 270 100" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <path d="M 290 140 Q 290 180 250 180" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <path d="M 150 180 Q 110 180 110 140" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <path d="M 90 100 Q 90 60 130 60" fill="none" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <div id="memory" class="question-section">
+            <div class="question">58. If two processes request 120KB and 80KB respectively, and your memory has holes of 100KB, 130KB, and 90KB, which allocation strategies (First-Fit, Best-Fit, Worst-Fit) will allocate them successfully?</div>
+            <div class="answer">
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Allocation Strategy</th>
+                            <th>120KB Process</th>
+                            <th>80KB Process</th>
+                            <th>Success?</th>
+                        </tr>
+                        <tr>
+                            <td>First-Fit</td>
+                            <td>Allocated to 130KB hole</td>
+                            <td>Allocated to 100KB hole</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Best-Fit</td>
+                            <td>Allocated to 130KB hole</td>
+                            <td>Allocated to 90KB hole</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Worst-Fit</td>
+                            <td>Allocated to 130KB hole</td>
+                            <td>Allocated to 100KB hole</td>
+                            <td>Yes</td>
+                        </tr>
+                    </table>
+                </div>
+                All three strategies can successfully allocate memory for both processes in this scenario.
+            </div>
+            
+            <div class="question">59. If you continuously use First-Fit allocation, what kind of memory problem are you likely to face over time?</div>
+            <div class="answer">
+                With continuous use of First-Fit allocation, you are likely to face <strong>external fragmentation</strong> over time. This occurs because:
+                <ul>
+                    <li>Small memory holes are scattered throughout the memory</li>
+                    <li>These holes may be too small to satisfy new allocation requests</li>
+                    <li>Even though the total free memory might be sufficient, it's fragmented into non-contiguous blocks</li>
+                </ul>
+            </div>
+            
+            <div class="question">60. What is garbage collection in memory management? Is it proactive or reactive?</div>
+            <div class="answer">
+                <strong>Garbage collection</strong> is an automatic memory management process that:
+                <ul>
+                    <li>Identifies and reclaims memory that is no longer in use by the program</li>
+                    <li>Frees up resources occupied by objects that are no longer accessible</li>
+                    <li>Prevents memory leaks by automatically deallocating unused memory</li>
+                </ul>
+                Garbage collection is <strong>reactive</strong> because it responds to memory allocation needs rather than proactively managing memory.
+            </div>
+            
+            <div class="question">61. Is garbage collection used in C/C++? Why or why not?</div>
+            <div class="answer">
+                No, garbage collection is not typically used in C/C++ because:
+                <ul>
+                    <li>C/C++ prioritize performance and control over memory management</li>
+                    <li>They provide manual memory management (malloc/free, new/delete)</li>
+                    <li>Garbage collection introduces overhead and unpredictability</li>
+                    <li>C/C++ are designed for systems programming where direct memory control is essential</li>
+                </ul>
+                However, some C/C++ libraries or frameworks may implement their own garbage collection mechanisms.
+            </div>
+        </div>
+        
+        <div id="tree" class="question-section">
+            <div class="question">62. What is a tree?</div>
+            <div class="answer">
+                A tree is a hierarchical data structure consisting of nodes connected by edges. It has:
+                <ul>
+                    <li>A root node (topmost node)</li>
+                    <li>Zero or more child nodes</li>
+                    <li>Edges connecting parent nodes to child nodes</li>
+                    <li>No cycles (acyclic)</li>
+                    <li>All nodes except the root have exactly one parent</li>
+                </ul>
+            </div>
+            
+            <div class="question">63. How is a binary tree different from a general tree?</div>
+            <div class="answer">
+                Differences between binary tree and general tree:
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Binary Tree</th>
+                            <th>General Tree</th>
+                        </tr>
+                        <tr>
+                            <td>Number of children</td>
+                            <td>Maximum 2 children per node</td>
+                            <td>No limit on number of children</td>
+                        </tr>
+                        <tr>
+                            <td>Child ordering</td>
+                            <td>Left and right children are ordered</td>
+                            <td>Children are unordered</td>
+                        </tr>
+                        <tr>
+                            <td>Empty tree</td>
+                            <td>Can be empty (no nodes)</td>
+                            <td>Must have at least one node (root)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="question">64. What are the types of binary trees?</div>
+            <div class="answer">
+                Types of binary trees:
+                <ul>
+                    <li><strong>Full Binary Tree:</strong> Every node has 0 or 2 children</li>
+                    <li><strong>Complete Binary Tree:</strong> All levels are completely filled except possibly the last, which is filled from left to right</li>
+                    <li><strong>Perfect Binary Tree:</strong> All internal nodes have 2 children and all leaves are at the same level</li>
+                    <li><strong>Balanced Binary Tree:</strong> Height of tree is O(log n) where n is number of nodes</li>
+                    <li><strong>Degenerate Tree:</strong> Each parent node has only one child (similar to linked list)</li>
+                </ul>
+            </div>
+            
+            <div class="question">65. What are the properties of a binary tree with n nodes?</div>
+            <div class="answer">
+                Properties of a binary tree with n nodes:
+                <ul>
+                    <li>Minimum number of levels: 1 (all nodes in a single path)</li>
+                    <li>Maximum number of levels: n (each node has one child)</li>
+                    <li>Maximum number of nodes at level i: 2^(i-1)</li>
+                    <li>Maximum number of nodes in a tree of height h: 2^h - 1</li>
+                    <li>For a non-empty binary tree: n = n₀ + n₁ + n₂, where n₀, n₁, n₂ are number of nodes with 0, 1, 2 children respectively</li>
+                    <li>n₀ = n₂ + 1 (number of leaf nodes = number of nodes with 2 children + 1)</li>
+                </ul>
+            </div>
+            
+            <div class="question">66. What are the methods to represent a binary tree?</div>
+            <div class="answer">
+                Methods to represent a binary tree:
+                <ul>
+                    <li><strong>Array Representation:</strong>
+                        <ul>
+                            <li>Store nodes in an array level by level</li>
+                            <li>For node at index i:
+                                <ul>
+                                    <li>Left child: 2i + 1</li>
+                                    <li>Right child: 2i + 2</li>
+                                    <li>Parent: floor((i-1)/2)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>Linked Representation:</strong>
+                        <ul>
+                            <li>Each node contains data and pointers to left and right children</li>
+                            <li>More flexible for dynamic trees</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="question">67. What are the tree traversal methods?</div>
+            <div class="answer">
+                Tree traversal methods:
+                <ul>
+                    <li><strong>Depth-First Traversals:</strong>
+                        <ul>
+                            <li><strong>Inorder (Left-Root-Right):</strong> Traverse left subtree, visit root, traverse right subtree</li>
+                            <li><strong>Preorder (Root-Left-Right):</strong> Visit root, traverse left subtree, traverse right subtree</li>
+                            <li><strong>Postorder (Left-Right-Root):</strong> Traverse left subtree, traverse right subtree, visit root</li>
+                        </ul>
+                    </li>
+                    <li><strong>Breadth-First Traversal:</strong>
+                        <ul>
+                            <li><strong>Level Order:</strong> Visit nodes level by level from top to bottom</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="question">68. What is an expression tree?</div>
+            <div class="answer">
+                An expression tree is a binary tree where:
+                <ul>
+                    <li>Internal nodes represent operators (+, -, *, /, etc.)</li>
+                    <li>Leaf nodes represent operands (constants or variables)</li>
+                    <li>The tree structure represents the precedence of operations</li>
+                </ul>
+                Traversing an expression tree in different orders gives different expression formats:
+                <ul>
+                    <li>Inorder traversal: Infix expression</li>
+                    <li>Preorder traversal: Prefix expression</li>
+                    <li>Postorder traversal: Postfix expression</li>
+                </ul>
+            </div>
+            
+            <div class="question">69. What is a Binary Search Tree (BST)?</div>
+            <div class="answer">
+                A Binary Search Tree (BST) is a binary tree with the following properties:
+                <ul>
+                    <li>For each node, all values in its left subtree are less than the node's value</li>
+                    <li>For each node, all values in its right subtree are greater than the node's value</li>
+                    <li>Both left and right subtrees are also binary search trees</li>
+                    <li>There are no duplicate values (in most implementations)</li>
+                </ul>
+            </div>
+            
+            <div class="question">70. What are the main operations on a BST?</div>
+            <div class="answer">
+                Main operations on a BST:
+                <ul>
+                    <li><strong>Search:</strong> Find a value in the tree (O(h) time, where h is height)</li>
+                    <li><strong>Insertion:</strong> Add a new value to the tree (O(h) time)</li>
+                    <li><strong>Deletion:</strong> Remove a value from the tree (O(h) time)</li>
+                    <li><strong>Traversal:</strong> Visit all nodes in a specific order (O(n) time)</li>
+                    <li><strong>Find Minimum/Maximum:</strong> Find smallest/largest value (O(h) time)</li>
+                </ul>
+            </div>
+            
+            <div class="question">71. What is a Binary Heap?</div>
+            <div class="answer">
+                A Binary Heap is a complete binary tree that satisfies the heap property:
+                <ul>
+                    <li><strong>Min-Heap:</strong> Parent node's value is less than or equal to its children's values</li>
+                    <li><strong>Max-Heap:</strong> Parent node's value is greater than or equal to its children's values</li>
+                </ul>
+                Binary Heaps are commonly used to implement priority queues.
+            </div>
+            
+            <div class="question">72. What are priority queues and how are they implemented?</div>
+            <div class="answer">
+                A priority queue is an abstract data type where each element has an associated priority. Elements with higher priority are served before elements with lower priority.
+                
+                Implementation methods:
+                <ul>
+                    <li><strong>Array:</strong> O(1) insertion, O(n) extraction of highest priority</li>
+                    <li><strong>Sorted Array:</strong> O(n) insertion, O(1) extraction</li>
+                    <li><strong>Linked List:</strong> Similar to array implementation</li>
+                    <li><strong>Binary Heap:</strong> O(log n) for both insertion and extraction (most efficient)</li>
+                </ul>
+            </div>
+            
+            <div class="question">82. If a binary tree has n nodes, what's the maximum number of leaf nodes it can have?</div>
+            <div class="answer">
+                In a binary tree with n nodes, the maximum number of leaf nodes is <strong>(n+1)/2</strong>.
+                
+                This occurs in a perfect binary tree where:
+                <ul>
+                    <li>All levels are completely filled</li>
+                    <li>All internal nodes have exactly 2 children</li>
+                    <li>For a perfect binary tree with height h: n = 2^h - 1 and leaves = 2^(h-1) = (n+1)/2</li>
+                </ul>
+            </div>
+            
+            <div class="question">83. Which tree traversal is used for expression evaluation? Which one for conversion?</div>
+            <div class="answer">
+                <ul>
+                    <li><strong>Expression Evaluation:</strong> <strong>Postorder traversal</strong> is used because it processes operands before operators, which matches the natural evaluation order of expressions.</li>
+                    <li><strong>Expression Conversion:</strong>
+                        <ul>
+                            <li><strong>Infix to Prefix:</strong> <strong>Preorder traversal</strong></li>
+                            <li><strong>Infix to Postfix:</strong> <strong>Postorder traversal</strong></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="question">84. What is the difference between a complete binary tree and a full binary tree?</div>
+            <div class="answer">
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Complete Binary Tree</th>
+                            <th>Full Binary Tree</th>
+                        </tr>
+                        <tr>
+                            <td>Definition</td>
+                            <td>All levels are completely filled except possibly the last, which is filled from left to right</td>
+                            <td>Every node has 0 or 2 children (no node has only one child)</td>
+                        </tr>
+                        <tr>
+                            <td>Node requirement</td>
+                            <td>Nodes are as far left as possible</td>
+                            <td>All nodes must have 0 or 2 children</td>
+                        </tr>
+                        <tr>
+                            <td>Height</td>
+                            <td>Minimum possible height for given number of nodes</td>
+                            <td>Can have any height</td>
+                        </tr>
+                        <tr>
+                            <td>Example</td>
+                            <td>Heap data structure</td>
+                            <td>Expression trees</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="question">85. Which is better for finding shortest path in an unweighted graph: BFS or DFS?</div>
+            <div class="answer">
+                <strong>BFS (Breadth-First Search)</strong> is better for finding the shortest path in an unweighted graph because:
+                <ul>
+                    <li>BFS explores all nodes at the present depth level before moving to nodes at the next depth level</li>
+                    <li>It guarantees that the first time a node is discovered, it is via the shortest path from the source</li>
+                    <li>DFS may go deep into one branch and miss shorter paths</li>
+                </ul>
+            </div>
+            
+            <div class="question">86. Can a disconnected graph have a spanning tree?</div>
+            <div class="answer">
+                No, a disconnected graph cannot have a single spanning tree. However:
+                <ul>
+                    <li>Each connected component of a disconnected graph can have its own spanning tree</li>
+                    <li>The collection of these spanning trees is called a <strong>spanning forest</strong></li>
+                    <li>A spanning tree by definition must connect all vertices of the graph, which is impossible in a disconnected graph</li>
+                </ul>
+            </div>
+            
+            <div class="question">87. You perform BFS starting from node A and visit nodes in order: A → B → C → D. What can you say about the structure?</div>
+            <div class="answer">
+                From the BFS traversal order A → B → C → D, we can infer:
+                <ul>
+                    <li>B and C are directly connected to A (at the same level)</li>
+                    <li>D is at the next level, connected to either B or C (or both)</li>
+                    <li>The graph structure could be:
+                        <ul>
+                            <li>A connected to B and C</li>
+                            <li>B connected to D</li>
+                            <li>C not connected to D</li>
+                        </ul>
+                    </li>
+                    <li>Alternatively, C could be connected to D instead of B</li>
+                    <li>Or both B and C could be connected to D</li>
+                </ul>
+            </div>
+            
+            <div class="question">88. In a graph with n vertices, what's the maximum number of edges possible in:</div>
+            <div class="answer">
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Graph Type</th>
+                            <th>Maximum Number of Edges</th>
+                        </tr>
+                        <tr>
+                            <td>a) Simple undirected graph</td>
+                            <td>n(n-1)/2</td>
+                        </tr>
+                        <tr>
+                            <td>b) Simple directed graph (no self-loops)</td>
+                            <td>n(n-1)</td>
+                        </tr>
+                    </table>
+                </div>
+                Explanation:
+                <ul>
+                    <li>For undirected graphs: Each vertex can connect to n-1 other vertices, but each edge is counted twice</li>
+                    <li>For directed graphs: Each vertex can have edges to n-1 other vertices, and direction matters</li>
+                </ul>
+            </div>
+            
+            <div class="question">102. Draw a Binary Tree and show its Inorder, Preorder, and Postorder traversals</div>
+            <div class="answer">
+                Consider the following binary tree:
+                
+                <div class="svg-container">
+                    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Tree structure -->
+                        <!-- Root: A -->
+                        <circle cx="200" cy="50" r="20" fill="#3498db" stroke="#333" stroke-width="2"/>
+                        <text x="200" y="55" text-anchor="middle" fill="white" font-weight="bold">A</text>
+                        
+                        <!-- Left child of A: B -->
+                        <circle cx="100" cy="130" r="20" fill="#2ecc71" stroke="#333" stroke-width="2"/>
+                        <text x="100" y="135" text-anchor="middle" fill="white" font-weight="bold">B</text>
+                        <line x1="185" y1="65" x2="115" y2="115" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Right child of A: C -->
+                        <circle cx="300" cy="130" r="20" fill="#e74c3c" stroke="#333" stroke-width="2"/>
+                        <text x="300" y="135" text-anchor="middle" fill="white" font-weight="bold">C</text>
+                        <line x1="215" y1="65" x2="285" y2="115" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Left child of B: D -->
+                        <circle cx="50" cy="210" r="20" fill="#f39c12" stroke="#333" stroke-width="2"/>
+                        <text x="50" y="215" text-anchor="middle" fill="white" font-weight="bold">D</text>
+                        <line x1="85" y1="145" x2="65" y2="195" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Right child of B: E -->
+                        <circle cx="150" cy="210" r="20" fill="#9b59b6" stroke="#333" stroke-width="2"/>
+                        <text x="150" y="215" text-anchor="middle" fill="white" font-weight="bold">E</text>
+                        <line x1="115" y1="145" x2="135" y2="195" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Right child of C: F -->
+                        <circle cx="300" cy="210" r="20" fill="#1abc9c" stroke="#333" stroke-width="2"/>
+                        <text x="300" y="215" text-anchor="middle" fill="white" font-weight="bold">F</text>
+                        <line x1="300" y1="150" x2="300" y2="190" stroke="#333" stroke-width="2"/>
+                    </svg>
+                </div>
+                
+                Traversals:
+                <ul>
+                    <li><strong>Inorder (Left-Root-Right):</strong> D → B → E → A → C → F</li>
+                    <li><strong>Preorder (Root-Left-Right):</strong> A → B → D → E → C → F</li>
+                    <li><strong>Postorder (Left-Right-Root):</strong> D → E → B → F → C → A</li>
+                </ul>
+            </div>
+            
+            <div class="question">103. Draw a Binary Search Tree (BST) for the following elements: 50, 30, 70, 20, 40, 60, 80</div>
+            <div class="answer">
+                <div class="svg-container">
+                    <svg width="500" height="350" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Root: 50 -->
+                        <circle cx="250" cy="50" r="20" fill="#3498db" stroke="#333" stroke-width="2"/>
+                        <text x="250" y="55" text-anchor="middle" fill="white" font-weight="bold">50</text>
+                        
+                        <!-- Left child of 50: 30 -->
+                        <circle cx="150" cy="130" r="20" fill="#2ecc71" stroke="#333" stroke-width="2"/>
+                        <text x="150" y="135" text-anchor="middle" fill="white" font-weight="bold">30</text>
+                        <line x1="235" y1="65" x2="165" y2="115" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Right child of 50: 70 -->
+                        <circle cx="350" cy="130" r="20" fill="#e74c3c" stroke="#333" stroke-width="2"/>
+                        <text x="350" y="135" text-anchor="middle" fill="white" font-weight="bold">70</text>
+                        <line x1="265" y1="65" x2="335" y2="115" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Left child of 30: 20 -->
+                        <circle cx="100" cy="210" r="20" fill="#f39c12" stroke="#333" stroke-width="2"/>
+                        <text x="100" y="215" text-anchor="middle" fill="white" font-weight="bold">20</text>
+                        <line x1="135" y1="145" x2="115" y2="195" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Right child of 30: 40 -->
+                        <circle cx="200" cy="210" r="20" fill="#9b59b6" stroke="#333" stroke-width="2"/>
+                        <text x="200" y="215" text-anchor="middle" fill="white" font-weight="bold">40</text>
+                        <line x1="165" y1="145" x2="185" y2="195" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Left child of 70: 60 -->
+                        <circle cx="300" cy="210" r="20" fill="#1abc9c" stroke="#333" stroke-width="2"/>
+                        <text x="300" y="215" text-anchor="middle" fill="white" font-weight="bold">60</text>
+                        <line x1="335" y1="145" x2="315" y2="195" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Right child of 70: 80 -->
+                        <circle cx="400" cy="210" r="20" fill="#d35400" stroke="#333" stroke-width="2"/>
+                        <text x="400" y="215" text-anchor="middle" fill="white" font-weight="bold">80</text>
+                        <line x1="365" y1="145" x2="385" y2="195" stroke="#333" stroke-width="2"/>
+                    </svg>
+                </div>
+                
+                This BST satisfies the binary search tree property:
+                <ul>
+                    <li>All values in the left subtree of a node are less than the node's value</li>
+                    <li>All values in the right subtree of a node are greater than the node's value</li>
+                </ul>
+            </div>
+            
+            <div class="question">104. Draw Min Heap and Max Heap for: 10, 20, 15, 30, 40</div>
+            <div class="answer">
+                <strong>Min Heap:</strong> Parent nodes are less than or equal to their children.
+                
+                <div class="svg-container">
+                    <svg width="400" height="250" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Root: 10 -->
+                        <circle cx="200" cy="50" r="20" fill="#3498db" stroke="#333" stroke-width="2"/>
+                        <text x="200" y="55" text-anchor="middle" fill="white" font-weight="bold">10</text>
+                        
+                        <!-- Left child of 10: 20 -->
+                        <circle cx="100" cy="130" r="20" fill="#2ecc71" stroke="#333" stroke-width="2"/>
+                        <text x="100" y="135" text-anchor="middle" fill="white" font-weight="bold">20</text>
+                        <line x1="185" y1="65" x2="115" y2="115" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Right child of 10: 15 -->
+                        <circle cx="300" cy="130" r="20" fill="#e74c3c" stroke="#333" stroke-width="2"/>
+                        <text x="300" y="135" text-anchor="middle" fill="white" font-weight="bold">15</text>
+                        <line x1="215" y1="65" x2="285" y2="115" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Left child of 20: 30 -->
+                        <circle cx="50" cy="210" r="20" fill="#f39c12" stroke="#333" stroke-width="2"/>
+                        <text x="50" y="215" text-anchor="middle" fill="white" font-weight="bold">30</text>
+                        <line x1="85" y1="145" x2="65" y2="195" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Right child of 20: 40 -->
+                        <circle cx="150" cy="210" r="20" fill="#9b59b6" stroke="#333" stroke-width="2"/>
+                        <text x="150" y="215" text-anchor="middle" fill="white" font-weight="bold">40</text>
+                        <line x1="115" y1="145" x2="135" y2="195" stroke="#333" stroke-width="2"/>
+                    </svg>
+                </div>
+                
+                <strong>Max Heap:</strong> Parent nodes are greater than or equal to their children.
+                
+                <div class="svg-container">
+                    <svg width="400" height="250" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Root: 40 -->
+                        <circle cx="200" cy="50" r="20" fill="#3498db" stroke="#333" stroke-width="2"/>
+                        <text x="200" y="55" text-anchor="middle" fill="white" font-weight="bold">40</text>
+                        
+                        <!-- Left child of 40: 30 -->
+                        <circle cx="100" cy="130" r="20" fill="#2ecc71" stroke="#333" stroke-width="2"/>
+                        <text x="100" y="135" text-anchor="middle" fill="white" font-weight="bold">30</text>
+                        <line x1="185" y1="65" x2="115" y2="115" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Right child of 40: 20 -->
+                        <circle cx="300" cy="130" r="20" fill="#e74c3c" stroke="#333" stroke-width="2"/>
+                        <text x="300" y="135" text-anchor="middle" fill="white" font-weight="bold">20</text>
+                        <line x1="215" y1="65" x2="285" y2="115" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Left child of 30: 10 -->
+                        <circle cx="50" cy="210" r="20" fill="#f39c12" stroke="#333" stroke-width="2"/>
+                        <text x="50" y="215" text-anchor="middle" fill="white" font-weight="bold">10</text>
+                        <line x1="85" y1="145" x2="65" y2="195" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Right child of 30: 15 -->
+                        <circle cx="150" cy="210" r="20" fill="#9b59b6" stroke="#333" stroke-width="2"/>
+                        <text x="150" y="215" text-anchor="middle" fill="white" font-weight="bold">15</text>
+                        <line x1="115" y1="145" x2="135" y2="195" stroke="#333" stroke-width="2"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <div id="graph" class="question-section">
+            <div class="question">73. What is a graph?</div>
+            <div class="answer">
+                A graph is a non-linear data structure consisting of:
+                <ul>
+                    <li><strong>Vertices (Nodes):</strong> Represent entities or objects</li>
+                    <li><strong>Edges:</strong> Connections between vertices</li>
+                </ul>
+                Graphs can be:
+                <ul>
+                    <li><strong>Directed:</strong> Edges have a direction (from one vertex to another)</li>
+                    <li><strong>Undirected:</strong> Edges have no direction (bidirectional)</li>
+                    <li><strong>Weighted:</strong> Edges have associated weights or costs</li>
+                    <li><strong>Unweighted:</strong> Edges have no weights</li>
+                </ul>
+            </div>
+            
+            <div class="question">74. How can you represent graphs?</div>
+            <div class="answer">
+                Graph representation methods:
+                <ul>
+                    <li><strong>Adjacency Matrix:</strong>
+                        <ul>
+                            <li>2D array where matrix[i][j] represents an edge from vertex i to vertex j</li>
+                            <li>For weighted graphs, matrix[i][j] stores the weight of the edge</li>
+                            <li>Space complexity: O(V²) where V is number of vertices</li>
+                        </ul>
+                    </li>
+                    <li><strong>Adjacency List:</strong>
+                        <ul>
+                            <li>Array of linked lists where each list represents the neighbors of a vertex</li>
+                            <li>For weighted graphs, each list element stores both neighbor vertex and edge weight</li>
+                            <li>Space complexity: O(V+E) where V is vertices and E is edges</li>
+                        </ul>
+                    </li>
+                    <li><strong>Incidence Matrix:</strong>
+                        <ul>
+                            <li>2D array where rows represent vertices and columns represent edges</li>
+                            <li>Each entry indicates whether a vertex is incident to an edge</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="question">75. What is Depth First Search (DFS)?</div>
+            <div class="answer">
+                Depth First Search (DFS) is a graph traversal algorithm that:
+                <ul>
+                    <li>Explores as far as possible along each branch before backtracking</li>
+                    <li>Uses a stack (either explicitly or implicitly via recursion)</li>
+                    <li>Time complexity: O(V+E) where V is vertices and E is edges</li>
+                    <li>Space complexity: O(V) for the stack/recursion</li>
+                </ul>
+                DFS is used for:
+                <ul>
+                    <li>Finding connected components</li>
+                    <li>Topological sorting</li>
+                    <li>Solving puzzles with one solution (mazes, etc.)</li>
+                    <li>Detecting cycles in a graph</li>
+                </ul>
+            </div>
+            
+            <div class="question">76. What is Breadth First Search (BFS)?</div>
+            <div class="answer">
+                Breadth First Search (BFS) is a graph traversal algorithm that:
+                <ul>
+                    <li>Explores all vertices at the present depth level before moving to vertices at the next depth level</li>
+                    <li>Uses a queue to manage the vertices to visit</li>
+                    <li>Time complexity: O(V+E) where V is vertices and E is edges</li>
+                    <li>Space complexity: O(V) for the queue</li>
+                </ul>
+                BFS is used for:
+                <ul>
+                    <li>Finding shortest path in unweighted graphs</li>
+                    <li>Finding connected components</li>
+                    <li>Web crawling</li>
+                    <li>Social networking features (finding friends within a certain distance)</li>
+                </ul>
+            </div>
+            
+            <div class="question">77. What are applications of DFS and BFS?</div>
+            <div class="answer">
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Algorithm</th>
+                            <th>Applications</th>
+                        </tr>
+                        <tr>
+                            <td>DFS</td>
+                            <td>
+                                <ul>
+                                    <li>Finding connected components</li>
+                                    <li>Topological sorting</li>
+                                    <li>Solving puzzles with one solution</li>
+                                    <li>Detecting cycles in a graph</li>
+                                    <li>Path finding (not shortest path)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>BFS</td>
+                            <td>
+                                <ul>
+                                    <li>Finding shortest path in unweighted graphs</li>
+                                    <li>Finding connected components</li>
+                                    <li>Web crawling</li>
+                                    <li>GPS navigation systems</li>
+                                    <li>Social networking features</li>
+                                    <li>Garbage collection in programming languages</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="question">78. What is Single Source All Destination in Graphs?</div>
+            <div class="answer">
+                Single Source All Destination (also known as Single Source Shortest Path) is a graph problem that:
+                <ul>
+                    <li>Finds the shortest path from a given source vertex to all other vertices in the graph</li>
+                    <li>Can be solved using algorithms like:
+                        <ul>
+                            <li>Dijkstra's algorithm (for weighted graphs with non-negative weights)</li>
+                            <li>Bellman-Ford algorithm (for weighted graphs with negative weights)</li>
+                            <li>BFS (for unweighted graphs)</li>
+                        </ul>
+                    </li>
+                    <li>Applications include routing protocols, navigation systems, and network analysis</li>
+                </ul>
+            </div>
+            
+            <div class="question">79. What is the time complexity of BFS and DFS?</div>
+            <div class="answer">
+                Time complexity of BFS and DFS:
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Representation</th>
+                            <th>BFS</th>
+                            <th>DFS</th>
+                        </tr>
+                        <tr>
+                            <td>Adjacency List</td>
+                            <td>O(V+E)</td>
+                            <td>O(V+E)</td>
+                        </tr>
+                        <tr>
+                            <td>Adjacency Matrix</td>
+                            <td>O(V²)</td>
+                            <td>O(V²)</td>
+                        </tr>
+                    </table>
+                </div>
+                Where:
+                <ul>
+                    <li>V = Number of vertices</li>
+                    <li>E = Number of edges</li>
+                </ul>
+            </div>
+            
+            <div class="question">80. How do you detect a cycle in a graph?</div>
+            <div class="answer">
+                Methods to detect cycles in a graph:
+                <ul>
+                    <li><strong>For Undirected Graphs:</strong>
+                        <ul>
+                            <li>Use DFS or BFS</li>
+                            <li>Keep track of visited vertices</li>
+                            <li>If you encounter an adjacent vertex that is visited and is not the parent of the current vertex, there is a cycle</li>
+                        </ul>
+                    </li>
+                    <li><strong>For Directed Graphs:</strong>
+                        <ul>
+                            <li>Use DFS with recursion stack</li>
+                            <li>Mark vertices as:
+                                <ul>
+                                    <li>Unvisited</li>
+                                    <li>Visiting (in recursion stack)</li>
+                                    <li>Visited (not in recursion stack)</li>
+                                </ul>
+                            </li>
+                            <li>If you encounter a vertex that is currently in the recursion stack, there is a cycle</li>
+                        </ul>
+                    </li>
+                    <li><strong>Union-Find (Disjoint Set Union):</strong>
+                        <ul>
+                            <li>Works for undirected graphs</li>
+                            <li>For each edge, check if the two vertices are in the same set</li>
+                            <li>If they are, there is a cycle</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="question">81. How do you find connected components in a graph?</div>
+            <div class="answer">
+                To find connected components in a graph:
+                <ul>
+                    <li><strong>For Undirected Graphs:</strong>
+                        <ul>
+                            <li>Use BFS or DFS</li>
+                            <li>Start from an unvisited vertex and traverse all reachable vertices</li>
+                            <li>Mark them as visited and count as one component</li>
+                            <li>Repeat for all unvisited vertices</li>
+                        </ul>
+                    </li>
+                    <li><strong>For Directed Graphs:</strong>
+                        <ul>
+                            <li>Find strongly connected components (SCCs) using Kosaraju's algorithm or Tarjan's algorithm</li>
+                            <li>Kosaraju's algorithm:
+                                <ul>
+                                    <li>Perform DFS on the original graph</li>
+                                    <li>Transpose the graph (reverse all edges)</li>
+                                    <li>Perform DFS on the transposed graph in order of decreasing finishing times</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="question">108. Draw graph representations: Adjacency Matrix vs Adjacency List</div>
+            <div class="answer">
+                Consider a graph with 4 vertices (A, B, C, D) and edges: A-B, A-C, B-D, C-D.
+                
+                <strong>Adjacency Matrix:</strong>
+                
+                <div class="svg-container">
+                    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Matrix grid -->
+                        <rect x="100" y="50" width="200" height="200" fill="none" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Column headers -->
+                        <text x="150" y="40" text-anchor="middle" font-weight="bold">A</text>
+                        <text x="200" y="40" text-anchor="middle" font-weight="bold">B</text>
+                        <text x="250" y="40" text-anchor="middle" font-weight="bold">C</text>
+                        <text x="300" y="40" text-anchor="middle" font-weight="bold">D</text>
+                        
+                        <!-- Row headers -->
+                        <text x="90" y="105" text-anchor="end" font-weight="bold">A</text>
+                        <text x="90" y="155" text-anchor="end" font-weight="bold">B</text>
+                        <text x="90" y="205" text-anchor="end" font-weight="bold">C</text>
+                        <text x="90" y="255" text-anchor="end" font-weight="bold">D</text>
+                        
+                        <!-- Matrix cells -->
+                        <!-- Row A -->
+                        <rect x="100" y="50" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="125" y="80" text-anchor="middle">0</text>
+                        
+                        <rect x="150" y="50" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="175" y="80" text-anchor="middle">1</text>
+                        
+                        <rect x="200" y="50" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="225" y="80" text-anchor="middle">1</text>
+                        
+                        <rect x="250" y="50" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="275" y="80" text-anchor="middle">0</text>
+                        
+                        <!-- Row B -->
+                        <rect x="100" y="100" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="125" y="130" text-anchor="middle">1</text>
+                        
+                        <rect x="150" y="100" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="175" y="130" text-anchor="middle">0</text>
+                        
+                        <rect x="200" y="100" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="225" y="130" text-anchor="middle">0</text>
+                        
+                        <rect x="250" y="100" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="275" y="130" text-anchor="middle">1</text>
+                        
+                        <!-- Row C -->
+                        <rect x="100" y="150" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="125" y="180" text-anchor="middle">1</text>
+                        
+                        <rect x="150" y="150" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="175" y="180" text-anchor="middle">0</text>
+                        
+                        <rect x="200" y="150" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="225" y="180" text-anchor="middle">0</text>
+                        
+                        <rect x="250" y="150" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="275" y="180" text-anchor="middle">1</text>
+                        
+                        <!-- Row D -->
+                        <rect x="100" y="200" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="125" y="230" text-anchor="middle">0</text>
+                        
+                        <rect x="150" y="200" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="175" y="230" text-anchor="middle">1</text>
+                        
+                        <rect x="200" y="200" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="225" y="230" text-anchor="middle">1</text>
+                        
+                        <rect x="250" y="200" width="50" height="50" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="275" y="230" text-anchor="middle">0</text>
+                    </svg>
+                </div>
+                
+                <strong>Adjacency List:</strong>
+                
+                <div class="svg-container">
+                    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Vertex A -->
+                        <rect x="50" y="50" width="40" height="40" fill="#3498db" stroke="#333" stroke-width="2"/>
+                        <text x="70" y="75" text-anchor="middle" fill="white" font-weight="bold">A</text>
+                        
+                        <!-- A's neighbors -->
+                        <line x1="90" y1="70" x2="120" y2="70" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <rect x="120" y="50" width="40" height="40" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="140" y="75" text-anchor="middle">B</text>
+                        
+                        <line x1="90" y1="70" x2="120" y2="100" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <rect x="120" y="80" width="40" height="40" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="140" y="105" text-anchor="middle">C</text>
+                        
+                        <!-- Vertex B -->
+                        <rect x="50" y="150" width="40" height="40" fill="#2ecc71" stroke="#333" stroke-width="2"/>
+                        <text x="70" y="175" text-anchor="middle" fill="white" font-weight="bold">B</text>
+                        
+                        <!-- B's neighbors -->
+                        <line x1="90" y1="170" x2="120" y2="170" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <rect x="120" y="150" width="40" height="40" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="140" y="175" text-anchor="middle">A</text>
+                        
+                        <line x1="90" y1="170" x2="120" y2="200" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <rect x="120" y="180" width="40" height="40" fill="#f39c12" stroke="#333" stroke-width="1"/>
+                        <text x="140" y="205" text-anchor="middle">D</text>
+                        
+                        <!-- Vertex C -->
+                        <rect x="250" y="50" width="40" height="40" fill="#e74c3c" stroke="#333" stroke-width="2"/>
+                        <text x="270" y="75" text-anchor="middle" fill="white" font-weight="bold">C</text>
+                        
+                        <!-- C's neighbors -->
+                        <line x1="290" y1="70" x2="320" y2="70" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <rect x="320" y="50" width="40" height="40" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="340" y="75" text-anchor="middle">A</text>
+                        
+                        <line x1="290" y1="70" x2="320" y2="100" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <rect x="320" y="80" width="40" height="40" fill="#f39c12" stroke="#333" stroke-width="1"/>
+                        <text x="340" y="105" text-anchor="middle">D</text>
+                        
+                        <!-- Vertex D -->
+                        <rect x="250" y="150" width="40" height="40" fill="#f39c12" stroke="#333" stroke-width="2"/>
+                        <text x="270" y="175" text-anchor="middle" fill="white" font-weight="bold">D</text>
+                        
+                        <!-- D's neighbors -->
+                        <line x1="290" y1="170" x2="320" y2="170" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <rect x="320" y="150" width="40" height="40" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="340" y="175" text-anchor="middle">B</text>
+                        
+                        <line x1="290" y1="170" x2="320" y2="200" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                        <rect x="320" y="180" width="40" height="40" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="340" y="205" text-anchor="middle">C</text>
+                        
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Adjacency Matrix</th>
+                            <th>Adjacency List</th>
+                        </tr>
+                        <tr>
+                            <td>Space Complexity</td>
+                            <td>O(V²)</td>
+                            <td>O(V+E)</td>
+                        </tr>
+                        <tr>
+                            <td>Edge Check</td>
+                            <td>O(1)</td>
+                            <td>O(degree of vertex)</td>
+                        </tr>
+                        <tr>
+                            <td>Best For</td>
+                            <td>Dense graphs</td>
+                            <td>Sparse graphs</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="question">110. Show DFS and BFS traversal on a graph.</div>
+            <div class="answer">
+                Consider the following graph:
+                
+                <div class="svg-container">
+                    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Graph vertices -->
+                        <circle cx="200" cy="50" r="20" fill="#3498db" stroke="#333" stroke-width="2"/>
+                        <text x="200" y="55" text-anchor="middle" fill="white" font-weight="bold">A</text>
+                        
+                        <circle cx="100" cy="130" r="20" fill="#2ecc71" stroke="#333" stroke-width="2"/>
+                        <text x="100" y="135" text-anchor="middle" fill="white" font-weight="bold">B</text>
+                        
+                        <circle cx="300" cy="130" r="20" fill="#e74c3c" stroke="#333" stroke-width="2"/>
+                        <text x="300" y="135" text-anchor="middle" fill="white" font-weight="bold">C</text>
+                        
+                        <circle cx="50" cy="210" r="20" fill="#f39c12" stroke="#333" stroke-width="2"/>
+                        <text x="50" y="215" text-anchor="middle" fill="white" font-weight="bold">D</text>
+                        
+                        <circle cx="150" cy="210" r="20" fill="#9b59b6" stroke="#333" stroke-width="2"/>
+                        <text x="150" y="215" text-anchor="middle" fill="white" font-weight="bold">E</text>
+                        
+                        <circle cx="250" cy="210" r="20" fill="#1abc9c" stroke="#333" stroke-width="2"/>
+                        <text x="250" y="215" text-anchor="middle" fill="white" font-weight="bold">F</text>
+                        
+                        <circle cx="350" cy="210" r="20" fill="#d35400" stroke="#333" stroke-width="2"/>
+                        <text x="350" y="215" text-anchor="middle" fill="white" font-weight="bold">G</text>
+                        
+                        <!-- Graph edges -->
+                        <line x1="185" y1="65" x2="115" y2="115" stroke="#333" stroke-width="2"/>
+                        <line x1="215" y1="65" x2="285" y2="115" stroke="#333" stroke-width="2"/>
+                        <line x1="85" y1="145" x2="65" y2="195" stroke="#333" stroke-width="2"/>
+                        <line x1="115" y1="145" x2="135" y2="195" stroke="#333" stroke-width="2"/>
+                        <line x1="285" y1="145" x2="265" y2="195" stroke="#333" stroke-width="2"/>
+                        <line x1="315" y1="145" x2="335" y2="195" stroke="#333" stroke-width="2"/>
+                        <line x1="170" y1="210" x2="230" y2="210" stroke="#333" stroke-width="2"/>
+                    </svg>
+                </div>
+                
+                <strong>DFS Traversal (starting from A):</strong><br>
+                A → B → D → E → F → C → G
+                
+                <strong>BFS Traversal (starting from A):</strong><br>
+                A → B → C → D → E → F → G
+                
+                Explanation:
+                <ul>
+                    <li><strong>DFS:</strong> Goes deep into one branch (A→B→D) before backtracking to explore other branches</li>
+                    <li><strong>BFS:</strong> Explores all neighbors at the current level (B and C) before moving to the next level</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="sorting" class="question-section">
+            <div class="question">89. What is the basic idea of Selection Sort?</div>
+            <div class="answer">
+                The basic idea of Selection Sort is:
+                <ul>
+                    <li>Divide the array into a sorted portion (left) and an unsorted portion (right)</li>
+                    <li>Find the smallest element in the unsorted portion</li>
+                    <li>Swap it with the first element of the unsorted portion</li>
+                    <li>Move the boundary between sorted and unsorted portions one element to the right</li>
+                    <li>Repeat until the entire array is sorted</li>
+                </ul>
+                Time Complexity: O(n²) in all cases<br>
+                Space Complexity: O(1)
+            </div>
+            
+            <div class="question">90. Is Insertion Sort better than Selection Sort?</div>
+            <div class="answer">
+                Insertion Sort is generally better than Selection Sort in the following scenarios:
+                <ul>
+                    <li><strong>For nearly sorted arrays:</strong> Insertion Sort performs better (O(n) vs O(n²))</li>
+                    <li><strong>For small datasets:</strong> Both have similar performance, but Insertion Sort has lower overhead</li>
+                    <li><strong>Adaptive nature:</strong> Insertion Sort is adaptive (takes advantage of existing order)</li>
+                </ul>
+                However, Selection Sort has the advantage of:
+                <ul>
+                    <li>Minimum number of swaps (O(n) swaps)</li>
+                    <li>Better performance when writing to memory is expensive</li>
+                </ul>
+            </div>
+            
+            <div class="question">91. Which sorting algorithm is best for small datasets?</div>
+            <div class="answer">
+                For small datasets, the best sorting algorithms are:
+                <ul>
+                    <li><strong>Insertion Sort:</strong>
+                        <ul>
+                            <li>Simple implementation</li>
+                            <li>Low overhead</li>
+                            <li>Efficient for small or nearly sorted arrays</li>
+                        </ul>
+                    </li>
+                    <li><strong>Selection Sort:</strong>
+                        <ul>
+                            <li>Simple implementation</li>
+                            <li>Minimum number of swaps</li>
+                        </ul>
+                    </li>
+                </ul>
+                Many standard libraries use Insertion Sort for small subarrays within more complex algorithms like QuickSort.
+            </div>
+            
+            <div class="question">100. Which is faster: Merge Sort or Quick Sort?</div>
+            <div class="answer">
+                The speed comparison between Merge Sort and Quick Sort depends on several factors:
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Factor</th>
+                            <th>Merge Sort</th>
+                            <th>Quick Sort</th>
+                        </tr>
+                        <tr>
+                            <td>Average Time Complexity</td>
+                            <td>O(n log n)</td>
+                            <td>O(n log n)</td>
+                        </tr>
+                        <tr>
+                            <td>Worst Case Time Complexity</td>
+                            <td>O(n log n)</td>
+                            <td>O(n²)</td>
+                        </tr>
+                        <tr>
+                            <td>Space Complexity</td>
+                            <td>O(n)</td>
+                            <td>O(log n) (recursion stack)</td>
+                        </tr>
+                        <tr>
+                            <td>Cache Performance</td>
+                            <td>Poor (non-sequential access)</td>
+                            <td>Good (sequential access)</td>
+                        </tr>
+                        <tr>
+                            <td>Stability</td>
+                            <td>Stable</td>
+                            <td>Not stable (standard implementation)</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                In practice:
+                <ul>
+                    <li>Quick Sort is generally faster for average cases due to better cache performance and lower constant factors</li>
+                    <li>Merge Sort is preferred when stability is required or when worst-case performance must be guaranteed</li>
+                    <li>Hybrid approaches (like Introsort) combine Quick Sort with other algorithms to avoid worst-case scenarios</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="searching" class="question-section">
+            <div class="question">92. How does Binary Search work?</div>
+            <div class="answer">
+                Binary Search works on sorted arrays by:
+                <ul>
+                    <li>Comparing the target value with the middle element of the array</li>
+                    <li>If the target matches the middle element, return its index</li>
+                    <li>If the target is less than the middle element, search in the left half</li>
+                    <li>If the target is greater than the middle element, search in the right half</li>
+                    <li>Repeat until the target is found or the search space is empty</li>
+                </ul>
+                Time Complexity: O(log n)<br>
+                Space Complexity: O(1) (iterative) or O(log n) (recursive)
+            </div>
+            
+            <div class="question">93. Can Binary Search be used on a linked list?</div>
+            <div class="answer">
+                No, Binary Search cannot be efficiently used on a linked list because:
+                <ul>
+                    <li>Binary Search requires random access to elements (O(1) access time)</li>
+                    <li>Linked lists only allow sequential access (O(n) access time)</li>
+                    <li>Finding the middle element in a linked list requires traversing half the list</li>
+                    <li>This would make the overall time complexity O(n log n), which is worse than a simple linear search (O(n))</li>
+                </ul>
+            </div>
+            
+            <div class="question">98. Which searching method is fastest?</div>
+            <div class="answer">
+                The fastest searching method depends on the data structure and whether the data is sorted:
+                
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Scenario</th>
+                            <th>Fastest Method</th>
+                            <th>Time Complexity</th>
+                        </tr>
+                        <tr>
+                            <td>Unsorted Array/List</td>
+                            <td>Linear Search</td>
+                            <td>O(n)</td>
+                        </tr>
+                        <tr>
+                            <td>Sorted Array</td>
+                            <td>Binary Search</td>
+                            <td>O(log n)</td>
+                        </tr>
+                        <tr>
+                            <td>Hash Table</td>
+                            <td>Hashing</td>
+                            <td>O(1) average</td>
+                        </tr>
+                        <tr>
+                            <td>Balanced BST</td>
+                            <td>Tree Search</td>
+                            <td>O(log n)</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                In general, <strong>hashing</strong> provides the fastest search time (O(1) average case) when the data is stored in a hash table.
+            </div>
+        </div>
+        
+        <div id="hashing" class="question-section">
+            <div class="question">94. What is hashing?</div>
+            <div class="answer">
+                Hashing is a technique that:
+                <ul>
+                    <li>Maps data of arbitrary size to fixed-size values (hash codes)</li>
+                    <li>Uses a hash function to compute an index into an array of buckets</li>
+                    <li>Enables efficient data retrieval in constant time on average</li>
+                    <li>Forms the basis of hash tables, hash maps, and similar data structures</li>
+                </ul>
+                Key properties of a good hash function:
+                <ul>
+                    <li>Deterministic (same input always produces same output)</li>
+                    <li>Uniform distribution (minimizes collisions)</li>
+                    <li>Efficient to compute</li>
+                </ul>
+            </div>
+            
+            <div class="question">95. What are common hash functions?</div>
+            <div class="answer">
+                Common hash functions include:
+                <ul>
+                    <li><strong>Division Method:</strong> h(k) = k mod m, where m is the table size</li>
+                    <li><strong>Multiplication Method:</strong> h(k) = floor(m * (k * A mod 1)), where A is a constant (0 < A < 1)</li>
+                    <li><strong>Mid-Square Method:</strong> Square the key, then extract the middle digits</li>
+                    <li><strong>Folding Method:</strong> Divide the key into parts, add them together</li>
+                    <li><strong>Polynomial Rolling Hash:</strong> Used for strings and variable-length data</li>
+                    <li><strong>Cryptographic Hash Functions:</strong> MD5, SHA-1, SHA-256 (used for security)</li>
+                </ul>
+            </div>
+            
+            <div class="question">96. What is a collision? How is it resolved?</div>
+            <div class="answer">
+                A <strong>collision</strong> occurs when two different keys hash to the same index in a hash table.
+                
+                Collision resolution techniques:
+                <ul>
+                    <li><strong>Separate Chaining:</strong>
+                        <ul>
+                            <li>Each bucket contains a linked list of all elements that hash to that index</li>
+                            <li>New elements are added to the end of the list</li>
+                        </ul>
+                    </li>
+                    <li><strong>Open Addressing:</strong>
+                        <ul>
+                            <li><strong>Linear Probing:</strong> Check the next bucket (h(k) + i) mod m</li>
+                            <li><strong>Quadratic Probing:</strong> Check buckets at (h(k) + i²) mod m</li>
+                            <li><strong>Double Hashing:</strong> Use a second hash function to determine the step size</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="question">97. Collision resolution techniques:</div>
+            <div class="answer">
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Technique</th>
+                            <th>Description</th>
+                            <th>Pros</th>
+                            <th>Cons</th>
+                        </tr>
+                        <tr>
+                            <td>Separate Chaining</td>
+                            <td>Each bucket contains a linked list of elements</td>
+                            <td>Simple implementation, no limit on number of elements</td>
+                            <li>Requires extra memory for pointers, poor cache performance</li>
+                        </tr>
+                        <tr>
+                            <td>Linear Probing</td>
+                            <td>Check consecutive buckets until an empty one is found</td>
+                            <li>Good cache performance, simple implementation</li>
+                            <li>Clustering problem, performance degrades with load factor</li>
+                        </tr>
+                        <tr>
+                            <td>Quadratic Probing</td>
+                            <td>Check buckets at quadratic intervals</td>
+                            <li>Reduces clustering compared to linear probing</li>
+                            <li>May not find an empty slot even if one exists</li>
+                        </tr>
+                        <tr>
+                            <td>Double Hashing</td>
+                            <td>Use a second hash function to determine step size</td>
+                            <li>Eliminates clustering, good distribution</li>
+                            <li>More complex computation, requires two hash functions</li>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="question">99. What is the load factor in hashing?</div>
+            <div class="answer">
+                The <strong>load factor</strong> in hashing is defined as:
+                <div class="highlight">λ = n / m</div>
+                where:
+                <ul>
+                    <li>n = number of elements in the hash table</li>
+                    <li>m = number of buckets in the hash table</li>
+                </ul>
+                
+                Significance of load factor:
+                <ul>
+                    <li>Measures how full the hash table is</li>
+                    <li>Affects performance:
+                        <ul>
+                            <li>Lower load factor: fewer collisions, faster operations</li>
+                            <li>Higher load factor: more collisions, slower operations</li>
+                        </ul>
+                    </li>
+                    <li>Triggers resizing:
+                        <ul>
+                            <li>Typically, when λ > 0.7, the hash table is resized</li>
+                            <li>Resizing involves creating a larger table and rehashing all elements</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="question">109. Draw a Hash Table using Division Method (h(k) = k % 10)</div>
+            <div class="answer">
+                Consider inserting keys: 12, 25, 36, 43, 51, 67, 78, 89, 91, 102
+                
+                Using division method: h(k) = k % 10
+                
+                <div class="svg-container">
+                    <svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Hash table buckets -->
+                        <rect x="50" y="50" width="500" height="300" fill="none" stroke="#333" stroke-width="2"/>
+                        
+                        <!-- Bucket indices -->
+                        <text x="30" y="75" text-anchor="end" font-weight="bold">0</text>
+                        <text x="30" y="105" text-anchor="end" font-weight="bold">1</text>
+                        <text x="30" y="135" text-anchor="end" font-weight="bold">2</text>
+                        <text x="30" y="165" text-anchor="end" font-weight="bold">3</text>
+                        <text x="30" y="195" text-anchor="end" font-weight="bold">4</text>
+                        <text x="30" y="225" text-anchor="end" font-weight="bold">5</text>
+                        <text x="30" y="255" text-anchor="end" font-weight="bold">6</text>
+                        <text x="30" y="285" text-anchor="end" font-weight="bold">7</text>
+                        <text x="30" y="315" text-anchor="end" font-weight="bold">8</text>
+                        <text x="30" y="345" text-anchor="end" font-weight="bold">9</text>
+                        
+                        <!-- Horizontal lines -->
+                        <line x1="50" y1="80" x2="550" y2="80" stroke="#333" stroke-width="1"/>
+                        <line x1="50" y1="110" x2="550" y2="110" stroke="#333" stroke-width="1"/>
+                        <line x1="50" y1="140" x2="550" y2="140" stroke="#333" stroke-width="1"/>
+                        <line x1="50" y1="170" x2="550" y2="170" stroke="#333" stroke-width="1"/>
+                        <line x1="50" y1="200" x2="550" y2="200" stroke="#333" stroke-width="1"/>
+                        <line x1="50" y1="230" x2="550" y2="230" stroke="#333" stroke-width="1"/>
+                        <line x1="50" y1="260" x2="550" y2="260" stroke="#333" stroke-width="1"/>
+                        <line x1="50" y1="290" x2="550" y2="290" stroke="#333" stroke-width="1"/>
+                        <line x1="50" y1="320" x2="550" y2="320" stroke="#333" stroke-width="1"/>
+                        
+                        <!-- Keys in buckets -->
+                        <text x="300" y="75" text-anchor="middle">12, 51, 91</text>
+                        <text x="300" y="105" text-anchor="middle">25, 102</text>
+                        <text x="300" y="135" text-anchor="middle">NULL</text>
+                        <text x="300" y="165" text-anchor="middle">43</text>
+                        <text x="300" y="195" text-anchor="middle">NULL</text>
+                        <text x="300" y="225" text-anchor="middle">25, 102</text>
+                        <text x="300" y="255" text-anchor="middle">36, 67</text>
+                        <text x="300" y="285" text-anchor="middle">78</text>
+                        <text x="300" y="315" text-anchor="middle">89</text>
+                        <text x="300" y="345" text-anchor="middle">NULL</text>
+                        
+                        <!-- Title -->
+                        <text x="300" y="30" text-anchor="middle" font-weight="bold" font-size="18">Hash Table using Division Method (h(k) = k % 10)</text>
+                    </svg>
+                </div>
+                
+                Note: This example shows separate chaining for collision resolution. Keys that hash to the same index are stored in a linked list at that bucket.
+            </div>
+        </div>
+        
+        <div id="operations" class="question-section">
+            <div class="question">105. Show Insertion and Deletion in Stack (with array/linked list).</div>
+            <div class="answer">
+                <strong>Stack Implementation with Array:</strong>
+                
+                <div class="svg-container">
+                    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Initial stack -->
+                        <text x="200" y="30" text-anchor="middle" font-weight="bold">Initial Stack</text>
+                        <rect x="150" y="50" width="100" height="30" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="200" y="70" text-anchor="middle">Element 1</text>
+                        
+                        <rect x="150" y="80" width="100" height="30" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="200" y="100" text-anchor="middle">Element 2</text>
+                        
+                        <rect x="150" y="110" width="100" height="30" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="200" y="130" text-anchor="middle">Element 3</text>
+                        
+                        <text x="120" y="70" text-anchor="end" font-weight="bold">Top</text>
+                        
+                        <!-- Arrow pointing to top -->
+                        <line x1="100" y1="65" x2="145" y2="65" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Push operation -->
+                        <text x="200" y="180" text-anchor="middle" font-weight="bold">Push(Element 4)</text>
+                        <rect x="150" y="200" width="100" height="30" fill="#f39c12" stroke="#333" stroke-width="1"/>
+                        <text x="200" y="220" text-anchor="middle">Element 4</text>
+                        
+                        <rect x="150" y="230" width="100" height="30" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="200" y="250" text-anchor="middle">Element 1</text>
+                        
+                        <rect x="150" y="260" width="100" height="30" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="200" y="280" text-anchor="middle">Element 2</text>
+                        
+                        <rect x="150" y="290" width="100" height="30" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="200" y="310" text-anchor="middle">Element 3</text>
+                        
+                        <text x="120" y="220" text-anchor="end" font-weight="bold">Top</text>
+                        
+                        <!-- Arrow pointing to new top -->
+                        <line x1="100" y1="215" x2="145" y2="215" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                        
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+                
+                <strong>Stack Implementation with Linked List:</strong>
+                
+                <div class="svg-container">
+                    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Initial stack -->
+                        <text x="200" y="30" text-anchor="middle" font-weight="bold">Initial Stack (Linked List)</text>
+                        
+                        <!-- Node 3 (Top) -->
+                        <rect x="150" y="50" width="80" height="40" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="190" y="75" text-anchor="middle" fill="white">Element 3</text>
+                        <line x1="230" y1="70" x2="260" y2="70" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Node 2 -->
+                        <rect x="260" y="50" width="80" height="40" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="300" y="75" text-anchor="middle" fill="white">Element 2</text>
+                        <line x1="340" y1="70" x2="370" y2="70" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Node 1 -->
+                        <rect x="370" y="50" width="80" height="40" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="410" y="75" text-anchor="middle" fill="white">Element 1</text>
+                        <line x1="450" y1="70" x2="480" y2="70" stroke="#333" stroke-width="1"/>
+                        
+                        <!-- NULL pointer -->
+                        <rect x="480" y="60" width="40" height="20" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="500" y="75" text-anchor="middle">NULL</text>
+                        
+                        <text x="120" y="70" text-anchor="end" font-weight="bold">Top</text>
+                        <line x1="100" y1="70" x2="145" y2="70" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Push operation -->
+                        <text x="200" y="150" text-anchor="middle" font-weight="bold">Push(Element 4)</text>
+                        
+                        <!-- New Node 4 (Top) -->
+                        <rect x="150" y="170" width="80" height="40" fill="#f39c12" stroke="#333" stroke-width="1"/>
+                        <text x="190" y="195" text-anchor="middle" fill="white">Element 4</text>
+                        <line x1="230" y1="190" x2="260" y2="190" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Node 3 -->
+                        <rect x="260" y="170" width="80" height="40" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="300" y="195" text-anchor="middle" fill="white">Element 3</text>
+                        <line x1="340" y1="190" x2="370" y2="190" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Node 2 -->
+                        <rect x="370" y="170" width="80" height="40" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="410" y="195" text-anchor="middle" fill="white">Element 2</text>
+                        <line x1="450" y1="190" x2="480" y2="190" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                        
+                        <!-- Node 1 -->
+                        <rect x="480" y="170" width="80" height="40" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="520" y="195" text-anchor="middle" fill="white">Element 1</text>
+                        <line x1="560" y1="190" x2="590" y2="190" stroke="#333" stroke-width="1"/>
+                        
+                        <!-- NULL pointer -->
+                        <rect x="590" y="180" width="40" height="20" fill="white" stroke="#333" stroke-width="1"/>
+                        <text x="610" y="195" text-anchor="middle">NULL</text>
+                        
+                        <text x="120" y="190" text-anchor="end" font-weight="bold">Top</text>
+                        <line x1="100" y1="190" x2="145" y2="190" stroke="#333" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                        
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+                
+                <strong>Deletion (Pop) Operation:</strong>
+                <ul>
+                    <li>For array implementation: Decrement the top pointer</li>
+                    <li>For linked list implementation: Update the top pointer to point to the next node and free the memory of the popped node</li>
+                </ul>
+            </div>
+            
+            <div class="question">106. Show Enqueue and Dequeue in Queue (with array).</div>
+            <div class="answer">
+                <div class="svg-container">
+                    <svg width="500" height="350" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Initial queue -->
+                        <text x="250" y="30" text-anchor="middle" font-weight="bold">Initial Queue</text>
+                        
+                        <rect x="100" y="50" width="60" height="40" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="130" y="75" text-anchor="middle" fill="white">A</text>
+                        <text x="130" y="100" text-anchor="middle" font-weight="bold">Front</text>
+                        
+                        <rect x="160" y="50" width="60" height="40" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="190" y="75" text-anchor="middle" fill="white">B</text>
+                        
+                        <rect x="220" y="50" width="60" height="40" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="250" y="75" text-anchor="middle" fill="white">C</text>
+                        
+                        <rect x="280" y="50" width="60" height="40" fill="#f39c12" stroke="#333" stroke-width="1"/>
+                        <text x="310" y="75" text-anchor="middle" fill="white">D</text>
+                        <text x="310" y="100" text-anchor="middle" font-weight="bold">Rear</text>
+                        
+                        <!-- Empty slots -->
+                        <rect x="340" y="50" width="60" height="40" fill="white" stroke="#333" stroke-width="1" stroke-dasharray="5,5"/>
+                        <text x="370" y="75" text-anchor="middle" fill="#999">Empty</text>
+                        
+                        <rect x="400" y="50" width="60" height="40" fill="white" stroke="#333" stroke-width="1" stroke-dasharray="5,5"/>
+                        <text x="430" y="75" text-anchor="middle" fill="#999">Empty</text>
+                        
+                        <!-- Enqueue operation -->
+                        <text x="250" y="140" text-anchor="middle" font-weight="bold">Enqueue(E)</text>
+                        
+                        <rect x="100" y="160" width="60" height="40" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="130" y="185" text-anchor="middle" fill="white">A</text>
+                        <text x="130" y="210" text-anchor="middle" font-weight="bold">Front</text>
+                        
+                        <rect x="160" y="160" width="60" height="40" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="190" y="185" text-anchor="middle" fill="white">B</text>
+                        
+                        <rect x="220" y="160" width="60" height="40" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="250" y="185" text-anchor="middle" fill="white">C</text>
+                        
+                        <rect x="280" y="160" width="60" height="40" fill="#f39c12" stroke="#333" stroke-width="1"/>
+                        <text x="310" y="185" text-anchor="middle" fill="white">D</text>
+                        
+                        <rect x="340" y="160" width="60" height="40" fill="#9b59b6" stroke="#333" stroke-width="1"/>
+                        <text x="370" y="185" text-anchor="middle" fill="white">E</text>
+                        <text x="370" y="210" text-anchor="middle" font-weight="bold">Rear</text>
+                        
+                        <rect x="400" y="160" width="60" height="40" fill="white" stroke="#333" stroke-width="1" stroke-dasharray="5,5"/>
+                        <text x="430" y="185" text-anchor="middle" fill="#999">Empty</text>
+                        
+                        <!-- Dequeue operation -->
+                        <text x="250" y="250" text-anchor="middle" font-weight="bold">Dequeue()</text>
+                        
+                        <rect x="100" y="270" width="60" height="40" fill="white" stroke="#333" stroke-width="1" stroke-dasharray="5,5"/>
+                        <text x="130" y="295" text-anchor="middle" fill="#999">Empty</text>
+                        
+                        <rect x="160" y="270" width="60" height="40" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="190" y="295" text-anchor="middle" fill="white">B</text>
+                        <text x="190" y="320" text-anchor="middle" font-weight="bold">Front</text>
+                        
+                        <rect x="220" y="270" width="60" height="40" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="250" y="295" text-anchor="middle" fill="white">C</text>
+                        
+                        <rect x="280" y="270" width="60" height="40" fill="#f39c12" stroke="#333" stroke-width="1"/>
+                        <text x="310" y="295" text-anchor="middle" fill="white">D</text>
+                        
+                        <rect x="340" y="270" width="60" height="40" fill="#9b59b6" stroke="#333" stroke-width="1"/>
+                        <text x="370" y="295" text-anchor="middle" fill="white">E</text>
+                        <text x="370" y="320" text-anchor="middle" font-weight="bold">Rear</text>
+                        
+                        <rect x="400" y="270" width="60" height="40" fill="white" stroke="#333" stroke-width="1" stroke-dasharray="5,5"/>
+                        <text x="430" y="295" text-anchor="middle" fill="#999">Empty</text>
+                    </svg>
+                </div>
+                
+                Explanation:
+                <ul>
+                    <li><strong>Enqueue:</strong> Add element at the rear (increment rear pointer)</li>
+                    <li><strong>Dequeue:</strong> Remove element from the front (increment front pointer)</li>
+                    <li>In a linear queue implementation, this can lead to unused space even when the queue is not full</li>
+                </ul>
+            </div>
+            
+            <div class="question">107. Draw a Circular Queue and show wrap-around.</div>
+            <div class="answer">
+                <div class="svg-container">
+                    <svg width="500" height="400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Circular queue representation -->
+                        <text x="250" y="30" text-anchor="middle" font-weight="bold">Circular Queue</text>
+                        
+                        <!-- Queue container -->
+                        <rect x="100" y="50" width="300" height="300" fill="none" stroke="#333" stroke-width="2" rx="10" ry="10"/>
+                        
+                        <!-- Queue elements -->
+                        <rect x="120" y="70" width="60" height="40" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="150" y="95" text-anchor="middle" fill="white">A</text>
+                        <text x="150" y="120" text-anchor="middle" font-weight="bold">Front</text>
+                        
+                        <rect x="180" y="70" width="60" height="40" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="210" y="95" text-anchor="middle" fill="white">B</text>
+                        
+                        <rect x="240" y="70" width="60" height="40" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="270" y="95" text-anchor="middle" fill="white">C</text>
+                        
+                        <rect x="300" y="70" width="60" height="40" fill="#f39c12" stroke="#333" stroke-width="1"/>
+                        <text x="330" y="95" text-anchor="middle" fill="white">D</text>
+                        
+                        <rect x="300" y="310" width="60" height="40" fill="#9b59b6" stroke="#333" stroke-width="1"/>
+                        <text x="330" y="335" text-anchor="middle" fill="white">E</text>
+                        <text x="330" y="360" text-anchor="middle" font-weight="bold">Rear</text>
+                        
+                        <!-- Empty slots -->
+                        <rect x="240" y="310" width="60" height="40" fill="white" stroke="#333" stroke-width="1" stroke-dasharray="5,5"/>
+                        <text x="270" y="335" text-anchor="middle" fill="#999">Empty</text>
+                        
+                        <rect x="180" y="310" width="60" height="40" fill="white" stroke="#333" stroke-width="1" stroke-dasharray="5,5"/>
+                        <text x="210" y="335" text-anchor="middle" fill="#999">Empty</text>
+                        
+                        <rect x="120" y="310" width="60" height="40" fill="white" stroke="#333" stroke-width="1" stroke-dasharray="5,5"/>
+                        <text x="150" y="335" text-anchor="middle" fill="#999">Empty</text>
+                        
+                        <!-- Wrap-around arrow -->
+                        <path d="M 360 90 Q 420 90 420 200 Q 420 310 360 310" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowhead)"/>
+                        <text x="430" y="200" text-anchor="middle" font-weight="bold" fill="#e74c3c">Wrap-around</text>
+                        
+                        <!-- Enqueue operation -->
+                        <text x="250" y="380" text-anchor="middle" font-weight="bold">Enqueue(F) - Wrap-around to beginning</text>
+                        
+                        <!-- New state after enqueue -->
+                        <rect x="120" y="420" width="60" height="40" fill="#1abc9c" stroke="#333" stroke-width="1"/>
+                        <text x="150" y="445" text-anchor="middle" fill="white">F</text>
+                        <text x="150" y="470" text-anchor="middle" font-weight="bold">Rear</text>
+                        
+                        <rect x="180" y="420" width="60" height="40" fill="#e74c3c" stroke="#333" stroke-width="1"/>
+                        <text x="210" y="445" text-anchor="middle" fill="white">A</text>
+                        <text x="210" y="470" text-anchor="middle" font-weight="bold">Front</text>
+                        
+                        <rect x="240" y="420" width="60" height="40" fill="#3498db" stroke="#333" stroke-width="1"/>
+                        <text x="270" y="445" text-anchor="middle" fill="white">B</text>
+                        
+                        <rect x="300" y="420" width="60" height="40" fill="#2ecc71" stroke="#333" stroke-width="1"/>
+                        <text x="330" y="445" text-anchor="middle" fill="white">C</text>
+                        
+                        <rect x="360" y="420" width="60" height="40" fill="#f39c12" stroke="#333" stroke-width="1"/>
+                        <text x="390" y="445" text-anchor="middle" fill="white">D</text>
+                        
+                        <rect x="420" y="420" width="60" height="40" fill="#9b59b6" stroke="#333" stroke-width="1"/>
+                        <text x="450" y="445" text-anchor="middle" fill="white">E</text>
+                        
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+                
+                Explanation:
+                <ul>
+                    <li>In a circular queue, the last position is connected to the first position</li>
+                    <li>When the rear reaches the end of the array, it wraps around to the beginning if there is space</li>
+                    <li>This allows efficient use of array space</li>
+                    <li>Formula to move rear: <span class="highlight">rear = (rear + 1) % SIZE</span></li>
+                    <li>Formula to move front: <span class="highlight">front = (front + 1) % SIZE</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
